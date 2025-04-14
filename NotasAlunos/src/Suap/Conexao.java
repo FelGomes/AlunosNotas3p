@@ -23,7 +23,7 @@ public class Conexao {
     public Connection getConexao() {
         try {
             return DriverManager.getConnection(SERVIDOR, USUARIO, SENHA);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage() + "Erro ao fazer conexao com o banco de dados!");
         }
         return null;
