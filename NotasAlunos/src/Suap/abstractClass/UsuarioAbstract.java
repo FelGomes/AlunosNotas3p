@@ -4,6 +4,7 @@ package Suap.abstractClass;
 /**
  *
  * @author Carlos
+ * @since 14-04 at 12:21
  */
 public abstract class UsuarioAbstract {
     
