@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class Instituicao {
     
-    private int  inst_nivel;
+    private float inst_nivel;
     private String inst_nome, inst_endereco, inst_cidade, inst_uf, inst_escolaridade;
     
     
@@ -21,7 +21,7 @@ public class Instituicao {
         
     }
     
-    Instituicao(String inst_nome, String inst_endereco, String inst_cidade, String inst_uf, String inst_escolaridade, int inst_nivel){
+    Instituicao(String inst_nome, String inst_endereco, String inst_cidade, String inst_uf, String inst_escolaridade, float inst_nivel){
         this.inst_nome = inst_nome;
         this.inst_endereco = inst_endereco;
         this.inst_cidade = inst_cidade;
@@ -30,11 +30,11 @@ public class Instituicao {
         this.inst_nivel = inst_nivel;
     }
 
-    public int getInst_nivel() {
+    public float getInst_nivel() {
         return inst_nivel;
     }
 
-    public void setInst_nivel(int inst_nivel) {
+    public void setInst_nivel(float inst_nivel) {
         this.inst_nivel = inst_nivel;
     }
 
@@ -93,7 +93,7 @@ public class Instituicao {
             stmt.setString(3, this.getInst_cidade());
             stmt.setString(4, this.getInst_uf());
             stmt.setString(5, this.getInst_escolaridade());
-            stmt.setInt(6,this.getInst_nivel());
+            stmt.setFloat(6,this.getInst_nivel());
         } catch (Exception e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
         }
@@ -257,7 +257,7 @@ public class Instituicao {
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
-                pstm.setInt(1, this.getInst_nivel());
+                pstm.setFloat(1, this.getInst_nivel());
                 pstm.setInt(2, inst_id);
                 pstm.execute();
                 
@@ -284,7 +284,7 @@ public class Instituicao {
                 pstm.setString(3, this.getInst_cidade());
                 pstm.setString(4, this.getInst_uf());
                 pstm.setString(5, this.getInst_escolaridade());
-                pstm.setInt(6, this.getInst_nivel());
+                pstm.setFloat(6, this.getInst_nivel());
                 pstm.setInt(7, inst_id);
                 pstm.execute();
                 
@@ -386,7 +386,7 @@ public class Instituicao {
                         rset.close();
                     }
                     if (pstm != null){
-                        rset.close();
+                        pstm.close();
                     }
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
