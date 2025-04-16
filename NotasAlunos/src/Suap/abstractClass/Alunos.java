@@ -53,7 +53,8 @@ public class Alunos extends UsuarioAbstract{
     public void setQtd_disciplina(int qtd_disciplina) {
         this.qtd_disciplina = qtd_disciplina;
     }
-    
+    //MeTODO PARA INSERIR DADOS NA TABELA
+    @Override
     public void inserir() throws SQLException{
         Connection conexao = new Conexao().getConexao();
         String sql = "Insert into alunos values (alunos_matriculados, alunos_sala, alunos_turma, qtd_disciplina, fk_alunos_usuarios_id) values (?,?,?,?,?)";
@@ -63,7 +64,7 @@ public class Alunos extends UsuarioAbstract{
             stmt.setString(2, this.getAlunos_sala());
             stmt.setString(3, this.getAlunos_turma());
             stmt.setInt(4, this.getQtd_disciplina());
-            //stmt.setString(5, this.getInst_escolaridade());
+            stmt.setInt(5, this.getId());
             
         } catch (Exception e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
@@ -76,7 +77,8 @@ public class Alunos extends UsuarioAbstract{
      * Método para remover campo da tabela alunos recebendo um ID
      * @param alunos_id 
      */
-    
+    //METODOS PARA DELETAR O CAMPO ESPECIFICADO
+    @Override
     public void deletar(int alunos_id){
         String sql = "Delete from alunos WHERE alunos_id = ?";
         PreparedStatement pstm = null;
@@ -108,6 +110,9 @@ public class Alunos extends UsuarioAbstract{
      * @param alunos_id
      * @param atributo 
      */
+    
+    //Funçao para alterar os dados da tabela, com condiçoes apenas para MATRICULA, SALA, TURMA, QUANTIDADE DE DISCIPLINAS e PARA TUDO
+    @Override
     public void alterar(int alunos_id, String atributo){
         if(atributo.equals("matricula")){
             String sql = "Update alunos set alunos_matriculados = ? where alunos_id = ?";
@@ -231,10 +236,12 @@ public class Alunos extends UsuarioAbstract{
      * Metodo para listar os valores de alunos
      * @param alunos_id
      */
+    @Override
     public void listar(int alunos_id){
         if(alunos_id > 0){
             String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuario_endereco, u.usuario_cpf, u.usuario_nascimento,"
                     + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on alunos.fk_alunos_usuarios_id = u.usuarios_id Where a.alunos_id = ?";
+            //Inner join para mostrar os dados do usuarios que passam chave primaria para alunos, nessa condição, especificos com id escolhido
             PreparedStatement pstm = null;
             ResultSet rset = null;
             
@@ -280,6 +287,7 @@ public class Alunos extends UsuarioAbstract{
         } else {
             String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuario_endereco, u.usuario_cpf, u.usuario_nascimento,"
                     + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on alunos.fk_alunos_usuarios_id = u.usuarios_id";
+            //Select com inner join de alunos que recebem a chave estrangeira de usuarios, nesse caso, ira mostrar todos os dados
             PreparedStatement pstm = null;
             ResultSet rset = null;
             

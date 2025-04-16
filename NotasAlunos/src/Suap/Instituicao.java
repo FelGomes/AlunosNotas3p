@@ -81,6 +81,8 @@ public class Instituicao {
      * Método para inserir na tabela instituição: nome, endereco, cidade, uf, escolaridade, nivel
      * @throws SQLException 
      */
+    
+    //METODOS PARA INSERIR VALORES NA TABELA INSTITUIÇAO
     public void inserir() throws SQLException{
         Connection conexao = new Conexao().getConexao();
         String sql = "Insert into instituicao values (instituicao_nome, instituicao_endereco, instituicao_cidade, instituicao_uf, instituicao_escolaridade, instituicao_nivel) values (?,?,?,?,?,?)";
@@ -103,7 +105,7 @@ public class Instituicao {
      * Método para remover campo da tabela instituicao recebendo um ID
      * @param inst_id 
      */
-    
+    //METODO PARA DELETAR CAMPOS DA TABELA INSTITUIÇAO
     public void deletar(int inst_id){
         String sql = "Delete from instituicao WHERE instituicao_id = ?";
         PreparedStatement pstm = null;
@@ -135,6 +137,9 @@ public class Instituicao {
      * @param inst_id
      * @param atributo 
      */
+    
+    
+    //METODOS PARA ALTERAR VALORES NA TABELA INSTITUIÇAO, COM CONDICOES PARA: NOME, ENDERECO, CIDADE, UF, ESCOLARIDADE, NIVEL e TUDO
     public void alterar(int inst_id, String atributo){
         if(atributo.equals("nome")){
             String sql = "Update instituicao set instituicao_nome = ? where instituicao_id = ?";
@@ -303,6 +308,8 @@ public class Instituicao {
      * Metodo para listar os valores de instituicao
      * @param inst_id 
      */
+    
+    //METODO PARA LISTAR APENAS 1 REGISTRO A PARTIR DO ID INFORMADO
     public void listar(int inst_id){
         if(inst_id > 0){
             String sql = "Select * from instituicao Where instituicao_id = ?";
@@ -346,7 +353,7 @@ public class Instituicao {
                 }
             }
             
-            
+        //CASO NAO SEJA PASSADO UM ID ESPECIFICO, VAI RETORNAR TODOS OS VALORES QUE HAVER NA TABELA    
         } else {
             String sql = "Select * from instituicao";
             PreparedStatement pstm = null;
@@ -393,7 +400,7 @@ public class Instituicao {
      * @param inst_id
      * @return 
      */
-    
+    //MEtodo para verificar se o ID existe
     public static boolean verificarInstituicao(int inst_id) {
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement comando = conexao.prepareStatement("SELECT * FROM fornecedores WHERE fornecedores_id = ?")) {
