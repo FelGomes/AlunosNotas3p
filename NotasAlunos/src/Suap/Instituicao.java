@@ -21,7 +21,7 @@ public class Instituicao {
         
     }
     
-    Instituicao(String inst_nome, String inst_endereco, String inst_cidade, String inst_uf, String inst_escolaridade, int inst_nive){
+    Instituicao(String inst_nome, String inst_endereco, String inst_cidade, String inst_uf, String inst_escolaridade, int inst_nivel){
         this.inst_nome = inst_nome;
         this.inst_endereco = inst_endereco;
         this.inst_cidade = inst_cidade;

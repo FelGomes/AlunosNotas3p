@@ -233,32 +233,34 @@ public class Alunos extends UsuarioAbstract{
      */
     public void listar(int alunos_id){
         if(alunos_id > 0){
-            String sql = "Select usuarios_nome, usuarios_sexo = ?";
+            String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuario_endereco, u.usuario_cpf, u.usuario_nascimento,"
+                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on alunos.fk_alunos_usuarios_id = u.usuarios_id Where a.alunos_id = ?";
             PreparedStatement pstm = null;
             ResultSet rset = null;
             
             try {
                 Connection conexao = new Conexao().getConexao();
                 pstm = conexao.prepareStatement(sql);
-                pstm.setInt(1, inst_id);
+                pstm.setInt(1, alunos_id);
                 pstm.executeQuery();
                 
                 if(rset.next()){
                     System.out.println("==================================================");
-                    System.out.println("ID: " + rset.getInt("instituicao_id"));
-                    System.out.println("Nome: " + rset.getString("instituicao_nome"));
-                    System.out.println("Endereco: " + rset.getString("instituicao_endereco"));
-                    System.out.println("Cidade: " + rset.getString("instituicao_cidade"));
-                    System.out.println("Uf: " + rset.getString("instituicao_uf"));
-                    System.out.println("Escolaridade: " + rset.getString("instituicao_escolaridade"));
-                    System.out.println("Nivel: " + rset.getString("instituicao_nivel"));
+                    System.out.println("ID: " + rset.getInt("alunos_id"));
+                    System.out.println("Nome: " + rset.getString("usuarios_nome"));  
+                    System.out.println("Sexo: " + rset.getString("usuarios_sexo"));
+                    System.out.println("Endereco: " + rset.getString("usuarios_endereco"));
+                    System.out.println("CPF: " + rset.getString("usuarios_cpf"));
+                    System.out.println("Nascimento: " + rset.getString("usuarios_nascimento"));
+                    System.out.println("Sala: " + rset.getString("alunos_sala"));
+                    System.out.println("Turma: " + rset.getString("usuarios_turma"));
                     System.out.println("==================================================");
                 }else {
-                    System.out.println("Nenhuma instituicao encontrado com o ID fornecido " + inst_id);
+                    System.out.println("Nenhum aluno encontrado com o ID fornecido " + alunos_id);
                 }
                 
             } catch (Exception e) {
-                System.out.println("Erro ao fazer a listagem da tabela instituicao " + e.getMessage());
+                System.out.println("Erro ao fazer a listagem da tabela aluno " + e.getMessage());
             } finally {
                 
                 try {
@@ -276,7 +278,8 @@ public class Alunos extends UsuarioAbstract{
             
             
         } else {
-            String sql = "Select * from instituicao";
+            String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuario_endereco, u.usuario_cpf, u.usuario_nascimento,"
+                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on alunos.fk_alunos_usuarios_id = u.usuarios_id";
             PreparedStatement pstm = null;
             ResultSet rset = null;
             
@@ -288,18 +291,19 @@ public class Alunos extends UsuarioAbstract{
                 
                 while(rset.next()){
                     System.out.println("==================================================");
-                    System.out.println("ID: " + rset.getInt("instituicao_id"));
-                    System.out.println("Nome: " + rset.getString("instituicao_nome"));
-                    System.out.println("Endereco: " + rset.getString("instituicao_endereco"));
-                    System.out.println("Cidade: " + rset.getString("instituicao_cidade"));
-                    System.out.println("Uf: " + rset.getString("instituicao_uf"));
-                    System.out.println("Escolaridade: " + rset.getString("instituicao_escolaridade"));
-                    System.out.println("Nivel: " + rset.getString("instituicao_nivel"));
+                    System.out.println("ID: " + rset.getInt("alunos_id"));
+                    System.out.println("Nome: " + rset.getString("usuarios_nome"));  
+                    System.out.println("Sexo: " + rset.getString("usuarios_sexo"));
+                    System.out.println("Endereco: " + rset.getString("usuarios_endereco"));
+                    System.out.println("CPF: " + rset.getString("usuarios_cpf"));
+                    System.out.println("Nascimento: " + rset.getString("usuarios_nascimento"));
+                    System.out.println("Sala: " + rset.getString("alunos_sala"));
+                    System.out.println("Turma: " + rset.getString("alunos_turma"));
                     System.out.println("==================================================");
                 }
                 
             } catch (SQLException e) {
-                System.out.println("Erro ao fazer a listagem da tabela INSTITUICAO " + e.getMessage());
+                System.out.println("Erro ao fazer a listagem da tabela aluno " + e.getMessage());
                 
             } finally {
                 try {
@@ -307,7 +311,7 @@ public class Alunos extends UsuarioAbstract{
                         rset.close();
                     }
                     if (pstm != null){
-                        rset.close();
+                        pstm.close();
                     }
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
@@ -318,19 +322,19 @@ public class Alunos extends UsuarioAbstract{
     }
     /**
      * Metodo para verificar a existencia do id
-     * @param inst_id
+     * @param alunos_id
      * @return 
      */
     
-    public static boolean verificarInstituicao(int inst_id) {
+    public static boolean verificarInstituicao(int alunos_id) {
         try (Connection conexao = new Conexao().getConexao();
-             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM fornecedores WHERE fornecedores_id = ?")) {
-            comando.setInt(1, inst_id);
+             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM alunos WHERE alunos_id = ?")) {
+            comando.setInt(1, alunos_id);
             try (ResultSet resultado = comando.executeQuery()) {
                 return resultado.next(); 
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao verificar a tabela instituicao: " + e.getMessage());
+            System.out.println("Erro ao verificar a tabela alunos " + e.getMessage());
         }
         return false;
     }
