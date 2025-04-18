@@ -334,7 +334,7 @@ public class Alunos extends UsuarioAbstract{
      * @return 
      */
     
-    public static boolean verificarAlunos(int alunos_id) {
+    public boolean verificarAlunos(int alunos_id) {
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement comando = conexao.prepareStatement("SELECT * FROM alunos WHERE alunos_usuarios_id = ?")) {
             comando.setInt(1, alunos_id);
