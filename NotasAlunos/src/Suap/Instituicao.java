@@ -83,9 +83,10 @@ public class Instituicao {
     //METODOS PARA INSERIR VALORES NA TABELA INSTITUIÇAO
     public void inserir() throws SQLException{
         Connection conexao = new Conexao().getConexao();
-        String sql = "Insert into instituicao values (instituicao_nome, instituicao_endereco, instituicao_cidade, instituicao_uf, instituicao_escolaridade, instituicao_nivel) values (?,?,?,?,?,?)";
+        String sql = "Insert into instituicao (instituicao_nome, instituicao_endereco, instituicao_cidade, instituicao_uf, instituicao_escolaridade, instituicao_nivel) values (?,?,?,?,?,?)";
         try {
-            PreparedStatement stmt = null;
+            PreparedStatement stmt;
+            stmt = conexao.prepareStatement(sql);
             stmt.setString(1, this.getInst_nome());
             stmt.setString(2, this.getInst_endereco());
             stmt.setString(3, this.getInst_cidade());
