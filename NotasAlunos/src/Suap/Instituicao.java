@@ -17,18 +17,16 @@ public class Instituicao {
     
     
     
-    Instituicao(){
-        
-    }
     
-    Instituicao(String inst_nome, String inst_endereco, String inst_cidade, String inst_uf, String inst_escolaridade, float inst_nivel){
+    
+    /**Instituicao(String inst_nome, String inst_endereco, String inst_cidade, String inst_uf, String inst_escolaridade, float inst_nivel){
         this.inst_nome = inst_nome;
         this.inst_endereco = inst_endereco;
         this.inst_cidade = inst_cidade;
         this.inst_uf = inst_uf;
         this.inst_escolaridade = inst_escolaridade;
         this.inst_nivel = inst_nivel;
-    }
+    }*/
 
     public float getInst_nivel() {
         return inst_nivel;
