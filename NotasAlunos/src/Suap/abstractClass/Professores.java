@@ -17,18 +17,9 @@ import java.sql.SQLException;
  */
 public class Professores extends UsuarioAbstract {
     
-    private int idProfessor;
     private String disciplinaMinistrada;
     private String turmaEnsinada;
     private String grauTitularidade;
-
-    public int getIdProfessor() {
-        return idProfessor;
-    }
-
-    public void setIdProfessor(int idProfessor) {
-        this.idProfessor = idProfessor;
-    }
 
     public String getDisciplinaMinistrada() {
         return disciplinaMinistrada;
