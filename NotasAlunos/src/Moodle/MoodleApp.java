@@ -91,6 +91,7 @@ public class MoodleApp {
                                         System.out.println("Informe o nivel da escola: ");
                                         inst.setInst_nivel(scan.nextFloat());
                                         inst.inserir();
+                                        scan.nextLine();
                                         
                                         
                                         System.out.println("Deseja cadastrar uma nova instituicao? ");
