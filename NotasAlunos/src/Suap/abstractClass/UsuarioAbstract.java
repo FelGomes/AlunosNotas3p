@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public abstract class UsuarioAbstract {
     
     private String nome, cpf, endereco, dataNascimento;
-    private char sexo;
+    private String sexo;
     
     private int usuario_id;
     
@@ -43,11 +43,11 @@ public abstract class UsuarioAbstract {
         this.endereco = endereco;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
    

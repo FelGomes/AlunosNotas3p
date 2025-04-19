@@ -57,20 +57,30 @@ public class Alunos extends UsuarioAbstract{
     @Override
     public void inserir() throws SQLException{
         Connection conexao = new Conexao().getConexao();
-        String sql = "Insert into alunos values (alunos_matriculados, alunos_sala, alunos_turma, qtd_disciplina, fk_alunos_usuarios_id) values (?,?,?,?,?)";
+        String sql = "Insert into alunos (alunos_matriculados, alunos_sala, alunos_turma, qtd_disciplina, fk_alunos_usuarios_id) values (?,?,?,?,?)";
+        String sql1 = "Insert into usuarios (usuarios_nome, usuarios_sexo, usuarios_endereco, usuarios_cpf, usuarios_nascimento) values (?,?,?,?,?)";
         try {
-            PreparedStatement stmt = null;
+            PreparedStatement stmt;
+            PreparedStatement stmt1;
+            stmt = conexao.prepareStatement(sql);
+            stmt1 = conexao.prepareStatement(sql1);
             stmt.setBoolean(1, this.isAlunos_matriculados());
             stmt.setString(2, this.getAlunos_sala());
             stmt.setString(3, this.getAlunos_turma());
             stmt.setInt(4, this.getQtd_disciplina());
             stmt.setInt(5, this.getId());
             
+            stmt1.setString(1, this.getNome());
+            stmt1.setString(2, this.getSexo());
+            stmt1.setString(3, this.getEndereco());
+            stmt1.setString(4, this.getCpf());
+            stmt1.setString(5, this.getDataNascimento());
+            
         } catch (Exception e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
         }
         
-            
+    
             
     }
     /**
