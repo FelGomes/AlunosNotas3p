@@ -93,6 +93,12 @@ public class Instituicao {
             stmt.setString(4, this.getInst_uf());
             stmt.setString(5, this.getInst_escolaridade());
             stmt.setFloat(6,this.getInst_nivel());
+            
+            stmt.execute();
+            stmt.close();
+            conexao.close();
+            
+            
         } catch (Exception e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
         }
