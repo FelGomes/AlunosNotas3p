@@ -402,7 +402,7 @@ public class Instituicao {
     //MEtodo para verificar se o ID existe
     public static boolean verificarInstituicao(int inst_id) {
         try (Connection conexao = new Conexao().getConexao();
-             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM fornecedores WHERE fornecedores_id = ?")) {
+             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM instituicao where instituicao_id = ?")) {
             comando.setInt(1, inst_id);
             try (ResultSet resultado = comando.executeQuery()) {
                 return resultado.next(); 

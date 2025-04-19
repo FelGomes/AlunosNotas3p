@@ -358,4 +358,17 @@ public abstract class UsuarioAbstract {
             }
         }
     }
+    
+     public boolean verificarUsuarios(int usuario_id) {
+        try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM usuario WHERE usuarios_id = ?")) {
+            comando.setInt(1, usuario_id);
+            try (ResultSet resultado = comando.executeQuery()) {
+                return resultado.next(); 
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar a tabela usuarios " + e.getMessage());
+        }
+        return false;
+    }
 }
