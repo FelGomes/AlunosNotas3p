@@ -18,23 +18,27 @@ public class MoodleApp {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Funcoes funcao = new Funcoes();
-        String resposta;
+        String resposta, opc;
+        int tabela;
+        boolean existe;
         
         funcao.menuPrincipal();
         try {
             System.out.println("Deseja escolher qual opçao? ");
             int escolha = scan.nextInt();
-            funcao.limparTela();
+            scan.nextLine();
             
             while(escolha <= 6){
                 switch(escolha){
                     case 1:
-                        funcao.menuTabelas();
-                        System.out.println("Deseja inserir valor em qual tabela? ");
-                        int tabela = scan.nextInt();
-                        scan.nextLine();
-                        while (tabela <= 10){
-                            switch(tabela){
+                        System.out.println("Deseja inserir em alguma tabela? ");
+                        opc = scan.nextLine().toLowerCase().trim();
+                        while (opc.equals("sim") || opc.equals("s")) {
+                            funcao.menuTabelas();
+                            System.out.println("informa a tabela: ");
+                            tabela = scan.nextInt();
+                            scan.nextLine();
+                            switch (tabela) {
                                 case 1:
                                     break;
                                 case 2:
@@ -44,10 +48,10 @@ public class MoodleApp {
                                         Alunos aluno = new Alunos();
                                         System.out.println("Digite o ID do usuario: ");
                                         aluno.setId(scan.nextInt());                                     
-                                        aluno.verificarAlunos(aluno.getId());
-                                        boolean existe = aluno.verificarAlunos(aluno.getId());
+                                        aluno.verificarUsuarios(aluno.getId());
+                                        existe = aluno.verificarUsuarios(aluno.getId());
                                         if(existe == true){
-                                            System.out.println("O aluno esta matriculado [true/false] ");
+                                            System.out.println("O aluno esta matriculado? [true/false] ");
                                             aluno.setAlunos_matriculados(scan.nextBoolean());
                                             System.out.println("Informe a sala do aluno: ");
                                             aluno.setAlunos_sala(scan.nextLine());
@@ -96,11 +100,106 @@ public class MoodleApp {
                                     break;
                                 case 5:
                                     break;
+                                default:
+                                    System.out.println("Nao existe esse campo!");
+                                    break;
                                 
                             }
+                            System.out.println("Deseja inserir outro valor? ");
+                            opc = scan.nextLine().toLowerCase().trim();
+                        }
+                        
+                    case 2:
+                        System.out.println("Deseja fazer atualizaçao de algum dado? ");
+                        opc = scan.nextLine().toLowerCase().trim();
+                        while(opc.equals("sim")||(opc.equals("s"))){
+                            funcao.menuTabelas();
+                            System.out.println("Deseja atualizar qual tabela? ");
+                            tabela = scan.nextInt();
+                            scan.nextLine();
+                            switch(tabela){
+                                case 1:
+                                    break;
+                                case 2:
+                                    System.out.println("Deseja fazer a atualizacao dessa tabela? ");
+                                    String opc1 = scan.nextLine();
+                                    while(opc1.equals("sim") || opc.equals("s")){
+                                        Alunos aluno = new Alunos();
+                                        System.out.println("Informe o ID do usuario que deseja fazer alteração: ");
+                                        aluno.setId(scan.nextInt());
+                                        existe = aluno.verificarAlunos(aluno.getId());
+                                        if (existe == true) {
+                                            System.out.println("=========================");
+                                            System.out.println("Matricula   ");
+                                            System.out.println("Sala        ");
+                                            System.out.println("Turma       ");
+                                            System.out.println("Materias    ");
+                                            System.out.println("tudo         ");
+                                            System.out.println("=========================");
+                                            System.out.println("Deseja alterar qual campo de ALUNO? ");
+                                            resposta = scan.nextLine().toLowerCase().trim();
+                                            if(resposta.equals("matricula")){
+                                                System.out.println("Esse aluno esta matriculado? [true/false]");
+                                                aluno.setAlunos_matriculados(scan.nextBoolean());
+                                                aluno.alterar(aluno.getId(), resposta);
+                                                
+                                            } else if(resposta.equals("sala")){
+                                                System.out.println("Informe a sala do aluno: ");
+                                                aluno.setAlunos_sala(scan.nextLine());
+                                                aluno.alterar(aluno.getId(), resposta);
+                                                
+                                            } else if(resposta.equals("turma")){
+                                                System.out.println("Informe a turma do aluno: ");
+                                                aluno.setAlunos_turma(scan.nextLine());
+                                                aluno.alterar(aluno.getId(), resposta);
+                                                
+                                            } else if (resposta.equals("materias")){
+                                                System.out.println("Informe a quantidade de disciplinas: ");
+                                                aluno.setQtd_disciplina(scan.nextInt());
+                                                aluno.alterar(aluno.getId(), resposta);
+                                                
+                                            } else if (resposta.equals("tudo")){
+                                                System.out.println("Esse aluno esta matriculado? [true/false]");
+                                                aluno.setAlunos_matriculados(scan.nextBoolean());
+                                                System.out.println("Informe a sala do aluno: ");
+                                                aluno.setAlunos_sala(scan.nextLine());
+                                                System.out.println("Informe a turma do aluno: ");
+                                                aluno.setAlunos_turma(scan.nextLine());
+                                                System.out.println("Informe a quantidade de disciplinas: ");
+                                                aluno.setQtd_disciplina(scan.nextInt());
+                                                aluno.alterar(aluno.getId(), resposta);
+                                                
+                                            } else{
+                                                System.out.println("Nao existe esse campo!");
+                                            }
+
+                                        } else {
+                                            System.out.println("Nao existe aluno com esse ID!");
+                                        }
+                                        System.out.println("Deseja Atualizar novamente?  ");
+                                        opc1 = scan.nextLine().toLowerCase().trim();
+                                    }
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    break;
+                                case 6:
+                                    break;
+                                case 7:
+                                    break;
+                                case 8:
+                                    break;
+                                case 9:
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
                         }
                         break;
-                    
                 }
                 
             }
