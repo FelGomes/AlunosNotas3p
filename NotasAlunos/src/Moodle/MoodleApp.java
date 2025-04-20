@@ -23,6 +23,8 @@ public class MoodleApp {
         int tabela;
         boolean existe;
         int idUsu = 0;
+        Alunos aluno = new Alunos();
+        Instituicao inst = new Instituicao();
         
         funcao.menuPrincipal();
         try {
@@ -42,8 +44,6 @@ public class MoodleApp {
                             scan.nextLine();
                             switch (tabela) {
                                 case 1:
-                                    Alunos aluno = new Alunos();
-                                    Professores professor = new Professores();
                                     System.out.println("Deseja inserir valores na tabela usuarios? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                     while(resposta.equals("sim")||resposta.equals("s")){
@@ -113,7 +113,6 @@ public class MoodleApp {
                                 case 3:
                                     break;
                                 case 4:
-                                    Instituicao inst = new Instituicao();
                                     System.out.println("Deseja prosseguir na inserção de valores de Instituicao? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                     while(resposta.equals("sim")||resposta.equals('s')){
@@ -164,7 +163,6 @@ public class MoodleApp {
                                     System.out.println("Deseja fazer a atualizacao dessa tabela? ");
                                     opc1 = scan.nextLine();
                                     while(opc1.equals("sim") || opc.equals("s")){
-                                        Alunos aluno = new Alunos();
                                         System.out.println("Informe o ID do usuario que deseja fazer alteração: ");
                                         aluno.setId(scan.nextInt());
                                         existe = aluno.verificarAlunos(aluno.getId());
@@ -243,8 +241,6 @@ public class MoodleApp {
                         break;
                         
                     case 3:
-                        Alunos aluno = new Alunos();
-                        Instituicao inst = new Instituicao();
                         System.out.println("Deseja remover valores de alguma tabela? ");
                         resposta = scan.nextLine();
                         while(resposta.equals("sim")||resposta.equals("s")){
@@ -314,6 +310,81 @@ public class MoodleApp {
                         }
                         break;
                     case 4:
+                        
+                        System.out.println("Deseja listar alguma tabela? ");
+                        resposta = scan.nextLine().toLowerCase().trim();
+                        while(resposta.equals("sim")||resposta.equals("s")){
+                            funcao.menuTabelas();
+                            System.out.println("Deseja escolher qual tabela? ");
+                            tabela = scan.nextInt();
+                            switch(tabela){
+                                case 1:
+                                    break;
+                                case 2:
+                                    System.out.println("Deseja listar todos os alunos? ");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                    if(opc.equals("sim")||opc.equals("s")){
+                                        aluno.listar(0);
+                                    } else{
+                                        System.out.println("Informe o ID de aluno que deseja listar: ");
+                                        int idlistar = scan.nextInt();
+                                        if(idlistar == 0){
+                                            aluno.listar(0);
+                                        } else {
+                                            existe = aluno.verificarAlunos(idlistar);
+                                            if(existe == true){
+                                                aluno.listar(idlistar);
+                                                
+                                            } else {
+                                                System.out.println("Nao existe usuario com esse ID!");
+                                            }
+                                        }
+                                    }
+                                    
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    System.out.println("Deseja listar todas as instituicoes? ");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                    if(opc.equals("sim")||opc.equals("s")){
+                                        inst.listar(0);
+                                    } else{
+                                        System.out.println("Informe o ID da instituicao que deseja listar: ");
+                                        int idlistar = scan.nextInt();
+                                        if(idlistar == 0){
+                                            inst.listar(0);
+                                        } else {
+                                            existe = aluno.verificarAlunos(idlistar);
+                                            if(existe == true){
+                                                inst.listar(idlistar);
+                                                
+                                            } else {
+                                                System.out.println("Nao existe instituicao com esse ID!");
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case 5:
+                                    break;
+                                case 6:
+                                    break;
+                                case 7:
+                                    break;
+                                case 8:
+                                    break;
+                                case 9:
+                                    break;
+                                default:
+                                    System.out.println("Tabela errada! ");
+                                    break;
+
+                                
+                            }
+                            System.out.println("Deseja listar alguma outra tabela? ");
+                            resposta = scan.nextLine().toLowerCase().trim();
+                        }
+                        
                         break;
                     case 5:
                         System.out.println("Saindo...");
