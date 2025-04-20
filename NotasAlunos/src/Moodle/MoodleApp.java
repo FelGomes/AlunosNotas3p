@@ -19,7 +19,7 @@ public class MoodleApp {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Funcoes funcao = new Funcoes();
-        String resposta, opc;
+        String resposta, opc, opc1;
         int tabela;
         boolean existe;
         int idUsu = 0;
@@ -82,12 +82,16 @@ public class MoodleApp {
                                                     aluno.setAlunos_turma(scan.nextLine());
                                                     System.out.println("Informe a quantidade de disciplinas que possui: ");
                                                     aluno.setQtd_disciplina(scan.nextInt());
+                                                    idUsu += 1;
+                                                    aluno.setId(idUsu);
                                                     aluno.inserir();
                                                     
                                                 }else {
                                                     aluno.setAlunos_sala(null);
                                                     aluno.setAlunos_turma(null);
                                                     aluno.setQtd_disciplina(0);
+                                                    idUsu += 1;
+                                                    aluno.setId(idUsu);
                                                     aluno.inserir();
                                                 }
                                                 
@@ -158,7 +162,7 @@ public class MoodleApp {
                                     break;
                                 case 2:
                                     System.out.println("Deseja fazer a atualizacao dessa tabela? ");
-                                    String opc1 = scan.nextLine();
+                                    opc1 = scan.nextLine();
                                     while(opc1.equals("sim") || opc.equals("s")){
                                         Alunos aluno = new Alunos();
                                         System.out.println("Informe o ID do usuario que deseja fazer alteração: ");
@@ -231,10 +235,73 @@ public class MoodleApp {
                                 case 9:
                                     break;
                                 default:
+                                    System.out.println("Tabela errada! ");
                                     break;
                             }
                             
                         }
+                        break;
+                        
+                    case 3:
+                        Alunos aluno = new Alunos();
+                        System.out.println("Deseja remover valores de alguma tabela? ");
+                        resposta = scan.nextLine();
+                        while(resposta.equals("sim")||resposta.equals("s")){
+                            funcao.menuTabelas();
+                            System.out.println("Deseja escolher qual tabela? ");
+                            tabela = scan.nextInt();
+                            switch(tabela){
+                                case 1:
+                                    break;
+                                case 2:
+                                    System.out.println("Deseja fazer a remoçao de alguma campo? ");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                    while(opc.equals("sim")||opc.equals("s")){
+                                        aluno.listar(0);
+                                        System.out.println("Informe o ID do usuario que deseja remover: ");
+                                        int idDelete = scan.nextInt();
+                                        existe = aluno.verificarAlunos(idDelete);
+                                        if (existe == true) {
+                                            aluno.deletar(idDelete);
+
+                                        } else {
+                                            System.out.println("Esse ID nao existe em aluno! ");
+                                        }
+                                        System.out.println("Deseja fazer outra remocao? ");
+                                        opc = scan.nextLine().toLowerCase().trim();
+                                        
+                                        
+                                    }
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    break;
+                                case 6:
+                                    break;
+                                case 7:
+                                    break;
+                                case 8:
+                                    break;
+                                case 9:
+                                    break;
+                                default:
+                                    System.out.println("Tabela errada! ");
+                                    break;
+                                    
+                            }
+                            
+                        }
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        System.out.println("Saindo...");
+                        break;
+                    default:
+                        System.out.println("Opçao errada!");
                         break;
                 }
                 
