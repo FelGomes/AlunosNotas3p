@@ -128,6 +128,48 @@ public class Diario {
         
      }
     
-    
-    
+    public void listar(int diario_id) {
+        String sql;
+
+        if (diario_id > 0) {
+            sql = "SELECT d.*, a.aluno_nome, p.professor_nome, i.instituicao_nome FROM diario d " +
+                  "INNER JOIN aluno a ON d.aluno_id = a.aluno_id " +
+                  "INNER JOIN professor p ON d.professor_id = p.professor_id " +
+                  "INNER JOIN instituicao i ON d.instituicao_id = i.instituicao_id " +
+                  "WHERE d.diario_id = ?";
+        } else {
+            sql = "SELECT d.*, a.aluno_nome, p.professor_nome, i.instituicao_nome FROM diario d " +
+                  "INNER JOIN aluno a ON d.aluno_id = a.aluno_id " +
+                  "INNER JOIN professor p ON d.professor_id = p.professor_id " +
+                  "INNER JOIN instituicao i ON d.instituicao_id = i.instituicao_id";
+        }
+
+        try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+            if (diario_id > 0) {
+                stmt.setInt(1, diario_id);
+            }
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("==============================================");
+                System.out.println("ID: " + rs.getInt("diario_id"));
+                System.out.println("Aluno: " + rs.getString("aluno_nome"));
+                System.out.println("Professor: " + rs.getString("professor_nome"));
+                System.out.println("Instituição: " + rs.getString("instituicao_nome"));
+                System.out.println("Disciplina: " + rs.getString("disciplina"));
+                System.out.println("Descrição: " + rs.getString("descricao"));
+                System.out.println("Data: " + rs.getString("data_registro"));
+                System.out.println("==============================================");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar diário: " + e.getMessage());
+        }
+    }
+
 }
+    
+
