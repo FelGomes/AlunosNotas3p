@@ -18,6 +18,7 @@ import java.sql.SQLException;
 public class Alunos extends UsuarioAbstract{
     
     
+    
     private boolean alunos_matriculados;
     private String alunos_sala, alunos_turma;
     private int qtd_disciplina;
