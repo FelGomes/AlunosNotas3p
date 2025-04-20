@@ -58,6 +58,20 @@ public class Matricula {
         }
     }
     
+    public void deletar(int matricula_id){
+         String sql = "DELETE FROM matricula WHERE matricula_id = ?";
+        try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            
+            stmt.setInt(1, matricula_id);
+            stmt.execute();
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar matricula: " + e.getMessage());
+        }
+    }
+    
+    
     
     
 }
