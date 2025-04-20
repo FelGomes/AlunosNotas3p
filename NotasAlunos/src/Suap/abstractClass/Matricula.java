@@ -7,6 +7,7 @@ import Suap.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 /**
  *
  * @author Kaua
@@ -70,7 +71,42 @@ public class Matricula {
             System.out.println("Erro ao deletar matricula: " + e.getMessage());
         }
     }
-    
+    public void alterar(int matricula_id){
+         String sql = "UPDATE matricula SET matricula_data = ?, aluno_id = ?, instituicao_id = ? WHERE matricula_id = ?";
+        try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            
+            stmt.setString(1, this.getData());
+            stmt.setInt(2, this.getAlunoId());
+            stmt.setInt(3, this.getInstituicaoId());
+            stmt.setInt(4, matricula_id);
+            stmt.execute();
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao alterar matricula: " + e.getMessage());
+        }
+    }
+    public void listar(int matricula_id) {
+        String sql = matricula_id > 0 ? "SELECT * FROM matricula WHERE matricula_id = ?" : "SELECT * FROM matricula";
+        try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            
+            if (matricula_id > 0) stmt.setInt(1, matricula_id);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                System.out.println("=======================================");
+                System.out.println("ID: " + rs.getInt("matricula_id"));
+                System.out.println("Data: " + rs.getString("matricula_data"));
+                System.out.println("Aluno ID: " + rs.getInt("aluno_id"));
+                System.out.println("Instituicao ID: " + rs.getInt("instituicao_id"));
+                System.out.println("=======================================");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar matriculas: " + e.getMessage());
+        }
+    }
     
     
     
