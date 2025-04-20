@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Suap.abstractClass;
-
+import Suap.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 /**
  *
  * @author Kaua
@@ -40,7 +43,20 @@ public class Matricula {
         this.instituicao_id = instituicao_id;
     }
     
-    
+    public void inserir(){
+        String sql = "INSERT INTO matricula (matricula_data, aluno_id, instituicao_id) VALUES (?, ?, ?)";
+         try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            
+            stmt.setString(1, this.getData());
+            stmt.setInt(2, this.getAlunoId());
+            stmt.setInt(3, this.getInstituicaoId());
+            stmt.execute();
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao inserir matricula: " + e.getMessage());
+        }
+    }
     
     
     
