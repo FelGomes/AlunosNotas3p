@@ -3,7 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Suap.abstractClass;
-
+import Suap.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author Kaua
@@ -70,5 +74,41 @@ public class Diario {
         this.data_registro = data_registro;
     }
 
+    //INSERÇÃO
+    public void inserir() throws SQLException {
+        String sql = "INSERT INTO diario (aluno_id, professor_id, instituicao_id, disciplina, descricao, data_registro) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conexao = new Conexao().getConexao(); 
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            
+            stmt.setInt(1, this.getAluno_id());
+            stmt.setInt(2, this.getProfessor_id());
+            stmt.setInt(3, this.getInstituicao_id());
+            stmt.setString(4, this.getDisciplina());
+            stmt.setString(5, this.getDescricao());
+            stmt.setString(6, this.getData_registro());
+            
+            stmt.execute();
+            System.out.println("Diário inserido com sucesso.");
+        } catch (SQLException e) {
+            System.out.println("Erro ao inserir diário: " + e.getMessage());
+        }
+    }
+    
+    //DELET
+     public void deletar(int diario_id) {
+        String sql = "DELETE FROM diario WHERE diario_id = ?";
+        try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+            stmt.setInt(1, diario_id);
+            stmt.execute();
+            System.out.println("Diário removido com sucesso.");
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover diário: " + e.getMessage());
+        }
+    }
+    
+    
+    
     
 }
