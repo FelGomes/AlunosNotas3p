@@ -23,6 +23,10 @@ public class Alunos extends UsuarioAbstract{
     private String alunos_sala, alunos_turma;
     private int qtd_disciplina;
 
+    public Alunos(String nome, String cpf, String endereco, String dataNascimento, String sexo, int usuario_id) {
+        super(nome, cpf, endereco, dataNascimento, sexo, usuario_id);
+    }
+
     public boolean isAlunos_matriculados() {
         return alunos_matriculados;
     }
