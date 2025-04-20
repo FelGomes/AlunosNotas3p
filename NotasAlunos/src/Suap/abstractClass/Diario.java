@@ -107,7 +107,26 @@ public class Diario {
             System.out.println("Erro ao remover diário: " + e.getMessage());
         }
     }
-    
+       public void alterar(int diario_id) {
+        String sql = "UPDATE diario SET aluno_id = ?, professor_id = ?, instituicao_id = ?, disciplina = ?, descricao = ?, data_registro = ? WHERE diario_id = ?";
+        try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            
+            stmt.setInt(1, this.getAluno_id());
+            stmt.setInt(2, this.getProfessor_id());
+            stmt.setInt(3, this.getInstituicao_id());
+            stmt.setString(4, this.getDisciplina());
+            stmt.setString(5, this.getDescricao());
+            stmt.setString(6, this.getData_registro());
+            stmt.setInt(7, diario_id);
+
+            stmt.execute();
+            System.out.println("Diário atualizado com sucesso.");
+        } catch (SQLException e){
+            System.out.println("Erro ao atualizar diário: " + e.getMessage());
+        }
+        
+     }
     
     
     
