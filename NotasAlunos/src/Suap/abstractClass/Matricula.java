@@ -87,28 +87,55 @@ public class Matricula {
         }
     }
     public void listar(int matricula_id) {
-        String sql = matricula_id > 0 ? "SELECT * FROM matricula WHERE matricula_id = ?" : "SELECT * FROM matricula";
+         String sql = "SELECT m.matricula_id, m.matricula_data, " +
+                 "a.aluno_id, a.aluno_nome, " +
+                 "i.instituicao_id, i.instituicao_nome " +
+                 "FROM matricula m " +
+                 "INNER JOIN aluno a ON m.aluno_id = a.aluno_id " +
+                 "INNER JOIN instituicao i ON m.instituicao_id = i.instituicao_id";
+
+    if (matricula_id > 0) {
+        sql += " WHERE m.matricula_id = ?";
+    }
+
+    try (Connection conexao = new Conexao().getConexao();
+         PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+        if (matricula_id > 0) {
+            stmt.setInt(1, matricula_id);
+        }
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            System.out.println("=======================================");
+            System.out.println("ID da Matrícula: " + rs.getInt("matricula_id"));
+            System.out.println("Data da Matrícula: " + rs.getString("matricula_data"));
+            System.out.println("Aluno: " + rs.getString("aluno_nome") + " (ID: " + rs.getInt("aluno_id") + ")");
+            System.out.println("Instituição: " + rs.getString("instituicao_nome") + " (ID: " + rs.getInt("instituicao_id") + ")");
+            System.out.println("=======================================");
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Erro ao listar matrículas com JOIN: " + e.getMessage());
+    }
+}
+    
+    public boolean verificarMatricula(int matricula_id) {
+        String sql = "SELECT * FROM matricula WHERE matricula_id = ?";
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
             
-            if (matricula_id > 0) stmt.setInt(1, matricula_id);
+            stmt.setInt(1, matricula_id);
             ResultSet rs = stmt.executeQuery();
-            
-            while (rs.next()) {
-                System.out.println("=======================================");
-                System.out.println("ID: " + rs.getInt("matricula_id"));
-                System.out.println("Data: " + rs.getString("matricula_data"));
-                System.out.println("Aluno ID: " + rs.getInt("aluno_id"));
-                System.out.println("Instituicao ID: " + rs.getInt("instituicao_id"));
-                System.out.println("=======================================");
-            }
+            return rs.next();
             
         } catch (SQLException e) {
-            System.out.println("Erro ao listar matriculas: " + e.getMessage());
+            System.out.println("Erro ao verificar matricula: " + e.getMessage());
         }
+        return false;
     }
-    
-    
-    
+
 }
+
 
