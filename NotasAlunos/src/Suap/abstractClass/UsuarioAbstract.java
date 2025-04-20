@@ -16,8 +16,16 @@ public abstract class UsuarioAbstract {
     
     private String nome, cpf, endereco, dataNascimento;
     private String sexo;
-    
     private int usuario_id;
+    
+    public UsuarioAbstract(String nome, String cpf, String endereco, String dataNascimento, String sexo, int usuario_id) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.usuario_id = usuario_id;
+    }
     
     public void setNome(String nome) {
         this.nome = nome;
@@ -67,12 +75,7 @@ public abstract class UsuarioAbstract {
     public void setId(int id) {
         this.usuario_id = id;
     }
-    
-    
-    
-    
 
-    
     
     /**
      * Método para inserir na tabela Usuario

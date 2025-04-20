@@ -20,6 +20,13 @@ public class Professores extends UsuarioAbstract {
     private String disciplinaMinistrada;
     private String turmaEnsinada;
     private String grauTitularidade;
+    
+    public Professores(String nome, String cpf, String endereco, String dataNascimento, String sexo, int usuario_id, String disciplinaMinistrada, String turmaEnsinada, String grauTitularidade){
+        super(nome, cpf, endereco, dataNascimento, sexo, usuario_id);
+        this.disciplinaMinistrada = disciplinaMinistrada;
+        this.turmaEnsinada = turmaEnsinada;
+        this.grauTitularidade = grauTitularidade; 
+    }
 
     public String getDisciplinaMinistrada() {
         return disciplinaMinistrada;
@@ -44,6 +51,7 @@ public class Professores extends UsuarioAbstract {
     public void setGrauTitularidade(String grauTitularidade) {
         this.grauTitularidade = grauTitularidade;
     }
+    
     
     
 }
