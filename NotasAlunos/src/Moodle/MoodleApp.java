@@ -244,6 +244,7 @@ public class MoodleApp {
                         
                     case 3:
                         Alunos aluno = new Alunos();
+                        Instituicao inst = new Instituicao();
                         System.out.println("Deseja remover valores de alguma tabela? ");
                         resposta = scan.nextLine();
                         while(resposta.equals("sim")||resposta.equals("s")){
@@ -260,6 +261,7 @@ public class MoodleApp {
                                         aluno.listar(0);
                                         System.out.println("Informe o ID do usuario que deseja remover: ");
                                         int idDelete = scan.nextInt();
+                                        scan.nextLine();
                                         existe = aluno.verificarAlunos(idDelete);
                                         if (existe == true) {
                                             aluno.deletar(idDelete);
@@ -269,13 +271,29 @@ public class MoodleApp {
                                         }
                                         System.out.println("Deseja fazer outra remocao? ");
                                         opc = scan.nextLine().toLowerCase().trim();
-                                        
-                                        
                                     }
                                     break;
                                 case 3:
                                     break;
                                 case 4:
+                                    System.out.println("Deseja fazer a remoçao de alguma campo? ");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                    while (opc.equals("sim") || opc.equals("s")) {
+                                        inst.listar(0);
+                                        System.out.println("Informe o ID da instituicao que deseja remover: ");
+                                        int idDelete = scan.nextInt();
+                                        scan.nextLine();
+                                        existe = inst.verificarInstituicao(idDelete);
+                                        if (existe == true) {
+                                            inst.deletar(idDelete);
+
+                                        } else {
+                                            System.out.println("Esse ID nao existe em instituicao! ");
+                                        }
+                                        System.out.println("Deseja fazer outra remocao? ");
+                                        opc = scan.nextLine().toLowerCase().trim();
+                                    }
+                                    
                                     break;
                                 case 5:
                                     break;
