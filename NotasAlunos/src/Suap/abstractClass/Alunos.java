@@ -17,11 +17,13 @@ import java.sql.SQLException;
  */
 public class Alunos extends UsuarioAbstract{
     
-    
-    
     private boolean alunos_matriculados;
     private String alunos_sala, alunos_turma;
     private int qtd_disciplina;
+    
+    public Alunos(){
+        
+    }
 
     public Alunos(String nome, String cpf, String endereco, String dataNascimento, String sexo, int usuario_id) {
         super(nome, cpf, endereco, dataNascimento, sexo, usuario_id);
@@ -351,7 +353,7 @@ public class Alunos extends UsuarioAbstract{
     
     public boolean verificarAlunos(int alunos_id) {
         try (Connection conexao = new Conexao().getConexao();
-             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM alunos WHERE alunos_usuarios_id = ?")) {
+             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM alunos WHERE fk_alunos_usuarios_id = ?")) {
             comando.setInt(1, alunos_id);
             try (ResultSet resultado = comando.executeQuery()) {
                 return resultado.next(); 
