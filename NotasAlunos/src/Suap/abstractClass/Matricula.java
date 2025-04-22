@@ -15,9 +15,10 @@ import java.sql.ResultSet;
  */
 public class Matricula {
     private int matricula_id;
-    private String matricula_data;
+    private String data_matricula;
     private int aluno_id;
     private int instituicao_id;
+    private int curso_id;
     
     public int getId(){
         return matricula_id;
@@ -25,11 +26,11 @@ public class Matricula {
     public void setId(int id){
         this.matricula_id = id;
     }
-    public String getData() {
-        return matricula_data;
+    public String getDataMatricula() {
+        return data_matricula;
     }
-    public void setData(String data){
-        this.matricula_data = data;
+    public void setDataMatricula(String data){
+        this.data_matricula = data;
     }
     public int getAlunoId(){
         return aluno_id;
@@ -43,15 +44,22 @@ public class Matricula {
     public void setInstituicaoId(int instituicao_id){
         this.instituicao_id = instituicao_id;
     }
+     public int getCursoId() {
+        return curso_id;
+    }
+    public void setCursoId(int curso_id) {
+        this.curso_id = curso_id;
+    }
     
     public void inserir(){
         String sql = "INSERT INTO matricula (matricula_data, aluno_id, instituicao_id) VALUES (?, ?, ?)";
          try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
             
-            stmt.setString(1, this.getData());
+            stmt.setString(1, this.getDataMatricula());
             stmt.setInt(2, this.getAlunoId());
             stmt.setInt(3, this.getInstituicaoId());
+            stmt.setInt(4, this.getCursoId());
             stmt.execute();
             
         } catch (SQLException e) {
@@ -76,10 +84,11 @@ public class Matricula {
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
             
-            stmt.setString(1, this.getData());
+            stmt.setString(1, this.getDataMatricula());
             stmt.setInt(2, this.getAlunoId());
             stmt.setInt(3, this.getInstituicaoId());
-            stmt.setInt(4, matricula_id);
+              stmt.setInt(4, this.getCursoId());
+             stmt.setInt(5, matricula_id);
             stmt.execute();
             
         } catch (SQLException e) {

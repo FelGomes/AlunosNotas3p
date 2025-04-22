@@ -4,9 +4,19 @@
  */
 package Moodle;
 import Suap.Funcoes;
+import java.sql.PreparedStatement;
 import Suap.Instituicao;
 import Suap.abstractClass.Alunos;
 import java.util.Scanner;
+import Suap.abstractClass.Matricula;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
+
+
+
+
+
 
 /**
  *
@@ -40,6 +50,37 @@ public class MoodleApp {
                             scan.nextLine();
                             switch (tabela) {
                                 case 1:
+                                    Matricula mat = new Matricula();
+    System.out.println("Deseja prosseguir na inserção de matrícula?");
+    resposta = scan.nextLine().toLowerCase().trim();
+    while (resposta.equals("sim") || resposta.equals("s")) {
+        System.out.println("Informe o ID do aluno: ");
+        mat.setAlunoId(scan.nextInt());
+        scan.nextLine();
+        System.out.println("Informe o ID do curso: ");
+        mat.setCursoId(scan.nextInt());
+        scan.nextLine();
+        System.out.println("Informe o ID da instituição: ");
+        mat.setInstituicaoId(scan.nextInt());
+        scan.nextLine();
+        System.out.println("Informe a data da matrícula (formato: YYYY-MM-DD): "); // YEAR - MONTH - DAY
+String dataInput = scan.nextLine();
+
+// Validação opcional
+try {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    sdf.setLenient(false);
+    sdf.parse(dataInput); // Se for inválida, lança exceção
+    mat.setDataMatricula(dataInput);
+} catch (Exception e) {
+    System.out.println("Data inválida! Use o formato YYYY-MM-DD."); 
+    return; // ou repita a leitura
+}
+
+        mat.inserir();
+
+        System.out.println("Deseja cadastrar uma nova matrícula?");
+        resposta = scan.nextLine().toLowerCase().trim();
                                     break;
                                 case 2:
                                     System.out.println("Para criar aluno, é necessario que tenha cadastrado usuario. Deseja prosseguir? ");
@@ -120,6 +161,7 @@ public class MoodleApp {
                             scan.nextLine();
                             switch(tabela){
                                 case 1:
+                                    
                                     break;
                                 case 2:
                                     System.out.println("Deseja fazer a atualizacao dessa tabela? ");
