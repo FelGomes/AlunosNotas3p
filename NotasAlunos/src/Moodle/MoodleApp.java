@@ -87,6 +87,12 @@ try {
 }
 
         mat.inserir();
+      System.out.println("\n Matrícula realizada com sucesso!");
+System.out.println(" Bem-vindo(a), aluno(a) de ID: " + mat.getAlunoId() + "!");
+System.out.println("️ Data da matrícula: " + mat.getDataMatricula());
+System.out.println(" Instituição ID: " + mat.getInstituicaoId());
+System.out.println(" Curso ID: " + mat.getCursoId());
+System.out.println("=======================================\n");
 
         System.out.println("Deseja cadastrar uma nova matrícula?");
         resposta = scan.nextLine().toLowerCase().trim();
