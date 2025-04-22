@@ -163,6 +163,7 @@ public class MoodleApp {
                                     System.out.println("Deseja fazer a atualizacao dessa tabela? ");
                                     opc1 = scan.nextLine();
                                     while(opc1.equals("sim") || opc.equals("s")){
+                                        aluno.listar(0);
                                         System.out.println("Informe o ID do usuario que deseja fazer alteração: ");
                                         aluno.setId(scan.nextInt());
                                         existe = aluno.verificarAlunos(aluno.getId());
