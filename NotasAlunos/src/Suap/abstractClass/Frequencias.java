@@ -117,6 +117,24 @@ public class Frequencias {
                     System.out.println(e.getMessage());
                 }
             }
+        } else if (atributo.equals("aulas_ministradas")) {
+            String sql = "UPDATE frequencias SET aulas_ministradas = ? WHERE frequencias_id = ?";
+            PreparedStatement pstm = null;
+            try {
+                Connection conexao = new Conexao().getConexao();
+                pstm.setInt(1, this.aulas_ministradas);
+                pstm.setInt(2, frequencias_id);
+                pstm.execute();
+            } catch (SQLException e) {
+                System.out.println("Erro ao alterar os atributos aulas_ministradas da tabela frequencias" + e.getMessage());
+            } finally {
+                try {
+                    if (pstm != null);
+                    pstm.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         }
     }
 }
