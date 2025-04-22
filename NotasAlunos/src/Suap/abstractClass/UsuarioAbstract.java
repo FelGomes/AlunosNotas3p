@@ -18,6 +18,10 @@ public abstract class UsuarioAbstract {
     private String sexo;
     private int usuario_id;
     
+    public UsuarioAbstract(){
+        
+    }
+    
     public UsuarioAbstract(String nome, String cpf, String endereco, String dataNascimento, String sexo, int usuario_id) {
         this.nome = nome;
         this.cpf = cpf;

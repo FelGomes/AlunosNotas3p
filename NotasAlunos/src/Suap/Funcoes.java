@@ -44,7 +44,7 @@ public class Funcoes {
         System.out.println("==================================");
         System.out.println("1) USUARIOS    ");
         System.out.println("2) ALUNOS      ");
-        System.out.println("3) PROFESSORES ");
+        System.out.println("3) PROFESSOR   ");
         System.out.println("4) INSTITUICAO ");
         System.out.println("5) MATRICULA   ");
         System.out.println("6) BOLETIM     ");
