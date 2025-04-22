@@ -60,7 +60,7 @@ public class MoodleApp {
     resposta = scan.nextLine().toLowerCase().trim();
     while (resposta.equals("sim") || resposta.equals("s")) {
         System.out.println("======================================");
-     System.out.println("         SEJA BEM VINDO, À MATRICULA        ");
+     System.out.println("           PÁGINA DE MATRÍCULA        ");
         System.out.println("======================================");
         
         System.out.println("Informe o ID do aluno: ");
