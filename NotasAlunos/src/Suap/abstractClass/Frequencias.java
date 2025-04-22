@@ -24,6 +24,7 @@ public class Frequencias {
         this.frequencias_faltas = frequencias_faltas;
         this.prctg_presenca = prctg_presenca;
         this.professores = professores;
+        professores.
     }
 
     public int getFrequencias_id() {
@@ -127,6 +128,23 @@ public class Frequencias {
                 pstm.execute();
             } catch (SQLException e) {
                 System.out.println("Erro ao alterar os atributos aulas_ministradas da tabela frequencias" + e.getMessage());
+            } finally {
+                try {
+                    if (pstm != null);
+                    pstm.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        } else if (atributo.equals("frequencias_faltas")) {
+            PreparedStatement pstm = null;
+            try {
+                Connection conexao = new Conexao().getConexao();
+                pstm.setInt(1, this.frequencias_faltas);
+                pstm.setInt(2, frequencias_id);
+                pstm.execute();
+            } catch (SQLException e) {
+                System.out.println("Erro ao alterar os atributos frequencias_faltas da tabela frequencias" + e.getMessage());
             } finally {
                 try {
                     if (pstm != null);
