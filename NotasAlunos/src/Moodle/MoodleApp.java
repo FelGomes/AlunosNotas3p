@@ -59,6 +59,10 @@ public class MoodleApp {
     System.out.println("Deseja prosseguir na inserção de matrícula?");
     resposta = scan.nextLine().toLowerCase().trim();
     while (resposta.equals("sim") || resposta.equals("s")) {
+        System.out.println("======================================");
+     System.out.println("         SEJA BEM VINDO, À MATRICULA        ");
+        System.out.println("======================================");
+        
         System.out.println("Informe o ID do aluno: ");
         mat.setAlunoId(scan.nextInt());
         scan.nextLine();
