@@ -106,8 +106,16 @@ public class Frequencias {
                 pstm.setInt(1, this.getTotal_aulas());
                 pstm.setInt(2, frequencias_id);
                 pstm.execute();
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 System.out.println("Erro ao alterar o atributos total_aulas da tabela frequencias" + e.getMessage());
+            } finally {
+                try {
+                    if (pstm != null) {
+                        pstm.close();
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
