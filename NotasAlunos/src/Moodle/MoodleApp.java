@@ -194,7 +194,7 @@ public class MoodleApp {
         System.out.println("Informe a data da matrícula (formato: YYYY-MM-DD): "); // YEAR - MONTH - DAY
 String dataInput = scan.nextLine();
 
-// Validação opcional
+// Validação
 try {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     sdf.setLenient(false);
