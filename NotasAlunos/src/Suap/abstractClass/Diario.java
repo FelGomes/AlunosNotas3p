@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @since 20/04/2025 as 14:03
  */
 public class Diario {
-    private int diario_id;
+    private int diarios_id;
      private String diarios_local;
     private String diarios_disciplinas;
     private int qtd_alunos;
@@ -93,81 +93,95 @@ public class Diario {
     }
     
     //DELET
-     public void deletar(int diario_id) {
-        String sql = "DELETE FROM diario WHERE diario_id = ?";
+      public void deletar(int diarios_id) {
+        String sql = "DELETE FROM diario WHERE diarios_id = ?";
+
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
-            stmt.setInt(1, diario_id);
+            stmt.setInt(1, diarios_id);
             stmt.execute();
-            System.out.println("Diário removido com sucesso.");
+
+            System.out.println("Diário deletado com sucesso!");
+
         } catch (SQLException e) {
-            System.out.println("Erro ao remover diário: " + e.getMessage());
+            System.out.println("Erro ao deletar diário: " + e.getMessage());
         }
     }
-       public void alterar(int diario_id) {
-        String sql = "UPDATE diario SET aluno_id = ?, professor_id = ?, instituicao_id = ?, disciplina = ?, descricao = ?, data_registro = ? WHERE diario_id = ?";
+    
+    public void listar(int diarios_id) {
+    String sql = "SELECT d.diarios_id, d.diarios_local, d.diarios_disciplinas, d.qtd_alunos, " +
+                 "p.professor_nome, a.aluno_nome " +
+                 "FROM diario d " +
+                 "INNER JOIN professor p ON d.fk_diarios_professores_ = p.professor_id " +
+                 "INNER JOIN aluno a ON d.fk_diarios_alunos_ = a.aluno_id";
+
+    if (diarios_id > 0) {
+        sql += " WHERE d.diarios_id = ?";
+    }
+
+    try (Connection conexao = new Conexao().getConexao();
+         PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+        if (diarios_id > 0) {
+            stmt.setInt(1, diarios_id);
+        }
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            System.out.println("=======================================");
+            System.out.println("ID do Diário: " + rs.getInt("diarios_id"));
+            System.out.println("Local: " + rs.getString("diarios_local"));
+            System.out.println("Disciplina: " + rs.getString("diarios_disciplinas"));
+            System.out.println("Quantidade de Alunos: " + rs.getInt("qtd_alunos"));
+            System.out.println("Professor: " + rs.getString("professor_nome"));
+            System.out.println("Aluno: " + rs.getString("aluno_nome"));
+            System.out.println("=======================================");
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Erro ao listar diário: " + e.getMessage());
+    }
+}
+  // Método para alterar
+    public void alterar(int diarios_id) {
+        String sql = "UPDATE diario SET diarios_local = ?, diarios_disciplinas = ?, qtd_alunos = ?, fk_diarios_professores_ = ?, fk_diarios_alunos_ = ? WHERE diarios_id = ?";
+
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
-            
-            stmt.setInt(1, this.getAluno_id());
-            stmt.setInt(2, this.getProfessor_id());
-            stmt.setInt(3, this.getInstituicao_id());
-            stmt.setString(4, this.getDisciplina());
-            stmt.setString(5, this.getDescricao());
-            stmt.setString(6, this.getData_registro());
-            stmt.setInt(7, diario_id);
 
+            stmt.setString(1, this.getDiariosLocal());
+            stmt.setString(2, this.getDiariosDisciplinas());
+            stmt.setInt(3, this.getQtdAlunos());
+            stmt.setInt(4, this.getFkDiariosProfessores());
+            stmt.setInt(5, this.getFkDiariosAlunos());
+            stmt.setInt(6, diarios_id);
             stmt.execute();
-            System.out.println("Diário atualizado com sucesso.");
-        } catch (SQLException e){
+
+            System.out.println("Diário atualizado com sucesso!");
+
+        } catch (SQLException e) {
             System.out.println("Erro ao atualizar diário: " + e.getMessage());
         }
-        
-     }
-    
-    public void listar(int diario_id) {
-        String sql;
-
-        if (diario_id > 0) {
-            sql = "SELECT d.*, a.aluno_nome, p.professor_nome, i.instituicao_nome FROM diario d " +
-                  "INNER JOIN aluno a ON d.aluno_id = a.aluno_id " +
-                  "INNER JOIN professor p ON d.professor_id = p.professor_id " +
-                  "INNER JOIN instituicao i ON d.instituicao_id = i.instituicao_id " +
-                  "WHERE d.diario_id = ?";
-        } else {
-            sql = "SELECT d.*, a.aluno_nome, p.professor_nome, i.instituicao_nome FROM diario d " +
-                  "INNER JOIN aluno a ON d.aluno_id = a.aluno_id " +
-                  "INNER JOIN professor p ON d.professor_id = p.professor_id " +
-                  "INNER JOIN instituicao i ON d.instituicao_id = i.instituicao_id";
-        }
+    }
+     // Verificação
+    public boolean verificarDiario(int diarios_id) {
+        String sql = "SELECT * FROM diario WHERE diarios_id = ?";
 
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
-            if (diario_id > 0) {
-                stmt.setInt(1, diario_id);
-            }
-
+            stmt.setInt(1, diarios_id);
             ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                System.out.println("==============================================");
-                System.out.println("ID: " + rs.getInt("diario_id"));
-                System.out.println("Aluno: " + rs.getString("aluno_nome"));
-                System.out.println("Professor: " + rs.getString("professor_nome"));
-                System.out.println("Instituição: " + rs.getString("instituicao_nome"));
-                System.out.println("Disciplina: " + rs.getString("disciplina"));
-                System.out.println("Descrição: " + rs.getString("descricao"));
-                System.out.println("Data: " + rs.getString("data_registro"));
-                System.out.println("==============================================");
-            }
+            return rs.next();
 
         } catch (SQLException e) {
-            System.out.println("Erro ao listar diário: " + e.getMessage());
+            System.out.println("Erro ao verificar diário: " + e.getMessage());
         }
+        return false;
     }
-
-}
+    
+    }
     
 
