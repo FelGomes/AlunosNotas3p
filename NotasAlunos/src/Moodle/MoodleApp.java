@@ -228,6 +228,78 @@ public class MoodleApp {
                                 case 3:
                                     break;
                                 case 4:
+                                    System.out.println("Deseja fazer alteracao na tabela Instituicao? ");
+                                    opc1 = scan.nextLine().toLowerCase().trim();
+                                    while(opc1.equals("sim")||opc1.equals("s")){
+                                        inst.listar(0);
+                                        System.out.println("Informe o ID desejado: ");
+                                        int idInst = scan.nextInt();
+                                        existe = inst.verificarInstituicao(idInst);
+                                        if(existe == true){
+                                            System.out.println("=========================");
+                                            System.out.println("Nome                     ");
+                                            System.out.println("Cidade                   ");
+                                            System.out.println("Endereco                 ");
+                                            System.out.println("UF                       ");
+                                            System.out.println("Escolaridade             ");
+                                            System.out.println("Nivel                    ");
+                                            System.out.println("Tudo                     ");
+                                            System.out.println("=========================");
+                                            System.out.println("Escolha o campo: ");
+                                            resposta = scan.nextLine().toLowerCase().trim();
+                                            if(resposta.equals("nome")){
+                                                System.out.println("Informe o nome da Instituicao: ");
+                                                inst.setInst_nome(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if(resposta.equals("cidade")){
+                                                System.out.println("Informe a cidade da Instituicao: ");
+                                                inst.setInst_cidade(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if (resposta.equals("endereco")){
+                                                System.out.println("Informe o endereco da instituicao: ");
+                                                inst.setInst_endereco(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if(resposta.equals("uf")){
+                                                System.out.println("Informe o UF da instituicao: ");
+                                                inst.setInst_uf(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if (resposta.equals("escolaridade")){
+                                                System.out.println("Informe a escolaridade da instituicao: ");
+                                                inst.setInst_escolaridade(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if (resposta.equals("nivel")){
+                                                System.out.println("Informe o nivel da instituicao: ");
+                                                inst.setInst_nivel(scan.nextFloat());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if(resposta.equals("tudo")){
+                                                System.out.println("Informe o nome da Instituicao: ");
+                                                inst.setInst_nome(scan.nextLine());
+                                                System.out.println("Informe o endereco da instituicao: ");
+                                                inst.setInst_endereco(scan.nextLine());
+                                                System.out.println("Informe o UF da instituicao: ");
+                                                inst.setInst_uf(scan.nextLine());
+                                                System.out.println("Informe a escolaridade da instituicao: ");
+                                                inst.setInst_escolaridade(scan.nextLine());
+                                                System.out.println("Informe a escolaridade da instituicao: ");
+                                                inst.setInst_escolaridade(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            }else {
+                                                System.out.println("Nao existe esse campo!");
+                                            }
+                                            
+                                        } else{
+                                            System.out.println("ID errado!");
+                                        }
+                                         System.out.println("Deseja alterar outro campo de Instituicao? ");
+                                        opc1 = scan.nextLine().toLowerCase().trim();
+                                    }
                                     break;
                                 case 5:
                                     break;
