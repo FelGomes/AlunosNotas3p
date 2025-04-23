@@ -14,64 +14,59 @@ import java.sql.SQLException;
  * @since 20/04/2025 as 14:03
  */
 public class Diario {
-    private int diario_id, aluno_id, professor_id, instituicao_id;
-    private String disciplina, descricao, data_registro;
-    
+    private int diario_id;
+     private String diarios_local;
+    private String diarios_disciplinas;
+    private int qtd_alunos;
+    private int fk_diarios_professores_;
+    private int fk_diarios_alunos_;
     //Getters e Setters
-    public int getDiario_id(){
-        return diario_id;
-    }
-    
-       public void setDiario_id(int diario_id) {
-        this.diario_id = diario_id;
+     public int getDiariosId() {
+        return diarios_id;
     }
 
-    public int getAluno_id() {
-        return aluno_id;
+    public void setDiariosId(int diarios_id) {
+        this.diarios_id = diarios_id;
     }
 
-    public void setAluno_id(int aluno_id) {
-        this.aluno_id = aluno_id;
+    public String getDiariosLocal() {
+        return diarios_local;
     }
 
-    public int getProfessor_id() {
-        return professor_id;
+    public void setDiariosLocal(String diarios_local) {
+        this.diarios_local = diarios_local;
     }
 
-    public void setProfessor_id(int professor_id) {
-        this.professor_id = professor_id;
+    public String getDiariosDisciplinas() {
+        return diarios_disciplinas;
     }
 
-    public int getInstituicao_id() {
-        return instituicao_id;
+    public void setDiariosDisciplinas(String diarios_disciplinas) {
+        this.diarios_disciplinas = diarios_disciplinas;
     }
 
-    public void setInstituicao_id(int instituicao_id) {
-        this.instituicao_id = instituicao_id;
+    public int getQtdAlunos() {
+        return qtd_alunos;
     }
 
-    public String getDisciplina() {
-        return disciplina;
+    public void setQtdAlunos(int qtd_alunos) {
+        this.qtd_alunos = qtd_alunos;
     }
 
-    public void setDisciplina(String disciplina) {
-        this.disciplina = disciplina;
+    public int getFkDiariosProfessores() {
+        return fk_diarios_professores_;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public void setFkDiariosProfessores(int fk_diarios_professores_) {
+        this.fk_diarios_professores_ = fk_diarios_professores_;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public int getFkDiariosAlunos() {
+        return fk_diarios_alunos_;
     }
 
-    public String getData_registro() {
-        return data_registro;
-    }
-
-    public void setData_registro(String data_registro) {
-        this.data_registro = data_registro;
+    public void setFkDiariosAlunos(int fk_diarios_alunos_) {
+        this.fk_diarios_alunos_ = fk_diarios_alunos_;
     }
 
     //INSERÇÃO
