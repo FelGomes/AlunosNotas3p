@@ -150,7 +150,7 @@ public class MoodleApp {
                             System.out.println("Deseja inserir outro valor? ");
                             opc = scan.nextLine().toLowerCase().trim();
                         }
-
+                        break;
                     case 2:
                         System.out.println("Deseja fazer atualizaçao de algum dado? ");
                         opc = scan.nextLine().toLowerCase().trim();

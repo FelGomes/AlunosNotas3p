@@ -24,7 +24,7 @@ public class Frequencias {
         this.frequencias_faltas = frequencias_faltas;
         this.prctg_presenca = prctg_presenca;
         this.professores = professores;
-        professores.
+        
     }
 
     public int getFrequencias_id() {
