@@ -4,20 +4,10 @@
  */
 package Moodle;
 import Suap.Funcoes;
-import java.sql.PreparedStatement;
 import Suap.Instituicao;
 import Suap.abstractClass.Alunos;
 import Suap.abstractClass.Professores;
 import java.util.Scanner;
-import Suap.abstractClass.Matricula;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
-
-
-
-
-
 
 /**
  *
@@ -48,38 +38,12 @@ public class MoodleApp {
                         System.out.println("Deseja inserir em alguma tabela? ");
                         opc = scan.nextLine().toLowerCase().trim();
                         while (opc.equals("sim") || opc.equals("s")) {
-                            funcao.menuTabelas();
+                            funcao.menuTabelasInserir();
                             System.out.println("informa a tabela: ");
                             tabela = scan.nextInt();
                             scan.nextLine();
                             switch (tabela) {
                                 case 1:
-                                    break;
-                                case 2:
-                                    System.out.println("Para criar aluno, é necessario que tenha cadastrado usuario. Deseja prosseguir? ");
-                                    resposta = scan.nextLine().toLowerCase().trim();   
-                                    while(resposta.equals("sim")|| resposta.equals("s")){
-                                        Alunos aluno = new Alunos();
-                                        System.out.println("Digite o ID do usuario: ");
-                                        aluno.setId(scan.nextInt());                                     
-                                        aluno.verificarUsuarios(aluno.getId());
-                                        existe = aluno.verificarUsuarios(aluno.getId());
-                                        if(existe == true){
-                                            System.out.println("O aluno esta matriculado? [true/false] ");
-                                            aluno.setAlunos_matriculados(scan.nextBoolean());
-                                            System.out.println("Informe a sala do aluno: ");
-                                            aluno.setAlunos_sala(scan.nextLine());
-                                            System.out.println("Informe a turma do aluno: ");
-                                            aluno.setAlunos_turma(scan.nextLine());
-                                            System.out.println("Informe as disciplinas do aluno: ");
-                                            aluno.setQtd_disciplina(scan.nextInt());
-                                            scan.nextLine();
-                                            aluno.inserir();
-                                            
-                                            
-                                        }else {
-                                            System.out.println("Nao existe esse usuario! ");
-
                                     System.out.println("Deseja inserir valores na tabela usuarios? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                     while(resposta.equals("sim")||resposta.equals("s")){
@@ -137,7 +101,6 @@ public class MoodleApp {
                                                 break;
                                             default:
                                                 break;
-
                                         }
                                         
                                         System.out.println("Deseja cadastrar outro usuario? ");
@@ -195,7 +158,6 @@ public class MoodleApp {
                             scan.nextLine();
                             switch(tabela){
                                 case 1:
-                                    
                                     break;
                                 case 2:
                                     System.out.println("Deseja fazer a atualizacao dessa tabela? ");
@@ -404,47 +366,7 @@ public class MoodleApp {
                                         }
                                     }
                                     break;
-                                case 5: Matricula mat = new Matricula();
-    System.out.println("Deseja prosseguir na inserção de matrícula?");
-    resposta = scan.nextLine().toLowerCase().trim();
-    while (resposta.equals("sim") || resposta.equals("s")) {
-        System.out.println("======================================");
-     System.out.println("           PÁGINA DE MATRÍCULA        ");
-        System.out.println("======================================");
-        
-        System.out.println("Informe o ID do aluno: ");
-        mat.setAlunoId(scan.nextInt());
-        scan.nextLine();
-        System.out.println("Informe o ID do curso: ");
-        mat.setCursoId(scan.nextInt());
-        scan.nextLine();
-        System.out.println("Informe o ID da instituição: ");
-        mat.setInstituicaoId(scan.nextInt());
-        scan.nextLine();
-        System.out.println("Informe a data da matrícula (formato: YYYY-MM-DD): "); // YEAR - MONTH - DAY
-String dataInput = scan.nextLine();
-
-// Validação opcional
-try {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    sdf.setLenient(false);
-    sdf.parse(dataInput); // Se for inválida, lança exceção
-    mat.setDataMatricula(dataInput);
-} catch (Exception e) {
-    System.out.println("Data inválida! Use o formato YYYY-MM-DD."); 
-    return; // ou repita a leitura
-}
-
-        mat.inserir();
-      System.out.println("\n Matrícula realizada com sucesso!");
-System.out.println(" Bem-vindo(a), aluno(a) de ID: " + mat.getAlunoId() + "!");
-System.out.println("️ Data da matrícula: " + mat.getDataMatricula());
-System.out.println(" Instituição ID: " + mat.getInstituicaoId());
-System.out.println(" Curso ID: " + mat.getCursoId());
-System.out.println("=======================================\n");
-
-        System.out.println("Deseja cadastrar uma nova matrícula?");
-        resposta = scan.nextLine().toLowerCase().trim();
+                                case 5:
                                     break;
                                 case 6:
                                     break;
