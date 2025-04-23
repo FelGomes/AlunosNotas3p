@@ -35,7 +35,7 @@ public class MoodleApp {
             while (escolha <= 6) {
                 switch (escolha) {
                     case 1:
-                        System.out.println("Deseja inserir em alguma tabela? ");
+                        System.out.println("Deseja inserir valores em alguma tabela? ");
                         opc = scan.nextLine().toLowerCase().trim();
                         while (opc.equals("sim") || opc.equals("s")) {
                             funcao.menuTabelasInserir();
@@ -84,6 +84,7 @@ public class MoodleApp {
                                                         aluno.setAlunos_turma(scan.nextLine());
                                                         System.out.println("Informe a quantidade de disciplinas que possui: ");
                                                         aluno.setQtd_disciplina(scan.nextInt());
+                                                        scan.nextLine();
                                                         idUsu += 1;
                                                         aluno.setId(idUsu);
                                                         aluno.inserir();
@@ -110,13 +111,7 @@ public class MoodleApp {
                                         System.out.println("Deseja cadastrar outro usuario? ");
                                         resposta = scan.nextLine().toLowerCase().trim();
                                     }
-                                    break;
                                 case 2:
-
-                                    break;
-                                case 3:
-                                    break;
-                                case 4:
                                     System.out.println("Deseja prosseguir na inserção de valores de Instituicao? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                     while (resposta.equals("sim") || resposta.equals('s')) {
@@ -140,7 +135,15 @@ public class MoodleApp {
                                     }
 
                                     break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
                                 case 5:
+                                    break;
+                                case 6:
+                                    break;
+                                case 7:
                                     break;
                                 default:
                                     System.out.println("Nao existe esse campo!");
@@ -163,7 +166,7 @@ public class MoodleApp {
                                 case 1:
                                     break;
                                 case 2:
-                                    System.out.println("Deseja fazer a atualizacao dessa tabela? ");
+                                    System.out.println("Deseja fazer a atualizacao da tabela aluno? ");
                                     opc1 = scan.nextLine();
                                     while (opc1.equals("sim") || opc.equals("s")) {
                                         aluno.listar(0);
@@ -240,6 +243,9 @@ public class MoodleApp {
                                     System.out.println("Tabela errada! ");
                                     break;
                             }
+                            
+                            System.out.println("Deseja fazer atualizaçao de outra tabela? ");
+                            opc = scan.nextLine().toLowerCase().trim();
 
                         }
                         break;
