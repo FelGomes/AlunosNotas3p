@@ -61,14 +61,12 @@ public class Funcoes {
     public void menuTabelasInserir(){
         System.out.println("==================================");
         System.out.println("1) USUARIOS    ");
-        System.out.println("2) ALUNOS      ");
-        System.out.println("3) PROFESSOR   ");
-        System.out.println("4) INSTITUICAO ");
-        System.out.println("5) MATRICULA   ");
-        System.out.println("6) BOLETIM     ");
-        System.out.println("7) NOTAS       ");
-        System.out.println("8) FREQUENCIA  ");
-        System.out.println("9) DIARIO      ");
+        System.out.println("3) INSTITUICAO ");
+        System.out.println("4) MATRICULA   ");
+        System.out.println("5) BOLETIM     ");
+        System.out.println("6) NOTAS       ");
+        System.out.println("7) FREQUENCIA  ");
+        System.out.println("8) DIARIO      ");
         System.out.println("==================================");
     }
 }
