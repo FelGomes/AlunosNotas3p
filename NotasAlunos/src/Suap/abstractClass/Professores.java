@@ -56,4 +56,6 @@ public class Professores extends UsuarioAbstract {
         this.grauTitularidade = grauTitularidade;
     }
     
+    
+    
 }
