@@ -7,6 +7,7 @@ package Moodle;
 import Suap.Funcoes;
 import Suap.Instituicao;
 import Suap.abstractClass.Alunos;
+import Suap.abstractClass.Diario;
 import Suap.abstractClass.Matricula;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -161,8 +162,6 @@ public class MoodleApp {
                                         scan.nextLine();
                                         System.out.println("Informe a data da matrícula (formato: YYYY-MM-DD): "); // YEAR - MONTH - DAY
                                         String dataInput = scan.nextLine();
-
-// Validação opcional
                                         try {
                                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                             sdf.setLenient(false);
@@ -368,7 +367,6 @@ public class MoodleApp {
 
                         }
                         break;
-
                     case 3:
                         System.out.println("Deseja remover valores de alguma tabela? ");
                         resposta = scan.nextLine();
@@ -433,13 +431,12 @@ public class MoodleApp {
                                 default:
                                     System.out.println("Tabela errada! ");
                                     break;
-
                             }
-
+                            System.out.println("Deseja remover valores de outra tabela? ");
+                            opc = scan.nextLine().toLowerCase().trim();
                         }
                         break;
                     case 4:
-
                         System.out.println("Deseja listar alguma tabela? ");
                         resposta = scan.nextLine().toLowerCase().trim();
                         while (resposta.equals("sim") || resposta.equals("s")) {
@@ -496,7 +493,6 @@ public class MoodleApp {
                                     break;
 
                                 case 5:
-
                                     break;
                                 case 6:
                                     break;
@@ -505,51 +501,49 @@ public class MoodleApp {
                                 case 8:
                                     break;
                                 case 9: System.out.println("Deseja inserir ou listar dados de Diário?");
-    opc = scan.nextLine().toLowerCase().trim();
-    while (opc.equals("sim") || opc.equals("s")) {
-        System.out.println("Escolha uma opção: ");
-        System.out.println("1. Inserir Diário");
-        System.out.println("2. Listar Diários");
-        System.out.println("3. Atualizar Diário");
-        System.out.println("4. Remover Diário");
-        System.out.println("Digite a opção desejada: ");
-        int escolhaDiario = scan.nextInt();
-        scan.nextLine();
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                    while (opc.equals("sim") || opc.equals("s")) {
+                                        System.out.println("Escolha uma opção: ");
+                                        System.out.println("1. Inserir Diário");
+                                        System.out.println("2. Listar Diários");
+                                        System.out.println("3. Atualizar Diário");
+                                        System.out.println("4. Remover Diário");
+                                        System.out.println("Digite a opção desejada: ");
+                                        int escolhaDiario = scan.nextInt();
+                                        scan.nextLine();
 
-        switch (escolhaDiario) {
-            case 1:
-                Diario diario = new Diario();  // Criar objeto Diario
-                System.out.println("====================================");
-                System.out.println("     INSERIR DADOS NO DIÁRIO       ");
-                System.out.println("====================================");
+                                        switch (escolhaDiario) {
+                                            case 1:
+                                                Diario diario = new Diario();  // Criar objeto Diario
+                                                System.out.println("====================================");
+                                                System.out.println("     INSERIR DADOS NO DIÁRIO       ");
+                                                System.out.println("====================================");
+                                                System.out.println("Informe o local do diário: ");
+                                                diario.setDiariosDisciplinas(scan.nextLine());
+                                                System.out.println("Informe as disciplinas do diário: ");
+                                                diario.setDiariosDisciplinas(scan.nextLine());
+                                                System.out.println("Informe a quantidade de alunos: ");
+                                                diario.setQtdAlunos(scan.nextInt());
+                                                scan.nextLine();
+                                                System.out.println("Informe o ID do professor: ");
+                                                diario.setFkDiariosProfessores(scan.nextInt());
+                                                scan.nextLine();
+                                                System.out.println("Informe o ID do aluno: ");
+                                                diario.setFkDiariosAlunos(scan.nextInt());
+                                                scan.nextLine();
 
-                System.out.println("Informe o local do diário: ");
-                diario.setDiarios_local(scan.nextLine());
-                System.out.println("Informe as disciplinas do diário: ");
-                diario.setDiarios_disciplinas(scan.nextLine());
-                System.out.println("Informe a quantidade de alunos: ");
-                diario.setQtd_alunos(scan.nextInt());
-                scan.nextLine();
-                System.out.println("Informe o ID do professor: ");
-                diario.setFk_diarios_professores_(scan.nextInt());
-                scan.nextLine();
-                System.out.println("Informe o ID do aluno: ");
-                diario.setFk_diarios_alunos_(scan.nextInt());
-                scan.nextLine();
+                                                diario.inserir();  // Inserir no banco de dados
+                                                System.out.println("Diário inserido com sucesso!");
+                                                
+                                            break;
+                                        default:
+                                            System.out.println("Tabela errada! ");
+                                            break;
 
-                diario.inserir();  // Inserir no banco de dados
-                System.out.println("Diário inserido com sucesso!");
-                break;
-                                    break;
-                                default:
-                                    System.out.println("Tabela errada! ");
-                                    break;
-
-                            }
-                            System.out.println("Deseja listar alguma outra tabela? ");
-                            resposta = scan.nextLine().toLowerCase().trim();
-                        }
-
+                                    }
+                                    System.out.println("Deseja listar alguma outra tabela? ");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                }
                         break;
                     case 5:
                         System.out.println("Saindo...");
@@ -565,9 +559,11 @@ public class MoodleApp {
 
                 }
 
-        }
+                }
 
-        catch (Exception e) {
+            }
+            
+        }catch (Exception e) {
             System.out.println("Erro na entrada de dados! ");
         }
     }
