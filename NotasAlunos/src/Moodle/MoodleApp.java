@@ -200,7 +200,7 @@ public class MoodleApp {
                             break;
 
                         
-                        case 2:
+                    case 2:
                         System.out.println("Deseja fazer atualizaçao de algum dado? ");
                         opc = scan.nextLine().toLowerCase().trim();
                         while (opc.equals("sim") || (opc.equals("s"))) {
@@ -534,16 +534,20 @@ public class MoodleApp {
 
                                                 diario.inserir();  // Inserir no banco de dados
                                                 System.out.println("Diário inserido com sucesso!");
-                                                
-                                            break;
-                                        default:
-                                            System.out.println("Tabela errada! ");
-                                            break;
+                                                break;
+                                             default:
+                                                System.out.println("Tabela errada! ");
+                                                break;
 
+                                        }
+                                        System.out.println("Deseja listar alguma outra tabela? ");
+                                        resposta = scan.nextLine().toLowerCase().trim();
                                     }
-                                    System.out.println("Deseja listar alguma outra tabela? ");
-                                    resposta = scan.nextLine().toLowerCase().trim();
-                                }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                         break;
                     case 5:
                         System.out.println("Saindo...");
@@ -557,11 +561,9 @@ public class MoodleApp {
                 escolha = scan.nextInt();
                 scan.nextLine();
 
-                }
-
-                }
-
             }
+
+
             
         }catch (Exception e) {
             System.out.println("Erro na entrada de dados! ");
