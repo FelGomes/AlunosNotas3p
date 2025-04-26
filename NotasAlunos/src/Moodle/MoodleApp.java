@@ -7,6 +7,8 @@ package Moodle;
 import Suap.Funcoes;
 import Suap.Instituicao;
 import Suap.abstractClass.Alunos;
+import Suap.abstractClass.Matricula;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 /**
@@ -139,51 +141,50 @@ public class MoodleApp {
                                     break;
                                 case 4:
                                     break;
-                                case 5:Matricula mat = new Matricula();
-    System.out.println("Deseja prosseguir na inserção de matrícula?");
-    resposta = scan.nextLine().toLowerCase().trim();
-    while (resposta.equals("sim") || resposta.equals("s")) {
-        System.out.println("======================================");
-     System.out.println("           PÁGINA DE MATRÍCULA        ");
-        System.out.println("======================================");
-        
-        System.out.println("Informe o ID do aluno: ");
-        mat.setAlunoId(scan.nextInt());
-        scan.nextLine();
-        System.out.println("Informe o ID do curso: ");
-        mat.setCursoId(scan.nextInt());
-        scan.nextLine();
-        System.out.println("Informe o ID da instituição: ");
-        mat.setInstituicaoId(scan.nextInt());
-        scan.nextLine();
-        System.out.println("Informe a data da matrícula (formato: YYYY-MM-DD): "); // YEAR - MONTH - DAY
-String dataInput = scan.nextLine();
+                                case 5:
+                                    Matricula mat = new Matricula();
+                                    System.out.println("Deseja prosseguir na inserção de matrícula?");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                    while (resposta.equals("sim") || resposta.equals("s")) {
+                                        System.out.println("======================================");
+                                        System.out.println("           PÁGINA DE MATRÍCULA        ");
+                                        System.out.println("======================================");
+
+                                        System.out.println("Informe o ID do aluno: ");
+                                        mat.setAlunoId(scan.nextInt());
+                                        scan.nextLine();
+                                        System.out.println("Informe o ID do curso: ");
+                                        mat.setCursoId(scan.nextInt());
+                                        scan.nextLine();
+                                        System.out.println("Informe o ID da instituição: ");
+                                        mat.setInstituicaoId(scan.nextInt());
+                                        scan.nextLine();
+                                        System.out.println("Informe a data da matrícula (formato: YYYY-MM-DD): "); // YEAR - MONTH - DAY
+                                        String dataInput = scan.nextLine();
 
 // Validação opcional
-try {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    sdf.setLenient(false);
-    sdf.parse(dataInput); // Se for inválida, lança exceção
-    mat.setDataMatricula(dataInput);
-} catch (Exception e) {
-    System.out.println("Data inválida! Use o formato YYYY-MM-DD."); 
-    return; // ou repita a leitura
-}
+                                        try {
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                            sdf.setLenient(false);
+                                            sdf.parse(dataInput); // Se for inválida, lança exceção
+                                            mat.setDataMatricula(dataInput);
+                                        } catch (Exception e) {
+                                            System.out.println("Data inválida! Use o formato YYYY-MM-DD.");
+                                            return; // ou repita a leitura
+                                        }
 
-        mat.inserir();
-      System.out.println("\n Matrícula realizada com sucesso!");
-System.out.println(" Bem-vindo(a), aluno(a) de ID: " + mat.getAlunoId() + "!");
-System.out.println("️ Data da matrícula: " + mat.getDataMatricula());
-System.out.println(" Instituição ID: " + mat.getInstituicaoId());
-System.out.println(" Curso ID: " + mat.getCursoId());
-System.out.println("=======================================\n");
+                                        mat.inserir();
+                                        System.out.println("\n Matrícula realizada com sucesso!");
+                                        System.out.println(" Bem-vindo(a), aluno(a) de ID: " + mat.getAlunoId() + "!");
+                                        System.out.println("️ Data da matrícula: " + mat.getDataMatricula());
+                                        System.out.println(" Instituição ID: " + mat.getInstituicaoId());
+                                        System.out.println(" Curso ID: " + mat.getCursoId());
+                                        System.out.println("=======================================\n");
 
-        System.out.println("Deseja cadastrar uma nova matrícula?");
-        resposta = scan.nextLine().toLowerCase().trim();
+                                        System.out.println("Deseja cadastrar uma nova matrícula?");
+                                        resposta = scan.nextLine().toLowerCase().trim();
+                                    }
                                     break;
-
-                                
-
                                 case 6:
                                     break;
                                 case 7:
@@ -195,10 +196,12 @@ System.out.println("=======================================\n");
 
                             }
                             System.out.println("Deseja inserir outro valor? ");
-                            opc = scan.nextLine().toLowerCase().trim();
-                        }
-                        break;
-                    case 2:
+                                    opc = scan.nextLine().toLowerCase().trim();
+                            }
+                            break;
+
+                        
+                        case 2:
                         System.out.println("Deseja fazer atualizaçao de algum dado? ");
                         opc = scan.nextLine().toLowerCase().trim();
                         while (opc.equals("sim") || (opc.equals("s"))) {
@@ -272,6 +275,78 @@ System.out.println("=======================================\n");
                                 case 3:
                                     break;
                                 case 4:
+                                    System.out.println("Deseja fazer alteracao na tabela Instituicao? ");
+                                    opc1 = scan.nextLine().toLowerCase().trim();
+                                    while(opc1.equals("sim")||opc1.equals("s")){
+                                        inst.listar(0);
+                                        System.out.println("Informe o ID desejado: ");
+                                        int idInst = scan.nextInt();
+                                        existe = inst.verificarInstituicao(idInst);
+                                        if(existe == true){
+                                            System.out.println("=========================");
+                                            System.out.println("Nome                     ");
+                                            System.out.println("Cidade                   ");
+                                            System.out.println("Endereco                 ");
+                                            System.out.println("UF                       ");
+                                            System.out.println("Escolaridade             ");
+                                            System.out.println("Nivel                    ");
+                                            System.out.println("Tudo                     ");
+                                            System.out.println("=========================");
+                                            System.out.println("Escolha o campo: ");
+                                            resposta = scan.nextLine().toLowerCase().trim();
+                                            if(resposta.equals("nome")){
+                                                System.out.println("Informe o nome da Instituicao: ");
+                                                inst.setInst_nome(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if(resposta.equals("cidade")){
+                                                System.out.println("Informe a cidade da Instituicao: ");
+                                                inst.setInst_cidade(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if (resposta.equals("endereco")){
+                                                System.out.println("Informe o endereco da instituicao: ");
+                                                inst.setInst_endereco(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if(resposta.equals("uf")){
+                                                System.out.println("Informe o UF da instituicao: ");
+                                                inst.setInst_uf(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if (resposta.equals("escolaridade")){
+                                                System.out.println("Informe a escolaridade da instituicao: ");
+                                                inst.setInst_escolaridade(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if (resposta.equals("nivel")){
+                                                System.out.println("Informe o nivel da instituicao: ");
+                                                inst.setInst_nivel(scan.nextFloat());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            } else if(resposta.equals("tudo")){
+                                                System.out.println("Informe o nome da Instituicao: ");
+                                                inst.setInst_nome(scan.nextLine());
+                                                System.out.println("Informe o endereco da instituicao: ");
+                                                inst.setInst_endereco(scan.nextLine());
+                                                System.out.println("Informe o UF da instituicao: ");
+                                                inst.setInst_uf(scan.nextLine());
+                                                System.out.println("Informe a escolaridade da instituicao: ");
+                                                inst.setInst_escolaridade(scan.nextLine());
+                                                System.out.println("Informe a escolaridade da instituicao: ");
+                                                inst.setInst_escolaridade(scan.nextLine());
+                                                inst.alterar(idInst, resposta);
+                                                
+                                            }else {
+                                                System.out.println("Nao existe esse campo!");
+                                            }
+                                            
+                                        } else{
+                                            System.out.println("ID errado!");
+                                        }
+                                         System.out.println("Deseja alterar outro campo de Instituicao? ");
+                                        opc1 = scan.nextLine().toLowerCase().trim();
+                                    }
                                     break;
                                 case 5:
                                     break;
@@ -420,8 +495,6 @@ System.out.println("=======================================\n");
                                     }
                                     break;
 
-                                case 5: 
-
                                 case 5:
 
                                     break;
@@ -490,12 +563,13 @@ System.out.println("=======================================\n");
                 escolha = scan.nextInt();
                 scan.nextLine();
 
-            }
+                }
 
-        } catch (Exception e) {
-            System.out.println("Erro na entrada de dados! ");
         }
 
-    
+        catch (Exception e) {
+            System.out.println("Erro na entrada de dados! ");
+        }
     }
 }
+
