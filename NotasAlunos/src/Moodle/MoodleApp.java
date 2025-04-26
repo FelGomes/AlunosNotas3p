@@ -108,6 +108,7 @@ public class MoodleApp {
                                             case 2:
                                                 break;
                                             default:
+                                                System.out.println("Valor errado!");
                                                 break;
                                         }
 
