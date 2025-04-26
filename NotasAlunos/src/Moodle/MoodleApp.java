@@ -7,6 +7,8 @@ package Moodle;
 import Suap.Funcoes;
 import Suap.Instituicao;
 import Suap.abstractClass.Alunos;
+import Suap.abstractClass.Matricula;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 /**
@@ -139,51 +141,50 @@ public class MoodleApp {
                                     break;
                                 case 4:
                                     break;
-                                case 5:Matricula mat = new Matricula();
-    System.out.println("Deseja prosseguir na inserção de matrícula?");
-    resposta = scan.nextLine().toLowerCase().trim();
-    while (resposta.equals("sim") || resposta.equals("s")) {
-        System.out.println("======================================");
-     System.out.println("           PÁGINA DE MATRÍCULA        ");
-        System.out.println("======================================");
-        
-        System.out.println("Informe o ID do aluno: ");
-        mat.setAlunoId(scan.nextInt());
-        scan.nextLine();
-        System.out.println("Informe o ID do curso: ");
-        mat.setCursoId(scan.nextInt());
-        scan.nextLine();
-        System.out.println("Informe o ID da instituição: ");
-        mat.setInstituicaoId(scan.nextInt());
-        scan.nextLine();
-        System.out.println("Informe a data da matrícula (formato: YYYY-MM-DD): "); // YEAR - MONTH - DAY
-String dataInput = scan.nextLine();
+                                case 5:
+                                    Matricula mat = new Matricula();
+                                    System.out.println("Deseja prosseguir na inserção de matrícula?");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                    while (resposta.equals("sim") || resposta.equals("s")) {
+                                        System.out.println("======================================");
+                                        System.out.println("           PÁGINA DE MATRÍCULA        ");
+                                        System.out.println("======================================");
+
+                                        System.out.println("Informe o ID do aluno: ");
+                                        mat.setAlunoId(scan.nextInt());
+                                        scan.nextLine();
+                                        System.out.println("Informe o ID do curso: ");
+                                        mat.setCursoId(scan.nextInt());
+                                        scan.nextLine();
+                                        System.out.println("Informe o ID da instituição: ");
+                                        mat.setInstituicaoId(scan.nextInt());
+                                        scan.nextLine();
+                                        System.out.println("Informe a data da matrícula (formato: YYYY-MM-DD): "); // YEAR - MONTH - DAY
+                                        String dataInput = scan.nextLine();
 
 // Validação opcional
-try {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    sdf.setLenient(false);
-    sdf.parse(dataInput); // Se for inválida, lança exceção
-    mat.setDataMatricula(dataInput);
-} catch (Exception e) {
-    System.out.println("Data inválida! Use o formato YYYY-MM-DD."); 
-    return; // ou repita a leitura
-}
+                                        try {
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                            sdf.setLenient(false);
+                                            sdf.parse(dataInput); // Se for inválida, lança exceção
+                                            mat.setDataMatricula(dataInput);
+                                        } catch (Exception e) {
+                                            System.out.println("Data inválida! Use o formato YYYY-MM-DD.");
+                                            return; // ou repita a leitura
+                                        }
 
-        mat.inserir();
-      System.out.println("\n Matrícula realizada com sucesso!");
-System.out.println(" Bem-vindo(a), aluno(a) de ID: " + mat.getAlunoId() + "!");
-System.out.println("️ Data da matrícula: " + mat.getDataMatricula());
-System.out.println(" Instituição ID: " + mat.getInstituicaoId());
-System.out.println(" Curso ID: " + mat.getCursoId());
-System.out.println("=======================================\n");
+                                        mat.inserir();
+                                        System.out.println("\n Matrícula realizada com sucesso!");
+                                        System.out.println(" Bem-vindo(a), aluno(a) de ID: " + mat.getAlunoId() + "!");
+                                        System.out.println("️ Data da matrícula: " + mat.getDataMatricula());
+                                        System.out.println(" Instituição ID: " + mat.getInstituicaoId());
+                                        System.out.println(" Curso ID: " + mat.getCursoId());
+                                        System.out.println("=======================================\n");
 
-        System.out.println("Deseja cadastrar uma nova matrícula?");
-        resposta = scan.nextLine().toLowerCase().trim();
+                                        System.out.println("Deseja cadastrar uma nova matrícula?");
+                                        resposta = scan.nextLine().toLowerCase().trim();
+                                    }
                                     break;
-
-                                
-
                                 case 6:
                                     break;
                                 case 7:
@@ -195,10 +196,12 @@ System.out.println("=======================================\n");
 
                             }
                             System.out.println("Deseja inserir outro valor? ");
-                            opc = scan.nextLine().toLowerCase().trim();
-                        }
-                        break;
-                    case 2:
+                                    opc = scan.nextLine().toLowerCase().trim();
+                            }
+                            break;
+
+                        
+                        case 2:
                         System.out.println("Deseja fazer atualizaçao de algum dado? ");
                         opc = scan.nextLine().toLowerCase().trim();
                         while (opc.equals("sim") || (opc.equals("s"))) {
@@ -492,8 +495,6 @@ System.out.println("=======================================\n");
                                     }
                                     break;
 
-                                case 5: 
-
                                 case 5:
 
                                     break;
@@ -527,12 +528,13 @@ System.out.println("=======================================\n");
                 escolha = scan.nextInt();
                 scan.nextLine();
 
-            }
+                }
 
-        } catch (Exception e) {
-            System.out.println("Erro na entrada de dados! ");
         }
 
-    
+        catch (Exception e) {
+            System.out.println("Erro na entrada de dados! ");
+        }
     }
 }
+
