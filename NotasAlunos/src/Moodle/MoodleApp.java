@@ -550,6 +550,9 @@ public class MoodleApp {
                         }
                         break;
                     case 5:
+                        break;
+                        
+                    case 6:
                         System.out.println("Saindo...");
                         break;
                     default:
