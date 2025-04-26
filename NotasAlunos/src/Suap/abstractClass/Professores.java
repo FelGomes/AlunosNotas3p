@@ -66,10 +66,29 @@ public class Professores extends UsuarioAbstract {
         comando2.setString(2, this.disciplinaMinistrada);
         comando2.setString(3, this.turmaEnsinada);
         comando2.setString(4, this.grauTitularidade);
-          
+        
+        comando2.execute();
+        comando2.close();
+        conexao.close();
         }catch (Exception e){
             System.out.println("Erro ao cadastrar professor!" + e.getMessage());
         }
     }
-    
+    @Override
+    public void deletar(int idProfessor){
+        Connection conexao = new Conexao().getConexao();
+        String sintaxeSQL = "DELETE FROM professores WHERE professores_id = ?";
+        
+        try{
+            PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+            comando.setInt(1, idProfessor);
+            
+            comando.execute();
+            comando.close();
+            conexao.close(); 
+        }catch(Exception e){
+            System.out.println("Erro ao deletar professor!" + e.getMessage());
+        }
+        
+    }   
 }
