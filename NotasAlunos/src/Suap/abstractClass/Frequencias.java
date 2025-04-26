@@ -76,7 +76,7 @@ public class Frequencias {
     }
 
     public void deletarFrequencia(int id_frequencia) {
-        String sql = "DELETE * FROM frequencia WHERE frequencias_id = ?";
+        String sql = "DELETE FROM frequencia WHERE frequencias_id = ?";
         PreparedStatement pstm = null;
 
         try {
