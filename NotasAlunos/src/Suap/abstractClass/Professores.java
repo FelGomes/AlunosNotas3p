@@ -16,7 +16,7 @@ import java.sql.SQLException;
  * @since 18/04/2025 as 20:38h
  */
 public class Professores extends UsuarioAbstract {
-    
+    private int idProfessor;
     private String disciplinaMinistrada;
     private String turmaEnsinada;
     private String grauTitularidade;
@@ -56,6 +56,24 @@ public class Professores extends UsuarioAbstract {
         this.grauTitularidade = grauTitularidade;
     }
     
-    
+    @Override
+    public void inserir(){
+        Connection conexao = new Conexao().getConexao();
+        //String sintaxeSQL1 = "INSERT INTO usuarios (usuario_id, usuarios_nome, usuarios_endereco, usuarios_cpf, usuarios_sexo, usuarios_nascimento) values (?,?,?,?,?,?)";
+        String sintaxeSQL2 = "INSERT INTO professores (professores_id, professores_disciplina, professores_turma, professores_titularidade, fk_professores_usuarios_id) values (?,?,?,?,?)";
+        
+        try{
+        //PreparedStatement comando = conexao.prepareStatement(sintaxeSQL1);
+        PreparedStatement comando2 = conexao.prepareStatement(sintaxeSQL2);
+        
+        comando2.setInt(1, this.idProfessor);
+        comando2.setString(2, this.disciplinaMinistrada);
+        comando2.setString(3, this.turmaEnsinada);
+        comando2.setString(4, this.grauTitularidade);
+          
+        }catch (Exception e){
+            System.out.println("Erro ao cadastrar professor!" + e.getMessage());
+        }
+    }
     
 }
