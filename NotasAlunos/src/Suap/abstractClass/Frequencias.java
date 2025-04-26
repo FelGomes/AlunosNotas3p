@@ -76,7 +76,7 @@ public class Frequencias {
     }
 
     public void deletarFrequencia(int id_frequencia) {
-        String sql = "DELETE FROM frequencia WHERE frequencias_id = ?";
+        String sql = "DELETE FROM frequencias WHERE frequencias_id = ?";
         PreparedStatement pstm = null;
 
         try {
@@ -127,7 +127,7 @@ public class Frequencias {
                 pstm.setInt(2, frequencias_id);
                 pstm.execute();
             } catch (SQLException e) {
-                System.out.println("Erro ao alterar os atributos aulas_ministradas da tabela frequencias" + e.getMessage());
+                System.out.println("Erro ao alterar o atributo aulas_ministradas da tabela frequencias" + e.getMessage());
             } finally {
                 try {
                     if (pstm != null);
@@ -144,7 +144,7 @@ public class Frequencias {
                 pstm.setInt(2, frequencias_id);
                 pstm.execute();
             } catch (SQLException e) {
-                System.out.println("Erro ao alterar os atributos frequencias_faltas da tabela frequencias" + e.getMessage());
+                System.out.println("Erro ao alterar o atributo frequencias_faltas da tabela frequencias" + e.getMessage());
             } finally {
                 try {
                     if (pstm != null);
@@ -155,4 +155,44 @@ public class Frequencias {
             }
         }
     }
+        public void listarFrequencias(int id_frequencia){
+            if(id_frequencia > 0){
+                String sql = '"SELECT f.id_frequencia, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, f.professores, f.total_aulas FROM frequencias INNER JOIN  f WHERE  f.id_frequencia = ?";
+                PreparedeStatement pstm = null;
+                ResultSet rset = null;
+                
+                try {
+                    Connection conexao = new Conexao().getConexao();
+                    pstm = conexao.prepareStatement(sql);
+                    pstm.setInt(1, id_frequencia);
+                    pstm.executeQuery();
+                    
+                    if (rset next()){
+                        System.out.println("ID: " + rset.getInt("id_frequencia"));
+                        System.out.println("Aulas ministradas: " + rset.getInt("aulas_ministradas"));
+                        System.out.println("Faltas: " + rset.getInt("frequencias_faltas"));
+                        System.out.println("% Frequencia: " + rset.getInt("prctg_presenca"));
+                        System.out.println("`Professor(a): " + rset.getInt("professores"));
+                }else {
+                        System.out.println("ID de Frequencia não encontrado");
+                        
+                  }
+            } catch (Exception e) {
+                    System.out.println("Erro ao listar os dados da tabela frequencias" + e.getMessage());
+            } finally {
+                    try {
+                        if (rset != null){
+                            rset.close();
+                        }
+                        if (pstm !=null){
+                            pstm.close();
+                        }  
+                    } catch ( SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+        
+            }
+        } 
 }
+        
