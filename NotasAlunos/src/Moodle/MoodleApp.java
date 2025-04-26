@@ -431,7 +431,42 @@ System.out.println("=======================================\n");
                                     break;
                                 case 8:
                                     break;
-                                case 9:
+                                case 9: System.out.println("Deseja inserir ou listar dados de Diário?");
+    opc = scan.nextLine().toLowerCase().trim();
+    while (opc.equals("sim") || opc.equals("s")) {
+        System.out.println("Escolha uma opção: ");
+        System.out.println("1. Inserir Diário");
+        System.out.println("2. Listar Diários");
+        System.out.println("3. Atualizar Diário");
+        System.out.println("4. Remover Diário");
+        System.out.println("Digite a opção desejada: ");
+        int escolhaDiario = scan.nextInt();
+        scan.nextLine();
+
+        switch (escolhaDiario) {
+            case 1:
+                Diario diario = new Diario();  // Criar objeto Diario
+                System.out.println("====================================");
+                System.out.println("     INSERIR DADOS NO DIÁRIO       ");
+                System.out.println("====================================");
+
+                System.out.println("Informe o local do diário: ");
+                diario.setDiarios_local(scan.nextLine());
+                System.out.println("Informe as disciplinas do diário: ");
+                diario.setDiarios_disciplinas(scan.nextLine());
+                System.out.println("Informe a quantidade de alunos: ");
+                diario.setQtd_alunos(scan.nextInt());
+                scan.nextLine();
+                System.out.println("Informe o ID do professor: ");
+                diario.setFk_diarios_professores_(scan.nextInt());
+                scan.nextLine();
+                System.out.println("Informe o ID do aluno: ");
+                diario.setFk_diarios_alunos_(scan.nextInt());
+                scan.nextLine();
+
+                diario.inserir();  // Inserir no banco de dados
+                System.out.println("Diário inserido com sucesso!");
+                break;
                                     break;
                                 default:
                                     System.out.println("Tabela errada! ");
