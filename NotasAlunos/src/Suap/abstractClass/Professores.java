@@ -98,7 +98,7 @@ public class Professores extends UsuarioAbstract {
     
     public void listarProfessores(){
         Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "SELECT usu FROM professores";
+        String sintaxeSQL = "SELECT * FROM professores";
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
