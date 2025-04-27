@@ -75,9 +75,10 @@ public class Professores extends UsuarioAbstract {
         comando2.close();
         conexao.close();
         }catch (Exception e){
-            System.out.println("Erro ao cadastrar professor!" + e.getMessage());
+            System.out.println("Erro ao cadastrar professor: " + e.getMessage());
         }
     }
+    
     @Override
     public void deletar(int idProfessor){
         Connection conexao = new Conexao().getConexao();
@@ -85,14 +86,44 @@ public class Professores extends UsuarioAbstract {
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
-            comando.setInt(1, idProfessor);
+            comando.setInt(1, idProfessor);  
             
             comando.execute();
             comando.close();
             conexao.close(); 
         }catch(Exception e){
-            System.out.println("Erro ao deletar professor!" + e.getMessage());
-        }
+            System.out.println("Erro ao deletar professor: " + e.getMessage());
+        }   
+    }  
+    
+    public void listarProfessores(){
+        Connection conexao = new Conexao().getConexao();
+        String sintaxeSQL = "SELECT usu FROM professores";
         
-    }   
+        try{
+            PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+            ResultSet mostrar = comando.executeQuery();
+            
+            System.out.println("\nProfessores cadastrados!\n");
+            
+            while(mostrar.next()){
+                System.out.println("==================================================");
+                System.out.println("ID de Usuário: " + mostrar.getInt("usuarios_id"));
+                System.out.println("Nome: " + mostrar.getString("usuarios_nome"));
+                System.out.println("Endereco: " + mostrar.getString("usuarios_endereco"));
+                System.out.println("CPF: " + mostrar.getString("usuarios_cpf"));
+                System.out.println("Sexo: " + mostrar.getString("usuarios_sexo"));
+                System.out.println("Disciplina: " + mostrar.getString("professores_disciplina"));
+                System.out.println("Turma: " + mostrar.getString("professores_turma"));
+                System.out.println("Titularidade: " + mostrar.getString("professores_titularidade"));      
+                System.out.println("==================================================");
+            }
+            
+            mostrar.close();
+            comando.close();
+            conexao.close();
+        }catch(Exception e){
+            System.out.println("Erro ao listar professores: " + e.getMessage());
+        }
+    }
 }
