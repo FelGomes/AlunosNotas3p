@@ -12,10 +12,9 @@ import java.sql.SQLException;
  * @since 14-04 at 12:21
  * 
  */
-public abstract class UsuarioAbstract {
+public class UsuarioAbstract extends PessoaAbstract{
     
-    private String nome, cpf, endereco, dataNascimento;
-    private String sexo;
+    private String  cpf, endereco;
     private int usuario_id;
     
     public UsuarioAbstract(){
@@ -23,21 +22,19 @@ public abstract class UsuarioAbstract {
     }
     
     public UsuarioAbstract(String nome, String cpf, String endereco, String dataNascimento, String sexo, int usuario_id) {
-        this.nome = nome;
+        super(nome,sexo,dataNascimento);
         this.cpf = cpf;
         this.endereco = endereco;
-        this.dataNascimento = dataNascimento;
-        this.sexo = sexo;
         this.usuario_id = usuario_id;
     }
     
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    
-     public String getNome() {
-        return nome;
-    }
+//    public void setNome(String nome) {
+//        this.nome = nome;
+//    }
+//    
+//     public String getNome() {
+//        return nome;
+//    }
 
     public String getCpf() {
         return cpf;
@@ -55,22 +52,22 @@ public abstract class UsuarioAbstract {
         this.endereco = endereco;
     }
 
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
+//    public String getSexo() {
+//        return sexo;
+//    }
+//
+//    public void setSexo(String sexo) {
+//        this.sexo = sexo;
+//    }
    
 
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+//    public String getDataNascimento() {
+//        return dataNascimento;
+//    }
+//
+//    public void setDataNascimento(String dataNascimento) {
+//        this.dataNascimento = dataNascimento;
+//    }
 
     public int getId() {
         return usuario_id;
