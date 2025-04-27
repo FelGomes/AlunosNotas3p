@@ -7,6 +7,7 @@ package Moodle;
 import Suap.Funcoes;
 import Suap.Instituicao;
 import Suap.abstractClass.Alunos;
+import Suap.abstractClass.Diario;
 import Suap.abstractClass.Matricula;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -107,6 +108,7 @@ public class MoodleApp {
                                             case 2:
                                                 break;
                                             default:
+                                                System.out.println("Valor errado!");
                                                 break;
                                         }
 
@@ -161,8 +163,6 @@ public class MoodleApp {
                                         scan.nextLine();
                                         System.out.println("Informe a data da matrícula (formato: YYYY-MM-DD): "); // YEAR - MONTH - DAY
                                         String dataInput = scan.nextLine();
-
-// Validação opcional
                                         try {
                                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                             sdf.setLenient(false);
@@ -201,7 +201,7 @@ public class MoodleApp {
                             break;
 
                         
-                        case 2:
+                    case 2:
                         System.out.println("Deseja fazer atualizaçao de algum dado? ");
                         opc = scan.nextLine().toLowerCase().trim();
                         while (opc.equals("sim") || (opc.equals("s"))) {
@@ -219,6 +219,7 @@ public class MoodleApp {
                                         aluno.listar(0);
                                         System.out.println("Informe o ID do usuario que deseja fazer alteração: ");
                                         aluno.setId(scan.nextInt());
+                                        scan.nextLine();
                                         existe = aluno.verificarAlunos(aluno.getId());
                                         if (existe == true) {
                                             System.out.println("=========================");
@@ -281,6 +282,7 @@ public class MoodleApp {
                                         inst.listar(0);
                                         System.out.println("Informe o ID desejado: ");
                                         int idInst = scan.nextInt();
+                                        scan.nextLine();
                                         existe = inst.verificarInstituicao(idInst);
                                         if(existe == true){
                                             System.out.println("=========================");
@@ -368,7 +370,6 @@ public class MoodleApp {
 
                         }
                         break;
-
                     case 3:
                         System.out.println("Deseja remover valores de alguma tabela? ");
                         resposta = scan.nextLine();
@@ -376,6 +377,7 @@ public class MoodleApp {
                             funcao.menuTabelas();
                             System.out.println("Deseja escolher qual tabela? ");
                             tabela = scan.nextInt();
+                            scan.nextLine();
                             switch (tabela) {
                                 case 1:
                                     break;
@@ -433,19 +435,19 @@ public class MoodleApp {
                                 default:
                                     System.out.println("Tabela errada! ");
                                     break;
-
                             }
-
+                            System.out.println("Deseja remover valores de outra tabela? ");
+                            opc = scan.nextLine().toLowerCase().trim();
                         }
                         break;
                     case 4:
-
                         System.out.println("Deseja listar alguma tabela? ");
                         resposta = scan.nextLine().toLowerCase().trim();
                         while (resposta.equals("sim") || resposta.equals("s")) {
                             funcao.menuTabelas();
                             System.out.println("Deseja escolher qual tabela? ");
                             tabela = scan.nextInt();
+                            scan.nextLine();
                             switch (tabela) {
                                 case 1:
                                     break;
@@ -496,7 +498,6 @@ public class MoodleApp {
                                     break;
 
                                 case 5:
-
                                     break;
                                 case 6:
                                     break;
@@ -504,6 +505,7 @@ public class MoodleApp {
                                     break;
                                 case 8:
                                     break;
+
                                     
                                 case 9: System.out.println("Deseja prosseguir na inserção ou gerenciamento de diário?");
     opc = scan.nextLine().toLowerCase().trim();
@@ -624,13 +626,16 @@ public class MoodleApp {
             
     break;
 
-                            }
-                            System.out.println("Deseja listar alguma outra tabela? ");
-                            resposta = scan.nextLine().toLowerCase().trim();
-                        }
 
+                              
+
+                            }
+                        }
                         break;
                     case 5:
+                        break;
+                        
+                    case 6:
                         System.out.println("Saindo...");
                         break;
                     default:
@@ -642,12 +647,12 @@ public class MoodleApp {
                 escolha = scan.nextInt();
                 scan.nextLine();
 
-                }
+            }
 
-        }
 
-        catch (Exception e) {
-            System.out.println("Erro na entrada de dados! ");
+            
+        }catch (Exception e) {
+            System.out.println("Erro na entrada de dados! " + e.getMessage());
         }
     }
 }

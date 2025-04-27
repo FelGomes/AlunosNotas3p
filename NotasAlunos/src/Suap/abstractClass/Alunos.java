@@ -302,7 +302,7 @@ public class Alunos extends UsuarioAbstract{
             
             
         } else {
-            String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuario_endereco, u.usuario_cpf, u.usuario_nascimento,"
+            String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_cpf, u.usuarios_nascimento,"
                     + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on alunos.fk_alunos_usuarios_id = u.usuarios_id";
             //Select com inner join de alunos que recebem a chave estrangeira de usuarios, nesse caso, ira mostrar todos os dados
             PreparedStatement pstm = null;
