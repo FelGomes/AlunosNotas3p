@@ -473,7 +473,6 @@ public class MoodleApp {
                                         }
                                     }
                                 }
-
                                 break;
                             case 3:
                                 break;
@@ -495,9 +494,9 @@ public class MoodleApp {
                                         } else {
                                             System.out.println("Nao existe instituicao com esse ID!");
                                         }
-
+                                    }
+                                }
                                     break;
-
                                 case 5:
                                     break;
                                 case 6:
@@ -505,10 +504,9 @@ public class MoodleApp {
                                 case 7:
                                     break;
                                 case 8:
-                                    break;
-
-                                    
-                                case 9: System.out.println("Deseja prosseguir na inserção ou gerenciamento de diário?");
+                                    break;  
+                                case 9: 
+                                    System.out.println("Deseja prosseguir na inserção ou gerenciamento de diário?");
                                     opc = scan.nextLine().toLowerCase().trim();
                                     while (opc.equals("sim") || opc.equals("s")) {
                                         System.out.println("======================================");
@@ -625,68 +623,8 @@ public class MoodleApp {
                                 default:
                                     System.out.println("Tabela errada! ");
                                     break;
-                            }
-
-                                }
-                                break;
-
-                            case 5:
-                                break;
-                            case 6:
-                                break;
-                            case 7:
-                                break;
-                            case 8:
-                                break;
-                            case 9:
-                                System.out.println("Deseja inserir ou listar dados de Diário?");
-                                opc = scan.nextLine().toLowerCase().trim();
-                                while (opc.equals("sim") || opc.equals("s")) {
-                                    System.out.println("Escolha uma opção: ");
-                                    System.out.println("1. Inserir Diário");
-                                    System.out.println("2. Listar Diários");
-                                    System.out.println("3. Atualizar Diário");
-                                    System.out.println("4. Remover Diário");
-                                    System.out.println("Digite a opção desejada: ");
-                                    int escolhaDiario = scan.nextInt();
-                                    scan.nextLine();
-
-                                    switch (escolhaDiario) {
-                                        case 1:
-                                            Diario diario = new Diario();  // Criar objeto Diario
-                                            System.out.println("====================================");
-                                            System.out.println("     INSERIR DADOS NO DIÁRIO       ");
-                                            System.out.println("====================================");
-                                            System.out.println("Informe o local do diário: ");
-                                            diario.setDiariosDisciplinas(scan.nextLine());
-                                            System.out.println("Informe as disciplinas do diário: ");
-                                            diario.setDiariosDisciplinas(scan.nextLine());
-                                            System.out.println("Informe a quantidade de alunos: ");
-                                            diario.setQtdAlunos(scan.nextInt());
-                                            scan.nextLine();
-                                            System.out.println("Informe o ID do professor: ");
-                                            diario.setFkDiariosProfessores(scan.nextInt());
-                                            scan.nextLine();
-                                            System.out.println("Informe o ID do aluno: ");
-                                            diario.setFkDiariosAlunos(scan.nextInt());
-                                            scan.nextLine();
-
-                                            diario.inserir();  // Inserir no banco de dados
-                                            System.out.println("Diário inserido com sucesso!");
-                                            break;
-                                        default:
-                                            System.out.println("Tabela errada! ");
-                                            break;
-
-                                    }
-                                    System.out.println("Deseja listar alguma outra tabela? ");
-                                    resposta = scan.nextLine().toLowerCase().trim();
-                                }
-                                break;
-                            default:
-                                break;
-
                         }
+
                     }
                     break;
                 case 5:
