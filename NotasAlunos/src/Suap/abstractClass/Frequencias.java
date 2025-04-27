@@ -157,8 +157,8 @@ public class Frequencias {
     }
         public void listarFrequencias(int id_frequencia){
             if(id_frequencia > 0){
-                String sql = '"SELECT f.id_frequencia, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, f.professores, f.total_aulas FROM frequencias INNER JOIN  f WHERE  f.id_frequencia = ?";
-                PreparedeStatement pstm = null;
+                String sql = "SELECT f.id_frequencia, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, f.professores, f.total_aulas FROM frequencias INNER JOIN  f WHERE  f.id_frequencia = ?";
+                PreparedStatement pstm = null;
                 ResultSet rset = null;
                 
                 try {
@@ -167,7 +167,7 @@ public class Frequencias {
                     pstm.setInt(1, id_frequencia);
                     pstm.executeQuery();
                     
-                    if (rset next()){
+                    if(rset.next()){
                         System.out.println("ID: " + rset.getInt("id_frequencia"));
                         System.out.println("Aulas ministradas: " + rset.getInt("aulas_ministradas"));
                         System.out.println("Faltas: " + rset.getInt("frequencias_faltas"));
