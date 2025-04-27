@@ -83,6 +83,31 @@ public class Professores extends UsuarioAbstract {
         return existe;
     }
     
+    /**
+     * Método para verificar se o ID procurado existe na tabela Usuários
+     * @param idProcurado
+     * @return Retorna true caso possuir o ID for encontrado e false caso não
+     */
+    public boolean verificarIdUsuario(int idProcurado){
+        Connection conexao = new Conexao().getConexao();
+        String sintaxeSQL = "SELECT COUNT(*) FROM usuarios WHERE id = ?";
+        boolean existe = false;
+        
+        try{
+            PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+            comando.setInt(1, idProcurado);
+            try(ResultSet resultado = comando.executeQuery()){
+                if(resultado.next()){
+                    int quantidade = resultado.getInt(1);
+                    existe = quantidade > 0;
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Erro ao verificar ID: "+ e.getMessage());
+        }
+        return existe;
+    }
+    
     public void inserirProfessor(){
         Connection conexao = new Conexao().getConexao();
         String sintaxeSQL = "INSERT INTO professores (professores_id, professores_disciplina, professores_turma, professores_titularidade, fk_professores_usuarios_id) values (?,?,?,?,?)";
