@@ -151,6 +151,7 @@ public class Instituicao {
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_nome());
                 pstm.setInt(2, inst_id);
                 pstm.execute();
@@ -174,6 +175,7 @@ public class Instituicao {
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_endereco());
                 pstm.setInt(2, inst_id);
                 pstm.execute();
@@ -196,6 +198,7 @@ public class Instituicao {
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_cidade());
                 pstm.setInt(2, inst_id);
                 pstm.execute();
@@ -218,6 +221,7 @@ public class Instituicao {
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_uf());
                 pstm.setInt(2, inst_id);
                 pstm.execute();
@@ -240,6 +244,7 @@ public class Instituicao {
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_escolaridade());
                 pstm.setInt(2, inst_id);
                 pstm.execute();
@@ -262,6 +267,7 @@ public class Instituicao {
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setFloat(1, this.getInst_nivel());
                 pstm.setInt(2, inst_id);
                 pstm.execute();
@@ -284,6 +290,7 @@ public class Instituicao {
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_nome());
                 pstm.setString(2, this.getInst_endereco());
                 pstm.setString(3, this.getInst_cidade());

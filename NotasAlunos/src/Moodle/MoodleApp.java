@@ -219,6 +219,7 @@ public class MoodleApp {
                                         aluno.listar(0);
                                         System.out.println("Informe o ID do usuario que deseja fazer alteração: ");
                                         aluno.setId(scan.nextInt());
+                                        scan.nextLine();
                                         existe = aluno.verificarAlunos(aluno.getId());
                                         if (existe == true) {
                                             System.out.println("=========================");
@@ -281,6 +282,7 @@ public class MoodleApp {
                                         inst.listar(0);
                                         System.out.println("Informe o ID desejado: ");
                                         int idInst = scan.nextInt();
+                                        scan.nextLine();
                                         existe = inst.verificarInstituicao(idInst);
                                         if(existe == true){
                                             System.out.println("=========================");
@@ -375,6 +377,7 @@ public class MoodleApp {
                             funcao.menuTabelas();
                             System.out.println("Deseja escolher qual tabela? ");
                             tabela = scan.nextInt();
+                            scan.nextLine();
                             switch (tabela) {
                                 case 1:
                                     break;
@@ -444,6 +447,7 @@ public class MoodleApp {
                             funcao.menuTabelas();
                             System.out.println("Deseja escolher qual tabela? ");
                             tabela = scan.nextInt();
+                            scan.nextLine();
                             switch (tabela) {
                                 case 1:
                                     break;
@@ -570,7 +574,7 @@ public class MoodleApp {
 
             
         }catch (Exception e) {
-            System.out.println("Erro na entrada de dados! ");
+            System.out.println("Erro na entrada de dados! " + e.getMessage());
         }
     }
 }
