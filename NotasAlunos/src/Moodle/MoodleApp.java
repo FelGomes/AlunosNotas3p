@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import Suap.abstractClass.Diario;
 /**
- *
  * @author felipe
  * @since 18-04 at 10:49 am
  */
@@ -638,7 +637,7 @@ public class MoodleApp {
                         break;
                 }
                 funcao.menuPrincipal();
-                System.out.println("Deseja escolher qual opçao? ");
+                System.out.println("Deseja escolher qual opçao?  ");
                 escolha = scan.nextInt();
                 scan.nextLine();
 
