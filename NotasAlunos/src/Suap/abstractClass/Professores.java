@@ -109,23 +109,28 @@ public class Professores extends UsuarioAbstract {
     }
     
     public void inserirProfessor(){
-        Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "INSERT INTO professores (professores_id, professores_disciplina, professores_turma, professores_titularidade, fk_professores_usuarios_id) values (?,?,?,?,?)";
+        boolean existe = verificarIdUsuario(idUsuario);
+        if(existe){
+            Connection conexao = new Conexao().getConexao();
+            String sintaxeSQL = "INSERT INTO professores (professores_id, professores_disciplina, professores_turma, professores_titularidade, fk_professores_usuarios_id) values (?,?,?,?,?)";
         
-        try{
-        PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+            try{
+            PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
         
-        comando.setInt(1, this.idProfessor);
-        comando.setString(2, this.disciplinaMinistrada);
-        comando.setString(3, this.turmaEnsinada);
-        comando.setString(4, this.grauTitularidade);
-        comando.setInt(5, this.idUsuario);
+            comando.setInt(1, this.idProfessor);
+            comando.setString(2, this.disciplinaMinistrada);
+            comando.setString(3, this.turmaEnsinada);
+            comando.setString(4, this.grauTitularidade);
+            comando.setInt(5, this.idUsuario);
         
-        comando.execute();
-        comando.close();
-        conexao.close();
-        }catch (Exception e){
-            System.out.println("Erro ao cadastrar professor: " + e.getMessage());
+            comando.execute();
+            comando.close();
+            conexao.close();
+            }catch (Exception e){
+                System.out.println("Erro ao cadastrar professor: " + e.getMessage());
+            }
+        }else{
+            System.out.println("O ID mostrado não existe!");
         }
     }
     
