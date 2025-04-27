@@ -20,16 +20,18 @@ public class Professores extends UsuarioAbstract {
     private String disciplinaMinistrada;
     private String turmaEnsinada;
     private String grauTitularidade;
-    
-    public Professores(){
-        
-    }
+    private int idUsuario;
     
     public Professores(String nome, String cpf, String endereco, String dataNascimento, String sexo, int usuario_id, String disciplinaMinistrada, String turmaEnsinada, String grauTitularidade){
         super(nome, cpf, endereco, dataNascimento, sexo, usuario_id);
+        
+    }
+    
+    public Professores(String disciplinaMinistrada, String turmaEnsinada, String grauTitularidade, int idUsuario){
         this.disciplinaMinistrada = disciplinaMinistrada;
         this.turmaEnsinada = turmaEnsinada;
         this.grauTitularidade = grauTitularidade; 
+        this.idUsuario = idUsuario;
     }
 
     public String getDisciplinaMinistrada() {
@@ -56,23 +58,46 @@ public class Professores extends UsuarioAbstract {
         this.grauTitularidade = grauTitularidade;
     }
     
-    @Override
-    public void inserir(){
+    /**
+     * Método para verificar se o ID procurado existe na tabela Professores
+     * @param idProcurado
+     * @return Retorna true caso possuir o ID for encontrado e false caso não
+     */
+    public boolean verificarIdProfessor(int idProcurado){
         Connection conexao = new Conexao().getConexao();
-        //String sintaxeSQL1 = "INSERT INTO usuarios (usuario_id, usuarios_nome, usuarios_endereco, usuarios_cpf, usuarios_sexo, usuarios_nascimento) values (?,?,?,?,?,?)";
-        String sintaxeSQL2 = "INSERT INTO professores (professores_id, professores_disciplina, professores_turma, professores_titularidade, fk_professores_usuarios_id) values (?,?,?,?,?)";
+        String sintaxeSQL = "SELECT COUNT(*) FROM professores WHERE id = ?";
+        boolean existe = false;
         
         try{
-        //PreparedStatement comando = conexao.prepareStatement(sintaxeSQL1);
-        PreparedStatement comando2 = conexao.prepareStatement(sintaxeSQL2);
+            PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+            comando.setInt(1, idProcurado);
+            try(ResultSet resultado = comando.executeQuery()){
+                if(resultado.next()){
+                    int quantidade = resultado.getInt(1);
+                    existe = quantidade > 0;
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Erro ao verificar ID: "+ e.getMessage());
+        }
+        return existe;
+    }
+    
+    public void inserirProfessor(){
+        Connection conexao = new Conexao().getConexao();
+        String sintaxeSQL = "INSERT INTO professores (professores_id, professores_disciplina, professores_turma, professores_titularidade, fk_professores_usuarios_id) values (?,?,?,?,?)";
         
-        comando2.setInt(1, this.idProfessor);
-        comando2.setString(2, this.disciplinaMinistrada);
-        comando2.setString(3, this.turmaEnsinada);
-        comando2.setString(4, this.grauTitularidade);
+        try{
+        PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
         
-        comando2.execute();
-        comando2.close();
+        comando.setInt(1, this.idProfessor);
+        comando.setString(2, this.disciplinaMinistrada);
+        comando.setString(3, this.turmaEnsinada);
+        comando.setString(4, this.grauTitularidade);
+        comando.setInt(5, this.idUsuario);
+        
+        comando.execute();
+        comando.close();
         conexao.close();
         }catch (Exception e){
             System.out.println("Erro ao cadastrar professor: " + e.getMessage());
@@ -98,7 +123,7 @@ public class Professores extends UsuarioAbstract {
     
     public void listarProfessores(){
         Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "SELECT * FROM professores";
+        String sintaxeSQL = "SELECT usu FROM professores";
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
