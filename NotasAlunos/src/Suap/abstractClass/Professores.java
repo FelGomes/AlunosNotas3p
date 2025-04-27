@@ -130,30 +130,35 @@ public class Professores extends UsuarioAbstract {
                 System.out.println("Erro ao cadastrar professor: " + e.getMessage());
             }
         }else{
-            System.out.println("O ID mostrado não existe!");
+            System.out.println("O id inserido não existe!");
         }
     }
     
     @Override
     public void deletar(int idProfessor){
-        Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "DELETE FROM professores WHERE professores_id = ?";
-        
-        try{
-            PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
-            comando.setInt(1, idProfessor);  
-            
-            comando.execute();
-            comando.close();
-            conexao.close(); 
-        }catch(Exception e){
-            System.out.println("Erro ao deletar professor: " + e.getMessage());
-        }   
+        boolean existe = verificarIdProfessor(idProfessor);
+        if (existe){
+            Connection conexao = new Conexao().getConexao();
+            String sintaxeSQL = "DELETE FROM professores WHERE professores_id = ?";
+
+            try{
+                PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+                comando.setInt(1, idProfessor);  
+
+                comando.execute();
+                comando.close();
+                conexao.close(); 
+            }catch(Exception e){
+                System.out.println("Erro ao deletar professor: " + e.getMessage());
+            }  
+        }else {
+            System.out.println("O id inserido não existe!");
+        }
     }  
     
     public void listarProfessores(){
         Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "SELECT usu FROM professores";
+        String sintaxeSQL = "SELECT * FROM professores";
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
