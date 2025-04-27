@@ -637,13 +637,13 @@ public class MoodleApp {
             }
 
             funcao.menuPrincipal();
-           try {
-            System.out.println("Deseja escolher qual opçao? ");
-            escolha = scan.nextInt();
-            scan.nextLine();
-        } catch (Exception e) {
-            System.out.println("Erro na entrada de dados! " + e.getMessage());
-        }
+            try {
+                System.out.println("Deseja escolher qual opçao? ");
+                escolha = scan.nextInt();
+                scan.nextLine();
+            } catch (Exception e) {
+                System.out.println("Erro na entrada de dados! " + e.getMessage());
+            }
 
         }
     }
