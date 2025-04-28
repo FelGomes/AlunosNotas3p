@@ -32,6 +32,7 @@ public class MoodleApp {
         int escolha = 0;
         Alunos aluno = new Alunos();
         Instituicao inst = new Instituicao();
+        Frequencias frequencias = new Frequencias();
 
         funcao.menuPrincipal();
         try {
@@ -362,9 +363,25 @@ public class MoodleApp {
                             case 7:
                                 break;
                             case 8:
+                                System.out.println("ATUALIZAÇÃO DE DADOS");
+
+                                System.out.println("Digite o id da frequência:");
+                                int idUpdate = scan.nextInt();
+                                scan.nextLine();
+                                existe = frequencias.verificaIdFrequencia(idUpdate);
+                                if (existe == true) {
+                                    System.out.println("O aluno(a) faltou a aula?");
+                                    String opcUpdate = scan.nextLine().toLowerCase().trim();
+                                    if (opcUpdate.equals("s") || opcUpdate.equals("sim")) {
+                                        frequencias.setFrequencias_faltas(frequencias.getAulas_ministradas());
+                                    } else {
+                                        frequencias.setFrequencias_faltas(0);
+                                    }
+                                }
                                 break;
                             case 9:
                                 break;
+
                             default:
                                 System.out.println("Tabela errada! ");
                                 break;
@@ -375,6 +392,7 @@ public class MoodleApp {
 
                     }
                     break;
+
                 case 3:
                     System.out.println("Deseja remover valores de alguma tabela? ");
                     resposta = scan.nextLine();
@@ -408,7 +426,7 @@ public class MoodleApp {
                             case 3:
                                 break;
                             case 4:
-                                System.out.println("Deseja fazer a remoçao de alguma campo? ");
+                                System.out.println("Deseja fazer a remocao de algum campo? ");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 while (opc.equals("sim") || opc.equals("s")) {
                                     inst.listar(0);
@@ -434,6 +452,22 @@ public class MoodleApp {
                             case 7:
                                 break;
                             case 8:
+                                System.out.println("Deseja fazer a remocao de algum campo");
+                                opc = scan.nextLine().toLowerCase().toLowerCase().trim();
+                                while (opc.equals("s") || opc.equals("sim")) {
+                                    frequencias.listarFrequencias(0);
+                                    System.out.println("Informe o ID de frequencia:");
+                                    int idDelete = scan.nextInt();
+                                    scan.nextLine();
+                                    existe = frequencias.verificaIdFrequencia(idDelete);
+                                    if (existe == true) {
+                                        frequencias.deletarFrequencia(idDelete);
+                                    } else {
+                                        System.out.println("ID de frequencia nao encontrado:");
+                                    }
+                                    System.out.println("Deseja fazer outra remocao? ");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                }
                                 break;
                             case 9:
                                 break;
@@ -521,7 +555,6 @@ public class MoodleApp {
                                     int opcFrequencia = scan.nextInt();
                                     scan.nextInt();
 
-                                    Frequencias frequencias = new Frequencias();
                                     switch (opcFrequencia) {
                                         case 1:
                                             System.out.println("INSERÇÃO DE DADOS");
@@ -534,26 +567,15 @@ public class MoodleApp {
                                             scan.nextLine();
                                             System.out.println("Quantas aulas terá hoje?");
                                             frequencias.setAulas_ministradas(scan.nextInt());
-                                        //....
+                                            //....
                                             break;
-                                            
+
                                         case 2:
                                             System.out.println("LISTAGEM DE DADOS");
                                             //...
                                             break;
-                                            
+
                                         case 3:
-                                            System.out.println("ATUALIZAÇÃO DE DADOS");
-                                            
-                                            System.out.println("Digite o id da frequência:");
-                                            int idUpdate = scan.nextInt();
-                                            scan.nextLine();
-                                            existe = frequencias.verificaIdFrequencia(idUpdate);
-                                            if (existe == true){
-                                                
-                                            }
-                                            
-                                          
                                     }
                                 }
                             case 9:
