@@ -158,7 +158,7 @@ public class Professores extends UsuarioAbstract {
     
     public void listarProfessores(){
         Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "SELECT * FROM professores";
+        String sintaxeSQL = "SELECT * FROM professores INNER JOIN usuarios WHERE usuarios.usuarios_id = professores.fk_professores_usuarios_id";
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
