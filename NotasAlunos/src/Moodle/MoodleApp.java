@@ -8,6 +8,7 @@ import Suap.Funcoes;
 import Suap.Instituicao;
 import Suap.abstractClass.Alunos;
 import Suap.abstractClass.Diario;
+import Suap.abstractClass.Frequencias;
 import Suap.abstractClass.Matricula;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -504,7 +505,25 @@ public class MoodleApp {
                                 case 7:
                                     break;
                                 case 8:
-                                    break;  
+                                    System.out.println("Deseja administrar algum dado na tabela de frequência?");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                    while (opc.equals("sim") || opc.equals("s")) {
+                                        System.out.println(" =======================================");
+                                        System.out.println("                       PÁGINA DE FREQUÊNCIA                    ");
+                                        System.out.println(" =======================================");
+                                        System.out.println("Escolha uma opção: ");
+                                        System.out.println("1 - INSERIR FREQUÊNCIA");
+                                        System.out.println("2 - LISTAR FREQUÊNCIA");
+                                        System.out.println("3 - ATUALIZAR FREQUÊNCIA");
+                                        System.out.println("4 - DELETAR FREQUÊNCIA");
+                                        int opcFrequencia = scan.nextInt();
+                                        scan.nextInt();
+                                        
+                                        Frequencias frequencias = new Frequencias();
+                                        
+                                        System.out.println("Digite o ID do professor: ");
+                                        frequencias.
+                                    }
                                 case 9: 
                                     System.out.println("Deseja prosseguir na inserção ou gerenciamento de diário?");
                                     opc = scan.nextLine().toLowerCase().trim();
