@@ -522,7 +522,8 @@ public class MoodleApp {
                                         Frequencias frequencias = new Frequencias();
                                         
                                         System.out.println("Digite o ID do professor: ");
-                                        frequencias.
+                                        frequencias.setProfessores(scan.nextLine()); // verificar como resolver
+                                        
                                     }
                                 case 9: 
                                     System.out.println("Deseja prosseguir na inserção ou gerenciamento de diário?");
