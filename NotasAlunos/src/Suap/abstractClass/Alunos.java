@@ -65,23 +65,15 @@ public class Alunos extends UsuarioAbstract{
     public void inserir() throws SQLException{
         Connection conexao = new Conexao().getConexao();
         String sql = "Insert into alunos (alunos_matriculados, alunos_sala, alunos_turma, qtd_disciplina, fk_alunos_usuarios_id) values (?,?,?,?,?)";
-        String sql1 = "Insert into usuarios (usuarios_nome, usuarios_sexo, usuarios_endereco, usuarios_cpf, usuarios_nascimento) values (?,?,?,?,?)";
         try {
             PreparedStatement stmt;
             PreparedStatement stmt1;
             stmt = conexao.prepareStatement(sql);
-            stmt1 = conexao.prepareStatement(sql1);
             stmt.setBoolean(1, this.isAlunos_matriculados());
             stmt.setString(2, this.getAlunos_sala());
             stmt.setString(3, this.getAlunos_turma());
             stmt.setInt(4, this.getQtd_disciplina());
             stmt.setInt(5, this.getId());
-            
-            stmt1.setString(1, this.getNome());
-            stmt1.setString(2, this.getSexo());
-            stmt1.setString(3, this.getEndereco());
-            stmt1.setString(4, this.getCpf());
-            stmt1.setString(5, this.getDataNascimento());
             
         } catch (Exception e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
@@ -257,7 +249,7 @@ public class Alunos extends UsuarioAbstract{
     public void listar(int alunos_id){
         if(alunos_id > 0){
             String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuario_endereco, u.usuario_cpf, u.usuario_nascimento,"
-                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on alunos.alunos_usuarios_id = u.usuarios_id Where a.alunos_id = ?";
+                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on a.alunos_usuarios_id = u.usuarios_id Where a.alunos_id = ?";
             //Inner join para mostrar os dados do usuarios que passam chave primaria para alunos, nessa condição, especificos com id escolhido
             PreparedStatement pstm = null;
             ResultSet rset = null;
@@ -303,7 +295,7 @@ public class Alunos extends UsuarioAbstract{
             
         } else {
             String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_cpf, u.usuarios_nascimento,"
-                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on alunos.fk_alunos_usuarios_id = u.usuarios_id";
+                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on a.fk_alunos_usuarios_id = u.usuarios_id";
             //Select com inner join de alunos que recebem a chave estrangeira de usuarios, nesse caso, ira mostrar todos os dados
             PreparedStatement pstm = null;
             ResultSet rset = null;

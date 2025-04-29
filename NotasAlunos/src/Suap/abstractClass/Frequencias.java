@@ -15,16 +15,23 @@ public class Frequencias {
 
     private int frequencias_id, total_aulas, aulas_ministradas, frequencias_faltas;
     private float prctg_presenca;
+    private String frequencias_disciplinas;
     private Professores professores;
+    private Alunos aluno;
 
-    public Frequencias(int frequencias_id, int total_aulas, int aulas_ministradas, int frequencias_faltas, float prctg_presenca, Professores professores) {
+    public Frequencias() {
+    }
+
+    public Frequencias(int frequencias_id, int total_aulas, int aulas_ministradas, int frequencias_faltas, float prctg_presenca, String frequencias_disciplinas, Professores professores, Alunos alunos) {
         this.frequencias_id = frequencias_id;
         this.total_aulas = total_aulas;
         this.aulas_ministradas = aulas_ministradas;
         this.frequencias_faltas = frequencias_faltas;
         this.prctg_presenca = prctg_presenca;
+        this.frequencias_disciplinas = frequencias_disciplinas;
         this.professores = professores;
-        
+        this.aluno = aluno;
+
     }
 
     public int getFrequencias_id() {
@@ -43,12 +50,28 @@ public class Frequencias {
         this.total_aulas = total_aulas;
     }
 
+    public String getFrequencias_disciplinas() {
+        return frequencias_disciplinas;
+    }
+
+    public void setFrequencias_disciplinas(String frequencias_disciplinas) {
+        this.frequencias_disciplinas = frequencias_disciplinas;
+    }
+
+    public void setAluno(Alunos aluno) {
+        this.aluno = aluno;
+    }
+
     public int getAulas_ministradas() {
         return aulas_ministradas;
     }
 
     public void setAulas_ministradas(int aulas_ministradas) {
         this.aulas_ministradas = aulas_ministradas;
+    }
+
+    public Alunos getAluno() {
+        return aluno;
     }
 
     public int getFrequencias_faltas() {
@@ -73,6 +96,11 @@ public class Frequencias {
 
     public void setProfessores(Professores professores) {
         this.professores = professores;
+    }
+
+    public void inserirFrequencia(int id_frequencia) {
+        String sql = "INSERT INTO frequencias (frequencias_id, total_aulas, aulas_ministradas, frequencias_faltas, prctg_presenca, frequencias_disciplinas,fk_frequencias_professores_id, fk_frequencias_alunos_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
     }
 
     public void deletarFrequencia(int id_frequencia) {
@@ -155,44 +183,67 @@ public class Frequencias {
             }
         }
     }
-        public void listarFrequencias(int id_frequencia){
-            if(id_frequencia > 0){
-                String sql = "SELECT f.id_frequencia, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, f.professores, f.total_aulas FROM frequencias INNER JOIN  f WHERE  f.id_frequencia = ?";
-                PreparedStatement pstm = null;
-                ResultSet rset = null;
-                
-                try {
-                    Connection conexao = new Conexao().getConexao();
-                    pstm = conexao.prepareStatement(sql);
-                    pstm.setInt(1, id_frequencia);
-                    pstm.executeQuery();
-                    
-                    if(rset.next()){
-                        System.out.println("ID: " + rset.getInt("id_frequencia"));
-                        System.out.println("Aulas ministradas: " + rset.getInt("aulas_ministradas"));
-                        System.out.println("Faltas: " + rset.getInt("frequencias_faltas"));
-                        System.out.println("% Frequencia: " + rset.getInt("prctg_presenca"));
-                        System.out.println("`Professor(a): " + rset.getInt("professores"));
-                }else {
-                        System.out.println("ID de Frequencia não encontrado");
-                        
-                  }
-            } catch (Exception e) {
-                    System.out.println("Erro ao listar os dados da tabela frequencias" + e.getMessage());
-            } finally {
-                    try {
-                        if (rset != null){
-                            rset.close();
-                        }
-                        if (pstm !=null){
-                            pstm.close();
-                        }  
-                    } catch ( SQLException e) {
-                        System.out.println(e.getMessage());
-                    }
+
+    public void listarFrequencias(int id_frequencia) {
+        if (id_frequencia > 0) {
+            String sql = "SELECT f.frequencias_id, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, frequencias_disciplinas, f.fk_frequencias_professores_id, f.fk_frequencias_alunos_id, f.total_aulas"
+                    + "FROM frequencias "
+                    + "INNER JOIN professores p"
+                    + "ON f.fk_frequencias_professores_id = p.professores_id"
+                    + "INNER JOIN alunos a"
+                    + "ON f.fk_frequencias_alunos_id = a.alunos_id"
+                    + "WHERE  f.id_frequencia = ?";
+            PreparedStatement pstm = null;
+            ResultSet rset = null;
+
+            try {
+                Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
+                pstm.setInt(1, id_frequencia);
+                pstm.executeQuery();
+
+                if (rset.next()) {
+                    System.out.println("ID: " + rset.getInt("frequencias_id"));
+                    System.out.println("Aulas ministradas: " + rset.getInt("aulas_ministradas"));
+                    System.out.println("Faltas: " + rset.getInt("frequencias_faltas"));
+                    System.out.println("% Frequencia: " + rset.getInt("prctg_presenca"));
+                    System.out.println("Disciplina" + rset.getInt("frequencias_disciplinas"));
+                    System.out.println("`ID Professor(a): " + rset.getInt("fk_frequencias_professores_id"));
+                    System.out.println("`ID Aluno(a): " + rset.getInt("fk_frequencias_alunos_id"));
+                } else {
+                    System.out.println("ID de Frequencia não encontrado");
+
                 }
-        
+            } catch (Exception e) {
+                System.out.println("Erro ao listar os dados da tabela frequencias" + e.getMessage());
+            } finally {
+                try {
+                    if (rset != null) {
+                        rset.close();
+                    }
+                    if (pstm != null) {
+                        pstm.close();
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
             }
-        } 
+        }
+    }
+
+    public boolean verificaIdFrequencia(int id_frequencia) {
+        try (Connection conexao = new Conexao().getConexao(); PreparedStatement comando = conexao.prepareStatement("SELECT * FROM frequencias WHERE f.frequencias_id = ?")) {
+            comando.setInt(1, id_frequencia);
+            try (ResultSet resultado = comando.executeQuery()) {
+                return resultado.next();
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar a tabela de frequências" + e.getMessage());
+        }
+        return false;
+    }
+    public float calculaPrctgFrequencia(int aula_total, int faltas){
+        float prctg = (aula_total - faltas) / aula_total * 100;
+        return prctg;
+    }
 }
-        
