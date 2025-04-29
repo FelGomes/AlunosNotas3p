@@ -452,21 +452,25 @@ public class MoodleApp {
                             case 7:
                                 break;
                             case 8:
-                                System.out.println("Deseja fazer a remocao de algum campo");
-                                opc = scan.nextLine().toLowerCase().toLowerCase().trim();
-                                while (opc.equals("s") || opc.equals("sim")) {
-                                    frequencias.listarFrequencias(0);
-                                    System.out.println("Informe o ID de frequencia:");
-                                    int idDelete = scan.nextInt();
-                                    scan.nextLine();
-                                    existe = frequencias.verificaIdFrequencia(idDelete);
-                                    if (existe == true) {
-                                        frequencias.deletarFrequencia(idDelete);
-                                    } else {
-                                        System.out.println("ID de frequencia nao encontrado:");
+                                try {
+                                    System.out.println("Deseja fazer a remocao de algum campo");
+                                    opc = scan.nextLine().toLowerCase().toLowerCase().trim();
+                                    while (opc.equals("s") || opc.equals("sim")) {
+                                        frequencias.listarFrequencias(0);
+                                        System.out.println("Informe o ID de frequencia:");
+                                        int idDelete = scan.nextInt();
+                                        scan.nextLine();
+                                        existe = frequencias.verificaIdFrequencia(idDelete);
+                                        if (existe == true) {
+                                            frequencias.deletarFrequencia(idDelete);
+                                        } else {
+                                            System.out.println("ID de frequencia nao encontrado:");
+                                        }
+                                        System.out.println("Deseja fazer outra remocao? ");
+                                        opc = scan.nextLine().toLowerCase().trim();
                                     }
-                                    System.out.println("Deseja fazer outra remocao? ");
-                                    opc = scan.nextLine().toLowerCase().trim();
+                                } catch (Exception e) {
+                                    System.out.println("Erro na remocao dos dados " + e.getMessage());
                                 }
                                 break;
                             case 9:
@@ -541,43 +545,27 @@ public class MoodleApp {
                             case 7:
                                 break;
                             case 8:
-                                System.out.println("Deseja administrar algum dado na tabela de frequência?");
-                                opc = scan.nextLine().toLowerCase().trim();
-                                while (opc.equals("sim") || opc.equals("s")) {
-                                    System.out.println(" =======================================");
-                                    System.out.println("                       PÁGINA DE FREQUÊNCIA                    ");
-                                    System.out.println(" =======================================");
-                                    System.out.println("Escolha uma opção: ");
-                                    System.out.println("1 - INSERIR FREQUÊNCIA");
-                                    System.out.println("2 - LISTAR FREQUÊNCIA");
-                                    System.out.println("3 - ATUALIZAR FREQUÊNCIA");
-                                    System.out.println("4 - DELETAR FREQUÊNCIA");
-                                    int opcFrequencia = scan.nextInt();
-                                    scan.nextInt();
-
-                                    switch (opcFrequencia) {
-                                        case 1:
-                                            System.out.println("INSERÇÃO DE DADOS");
-                                            System.out.println("Digite o ID do professor: ");
-
-                                            System.out.println("Digite o ID do aluno");
-
-                                            System.out.println("Quantas aulas tem a disciplina");
-                                            frequencias.setTotal_aulas(scan.nextInt());
-                                            scan.nextLine();
-                                            System.out.println("Quantas aulas terá hoje?");
-                                            frequencias.setAulas_ministradas(scan.nextInt());
-                                            //....
-                                            break;
-
-                                        case 2:
-                                            System.out.println("LISTAGEM DE DADOS");
-                                            //...
-                                            break;
-
-                                        case 3:
+                                try {
+                                    System.out.println("Deseja listar todas as frequências");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                    if (opc.equals("s") || opc.equals("sim")) {
+                                        frequencias.listarFrequencias(0);
+                                    } else {
+                                        System.out.println("Digite o ID de frequencias: ");
+                                        int idListar = scan.nextInt();
+                                        if (idListar == 0) {
+                                            frequencias.listarFrequencias(0);
+                                        } else {
+                                            existe = frequencias.verificaIdFrequencia(idListar);
+                                            if (existe == true) {
+                                                frequencias.listarFrequencias(idListar);
+                                            }
+                                        }
                                     }
+                                } catch (Exception e) {
+                                    System.out.println("Erro ao listar dados da tabela de frequencias" + e.getMessage());
                                 }
+                                break;
                             case 9:
                                 System.out.println("Deseja prosseguir na inserção ou gerenciamento de diário?");
                                 opc = scan.nextLine().toLowerCase().trim();
