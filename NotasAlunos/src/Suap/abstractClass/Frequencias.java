@@ -232,17 +232,40 @@ public class Frequencias {
     }
 
     public boolean verificaIdFrequencia(int id_frequencia) {
-        try (Connection conexao = new Conexao().getConexao(); PreparedStatement comando = conexao.prepareStatement("SELECT * FROM frequencias WHERE f.frequencias_id = ?")) {
+        try (Connection conexao = new Conexao().getConexao(); PreparedStatement comando = conexao.prepareStatement("SELECT * FROM frequencias f WHERE f.frequencias_id = ?")) {
             comando.setInt(1, id_frequencia);
             try (ResultSet resultado = comando.executeQuery()) {
                 return resultado.next();
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao verificar a tabela de frequências" + e.getMessage());
+            System.out.println("Erro ao verificar a tabela de frequências " + e.getMessage());
         }
         return false;
     }
-    public float calculaPrctgFrequencia(int aula_total, int faltas){
+
+    public boolean verificaIdProfessores(int id_professores) {
+        try (Connection conexao = new Conexao().getConexao(); PreparedStatement comando = conexao.prepareStatement("SELECT * FROM professores p WHERE p.professores_id = ?")) {
+            comando.setInt(1, id_professores);
+            try (ResultSet resultado = comando.executeQuery()) {
+                return resultado.next();
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar a tabela de professores " + e.getMessage());
+        }
+        return false;
+    }
+    public boolean verificaIdAlunos(int id_alunos) {
+        try (Connection conexao = new Conexao().getConexao(); PreparedStatement comando = conexao.prepareStatement("SELECT * FROM alunos a WHERE a.alunos_id = ?")) {
+            comando.setInt(1, id_alunos);
+            try(ResultSet resultado = comando.executeQuery()) {
+                return resultado.next();
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar a tabela de alunos " + e.getMessage());
+        }
+        return false;
+    }
+    public float calculaPrctgFrequencia(int aula_total, int faltas) {
         float prctg = (aula_total - faltas) / aula_total * 100;
         return prctg;
     }

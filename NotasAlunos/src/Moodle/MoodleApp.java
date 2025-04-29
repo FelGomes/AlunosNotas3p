@@ -33,6 +33,7 @@ public class MoodleApp {
         Alunos aluno = new Alunos();
         Instituicao inst = new Instituicao();
         Frequencias frequencias = new Frequencias();
+        Professores professores = new Professores();
 
         funcao.menuPrincipal();
         try {
@@ -203,14 +204,12 @@ public class MoodleApp {
                                     System.out.println("Digite o ID do professor: ");
                                     int idProfessorInsert = scan.nextInt();
                                     scan.nextLine();
-                                    //método para verificar id professor
-                                    //existe = frequencias.verificarIdProfessor(idProfessorInsert);
+                                    existe = frequencias.verificaIdProfessores(idProfessorInsert);
                                     if (existe == true) {
                                         System.out.println("Digite o id do aluno: ");
                                         int idAlunoInsert = scan.nextInt();
                                         scan.nextLine();
-                                        //método para verificar o id de aluno
-                                        //existe1 =  frequencias.verificarIdAluno(idAlunoInsert);
+                                        boolean existe1 =  frequencias.verificaIdAlunos(idAlunoInsert);
                                         if (existe1 == true) {
                                             System.out.println("Digite a quantidade de aulas que a disciplina possui: ");
                                             frequencias.setTotal_aulas(scan.nextInt());
