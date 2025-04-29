@@ -203,7 +203,18 @@ public class MoodleApp {
                                     System.out.println("Digite o ID do professor: ");
                                     int idProfessor = scan.nextInt();
                                     scan.nextLine();
-                                   
+                                   //método para verificar id professor
+                                   //if(idProfessor == true){
+                                        System.out.println("Digite o id do aluno: ");
+                                       //método para verificar o id de aluno
+                                       if(idAluno == true){
+                                           System.out.println("Digite a quantidade de aulas que a disciplina possui: ");
+                                           frequencias.setTotal_aulas(scan.nextInt());
+                                           scan.nextLine();
+                                           System.out.println("Digite a quantidade de aulas de hoje: ");
+                                           frequencias.setAulas_ministradas(scan.nextInt());
+                                           scan.nextLine();
+                                       }
                                 }
                                 break;
                             case 9:
