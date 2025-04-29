@@ -64,10 +64,9 @@ public class Alunos extends UsuarioAbstract{
     @Override
     public void inserir() throws SQLException{
         Connection conexao = new Conexao().getConexao();
-        String sql = "Insert into alunos (alunos_matriculados, alunos_sala, alunos_turma, qtd_disciplina, fk_alunos_usuarios_id) values (?,?,?,?,?)";
+        String sql = "Insert into alunos (alunos_matriculados, alunos_sala, alunos_turma, qtd_disciplinas, fk_alunos_usuarios_id) values (?,?,?,?,?)";
         try {
             PreparedStatement stmt;
-            PreparedStatement stmt1;
             stmt = conexao.prepareStatement(sql);
             stmt.setBoolean(1, this.isAlunos_matriculados());
             stmt.setString(2, this.getAlunos_sala());
@@ -75,7 +74,17 @@ public class Alunos extends UsuarioAbstract{
             stmt.setInt(4, this.getQtd_disciplina());
             stmt.setInt(5, this.getId());
             
-        } catch (Exception e) {
+            
+            int alteracao = stmt.executeUpdate();
+            if (alteracao > 0){
+                System.out.println("ALuno cadastrado com sucesso!");
+                
+            } else {
+                System.out.println("Nao foi cadastrado nenhum aluno!");
+            }
+            
+            
+        } catch (SQLException e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
         }
         
@@ -90,28 +99,25 @@ public class Alunos extends UsuarioAbstract{
     @Override
     public void deletar(int alunos_id){
         String sql = "Delete from alunos WHERE alunos_id = ?";
-        PreparedStatement pstm = null;
+        
         
         try {
             Connection conexao = new Conexao().getConexao();
-            pstm = conexao.prepareStatement(sql);
+            PreparedStatement pstm = conexao.prepareStatement(sql);
             pstm.setInt(1, alunos_id);
             
-            pstm.execute();
+            int alteracao = pstm.executeUpdate();
             
-            
+            if (alteracao > 0){
+                System.out.println("Tabela deletada com sucesso!");
+                
+            } else {
+                System.out.println("Erro ao deletar a tabela");
+            }
             
         } catch (Exception e) {
             System.out.println("Erro ao deletar valores na tabela Alunos! " + e.getMessage());
             
-        }finally{
-            try {
-                if(pstm != null){
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
         }
     }
     /**
@@ -153,7 +159,14 @@ public class Alunos extends UsuarioAbstract{
                 Connection conexao = new Conexao().getConexao();
                 pstm.setString(1, this.getAlunos_sala());
                 pstm.setInt(2, alunos_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+            
+                if (alteracao > 0) {
+                    System.out.println("Tabela deletada com sucesso!");
+
+                } else {
+                    System.out.println("Erro ao deletar a tabela");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo alunos_sala da tabela ALUNOS! " + e.getMessage());
@@ -175,7 +188,14 @@ public class Alunos extends UsuarioAbstract{
                 Connection conexao = new Conexao().getConexao();
                 pstm.setString(1, this.getAlunos_turma());
                 pstm.setInt(2, alunos_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+
+                if (alteracao > 0) {
+                    System.out.println("Tabela deletada com sucesso!");
+
+                } else {
+                    System.out.println("Erro ao deletar a tabela");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo alunos_turma da tabela ALUNOS " + e.getMessage());
@@ -197,7 +217,14 @@ public class Alunos extends UsuarioAbstract{
                 Connection conexao = new Conexao().getConexao();
                 pstm.setInt(1, this.getQtd_disciplina());
                 pstm.setInt(2, alunos_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+            
+                if (alteracao > 0) {
+                    System.out.println("Tabela deletada com sucesso!");
+
+                } else {
+                    System.out.println("Erro ao deletar a tabela");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo qtd_disciplina da tabela ALUNOS! " + e.getMessage());
@@ -218,12 +245,20 @@ public class Alunos extends UsuarioAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setBoolean(1,this.isAlunos_matriculados());
                 pstm.setString(2, this.getAlunos_sala());
                 pstm.setString(3, this.getAlunos_turma());
                 pstm.setInt(4, this.getQtd_disciplina());
                 pstm.setInt(5, alunos_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+            
+                if (alteracao > 0) {
+                    System.out.println("Tabela deletada com sucesso!");
+
+                } else {
+                    System.out.println("Erro ao deletar a tabela");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar a tabela ALUNOS! " + e.getMessage());
@@ -248,7 +283,7 @@ public class Alunos extends UsuarioAbstract{
     @Override
     public void listar(int alunos_id){
         if(alunos_id > 0){
-            String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuario_endereco, u.usuario_cpf, u.usuario_nascimento,"
+            String sql = "Select a.alunos_id, u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_cpf, u.usuarios_nascimento,"
                     + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on a.alunos_usuarios_id = u.usuarios_id Where a.alunos_id = ?";
             //Inner join para mostrar os dados do usuarios que passam chave primaria para alunos, nessa condição, especificos com id escolhido
             PreparedStatement pstm = null;
@@ -259,6 +294,7 @@ public class Alunos extends UsuarioAbstract{
                 pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, alunos_id);
                 pstm.executeQuery();
+                rset = pstm.executeQuery();
                 
                 if(rset.next()){
                     System.out.println("==================================================");
@@ -294,7 +330,7 @@ public class Alunos extends UsuarioAbstract{
             
             
         } else {
-            String sql = "Select u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_cpf, u.usuarios_nascimento,"
+            String sql = "Select a.alunos_id, u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_cpf, u.usuarios_nascimento,"
                     + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on a.fk_alunos_usuarios_id = u.usuarios_id";
             //Select com inner join de alunos que recebem a chave estrangeira de usuarios, nesse caso, ira mostrar todos os dados
             PreparedStatement pstm = null;

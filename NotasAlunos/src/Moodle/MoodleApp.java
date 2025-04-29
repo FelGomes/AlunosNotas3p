@@ -12,6 +12,7 @@ import Suap.abstractClass.Diario;
 import Suap.abstractClass.Frequencias;
 import Suap.abstractClass.Matricula;
 import Suap.abstractClass.Professores;
+import Suap.abstractClass.UsuarioAbstract;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -33,6 +34,7 @@ public class MoodleApp {
         Alunos aluno = new Alunos();
         Instituicao inst = new Instituicao();
         Frequencias frequencias = new Frequencias();
+        UsuarioAbstract usuario = new UsuarioAbstract();
 
         funcao.menuPrincipal();
         try {
@@ -48,84 +50,58 @@ public class MoodleApp {
                     System.out.println("Deseja inserir valores em alguma tabela? ");
                     opc = scan.nextLine().toLowerCase().trim();
                     while (opc.equals("sim") || opc.equals("s")) {
-                        funcao.menuTabelasInserir();
+                        funcao.menuTabelas();
                         System.out.println("informa a tabela: ");
                         tabela = scan.nextInt();
                         scan.nextLine();
                         switch (tabela) {
                             case 1:
-                                System.out.println("Deseja inserir valores na tabela usuarios? ");
-                                resposta = scan.nextLine().toLowerCase().trim();
-                                while (resposta.equals("sim") || resposta.equals("s")) {
-                                    System.out.println("Digite 1 para usuario Aluno e 2 para Usuario professor: ");
-                                    int usuEscolha = scan.nextInt();
-                                    scan.nextLine();
-                                    switch (usuEscolha) {
-                                        case 1:
-                                            try {
-                                                System.out.println("======================================");
-                                                System.out.println("         SEJA BEM VINDO, Aluno        ");
-                                                System.out.println("======================================");
-                                                System.out.println("Informe seu nome: ");
-                                                aluno.setNome(scan.nextLine());
-                                                System.out.println("Informe seu sexo [M ou F] ");
-                                                aluno.setSexo(scan.nextLine());
-                                                System.out.println("Informe seu endereco: ");
-                                                aluno.setEndereco(scan.nextLine());
-                                                System.out.println("Informe CPF: ");
-                                                aluno.setCpf(scan.nextLine());
-                                                System.out.println("Informe sua data de nascimento: ");
-                                                aluno.setDataNascimento(scan.nextLine());
-                                                System.out.println("Esta matriculado? ");
-                                                String matriculado = scan.nextLine().toLowerCase().trim();
-                                                if (matriculado.equals("sim") || matriculado.equals("s")) {
-                                                    aluno.setAlunos_matriculados(true);
-
-                                                } else if (matriculado.equals("nao") || matriculado.equals("n")) {
-                                                    aluno.setAlunos_matriculados(false);
-
-                                                } else {
-                                                    System.out.println("Resposta invalida");
-                                                }
-                                                if (aluno.isAlunos_matriculados() == true) {
-                                                    System.out.println("Informe sua sala: ");
-                                                    aluno.setAlunos_sala(scan.nextLine());
-                                                    System.out.println("Informe sua turma: ");
-                                                    aluno.setAlunos_turma(scan.nextLine());
-                                                    System.out.println("Informe a quantidade de disciplinas que possui: ");
-                                                    aluno.setQtd_disciplina(scan.nextInt());
-                                                    scan.nextLine();
-                                                    idUsu += 1;
-                                                    aluno.setId(idUsu);
-                                                    aluno.inserir();
-
-                                                } else {
-                                                    aluno.setAlunos_sala(null);
-                                                    aluno.setAlunos_turma(null);
-                                                    aluno.setQtd_disciplina(0);
-                                                    idUsu += 1;
-                                                    aluno.setId(idUsu);
-                                                    aluno.inserir();
-                                                }
-                                            } catch (Exception e) {
-                                                System.out.println("Erros na entrada de dados");
-                                            }
-
-                                            break;
-                                        case 2:
-                                            break;
-                                        default:
-                                            System.out.println("Valor errado!");
-                                            break;
-                                    }
-
-                                    System.out.println("Deseja cadastrar outro usuario? ");
-                                    resposta = scan.nextLine().toLowerCase().trim();
-                                }
+                                break;
                             case 2:
+                                try {
+                                    System.out.println("Deseja cadastrar alunos? ");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                    while(resposta.equals("sim")||resposta.equals("s")){
+                                        System.out.println("Informe o ID do usuario: ");
+                                        int id_usu = scan.nextInt(); // vai receber um id e vai verificar se existe para dar procedimento
+                                        scan.nextLine();
+                                        existe = usuario.verificarUsuarios(id_usu);
+                                        if(existe == true){ // se existe, o codigo da andamento
+                                            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                            System.out.println("         BEM VINDO, ALUNO           ");
+                                            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                            aluno.setAlunos_matriculados(true);
+                                            System.out.println("Informe a sala: ");
+                                            aluno.setAlunos_sala(scan.nextLine());
+                                            System.out.println("Informe a turma: ");
+                                            aluno.setAlunos_turma(scan.nextLine());
+                                            System.out.println("Informe a quantidade de disciplina: ");
+                                            aluno.setQtd_disciplina(scan.nextInt());
+                                            aluno.setId(id_usu);
+                                            aluno.inserir();
+                                            scan.nextLine();
+                                            
+                                            
+                                        } else {
+                                            System.out.println("Esse ID nao existe");
+                                        }
+                                       
+                                        
+                                        System.out.println("Deseja cadastrar outro aluno? ");
+                                        resposta = scan.nextLine().toLowerCase().trim();
+                                    }
+                                    
+                                } catch (Exception e) {
+                                     System.out.println("Erro na entrada de dado!" + e.getMessage());
+                                }
+                                     
+                                break;
+                            case 3:
+                                break;
+                            case 4:
                                 System.out.println("Deseja prosseguir na inserção de valores de Instituicao? ");
                                 resposta = scan.nextLine().toLowerCase().trim();
-                                while (resposta.equals("sim") || resposta.equals('s')) {
+                                while (resposta.equals("sim") || resposta.equals("s")) {
                                     System.out.println("Informe o nome: ");
                                     inst.setInst_nome(scan.nextLine());
                                     System.out.println("Informe o endereco: ");
@@ -146,11 +122,11 @@ public class MoodleApp {
                                 }
 
                                 break;
-                            case 3:
-                                break;
-                            case 4:
-                                break;
                             case 5:
+                                break;
+                            case 6:
+                                break;
+                            case 7:
                                 Matricula mat = new Matricula();
                                 System.out.println("Deseja prosseguir na inserção de matrícula?");
                                 resposta = scan.nextLine().toLowerCase().trim();
@@ -192,20 +168,20 @@ public class MoodleApp {
                                     resposta = scan.nextLine().toLowerCase().trim();
                                 }
                                 break;
-                            case 6:
-                                break;
-                            case 7:
-                                break;
                             case 8:
-                                System.out.println("Deseja inserir algum dado na tabela de frequencias? ");
-                                resposta = scan.nextLine().toLowerCase().trim();
-                                while (resposta.equals("s") || resposta.equals("sim")) {
-                                    System.out.println("Digite o ID do professor: ");
-                                    int idProfessorInsert = scan.nextInt();
-                                    scan.nextLine();
+                                break;
+                            case 9:
+                                break;
+                            case 10:
+                                //System.out.println("Deseja inserir algum dado na tabela de frequencias? ");
+                                //resposta = scan.nextLine().toLowerCase().trim();
+                                //while (resposta.equals("s") || resposta.equals("sim")) {
+                                  //  System.out.println("Digite o ID do professor: ");
+                                    //int idProfessorInsert = scan.nextInt();
+                                    //scan.nextLine();
                                     //método para verificar id professor
                                     //existe = frequencias.verificarIdProfessor(idProfessorInsert);
-                                    if (existe == true) {
+                                    /**if (existe == true) {
                                         System.out.println("Digite o id do aluno: ");
                                         int idAlunoInsert = scan.nextInt();
                                         scan.nextLine();
@@ -235,8 +211,7 @@ public class MoodleApp {
                                         }
                                     }
                                 }
-                                break;
-                            case 9:
+                                */
                                 break;
                             default:
 
@@ -265,7 +240,7 @@ public class MoodleApp {
                                 opc1 = scan.nextLine();
                                 while (opc1.equals("sim") || opc.equals("s")) {
                                     aluno.listar(0);
-                                    System.out.println("Informe o ID do usuario que deseja fazer alteração: ");
+                                    System.out.println("Informe o ID do aluno que deseja fazer alteração: ");
                                     aluno.setId(scan.nextInt());
                                     scan.nextLine();
                                     existe = aluno.verificarAlunos(aluno.getId());
@@ -283,6 +258,7 @@ public class MoodleApp {
                                             System.out.println("Esse aluno esta matriculado? [true/false]");
                                             aluno.setAlunos_matriculados(scan.nextBoolean());
                                             aluno.alterar(aluno.getId(), resposta);
+                                            scan.nextLine();
 
                                         } else if (resposta.equals("sala")) {
                                             System.out.println("Informe a sala do aluno: ");
@@ -302,6 +278,7 @@ public class MoodleApp {
                                         } else if (resposta.equals("tudo")) {
                                             System.out.println("Esse aluno esta matriculado? [true/false]");
                                             aluno.setAlunos_matriculados(scan.nextBoolean());
+                                            scan.nextLine();
                                             System.out.println("Informe a sala do aluno: ");
                                             aluno.setAlunos_sala(scan.nextLine());
                                             System.out.println("Informe a turma do aluno: ");
@@ -451,7 +428,7 @@ public class MoodleApp {
                             case 1:
                                 break;
                             case 2:
-                                System.out.println("Deseja fazer a remoçao de alguma campo? ");
+                                System.out.println("Deseja fazer remocao de aluno? ");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 while (opc.equals("sim") || opc.equals("s")) {
                                     aluno.listar(0);

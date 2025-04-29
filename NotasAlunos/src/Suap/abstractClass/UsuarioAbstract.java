@@ -365,7 +365,7 @@ public class UsuarioAbstract extends PessoaAbstract{
     
      public boolean verificarUsuarios(int usuario_id) {
         try (Connection conexao = new Conexao().getConexao();
-             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM usuario WHERE usuarios_id = ?")) {
+             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM usuarios WHERE usuarios_id = ?")) {
             comando.setInt(1, usuario_id);
             try (ResultSet resultado = comando.executeQuery()) {
                 return resultado.next(); 
