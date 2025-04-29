@@ -33,7 +33,7 @@ public class MoodleApp {
         Alunos aluno = new Alunos();
         Instituicao inst = new Instituicao();
         Frequencias frequencias = new Frequencias();
-
+        
         funcao.menuPrincipal();
         try {
             System.out.println("Deseja escolher qual opçao? ");
@@ -195,6 +195,18 @@ public class MoodleApp {
                             case 6:
                                 break;
                             case 7:
+                                break;
+                            case 8:
+                                System.out.println("Deseja inserir algum dado na tabela de frequencias? ");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                while(resposta.equals("s") || resposta.equals("sim")) {
+                                    System.out.println("Digite o ID do professor: ");
+                                    int idProfessor = scan.nextInt();
+                                    scan.nextLine();
+                                   
+                                }
+                                break;
+                            case 9:
                                 break;
                             default:
 
@@ -363,19 +375,23 @@ public class MoodleApp {
                             case 7:
                                 break;
                             case 8:
-                                System.out.println("ATUALIZAÇÃO DE DADOS");
-
-                                System.out.println("Digite o id da frequência:");
-                                int idUpdate = scan.nextInt();
-                                scan.nextLine();
-                                existe = frequencias.verificaIdFrequencia(idUpdate);
-                                if (existe == true) {
-                                    System.out.println("O aluno(a) faltou a aula?");
-                                    String opcUpdate = scan.nextLine().toLowerCase().trim();
-                                    if (opcUpdate.equals("s") || opcUpdate.equals("sim")) {
-                                        frequencias.setFrequencias_faltas(frequencias.getAulas_ministradas());
-                                    } else {
-                                        frequencias.setFrequencias_faltas(0);
+                                System.out.println("Deseja atualizar algum dado na tabela de frequencias?");
+                                opc1 = scan.nextLine().toLowerCase().trim();
+                                while (opc.equals("s") || opc.equals("sim")) {
+                                    System.out.println("Digite o id da frequência:");
+                                    int idUpdate = scan.nextInt();
+                                    scan.nextLine();
+                                    existe = frequencias.verificaIdFrequencia(idUpdate);
+                                    if (existe == true) {
+                                        System.out.println("O aluno(a) faltou a aula?");
+                                        String opcUpdate = scan.nextLine().toLowerCase().trim();
+                                        if (opcUpdate.equals("s") || opcUpdate.equals("sim")) {
+                                            frequencias.setFrequencias_faltas(frequencias.getAulas_ministradas());
+                                        } else {
+                                            frequencias.setFrequencias_faltas(0);
+                                        }
+                                        System.out.println("Deseja alterar outro campo de Instituicao? ");
+                                        opc1 = scan.nextLine().toLowerCase().trim();
                                     }
                                 }
                                 break;
