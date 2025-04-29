@@ -27,6 +27,9 @@ public class Professores extends UsuarioAbstract {
         
     }
     
+    public Professores(){
+    }
+    
     public Professores(String disciplinaMinistrada, String turmaEnsinada, String grauTitularidade, int idUsuario){
         this.disciplinaMinistrada = disciplinaMinistrada;
         this.turmaEnsinada = turmaEnsinada;

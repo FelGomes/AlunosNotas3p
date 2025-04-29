@@ -12,13 +12,26 @@ import java.sql.SQLException;
  */
 public class Boletim{
     
-    private String boletins_situacao, boletins_semestre;
-    private float boletins_media, boletins_indice_rendimento;
-    private Frequencias frequencias;
-    private Professores professores;
-    private Notas nota;
+    private String boletins_situacao;
+
+
+    Alunos alunos = new Alunos();
+    Notas notas = new Notas();
+    Frequencias frequencias = new Frequencias();
+    
+    /**
+     * 
+     * @param boletins_id 
+     */
+    public void listarBoletim(int boletins_id){
+        if(boletins_id > 0){
+            String sql = "SELECT * FROM boletins WHERE boletins_id = ?";
+            PreparedStatement pstm = null;
+            ResultSet rset = null;
+        
+        }
     
     
-    
+    }
     
 }
