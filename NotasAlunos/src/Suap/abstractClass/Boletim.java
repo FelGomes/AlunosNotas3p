@@ -12,13 +12,107 @@ import java.sql.SQLException;
  */
 public class Boletim{
     
-    private String boletins_situacao, boletins_semestre;
-    private float boletins_media, boletins_indice_rendimento;
-    private Frequencias frequencias;
-    private Professores professores;
-    private Notas nota;
+    private String boletins_situacao;
+
+
+    Alunos alunos = new Alunos();
+    Notas notas = new Notas();
+    Frequencias frequencias = new Frequencias();
+    
+    /**
+     * 
+     * @param boletins_id
+     */
+    public void listarBoletim(int boletins_id, double nota_um, double nota_dois, double nota_tres, double nota_quatro){
+        
+
+        if(boletins_id > 0){
+            String sql = "SELECT * FROM boletins WHERE boletins_id = ?";
+            PreparedStatement pstm = null;
+            ResultSet rset = null;
+            
+            try{
+                Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
+                pstm.setInt(1, boletins_id);
+                pstm.executeQuery();
+                
+                if(rset.next()){
+                    System.out.println("==================================================");
+                    System.out.println("ID: " + rset.getInt("boletins_id"));
+                    System.out.println("Nome Aluno: " + rset.getString("usuarios_nome"));
+                    System.out.println("Sexo: " + rset.getString("usuarios_sexo"));
+                    System.out.println("Situacao: " + rset.getString("boletins_situacao"));
+                    System.out.println("Media de notas: " + rset.getDouble("notas_media"));
+                    System.out.println("Porcentagem Frequencia: " + rset.getDouble("prctg_presenca"));
+                    System.out.println("Materias: " + rset.getString("nota_disciplina"));
+                    System.out.println("==================================================");
+                
+            
+                } else {
+                    System.out.println("Nenhum boletim encontrado com o ID fornecido!" + boletins_id);
+                }
+        
+            } catch (Exception e){
+                System.out.println("Erro ao fazer a listagem dos boletins " + e.getMessage());
+            } finally {
+            
+                try{
+                    if(rset != null){
+                        rset.close();
+                    }
+                    if(pstm != null){
+                        pstm.close();
+                    }
+                } catch (SQLException e){
+                    System.out.println(e.getMessage());
+                }
+            }
+            
+        //CASO NÃO EXISTA UM ID ESPECIFICO VAI RETORNAR TODOS
     
     
+        } else {
+            String sql = "SELECT * FROM BOLETIM";
+            PreparedStatement pstm = null;
+            ResultSet rset = null;
+            
+            try {
+                Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
+                
+                rset = pstm.executeQuery();
+                
+                while(rset.next()){
+                    System.out.println("==================================================");
+                    System.out.println("ID: " + rset.getInt("boletins_id"));
+                    System.out.println("Nome Aluno: " + rset.getString("usuarios_nome"));
+                    System.out.println("Sexo: " + rset.getString("usuarios_sexo"));
+                    System.out.println("Situacao: " + rset.getString("boletins_situacao"));
+                    System.out.println("Media de notas: " + rset.getDouble("notas_media"));
+                    System.out.println("Porcentagem Frequencia: " + rset.getDouble("prctg_presenca"));
+                    System.out.println("Materias: " + rset.getString("nota_disciplina"));
+                    System.out.println("==================================================");
+                }
+                
+            } catch (SQLException e) {
+                System.out.println("Erro ao fazer a listagem dos boletins " + e.getMessage());
+                
+            } finally {
+                try {
+                    if (rset != null){
+                        rset.close();
+                    }
+                    if (pstm != null){
+                        pstm.close();
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                
+                }   
+            }
+        }
     
+    }
     
 }
