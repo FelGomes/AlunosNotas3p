@@ -33,7 +33,7 @@ public class MoodleApp {
         Alunos aluno = new Alunos();
         Instituicao inst = new Instituicao();
         Frequencias frequencias = new Frequencias();
-        
+
         funcao.menuPrincipal();
         try {
             System.out.println("Deseja escolher qual opçao? ");
@@ -199,22 +199,41 @@ public class MoodleApp {
                             case 8:
                                 System.out.println("Deseja inserir algum dado na tabela de frequencias? ");
                                 resposta = scan.nextLine().toLowerCase().trim();
-                                while(resposta.equals("s") || resposta.equals("sim")) {
+                                while (resposta.equals("s") || resposta.equals("sim")) {
                                     System.out.println("Digite o ID do professor: ");
-                                    int idProfessor = scan.nextInt();
+                                    int idProfessorInsert = scan.nextInt();
                                     scan.nextLine();
-                                   //método para verificar id professor
-                                   //if(idProfessor == true){
+                                    //método para verificar id professor
+                                    //existe = frequencias.verificarIdProfessor(idProfessorInsert);
+                                    if (existe == true) {
                                         System.out.println("Digite o id do aluno: ");
-                                       //método para verificar o id de aluno
-                                       if(idAluno == true){
-                                           System.out.println("Digite a quantidade de aulas que a disciplina possui: ");
-                                           frequencias.setTotal_aulas(scan.nextInt());
-                                           scan.nextLine();
-                                           System.out.println("Digite a quantidade de aulas de hoje: ");
-                                           frequencias.setAulas_ministradas(scan.nextInt());
-                                           scan.nextLine();
-                                       }
+                                        int idAlunoInsert = scan.nextInt();
+                                        scan.nextLine();
+                                        //método para verificar o id de aluno
+                                        //existe1 =  frequencias.verificarIdAluno(idAlunoInsert);
+                                        if (existe1 == true) {
+                                            System.out.println("Digite a quantidade de aulas que a disciplina possui: ");
+                                            frequencias.setTotal_aulas(scan.nextInt());
+                                            scan.nextLine();
+                                            System.out.println("Digite o nome da disciplina: ");
+                                            frequencias.setFrequencias_disciplinas(scan.nextLine());
+                                            scan.nextLine();
+                                            System.out.println("Digite a quantidade de aulas de hoje: ");
+                                            frequencias.setAulas_ministradas(scan.nextInt());
+                                            scan.nextLine();
+                                            System.out.println("O aluno(a) compareceu a aula? ");
+                                            String opcFrequencia = scan.nextLine().toLowerCase().trim();
+                                            if (opcFrequencia.equals("sim") || opcFrequencia.equals("s")) {
+                                                frequencias.setFrequencias_faltas(0);
+                                                frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas());
+                                                frequencias.setPrctg_presenca(frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas()));
+                                            } else {
+                                                frequencias.setFrequencias_faltas(frequencias.getAulas_ministradas());
+                                                frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas());
+                                                frequencias.setPrctg_presenca(frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas()));
+                                            }
+                                        }
+                                    }
                                 }
                                 break;
                             case 9:

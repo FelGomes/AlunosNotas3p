@@ -242,4 +242,8 @@ public class Frequencias {
         }
         return false;
     }
+    public float calculaPrctgFrequencia(int aula_total, int faltas){
+        float prctg = (aula_total - faltas) / aula_total * 100;
+        return prctg;
+    }
 }
