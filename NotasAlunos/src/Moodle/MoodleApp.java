@@ -432,7 +432,45 @@ public class MoodleApp {
                                 case 8:
                                     break;
                                 case 9:
-                                    break;
+                            Diario diario = new Diario();
+                         System.out.println("======================================");
+                         System.out.println("           ATUALIZAR DIARIO       ");
+                         System.out.println("======================================");
+            resposta = scan.nextLine().toLowerCase().trim();
+            while (resposta.equals("sim") || resposta.equals("s")) {
+                System.out.println("Informe o ID do diário que deseja atualizar:");
+                int id = scan.nextInt();
+                scan.nextLine(); 
+
+                if (diario.verificarDiario(id)) {
+                    diario.setDiariosId(id);
+
+                    System.out.println("Informe o novo local:");
+                    diario.setDiariosLocal(scan.nextLine());
+
+                    System.out.println("Informe as novas disciplinas:");
+                    diario.setDiariosDisciplinas(scan.nextLine());
+
+                    System.out.println("Informe a nova quantidade de alunos:");
+                    diario.setQtdAlunos(scan.nextInt());
+
+                    System.out.println("Informe o novo ID do professor:");
+                    diario.setFkDiariosProfessores(scan.nextInt());
+
+                    System.out.println("Informe o novo ID do aluno:");
+                    diario.setFkDiariosAlunos(scan.nextInt());
+                    scan.nextLine(); 
+
+                    diario.alterar(id);
+                } else {
+                    System.out.println("Diário não encontrado.");
+                }
+
+                System.out.println("Deseja atualizar outro diário?");
+                resposta = scan.nextLine().toLowerCase().trim();
+            }
+            break;
+                                    
                                 default:
                                     System.out.println("Tabela errada! ");
                                     break;
@@ -524,6 +562,25 @@ public class MoodleApp {
                                 case 8:
                                     break;
                                 case 9:
+                                Diario diario = new Diario();
+                            System.out.println("======================================");
+                            System.out.println("           DELETAR DIARIO       ");
+                            System.out.println("======================================");
+            resposta = scan.nextLine().toLowerCase().trim();
+            while (resposta.equals("sim") || resposta.equals("s")) {
+                System.out.println("Informe o ID do diario que deseja deletar:");
+                int id = scan.nextInt();
+                scan.nextLine(); 
+
+                if (diario.verificarDiario(id)) {
+                    diario.deletar(id);
+                } else {
+                    System.out.println("Diario nao encontrado.");
+                }
+
+                System.out.println("Deseja deletar outro diario?");
+                resposta = scan.nextLine().toLowerCase().trim();
+            }
                                     break;
                                 default:
                                     System.out.println("Tabela errada! ");
@@ -614,46 +671,29 @@ public class MoodleApp {
                                     break;
 
                                     
-                                case 9: System.out.println("Deseja prosseguir na inserção ou gerenciamento de diário?");
-    opc = scan.nextLine().toLowerCase().trim();
-    while (opc.equals("sim") || opc.equals("s")) {
-         System.out.println("======================================");
-        System.out.println("           PÁGINA DE DIARIO           ");
-        System.out.println("======================================");
-        System.out.println("Escolha uma opção: ");
-        System.out.println("1. Inserir Diario");
-        System.out.println("2. Listar Diarios");
-        System.out.println("3. Atualizar Diario");
-        System.out.println("4. Remover Diario");
-        System.out.println("Digite a opçao desejada: ");
-        int escolhaDiario = scan.nextInt();
-        scan.nextLine();
+                                case 9: 
+                                Diario diario = new Diario();
+                            System.out.println("======================================");
+                            System.out.println("           LISTAR DIARIO       ");
+                            System.out.println("======================================");
+            resposta = scan.nextLine().toLowerCase().trim();
+            while (resposta.equals("sim") || resposta.equals("s")) {
+                System.out.println("Informe o ID do diário que deseja deletar:");
+                int id = scan.nextInt();
+                scan.nextLine(); 
+
+                if (diario.verificarDiario(id)) {
+                    diario.deletar(id);
+                } else {
+                    System.out.println("Diario nao encontrado.");
+                }
+
+                System.out.println("Deseja deletar outro diario?");
+                resposta = scan.nextLine().toLowerCase().trim();
+            }
+            break;
         
- Diario diario = new Diario();  // Criar objeto Diario
-        switch (escolhaDiario) {
-            case 1:
                
-                break;
-                                   
-            case 2:
-    
-    break;
-
-            case 3:
-   
-    break;
-
-            case 4:
-    
-    break;
-
-            default:
-                System.out.println("️Opção invalida! Tente Novamente.");
-                break;
-
-        } catch (Exception e) {
-            System.out.println("Erro na entrada de dados! " + e.getMessage());
-
         }
         while (escolha != 5) {
             switch (escolha) {
@@ -1198,6 +1238,7 @@ public class MoodleApp {
                                 }
                                 break;
                             case 5:
+                                
                                 break;
                             case 6:
                                 break;
