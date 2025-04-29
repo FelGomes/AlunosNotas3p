@@ -34,6 +34,9 @@ public class Professores extends UsuarioAbstract {
         this.idUsuario = idUsuario;
     }
     
+    public Professores (){
+    }
+            
     public String getDisciplinaMinistrada() {
         return disciplinaMinistrada;
     }
