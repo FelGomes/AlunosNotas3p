@@ -36,7 +36,10 @@ public class Professores extends UsuarioAbstract {
         this.grauTitularidade = grauTitularidade; 
         this.idUsuario = idUsuario;
     }
-
+    
+    public Professores (){
+    }
+            
     public String getDisciplinaMinistrada() {
         return disciplinaMinistrada;
     }
@@ -161,7 +164,7 @@ public class Professores extends UsuarioAbstract {
     
     public void listarProfessores(){
         Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "SELECT * FROM professores";
+        String sintaxeSQL = "SELECT * FROM professores INNER JOIN usuarios WHERE usuarios.usuarios_id = professores.fk_professores_usuarios_id";
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
@@ -176,6 +179,7 @@ public class Professores extends UsuarioAbstract {
                 System.out.println("Endereco: " + mostrar.getString("usuarios_endereco"));
                 System.out.println("CPF: " + mostrar.getString("usuarios_cpf"));
                 System.out.println("Sexo: " + mostrar.getString("usuarios_sexo"));
+                System.out.println("ID de Professor: " + mostrar.getString("professores_id"));
                 System.out.println("Disciplina: " + mostrar.getString("professores_disciplina"));
                 System.out.println("Turma: " + mostrar.getString("professores_turma"));
                 System.out.println("Titularidade: " + mostrar.getString("professores_titularidade"));      
@@ -187,6 +191,73 @@ public class Professores extends UsuarioAbstract {
             conexao.close();
         }catch(Exception e){
             System.out.println("Erro ao listar professores: " + e.getMessage());
+        }
+    }
+    
+    @Override
+    public void alterar(int professores_id, String atributo){
+        if(atributo.equals("disciplina")){
+            Connection conexao = new Conexao().getConexao();
+            String sintaxeSQL = "UPDATE professores SET professores_disciplina = ? WHERE professores_id = ?";
+            
+            try {
+                PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+                comando.setString(1, this.getDisciplinaMinistrada());
+                comando.setInt(2, professores_id);
+                
+                comando.executeUpdate();
+                comando.close();
+                conexao.close();
+            }catch(Exception e){
+                System.out.println("Erro ao alterar: "+ e.getMessage());
+            }
+        }else if (atributo.equals("turma")){
+            Connection conexao = new Conexao().getConexao();
+            String sintaxeSQL = "UPDATE professores SET professores_turma = ? WHERE professores_id = ?";
+            
+            try {
+                PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+                comando.setString(1, this.getTurmaEnsinada());
+                comando.setInt(2, professores_id);
+                
+                comando.executeUpdate();
+                comando.close();
+                conexao.close();
+            }catch(Exception e){
+                System.out.println("Erro ao alterar: "+ e.getMessage());
+            }
+        }else if(atributo.equals("titularidade")){
+            Connection conexao = new Conexao().getConexao();
+            String sintaxeSQL = "UPDATE professores SET professores_titularidade = ? WHERE professores_id = ?";
+            
+            try {
+                PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+                comando.setString(1, this.getGrauTitularidade());
+                comando.setInt(2, professores_id);
+                
+                comando.executeUpdate();
+                comando.close();
+                conexao.close();
+            }catch(Exception e){
+                System.out.println("Erro ao alterar: "+ e.getMessage());
+            }
+        }else if(atributo.equals("tudo")){
+            Connection conexao = new Conexao().getConexao();
+            String sintaxeSQL = "UPDATE professores SET professores_disciplina = ?, professores_turma = ?, professores_titularidade = ? WHERE professores_id = ?";
+            
+            try {
+                PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+                comando.setString(1, this.getDisciplinaMinistrada());
+                comando.setString(2, this.getTurmaEnsinada());
+                comando.setString(3, this.getGrauTitularidade());
+                comando.setInt(4, professores_id);
+                
+                comando.executeUpdate();
+                comando.close();
+                conexao.close();
+            }catch(Exception e){
+                System.out.println("Erro ao alterar: "+ e.getMessage());
+            }
         }
     }
 }

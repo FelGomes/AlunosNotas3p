@@ -8,8 +8,10 @@ import Suap.Funcoes;
 import Suap.Instituicao;
 import Suap.abstractClass.Alunos;
 import Suap.abstractClass.Diario;
+
 import Suap.abstractClass.Frequencias;
 import Suap.abstractClass.Matricula;
+import Suap.abstractClass.Professores;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -30,7 +32,8 @@ public class MoodleApp {
         int escolha = 0;
         Alunos aluno = new Alunos();
         Instituicao inst = new Instituicao();
-
+        Frequencias frequencias = new Frequencias();
+        
         funcao.menuPrincipal();
         try {
             System.out.println("Deseja escolher qual opçao? ");
@@ -192,6 +195,29 @@ public class MoodleApp {
                             case 6:
                                 break;
                             case 7:
+                                break;
+                            case 8:
+                                System.out.println("Deseja inserir algum dado na tabela de frequencias? ");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                while(resposta.equals("s") || resposta.equals("sim")) {
+                                    System.out.println("Digite o ID do professor: ");
+                                    int idProfessor = scan.nextInt();
+                                    scan.nextLine();
+                                   //método para verificar id professor
+                                   //if(idProfessor == true){
+                                        System.out.println("Digite o id do aluno: ");
+                                       //método para verificar o id de aluno
+                                       if(idAluno == true){
+                                           System.out.println("Digite a quantidade de aulas que a disciplina possui: ");
+                                           frequencias.setTotal_aulas(scan.nextInt());
+                                           scan.nextLine();
+                                           System.out.println("Digite a quantidade de aulas de hoje: ");
+                                           frequencias.setAulas_ministradas(scan.nextInt());
+                                           scan.nextLine();
+                                       }
+                                }
+                                break;
+                            case 9:
                                 break;
                             default:
 
@@ -360,9 +386,29 @@ public class MoodleApp {
                             case 7:
                                 break;
                             case 8:
+                                System.out.println("Deseja atualizar algum dado na tabela de frequencias?");
+                                opc1 = scan.nextLine().toLowerCase().trim();
+                                while (opc.equals("s") || opc.equals("sim")) {
+                                    System.out.println("Digite o id da frequência:");
+                                    int idUpdate = scan.nextInt();
+                                    scan.nextLine();
+                                    existe = frequencias.verificaIdFrequencia(idUpdate);
+                                    if (existe == true) {
+                                        System.out.println("O aluno(a) faltou a aula?");
+                                        String opcUpdate = scan.nextLine().toLowerCase().trim();
+                                        if (opcUpdate.equals("s") || opcUpdate.equals("sim")) {
+                                            frequencias.setFrequencias_faltas(frequencias.getAulas_ministradas());
+                                        } else {
+                                            frequencias.setFrequencias_faltas(0);
+                                        }
+                                        System.out.println("Deseja alterar outro campo de Instituicao? ");
+                                        opc1 = scan.nextLine().toLowerCase().trim();
+                                    }
+                                }
                                 break;
                             case 9:
                                 break;
+
                             default:
                                 System.out.println("Tabela errada! ");
                                 break;
@@ -373,6 +419,7 @@ public class MoodleApp {
 
                     }
                     break;
+
                 case 3:
                     System.out.println("Deseja remover valores de alguma tabela? ");
                     resposta = scan.nextLine();
@@ -406,7 +453,7 @@ public class MoodleApp {
                             case 3:
                                 break;
                             case 4:
-                                System.out.println("Deseja fazer a remoçao de alguma campo? ");
+                                System.out.println("Deseja fazer a remocao de algum campo? ");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 while (opc.equals("sim") || opc.equals("s")) {
                                     inst.listar(0);
@@ -432,6 +479,26 @@ public class MoodleApp {
                             case 7:
                                 break;
                             case 8:
+                                try {
+                                    System.out.println("Deseja fazer a remocao de algum campo");
+                                    opc = scan.nextLine().toLowerCase().toLowerCase().trim();
+                                    while (opc.equals("s") || opc.equals("sim")) {
+                                        frequencias.listarFrequencias(0);
+                                        System.out.println("Informe o ID de frequencia:");
+                                        int idDelete = scan.nextInt();
+                                        scan.nextLine();
+                                        existe = frequencias.verificaIdFrequencia(idDelete);
+                                        if (existe == true) {
+                                            frequencias.deletarFrequencia(idDelete);
+                                        } else {
+                                            System.out.println("ID de frequencia nao encontrado:");
+                                        }
+                                        System.out.println("Deseja fazer outra remocao? ");
+                                        opc = scan.nextLine().toLowerCase().trim();
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Erro na remocao dos dados " + e.getMessage());
+                                }
                                 break;
                             case 9:
                                 break;
@@ -497,152 +564,153 @@ public class MoodleApp {
                                         }
                                     }
                                 }
-                                    break;
-                                case 5:
-                                    break;
-                                case 6:
-                                    break;
-                                case 7:
-                                    break;
-                                case 8:
-                                    System.out.println("Deseja administrar algum dado na tabela de frequência?");
+                                break;
+                            case 5:
+                                break;
+                            case 6:
+                                break;
+                            case 7:
+                                break;
+                            case 8:
+                                try {
+                                    System.out.println("Deseja listar todas as frequências");
                                     opc = scan.nextLine().toLowerCase().trim();
-                                    while (opc.equals("sim") || opc.equals("s")) {
-                                        System.out.println(" =======================================");
-                                        System.out.println("                       PÁGINA DE FREQUÊNCIA                    ");
-                                        System.out.println(" =======================================");
-                                        System.out.println("Escolha uma opção: ");
-                                        System.out.println("1 - INSERIR FREQUÊNCIA");
-                                        System.out.println("2 - LISTAR FREQUÊNCIA");
-                                        System.out.println("3 - ATUALIZAR FREQUÊNCIA");
-                                        System.out.println("4 - DELETAR FREQUÊNCIA");
-                                        int opcFrequencia = scan.nextInt();
-                                        scan.nextInt();
-                                        
-                                        Frequencias frequencias = new Frequencias();
-                                        
-                                        System.out.println("Digite o ID do professor: ");
-                                        frequencias.setProfessores(scan.nextLine()); // verificar como resolver
-                                        
-                                    }
-                                case 9: 
-                                    System.out.println("Deseja prosseguir na inserção ou gerenciamento de diário?");
-                                    opc = scan.nextLine().toLowerCase().trim();
-                                    while (opc.equals("sim") || opc.equals("s")) {
-                                        System.out.println("======================================");
-                                        System.out.println("           PÁGINA DE DIÁRIO           ");
-                                        System.out.println("======================================");
-                                        System.out.println("Escolha uma opção: ");
-                                        System.out.println("1. Inserir Diário");
-                                        System.out.println("2. Listar Diários");
-                                        System.out.println("3. Atualizar Diário");
-                                        System.out.println("4. Remover Diário");
-                                        System.out.println("Digite a opção desejada: ");
-                                        int escolhaDiario = scan.nextInt();
-                                        scan.nextLine();
-
-                                        Diario diario = new Diario();  // Criar objeto Diario
-                                        switch (escolhaDiario) {
-                                            case 1:
-
-                                                System.out.println("====================================");
-                                                System.out.println("     INSERIR DADOS NO DIÁRIO       ");
-                                                System.out.println("====================================");
-
-                                                System.out.println("Informe o local do diário: ");
-                                                diario.setDiariosLocal(scan.nextLine());
-                                                System.out.println("Informe as disciplinas do diário: ");
-                                                diario.setDiariosDisciplinas(scan.nextLine());
-                                                System.out.println("Informe a quantidade de alunos: ");
-                                                diario.setQtdAlunos(scan.nextInt());
-                                                scan.nextLine();
-                                                System.out.println("Informe o ID do professor: ");
-                                                diario.setFkDiariosProfessores(scan.nextInt());
-                                                scan.nextLine();
-                                                System.out.println("Informe o ID do aluno: ");
-                                                diario.setFkDiariosAlunos(scan.nextInt());
-                                                scan.nextLine();
-
-                                                diario.inserir();  // Inserir no banco de dados
-                                                System.out.println("Diário inserido com sucesso!");
-                                                System.out.println("\n Diário cadastrado com sucesso!");
-                                                System.out.println(" Local: " + diario.getDiariosLocal());
-                                                System.out.println(" Disciplinas: " + diario.getDiariosDisciplinas());
-                                                System.out.println(" Quantidade de alunos: " + diario.getQtdAlunos());
-                                                System.out.println(" Professor ID: " + diario.getFkDiariosProfessores());
-                                                System.out.println(" Aluno ID: " + diario.getFkDiariosAlunos());
-                                                System.out.println("=======================================\n");
-
-                                                System.out.println("Deseja cadastrar um novo diário?");
-                                                resposta = scan.nextLine().toLowerCase().trim();
-
-                                                break;
-
-                                            case 2:
-                                                System.out.println("====================================");
-                                                System.out.println("          LISTAR DIÁRIOS            ");
-                                                System.out.println("====================================");
-                                                System.out.println("Deseja listar um diário específico? (sim/não)");
-                                                String listarOpcao = scan.nextLine().toLowerCase().trim();
-
-                                                if (listarOpcao.equals("sim") || listarOpcao.equals("s")) {
-                                                    System.out.println("Informe o ID do Diário: ");
-                                                    int idListar = scan.nextInt();
-                                                    scan.nextLine();
-                                                    diario.listar(idListar);
-                                                } else {
-                                                    diario.listar(0); // Listar todos se passar 0
-                                                }
-                                                break;
-
-                                            case 3:
-                                                System.out.println("====================================");
-                                                System.out.println("          ATUALIZAR DIÁRIO          ");
-                                                System.out.println("====================================");
-                                                System.out.println("Informe o ID do Diário que deseja atualizar: ");
-                                                int idAtualizar = scan.nextInt();
-                                                scan.nextLine();
-
-                                                System.out.println("Informe o novo local do diário: ");
-                                                diario.setDiariosLocal(scan.nextLine());
-                                                System.out.println("Informe as novas disciplinas do diário: ");
-                                                diario.setDiariosDisciplinas(scan.nextLine());
-                                                System.out.println("Informe a nova quantidade de alunos: ");
-                                                diario.setQtdAlunos(scan.nextInt());
-                                                scan.nextLine();
-                                                System.out.println("Informe o novo ID do professor: ");
-                                                diario.setFkDiariosProfessores(scan.nextInt());
-                                                scan.nextLine();
-                                                System.out.println("Informe o novo ID do aluno: ");
-                                                diario.setFkDiariosAlunos(scan.nextInt());
-                                                scan.nextLine();
-
-                                                diario.alterar(idAtualizar);
-                                                break;
-
-                                            case 4:
-                                                System.out.println("====================================");
-                                                System.out.println("          REMOVER DIÁRIO            ");
-                                                System.out.println("====================================");
-                                                System.out.println("Informe o ID do Diário que deseja remover: ");
-                                                int idRemover = scan.nextInt();
-                                                scan.nextLine();
-
-                                                diario.deletar(idRemover);
-                                                break;
-
-                                            default:
-                                                System.out.println("️Opção inválida! Tente Novamente.");
-                                                break;
+                                    if (opc.equals("s") || opc.equals("sim")) {
+                                        frequencias.listarFrequencias(0);
+                                    } else {
+                                        System.out.println("Digite o ID de frequencias: ");
+                                        int idListar = scan.nextInt();
+                                        if (idListar == 0) {
+                                            frequencias.listarFrequencias(0);
+                                        } else {
+                                            existe = frequencias.verificaIdFrequencia(idListar);
+                                            if (existe == true) {
+                                                frequencias.listarFrequencias(idListar);
+                                            }
                                         }
-
-                                        System.out.println("\nDeseja realizar outra operação em diário?");
-                                        resposta = scan.nextLine().toLowerCase().trim();
                                     }
-                                    break;
-                                default:
-                                    System.out.println("Tabela errada! ");
-                                    break;
+                                } catch (Exception e) {
+                                    System.out.println("Erro ao listar dados da tabela de frequencias" + e.getMessage());
+                                }
+                                break;
+                            case 9:
+                                System.out.println("Deseja prosseguir na inserção ou gerenciamento de diário?");
+                                opc = scan.nextLine().toLowerCase().trim();
+                                while (opc.equals("sim") || opc.equals("s")) {
+                                    System.out.println("======================================");
+                                    System.out.println("           PÁGINA DE DIÁRIO           ");
+                                    System.out.println("======================================");
+                                    System.out.println("Escolha uma opção: ");
+                                    System.out.println("1. Inserir Diário");
+                                    System.out.println("2. Listar Diários");
+                                    System.out.println("3. Atualizar Diário");
+                                    System.out.println("4. Remover Diário");
+                                    System.out.println("Digite a opção desejada: ");
+                                    int escolhaDiario = scan.nextInt();
+                                    scan.nextLine();
+
+                                    Diario diario = new Diario();  // Criar objeto Diario
+                                    switch (escolhaDiario) {
+                                        case 1:
+
+                                            System.out.println("====================================");
+                                            System.out.println("     INSERIR DADOS NO DIÁRIO       ");
+                                            System.out.println("====================================");
+
+                                            System.out.println("Informe o local do diário: ");
+                                            diario.setDiariosLocal(scan.nextLine());
+                                            System.out.println("Informe as disciplinas do diário: ");
+                                            diario.setDiariosDisciplinas(scan.nextLine());
+                                            System.out.println("Informe a quantidade de alunos: ");
+                                            diario.setQtdAlunos(scan.nextInt());
+                                            scan.nextLine();
+                                            System.out.println("Informe o ID do professor: ");
+                                            diario.setFkDiariosProfessores(scan.nextInt());
+                                            scan.nextLine();
+                                            System.out.println("Informe o ID do aluno: ");
+                                            diario.setFkDiariosAlunos(scan.nextInt());
+                                            scan.nextLine();
+
+                                            diario.inserir();  // Inserir no banco de dados
+                                            System.out.println("Diário inserido com sucesso!");
+                                            System.out.println("\n Diário cadastrado com sucesso!");
+                                            System.out.println(" Local: " + diario.getDiariosLocal());
+                                            System.out.println(" Disciplinas: " + diario.getDiariosDisciplinas());
+                                            System.out.println(" Quantidade de alunos: " + diario.getQtdAlunos());
+                                            System.out.println(" Professor ID: " + diario.getFkDiariosProfessores());
+                                            System.out.println(" Aluno ID: " + diario.getFkDiariosAlunos());
+                                            System.out.println("=======================================\n");
+
+                                            System.out.println("Deseja cadastrar um novo diário?");
+                                            resposta = scan.nextLine().toLowerCase().trim();
+
+                                            break;
+
+                                        case 2:
+                                            System.out.println("====================================");
+                                            System.out.println("          LISTAR DIÁRIOS            ");
+                                            System.out.println("====================================");
+                                            System.out.println("Deseja listar um diário específico? (sim/não)");
+                                            String listarOpcao = scan.nextLine().toLowerCase().trim();
+
+                                            if (listarOpcao.equals("sim") || listarOpcao.equals("s")) {
+                                                System.out.println("Informe o ID do Diário: ");
+                                                int idListar = scan.nextInt();
+                                                scan.nextLine();
+                                                diario.listar(idListar);
+                                            } else {
+                                                diario.listar(0); // Listar todos se passar 0
+                                            }
+                                            break;
+
+                                        case 3:
+                                            System.out.println("====================================");
+                                            System.out.println("          ATUALIZAR DIÁRIO          ");
+                                            System.out.println("====================================");
+                                            System.out.println("Informe o ID do Diário que deseja atualizar: ");
+                                            int idAtualizar = scan.nextInt();
+                                            scan.nextLine();
+
+                                            System.out.println("Informe o novo local do diário: ");
+                                            diario.setDiariosLocal(scan.nextLine());
+                                            System.out.println("Informe as novas disciplinas do diário: ");
+                                            diario.setDiariosDisciplinas(scan.nextLine());
+                                            System.out.println("Informe a nova quantidade de alunos: ");
+                                            diario.setQtdAlunos(scan.nextInt());
+                                            scan.nextLine();
+                                            System.out.println("Informe o novo ID do professor: ");
+                                            diario.setFkDiariosProfessores(scan.nextInt());
+                                            scan.nextLine();
+                                            System.out.println("Informe o novo ID do aluno: ");
+                                            diario.setFkDiariosAlunos(scan.nextInt());
+                                            scan.nextLine();
+
+                                            diario.alterar(idAtualizar);
+                                            break;
+
+                                        case 4:
+                                            System.out.println("====================================");
+                                            System.out.println("          REMOVER DIÁRIO            ");
+                                            System.out.println("====================================");
+                                            System.out.println("Informe o ID do Diário que deseja remover: ");
+                                            int idRemover = scan.nextInt();
+                                            scan.nextLine();
+
+                                            diario.deletar(idRemover);
+                                            break;
+
+                                        default:
+                                            System.out.println("️Opção inválida! Tente Novamente.");
+                                            break;
+                                    }
+
+                                    System.out.println("\nDeseja realizar outra operação em diário?");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                }
+                                break;
+                            default:
+                                System.out.println("Tabela errada! ");
+                                break;
                         }
 
                     }

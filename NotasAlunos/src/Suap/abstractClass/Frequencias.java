@@ -50,10 +50,6 @@ public class Frequencias {
         this.total_aulas = total_aulas;
     }
 
-    public Alunos getAlunos() {
-        return aluno;
-    }
-
     public String getFrequencias_disciplinas() {
         return frequencias_disciplinas;
     }
@@ -72,6 +68,10 @@ public class Frequencias {
 
     public void setAulas_ministradas(int aulas_ministradas) {
         this.aulas_ministradas = aulas_ministradas;
+    }
+
+    public Alunos getAluno() {
+        return aluno;
     }
 
     public int getFrequencias_faltas() {
@@ -229,5 +229,17 @@ public class Frequencias {
                 }
             }
         }
+    }
+
+    public boolean verificaIdFrequencia(int id_frequencia) {
+        try (Connection conexao = new Conexao().getConexao(); PreparedStatement comando = conexao.prepareStatement("SELECT * FROM frequencias WHERE f.frequencias_id = ?")) {
+            comando.setInt(1, id_frequencia);
+            try (ResultSet resultado = comando.executeQuery()) {
+                return resultado.next();
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar a tabela de frequências" + e.getMessage());
+        }
+        return false;
     }
 }
