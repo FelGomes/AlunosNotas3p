@@ -173,7 +173,7 @@ public class Professores extends UsuarioAbstract {
                 System.out.println("Endereco: " + mostrar.getString("usuarios_endereco"));
                 System.out.println("CPF: " + mostrar.getString("usuarios_cpf"));
                 System.out.println("Sexo: " + mostrar.getString("usuarios_sexo"));
-                System.out.println("Sexo: " + mostrar.getString("professores_id"));
+                System.out.println("ID de Professor: " + mostrar.getString("professores_id"));
                 System.out.println("Disciplina: " + mostrar.getString("professores_disciplina"));
                 System.out.println("Turma: " + mostrar.getString("professores_turma"));
                 System.out.println("Titularidade: " + mostrar.getString("professores_titularidade"));      
