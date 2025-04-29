@@ -1404,12 +1404,16 @@ public class MoodleApp {
                 scan.nextLine();
             } catch (Exception e) {
                 System.out.println("Erro na entrada de dados! " + e.getMessage());
+                                             }
+
+                                        }
+                                }
+                            }
+
+
+                         }
+                     }
+                }
             }
-
-        }
-    }
-}
-
-
-
+       
 
