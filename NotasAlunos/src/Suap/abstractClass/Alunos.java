@@ -73,18 +73,15 @@ public class Alunos extends UsuarioAbstract{
             stmt.setString(3, this.getAlunos_turma());
             stmt.setInt(4, this.getQtd_disciplina());
             stmt.setInt(5, this.getId());
-            
-            
             int alteracao = stmt.executeUpdate();
-            if (alteracao > 0){
+
+            if (alteracao > 0) {
                 System.out.println("ALuno cadastrado com sucesso!");
-                
             } else {
                 System.out.println("Nao foi cadastrado nenhum aluno!");
             }
-            
-            
-        } catch (SQLException e) {
+
+        } catch (Exception e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
         }
         
@@ -105,16 +102,14 @@ public class Alunos extends UsuarioAbstract{
             Connection conexao = new Conexao().getConexao();
             PreparedStatement pstm = conexao.prepareStatement(sql);
             pstm.setInt(1, alunos_id);
-            
             int alteracao = pstm.executeUpdate();
             
             if (alteracao > 0){
                 System.out.println("Tabela deletada com sucesso!");
-                
             } else {
                 System.out.println("Erro ao deletar a tabela");
             }
-            
+
         } catch (Exception e) {
             System.out.println("Erro ao deletar valores na tabela Alunos! " + e.getMessage());
             
@@ -134,111 +129,85 @@ public class Alunos extends UsuarioAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setBoolean(1, this.isAlunos_matriculados());
                 pstm.setInt(2, alunos_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo alunos_matriculados da tabela ALUNO! " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
             
         } else if(atributo.equals("sala")){
             String sql = "Update alunos set alunos_sala = ? where alunos_id = ?";
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getAlunos_sala());
                 pstm.setInt(2, alunos_id);
                 int alteracao = pstm.executeUpdate();
-            
-                if (alteracao > 0) {
-                    System.out.println("Tabela deletada com sucesso!");
-
-                } else {
-                    System.out.println("Erro ao deletar a tabela");
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
                 }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo alunos_sala da tabela ALUNOS! " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
+                    
         } else if(atributo.equals("turma")){
             String sql = "Update alunos set alunos_turma = ? where alunos_id = ?";
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getAlunos_turma());
                 pstm.setInt(2, alunos_id);
                 int alteracao = pstm.executeUpdate();
-
-                if (alteracao > 0) {
-                    System.out.println("Tabela deletada com sucesso!");
-
-                } else {
-                    System.out.println("Erro ao deletar a tabela");
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
                 }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo alunos_turma da tabela ALUNOS " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
+            
         } else if(atributo.equals("materias")){
             String sql = "Update alunos set qtd_disciplinas = ? where alunos_id = ?";
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, this.getQtd_disciplina());
                 pstm.setInt(2, alunos_id);
-                int alteracao = pstm.executeUpdate();
-            
-                if (alteracao > 0) {
-                    System.out.println("Tabela deletada com sucesso!");
-
-                } else {
-                    System.out.println("Erro ao deletar a tabela");
+             int alteracao = pstm.executeUpdate();
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
                 }
                 
             } catch (SQLException e){
-                System.out.println("Erro ao alterar o atributo qtd_disciplina da tabela ALUNOS! " + e.getMessage());
+                System.out.println("Erro ao alterar o atributo qtd_disciplinas da tabela ALUNOS " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
         
         } else if(atributo.equals("tudo")){
             String sql = "Update alunos set alunos_matriculados = ?, alunos_sala = ?, alunos_turma = ?, qtd_disciplinas = ? where alunos_id = ?";
@@ -252,27 +221,19 @@ public class Alunos extends UsuarioAbstract{
                 pstm.setInt(4, this.getQtd_disciplina());
                 pstm.setInt(5, alunos_id);
                 int alteracao = pstm.executeUpdate();
-            
                 if (alteracao > 0) {
-                    System.out.println("Tabela deletada com sucesso!");
+                    System.out.println("Tabela alterada com sucesso! ");
 
                 } else {
-                    System.out.println("Erro ao deletar a tabela");
+                    System.out.println("Erro ao alterar a tabela!");
                 }
-                
-            } catch (SQLException e){
-                System.out.println("Erro ao alterar a tabela ALUNOS! " + e.getMessage());
-                
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
 
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
+            } catch (SQLException e) {
+                System.out.println("Erro ao alterar a tabela ALUNOS " + e.getMessage());
+
             }
+                
+           
         }        
         
     } 
@@ -381,7 +342,7 @@ public class Alunos extends UsuarioAbstract{
     
     public boolean verificarAlunos(int alunos_id) {
         try (Connection conexao = new Conexao().getConexao();
-             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM alunos WHERE fk_alunos_usuarios_id = ?")) {
+             PreparedStatement comando = conexao.prepareStatement("SELECT * FROM alunos WHERE alunos_id = ?")) {
             comando.setInt(1, alunos_id);
             try (ResultSet resultado = comando.executeQuery()) {
                 return resultado.next(); 
