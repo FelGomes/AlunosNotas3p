@@ -100,6 +100,9 @@ public class MoodleApp {
                                 System.out.println("Deseja prosseguir na inserção de valores de Instituicao? ");
                                 resposta = scan.nextLine().toLowerCase().trim();
                                 while (resposta.equals("sim") || resposta.equals("s")) {
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("             BEM VINDO              ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Informe o nome: ");
                                     inst.setInst_nome(scan.nextLine());
                                     System.out.println("Informe o endereco: ");
@@ -353,12 +356,14 @@ public class MoodleApp {
                                             inst.setInst_nome(scan.nextLine());
                                             System.out.println("Informe o endereco da instituicao: ");
                                             inst.setInst_endereco(scan.nextLine());
+                                            System.out.println("Informe a cidade da instituicao: ");
+                                            inst.setInst_cidade(scan.nextLine());
                                             System.out.println("Informe o UF da instituicao: ");
                                             inst.setInst_uf(scan.nextLine());
                                             System.out.println("Informe a escolaridade da instituicao: ");
                                             inst.setInst_escolaridade(scan.nextLine());
-                                            System.out.println("Informe a escolaridade da instituicao: ");
-                                            inst.setInst_escolaridade(scan.nextLine());
+                                            System.out.println("Informe o nivel da instituicao: ");
+                                            inst.setInst_nivel(scan.nextInt());
                                             inst.alterar(idInst, resposta);
 
                                         } else {
@@ -446,7 +451,7 @@ public class MoodleApp {
                             case 3:
                                 break;
                             case 4:
-                                System.out.println("Deseja fazer a remocao de algum campo? ");
+                                System.out.println("Deseja fazer a remocao de instituicao? ");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 while (opc.equals("sim") || opc.equals("s")) {
                                     inst.listar(0);

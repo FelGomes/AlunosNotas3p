@@ -94,15 +94,17 @@ public class Instituicao {
             stmt.setString(5, this.getInst_escolaridade());
             stmt.setFloat(6,this.getInst_nivel());
             
-            stmt.execute();
-            stmt.close();
-            conexao.close();
-            
-            
+            int alteracao = stmt.executeUpdate();
+
+            if (alteracao > 0) {
+                System.out.println("Instituicao cadastrada com sucesso!");
+            } else {
+                System.out.println("Nao foi cadastrado nenhum aluno!");
+            }
+
         } catch (Exception e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
         }
-        
             
             
     }
@@ -119,22 +121,17 @@ public class Instituicao {
             Connection conexao = new Conexao().getConexao();
             pstm = conexao.prepareStatement(sql);
             pstm.setInt(1, inst_id);
+            int alteracao = pstm.executeUpdate();
             
-            pstm.execute();
-            
-            
-            
+            if (alteracao > 0){
+                System.out.println("Tabela deletada com sucesso!");
+            } else {
+                System.out.println("Erro ao deletar a tabela");
+            }
+
         } catch (Exception e) {
             System.out.println("Erro ao deletar valores na tabela Instituicao! " + e.getMessage());
             
-        }finally{
-            try {
-                if(pstm != null){
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
         }
     }
     /**
@@ -154,21 +151,20 @@ public class Instituicao {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_nome());
                 pstm.setInt(2, inst_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
+                
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo instituicao_nome da tabela INSTITUICAO! " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
             
         } else if(atributo.equals("endereco")){
             String sql = "Update instituicao set instituicao_endereco = ? where instituicao_id = ?";
@@ -178,21 +174,20 @@ public class Instituicao {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_endereco());
                 pstm.setInt(2, inst_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo instituicao_endereco da tabela INSTITUICAO! " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
+            
         } else if(atributo.equals("cidade")){
             String sql = "Update instituicao set instituicao_cidade = ? where instituicao_id = ?";
             PreparedStatement pstm = null;
@@ -201,21 +196,20 @@ public class Instituicao {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_cidade());
                 pstm.setInt(2, inst_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo instituicao_cidade da tabela INSTITUICAO! " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
+            
         } else if(atributo.equals("uf")){
             String sql = "Update instituicao set instituicao_uf = ? where instituicao_id = ?";
             PreparedStatement pstm = null;
@@ -224,21 +218,20 @@ public class Instituicao {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_uf());
                 pstm.setInt(2, inst_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo instituicao_uf da tabela INSTITUICAO! " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
+            
         }else if(atributo.equals("escolaridade")){
             String sql = "Update instituicao set instituicao_escolaridade = ? where instituicao_id = ?";
             PreparedStatement pstm = null;
@@ -247,21 +240,20 @@ public class Instituicao {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getInst_escolaridade());
                 pstm.setInt(2, inst_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo instituicao_escolaridade da tabela INSTITUICAO! " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
+            
         } else if(atributo.equals("nivel")){
             String sql = "Update instituicao set instituicao_nivel = ? where instituicao_id = ?";
             PreparedStatement pstm = null;
@@ -270,21 +262,20 @@ public class Instituicao {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setFloat(1, this.getInst_nivel());
                 pstm.setInt(2, inst_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar o atributo instituicao_cidade da tabela INSTITUICAO! " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
+            
         } else if(atributo.equals("tudo")){
             String sql = "Update instituicao set instituicao_nome = ?, instituicao_endereco = ?, instituicao_cidade = ?, instituicao_uf = ?, instituicao_escolaridade = ?, instituicao_nivel = ?  where instituicao_id = ?";
             PreparedStatement pstm = null;
@@ -298,21 +289,19 @@ public class Instituicao {
                 pstm.setString(5, this.getInst_escolaridade());
                 pstm.setFloat(6, this.getInst_nivel());
                 pstm.setInt(7, inst_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
                 
             } catch (SQLException e){
                 System.out.println("Erro ao alterar a tabela INSTITUICAO! " + e.getMessage());
                 
-            } finally {
-                try{
-                    if (pstm != null) {
-                        pstm.close();
-
-                    }
-                } catch(SQLException e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            } 
         }        
         
     } 
