@@ -88,8 +88,6 @@ public class MoodleApp {
  
                                         }
                                         System.out.println("Deseja cadastrar outro aluno? ");
- 
-
                                         resposta = scan.nextLine().toLowerCase().trim();
                                     }
                                 }catch (Exception e) {
