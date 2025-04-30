@@ -107,6 +107,38 @@ public class Matricula {
             System.out.println("Erro ao alterar matrícula: " + e.getMessage());
      }
   }
+  // LISTAR
+public void listar(int matriculas_id){
+    String sql = "SELECT m.matriculas_id, m.matriculas_data_inicio, m.matriculas_data_fim, m.qtd_tempo, " +
+                "a.aluno_nome, i.instituicao_nome FROM matricula m " +
+                "INNER JOIN aluno a ON m.fk_matricula_alunos_ = a.aluno_id " +
+                "INNER JOIN instituicao i ON m.fk_matricula_instituicao_id = i.instituicao_id";
+    
+        if (matriculas_id > 0){
+            sql += "WHERE m.matriculas_id = ?";
+         }
+     try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+         if (matriculas_id > 0){
+             stmt.setInt(1, matriculas_id);
+         }
+    ResultSet rs = stmt.executeQuery();
+    while (rs.next()) {
+                System.out.println("=======================================");
+                System.out.println("ID da Matrícula: " + rs.getInt("matriculas_id"));
+                System.out.println("Data Início: " + rs.getString("matriculas_data_inicio"));
+                System.out.println("Data Fim: " + rs.getString("matriculas_data_fim"));
+                System.out.println("Tempo (meses): " + rs.getInt("qtd_tempo"));
+                System.out.println("Aluno: " + rs.getString("aluno_nome"));
+                System.out.println("Instituição: " + rs.getString("instituicao_nome"));
+                System.out.println("=======================================");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar matrículas: " + e.getMessage());
+      }
+   }
+
 
 
 }
