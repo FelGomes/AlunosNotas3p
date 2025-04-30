@@ -36,7 +36,6 @@ public class Professores extends UsuarioAbstract {
         this.grauTitularidade = grauTitularidade; 
         this.idUsuario = idUsuario;
     }
-    
             
     public String getDisciplinaMinistrada() {
         return disciplinaMinistrada;
