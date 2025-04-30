@@ -138,6 +138,7 @@ public void listar(int matriculas_id){
             System.out.println("Erro ao listar matrículas: " + e.getMessage());
       }
    }
+// VERIFICAÇÃO DA MATRÍCULA
 public boolean verificarMatricula(int matriculas_id) {
     String sql = "SELECT * FROM matricula WHERE matriculas_id = ?";
     try (Connection conexao = new Conexao().getConexao();

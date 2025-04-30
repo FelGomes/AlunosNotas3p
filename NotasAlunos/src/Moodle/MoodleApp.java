@@ -125,7 +125,34 @@ public class MoodleApp {
                                 break;
 
                             case 5:
-
+                                Matricula matricula = new Matricula();
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("          INSERIR MATRICULA             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                String respostaMatricula = scan.nextLine().toLowerCase().trim();
+                                
+                                while (respostaMatricula.equals("sim") || respostaMatricula.equals("s")){
+                                    System.out.println("Informe a data de inicio da matricula (ANO - MES - DIA) ");
+                                    matricula.setMatriculasDataInicio(scan.nextLine());
+                                    
+                                    System.out.println("Informe a data de termino da matricula: ");
+                                    matricula.setMatriculaDataFim(scan.nextLine());
+                                    
+                                    System.out.println("Informe a quantidade de tempo (em meses): ");
+                                    matricula.setQtdTempo(scan.nextInt());
+                                    
+                                    System.out.println("Informe o ID da instituicao: ");
+                                    matricula.setFkinstituicaoId(scan.nextInt());
+                                    
+                                    System.out.println("Informe o ID do aluno: ");
+                                    matricula.setFkAlunoId(scan.nextInt());
+                                    scan.nextLine();
+                                    
+                                    matricula.inserir();
+                                    
+                                    System.out.println("Deseja cadastrar uma nova matricula? (s/n): ");
+                                    respostaMatricula = scan.nextLine().toLowerCase().trim();
+                               }
                                 
 
                                 break;
