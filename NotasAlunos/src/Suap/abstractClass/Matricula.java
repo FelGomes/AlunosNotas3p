@@ -28,6 +28,9 @@ public class Matricula {
     public void setMatriculasId(int matriculas_id){
         this.matriculas_id = matriculas_id;
     }
+    public String getMatriculasDataInicio(){
+        return matriculas_data_inicio;
+    }
    public void setMatriculasDataInicio(String matriculas_data_inicio) {
         this.matriculas_data_inicio = matriculas_data_inicio;
     }
@@ -56,10 +59,56 @@ public class Matricula {
   public void setFkAlunoId(int fk_matricula_alunos_){
       this.fk_matricula_alunos_ = fk_matricula_alunos_;
   }
-  
-  
-  
-  
+  // INSERÇÃO
+  public void inserir(){
+      String sql = "INSERT INTO matricula (matriculas_data_inicio, matriculas_data_fim, qtd_tempo, fk_matricula_instituicao_id, fk_matricula_alunos_) VALUES (?, ?, ?, ?, ?)";
+       try (Connection conexao = new Conexao().getConexao();
+            PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+            stmt.setString(1, this.getMatriculasDataInicio());
+            stmt.setString(2, this.getMatriculasDataFim());
+            stmt.setInt(3, this.getQtdTempo());
+            stmt.setInt(4, this.getFkInstituicaoId());
+            stmt.setInt(5, this.getFkAlunoId());
+            stmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao inserir matricula: " + e.getMessage());
+        }
+    }
+  // DELETE
+  public void deletar (int matriculas_id){
+      String sql = "DELETE FROM matricula WHERE matriculas_id = ?";
+      try (Connection conexao = new Conexao().getConexao();
+           PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+            stmt.setInt(1, matriculas_id);
+            stmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar matricula " + e.getMessage());
+      }
+  }
+  // ALTERAR
+  public void alterar(int matriculas_id) {
+      String sql = "UPDATE matricula SET matricula_data_inicio = ?, matricula_data_fim = ?, qtd_tempo = ?, fk_matricula_instituicao_id = ?, fk_matricula_alunos_ = ? WHERE matriculas_id = ?";
+      try (Connection conexao = new Conexao().getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+           stmt.setString(1, this.getMatriculasDataInicio());
+           stmt.setString(2, this.getMatriculasDataFim());
+           stmt.setInt(3, this.getQtdTempo());
+           stmt.setInt(4, this.getFkInstituicaoId());
+           stmt.setInt(5, this.getFkAlunoId());
+           stmt.setInt(6, matriculas_id);
+           stmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao alterar matrícula: " + e.getMessage());
+     }
+  }
+
+
 }
 
 
