@@ -138,8 +138,19 @@ public void listar(int matriculas_id){
             System.out.println("Erro ao listar matrículas: " + e.getMessage());
       }
    }
+public boolean verificarMatricula(int matriculas_id) {
+    String sql = "SELECT * FROM matricula WHERE matriculas_id = ?";
+    try (Connection conexao = new Conexao().getConexao();
+         PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
-
+         stmt.setInt(1, matriculas_id);
+         ResultSet rs = stmt.executeQuery();
+         return rs.next();
+    } catch (SQLException e){
+         System.out.println("Erro ao verificar matrícula: " + e.getMessage());
+        }
+        return false;
+    }
 
 }
 
