@@ -36,8 +36,7 @@ public class MoodleApp {
         Frequencias frequencias = new Frequencias();
         Professores professores = new Professores();
         UsuarioAbstract usuario = new UsuarioAbstract();
-        
-        
+
         funcao.menuPrincipal();
         try {
             System.out.println("Deseja escolher qual opçao? ");
@@ -63,12 +62,12 @@ public class MoodleApp {
                                 try {
                                     System.out.println("Deseja cadastrar alunos? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
-                                    while(resposta.equals("sim")||resposta.equals("s")){
+                                    while (resposta.equals("sim") || resposta.equals("s")) {
                                         System.out.println("Informe o ID do usuario: ");
                                         int id_usu = scan.nextInt(); // vai receber um id e vai verificar se existe para dar procedimento
                                         scan.nextLine();
                                         existe = usuario.verificarUsuarios(id_usu);
-                                        if(existe == true){ // se existe, o codigo da andamento
+                                        if (existe == true) { // se existe, o codigo da andamento
                                             System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                             System.out.println("         BEM VINDO, ALUNO           ");
                                             System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
@@ -85,12 +84,12 @@ public class MoodleApp {
 
                                         } else {
                                             System.out.println("Esse ID nao existe");
- 
+
                                         }
                                         System.out.println("Deseja cadastrar outro aluno? ");
                                         resposta = scan.nextLine().toLowerCase().trim();
                                     }
-                                }catch (Exception e) {
+                                } catch (Exception e) {
                                     System.out.println("Erro na entrada de dado!" + e.getMessage());
                                 }
                                 break;
@@ -130,68 +129,70 @@ public class MoodleApp {
                                 System.out.println("          INSERIR MATRICULA             ");
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 String respostaMatricula = scan.nextLine().toLowerCase().trim();
-                                
-                                while (respostaMatricula.equals("sim") || respostaMatricula.equals("s")){
+
+                                while (respostaMatricula.equals("sim") || respostaMatricula.equals("s")) {
                                     System.out.println("Informe a data de inicio da matricula (ANO - MES - DIA) ");
                                     matricula.setMatriculasDataInicio(scan.nextLine());
-                                    
+
                                     System.out.println("Informe a data de termino da matricula: ");
                                     matricula.setMatriculaDataFim(scan.nextLine());
-                                    
+
                                     System.out.println("Informe a quantidade de tempo (em meses): ");
                                     matricula.setQtdTempo(scan.nextInt());
-                                    
+
                                     System.out.println("Informe o ID da instituicao: ");
                                     matricula.setFkinstituicaoId(scan.nextInt());
-                                    
+
                                     System.out.println("Informe o ID do aluno: ");
                                     matricula.setFkAlunoId(scan.nextInt());
                                     scan.nextLine();
-                                    
+
                                     matricula.inserir();
-                                    
+
                                     System.out.println("Deseja cadastrar uma nova matricula? (s/n): ");
                                     respostaMatricula = scan.nextLine().toLowerCase().trim();
-                               }
-                                
+                                }
 
                                 break;
                             case 6:
                                 break;
                             case 7:
-                 Diario diario = new Diario();
-                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                 System.out.println("          INSERIR DIARIO             ");
-                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                 resposta = scan.nextLine().toLowerCase().trim();
-                 while (resposta.equals("sim") || resposta.equals("s")){
-                     System.out.println("Informe o local do diario:");
-                     diario.setDiariosLocal(scan.nextLine());
-                     
-                     System.out.println("Informe as disciplinas:");
-                     diario.setDiariosDisciplinas(scan.nextLine());
-                     
-                     System.out.println("Informe a quantidade de alunos:");
-                     diario.setQtdAlunos(scan.nextInt());
-                     
-                     System.out.println("Informe o ID do professor:");
-                     diario.setFkDiariosProfessores(scan.nextInt());
-                     
-                     System.out.println("Informe o ID do aluno:");
-                     diario.setFkDiariosAlunos(scan.nextInt());
-                     scan.nextLine();
-                     
-                     diario.inserir();
-                     
-                     System.out.println("Deseja inserir outro diario?");
-                     resposta = scan.nextLine().toLowerCase().trim();
-                }
+                                Diario diario = new Diario();
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("          INSERIR DIARIO             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                while (resposta.equals("sim") || resposta.equals("s")) {
+                                    System.out.println("Informe o local do diario:");
+                                    diario.setDiariosLocal(scan.nextLine());
+
+                                    System.out.println("Informe as disciplinas:");
+                                    diario.setDiariosDisciplinas(scan.nextLine());
+
+                                    System.out.println("Informe a quantidade de alunos:");
+                                    diario.setQtdAlunos(scan.nextInt());
+
+                                    System.out.println("Informe o ID do professor:");
+                                    diario.setFkDiariosProfessores(scan.nextInt());
+
+                                    System.out.println("Informe o ID do aluno:");
+                                    diario.setFkDiariosAlunos(scan.nextInt());
+                                    scan.nextLine();
+
+                                    diario.inserir();
+
+                                    System.out.println("Deseja inserir outro diario?");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                }
                                 break;
                             case 8:
                                 break;
                             case 9:
                                 break;
                             case 10:
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("          INSERIR FREQUENCIA             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("Deseja inserir algum dado na tabela de frequencias? ");
                                 resposta = scan.nextLine().toLowerCase().trim();
                                 while (resposta.equals("s") || resposta.equals("sim")) {
@@ -199,13 +200,11 @@ public class MoodleApp {
                                     int idProfessorInsert = scan.nextInt();
                                     scan.nextLine();
                                     existe = frequencias.verificaIdProfessores(idProfessorInsert);
-                                    //método para verificar id professor
-                                    //existe = frequencias.verificarIdProfessor(idProfessorInsert);
                                     if (existe == true) {
                                         System.out.println("Digite o id do aluno: ");
                                         int idAlunoInsert = scan.nextInt();
                                         scan.nextLine();
-                                        boolean existe1 =  frequencias.verificaIdAlunos(idAlunoInsert);
+                                        boolean existe1 = frequencias.verificaIdAlunos(idAlunoInsert);
                                         if (existe1 == true) {
                                             System.out.println("Digite a quantidade de aulas que a disciplina possui: ");
                                             frequencias.setTotal_aulas(scan.nextInt());
@@ -401,35 +400,33 @@ public class MoodleApp {
                                 System.out.println("          ATUALIZAR MATRICULA             ");
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 resposta = scan.nextLine().toLowerCase().trim();
-                                while (resposta.equals("sim") || resposta.equals("s")){
+                                while (resposta.equals("sim") || resposta.equals("s")) {
                                     System.out.println("Informe o ID da matricula que deseja atualizar:");
                                     int id = scan.nextInt();
                                     scan.nextLine();
-                                    
-                                    if (matricula.verificarMatricula(matricula.getMatriculaId())){
+
+                                    if (matricula.verificarMatricula(matricula.getMatriculaId())) {
                                         System.out.println("Informe a nova data de inicio: ");
                                         matricula.setMatriculasDataInicio(scan.nextLine());
-                                    
-                                    
-                                    System.out.println("Informe a nova data da matricula:");
-                                    matricula.setMatriculaDataFim(scan.nextLine());
-                                    
-                                    System.out.println("Informe a nova quantidade de tempo: ");
-                                    matricula.setQtdTempo(scan.nextInt());
-                                    
-                                    System.out.println("Informe o novo ID da instituicao: ");
-                                    matricula.setFkinstituicaoId(scan.nextInt());
-                                    
-                                    System.out.println("Informe o novo ID do aluno: ");
-                                    matricula.setFkAlunoId(scan.nextInt());
-                                        
-                                    scan.nextLine();
-                                    
-                                    matricula.alterar(matricula.getMatriculaId());
-                                            
-                                            
-                                     } else {
-                                        System.out.println("ID de matricula nao encontrada.");  
+
+                                        System.out.println("Informe a nova data da matricula:");
+                                        matricula.setMatriculaDataFim(scan.nextLine());
+
+                                        System.out.println("Informe a nova quantidade de tempo: ");
+                                        matricula.setQtdTempo(scan.nextInt());
+
+                                        System.out.println("Informe o novo ID da instituicao: ");
+                                        matricula.setFkinstituicaoId(scan.nextInt());
+
+                                        System.out.println("Informe o novo ID do aluno: ");
+                                        matricula.setFkAlunoId(scan.nextInt());
+
+                                        scan.nextLine();
+
+                                        matricula.alterar(matricula.getMatriculaId());
+
+                                    } else {
+                                        System.out.println("ID de matricula nao encontrada.");
                                     }
                                     System.out.println("Deseja atualizar outra matricula? (s/n): ");
                                     resposta = scan.nextLine().toLowerCase().trim();
@@ -440,6 +437,9 @@ public class MoodleApp {
                             case 7:
                                 break;
                             case 8:
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("          ATUALIZAR FREQUENCIA             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("Deseja atualizar algum dado na tabela de frequencias?");
                                 opc1 = scan.nextLine().toLowerCase().trim();
                                 while (opc.equals("s") || opc.equals("sim")) {
@@ -461,42 +461,42 @@ public class MoodleApp {
                                 }
                                 break;
                             case 9:
-                 Diario diario = new Diario();
-                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                 System.out.println("          ATUALIZAR DIARIO             ");
-                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                 resposta = scan.nextLine().toLowerCase().trim();
-                 while (resposta.equals("sim") || resposta.equals("s")){
-                     System.out.println("Informe o ID do diario que deseja atualizar:");
-                     int id = scan.nextInt();
-                     scan.nextLine();
-                     
-                     if (diario.verificarDiario(id)){
-                         diario.setDiariosId(id);
-                         
-                         System.out.println("Informe o novo local:");
-                         diario.setDiariosLocal(scan.nextLine());
-                         
-                         System.out.println("Informe as novas disciplinas:");
-                         diario.setDiariosDisciplinas(scan.nextLine());
-                         
-                         System.out.println("Informe a nova quantidade de alunos:");
-                         diario.setQtdAlunos(scan.nextInt());
-                         
-                         System.out.println("Informe o novo ID do professor:");
-                         diario.setFkDiariosProfessores(scan.nextInt());
-                         
-                         System.out.println("Informe o novo ID do aluno:");
-                         diario.setFkDiariosAlunos(scan.nextInt());
-                         scan.nextLine();
-                         
-                         diario.alterar(id);
-                     } else {
-                         System.out.println("Diario nao encontrado.");
-                     }
-                     System.out.println("Deseja atualizar outro diario?");
-                     resposta = scan.nextLine().toLowerCase().trim();
-                 }
+                                Diario diario = new Diario();
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("          ATUALIZAR DIARIO             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                while (resposta.equals("sim") || resposta.equals("s")) {
+                                    System.out.println("Informe o ID do diario que deseja atualizar:");
+                                    int id = scan.nextInt();
+                                    scan.nextLine();
+
+                                    if (diario.verificarDiario(id)) {
+                                        diario.setDiariosId(id);
+
+                                        System.out.println("Informe o novo local:");
+                                        diario.setDiariosLocal(scan.nextLine());
+
+                                        System.out.println("Informe as novas disciplinas:");
+                                        diario.setDiariosDisciplinas(scan.nextLine());
+
+                                        System.out.println("Informe a nova quantidade de alunos:");
+                                        diario.setQtdAlunos(scan.nextInt());
+
+                                        System.out.println("Informe o novo ID do professor:");
+                                        diario.setFkDiariosProfessores(scan.nextInt());
+
+                                        System.out.println("Informe o novo ID do aluno:");
+                                        diario.setFkDiariosAlunos(scan.nextInt());
+                                        scan.nextLine();
+
+                                        diario.alterar(id);
+                                    } else {
+                                        System.out.println("Diario nao encontrado.");
+                                    }
+                                    System.out.println("Deseja atualizar outro diario?");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                }
                                 break;
 
                             default:
@@ -568,18 +568,18 @@ public class MoodleApp {
                                 System.out.println("         DELETAR MATRICULA             ");
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 resposta = scan.nextLine().toLowerCase().trim();
-                                
-                                while(resposta.equals("sim") || resposta.equals("s")){
+
+                                while (resposta.equals("sim") || resposta.equals("s")) {
                                     System.out.println("Informe o ID da matricula que deseja deletar: ");
                                     matricula.setMatriculasId(scan.nextInt());
                                     scan.nextLine();
-                                    
-                                    if (matricula.verificarMatricula(matricula.getMatriculaId())){
+
+                                    if (matricula.verificarMatricula(matricula.getMatriculaId())) {
                                         matricula.deletar(matricula.getMatriculaId());
                                     } else {
                                         System.out.println("ID de matricula nao encontrada.");
                                     }
-                                    
+
                                     System.out.println("Deseja deletar outra matricula? (s/n): ");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                 }
@@ -590,6 +590,9 @@ public class MoodleApp {
                                 break;
                             case 8:
                                 try {
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("          DELETAR FREQUENCIA             ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja fazer a remocao de algum campo");
                                     opc = scan.nextLine().toLowerCase().toLowerCase().trim();
                                     while (opc.equals("s") || opc.equals("sim")) {
@@ -611,24 +614,24 @@ public class MoodleApp {
                                 }
                                 break;
                             case 9:
-            Diario diario = new Diario();
-            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-            System.out.println("             DELETAR DIARIO             ");
-            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-            resposta = scan.nextLine().toLowerCase().trim();
-            while (resposta.equals("sim") || resposta.equals("s")){
-                System.out.println("Informe o ID do diario que deseja deletar:");
-                int id = scan.nextInt();
-                scan.nextLine();
-                
-                if (diario.verificarDiario(id)){
-                    diario.deletar(id);  
-                }else{
-                    System.out.println("Diario nao encontrado.");
-                }
-                System.out.println("Deseja deletar outro diario?");
-                resposta = scan.nextLine().toLowerCase().trim();
-            }
+                                Diario diario = new Diario();
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("             DELETAR DIARIO             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                while (resposta.equals("sim") || resposta.equals("s")) {
+                                    System.out.println("Informe o ID do diario que deseja deletar:");
+                                    int id = scan.nextInt();
+                                    scan.nextLine();
+
+                                    if (diario.verificarDiario(id)) {
+                                        diario.deletar(id);
+                                    } else {
+                                        System.out.println("Diario nao encontrado.");
+                                    }
+                                    System.out.println("Deseja deletar outro diario?");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                }
                                 break;
                             default:
                                 System.out.println("Tabela errada! ");
@@ -699,13 +702,13 @@ public class MoodleApp {
                                 System.out.println("          LISTAR MATRICULA             ");
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 resposta = scan.nextLine().toLowerCase().trim();
-                                
-                                if (resposta.equals("sim") || resposta.equals("s")){
+
+                                if (resposta.equals("sim") || resposta.equals("s")) {
                                     System.out.println("Informe o ID da matricula: ");
                                     matricula.setMatriculasId(scan.nextInt());
                                     scan.nextLine();
-                                    
-                                    if (matricula.verificarMatricula(matricula.getMatriculaId())){
+
+                                    if (matricula.verificarMatricula(matricula.getMatriculaId())) {
                                         matricula.listar(matricula.getMatriculaId());
                                     } else {
                                         System.out.println("ID de matricula nao encontrada.");
@@ -713,7 +716,7 @@ public class MoodleApp {
                                 } else {
                                     matricula.listar(0); // listar todas
                                 }
-                                
+
                                 break;
                             case 6:
                                 break;
@@ -721,6 +724,9 @@ public class MoodleApp {
                                 break;
                             case 8:
                                 try {
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("          LISTAR FREQUENCIA             ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar todas as frequências");
                                     opc = scan.nextLine().toLowerCase().trim();
                                     if (opc.equals("s") || opc.equals("sim")) {
@@ -742,37 +748,35 @@ public class MoodleApp {
                                 }
                                 break;
                             case 9:
-            Diario diario = new Diario();
-            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-            System.out.println("             LISTAR DIARIO             ");
-            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-            resposta = scan.nextLine().toLowerCase().trim();
-            if (resposta.equals("sim") || resposta.equals("s")){
-                System.out.println("Informe o ID do diario:");
-                int id = scan.nextInt();
-                scan.nextLine();
-                diario.listar(id);
-            }else{
-                diario.listar(0); // lista todos
-                
-            }
-                            
-             break;
-            }
+                                Diario diario = new Diario();
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("             LISTAR DIARIO             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                if (resposta.equals("sim") || resposta.equals("s")) {
+                                    System.out.println("Informe o ID do diario:");
+                                    int id = scan.nextInt();
+                                    scan.nextLine();
+                                    diario.listar(id);
+                                } else {
+                                    diario.listar(0); // lista todos
 
-            funcao.menuPrincipal();
-            try {
-                System.out.println("Deseja escolher qual opçao? ");
-                escolha = scan.nextInt();
-                scan.nextLine();
-            } catch (Exception e) {
-                System.out.println("Erro na entrada de dados! " + e.getMessage());
+                                }
+
+                                break;
+                        }
+
+                        funcao.menuPrincipal();
+                        try {
+                            System.out.println("Deseja escolher qual opçao? ");
+                            escolha = scan.nextInt();
+                            scan.nextLine();
+                        } catch (Exception e) {
+                            System.out.println("Erro na entrada de dados! " + e.getMessage());
+                        }
+
+                    }
             }
-
-        }
-    }
-       
-
 
         }
     }
