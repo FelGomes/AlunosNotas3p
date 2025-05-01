@@ -563,6 +563,26 @@ public class MoodleApp {
 
                                 break;
                             case 5:
+                                Matricula matricula = new Matricula();
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("         DELETAR MATRICULA             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                
+                                while(resposta.equals("sim") || resposta.equals("s")){
+                                    System.out.println("Informe o ID da matricula que deseja deletar: ");
+                                    matricula.setMatriculasId(scan.nextInt());
+                                    scan.nextLine();
+                                    
+                                    if (matricula.verificarMatricula(matricula.getMatriculaId())){
+                                        matricula.deletar(matricula.getMatriculaId());
+                                    } else {
+                                        System.out.println("ID de matricula nao encontrada.");
+                                    }
+                                    
+                                    System.out.println("Deseja deletar outra matricula? (s/n): ");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                }
                                 break;
                             case 6:
                                 break;
@@ -674,6 +694,26 @@ public class MoodleApp {
                                 }
                                 break;
                             case 5:
+                                Matricula matricula = new Matricula();
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("          LISTAR MATRICULA             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                
+                                if (resposta.equals("sim") || resposta.equals("s")){
+                                    System.out.println("Informe o ID da matricula: ");
+                                    matricula.setMatriculasId(scan.nextInt());
+                                    scan.nextLine();
+                                    
+                                    if (matricula.verificarMatricula(matricula.getMatriculaId())){
+                                        matricula.listar(matricula.getMatriculaId());
+                                    } else {
+                                        System.out.println("ID de matricula nao encontrada.");
+                                    }
+                                } else {
+                                    matricula.listar(0); // listar todas
+                                }
+                                
                                 break;
                             case 6:
                                 break;
