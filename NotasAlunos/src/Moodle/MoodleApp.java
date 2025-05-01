@@ -396,6 +396,44 @@ public class MoodleApp {
                                 }
                                 break;
                             case 5:
+                                Matricula matricula = new Matricula();
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("          ATUALIZAR MATRICULA             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                while (resposta.equals("sim") || resposta.equals("s")){
+                                    System.out.println("Informe o ID da matricula que deseja atualizar:");
+                                    int id = scan.nextInt();
+                                    scan.nextLine();
+                                    
+                                    if (matricula.verificarMatricula(matricula.getMatriculaId())){
+                                        System.out.println("Informe a nova data de inicio: ");
+                                        matricula.setMatriculasDataInicio(scan.nextLine());
+                                    
+                                    
+                                    System.out.println("Informe a nova data da matricula:");
+                                    matricula.setMatriculaDataFim(scan.nextLine());
+                                    
+                                    System.out.println("Informe a nova quantidade de tempo: ");
+                                    matricula.setQtdTempo(scan.nextInt());
+                                    
+                                    System.out.println("Informe o novo ID da instituicao: ");
+                                    matricula.setFkinstituicaoId(scan.nextInt());
+                                    
+                                    System.out.println("Informe o novo ID do aluno: ");
+                                    matricula.setFkAlunoId(scan.nextInt());
+                                        
+                                    scan.nextLine();
+                                    
+                                    matricula.alterar(matricula.getMatriculaId());
+                                            
+                                            
+                                     } else {
+                                        System.out.println("ID de matricula nao encontrada.");  
+                                    }
+                                    System.out.println("Deseja atualizar outra matricula? (s/n): ");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                }
                                 break;
                             case 6:
                                 break;
