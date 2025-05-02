@@ -755,6 +755,25 @@ public class MoodleApp {
                         scan.nextLine();
                         switch (tabela) {
                             case 1:
+                                System.out.println("Deseja listar todos os usuario?");
+                                opc = scan.nextLine().toLowerCase().trim();
+                                if (opc.equals("sim") || opc.equals("s")) {
+                                    usuario.listar(0);
+                                }else{
+                                    System.out.println("Digite o id do usuario a ser listado");
+                                    int idListado = scan.nextInt();
+                                    if(idListado == 0){
+                                        System.out.println("id 0 é inexistente");
+                                    }else{
+                                        existe = usuario.verificarUsuarios(idListado);
+                                        if (existe == true) {
+                                            usuario.listar(idListado);
+
+                                        } else {
+                                            System.out.println("Nao existe usuario com esse ID!");
+                                        }
+                                    }
+                                }
                                 break;
                             case 2:
                                 System.out.println("Deseja listar todos os alunos? ");
