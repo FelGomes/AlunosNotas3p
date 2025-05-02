@@ -607,6 +607,23 @@ public class MoodleApp {
                         scan.nextLine();
                         switch (tabela) {
                             case 1:
+                                System.out.println("Deseja fazer a remoçao de Usuario? ");
+                                opc = scan.nextLine().toLowerCase().trim();
+                                while (opc.equals("sim") || opc.equals("s")) {
+                                    usuario.listar(0);
+                                    System.out.println("Informe o ID do usuario que deseja remover: ");
+                                    int idDeletar = scan.nextInt();
+                                    scan.nextLine();
+                                    existe = usuario.verificarUsuarios(idDeletar);
+                                    if (existe == true) {
+                                        usuario.deletar(idDeletar);
+
+                                    } else {
+                                        System.out.println("Esse ID nao existe em Usuarios! ");
+                                    }
+                                    System.out.println("Deseja fazer outra remocao? ");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                }
                                 break;
                             case 2:
                                 System.out.println("Deseja fazer a remoçao de aluno? ");
