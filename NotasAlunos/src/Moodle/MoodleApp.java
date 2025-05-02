@@ -51,7 +51,7 @@ public class MoodleApp {
                     System.out.println("Deseja inserir valores em alguma tabela? ");
                     opc = scan.nextLine().toLowerCase().trim();
                     while (opc.equals("sim") || opc.equals("s")) {
-                        funcao.menuTabelas();
+                        funcao.menuTabelasInserir();
                         System.out.println("informa a tabela: ");
                         tabela = scan.nextInt();
                         scan.nextLine();
@@ -118,7 +118,7 @@ public class MoodleApp {
                                     System.out.println("Erro na entrada de dado!" + e.getMessage());
                                 }
                                 break;
-                            case 3:
+                            case 3: // inserir professor
                                 break;
                             case 4:
                                 System.out.println("Deseja prosseguir na inserção de valores de Instituicao? ");
@@ -179,42 +179,9 @@ public class MoodleApp {
                                 }
 
                                 break;
-                            case 6:
+                            case 6: // inserir notas
                                 break;
-                            case 7:
-                                Diario diario = new Diario();
-                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                System.out.println("          INSERIR DIARIO             ");
-                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                resposta = scan.nextLine().toLowerCase().trim();
-                                while (resposta.equals("sim") || resposta.equals("s")) {
-                                    System.out.println("Informe o local do diario:");
-                                    diario.setDiariosLocal(scan.nextLine());
-
-                                    System.out.println("Informe as disciplinas:");
-                                    diario.setDiariosDisciplinas(scan.nextLine());
-
-                                    System.out.println("Informe a quantidade de alunos:");
-                                    diario.setQtdAlunos(scan.nextInt());
-
-                                    System.out.println("Informe o ID do professor:");
-                                    diario.setFkDiariosProfessores(scan.nextInt());
-
-                                    System.out.println("Informe o ID do aluno:");
-                                    diario.setFkDiariosAlunos(scan.nextInt());
-                                    scan.nextLine();
-
-                                    diario.inserir();
-
-                                    System.out.println("Deseja inserir outro diario?");
-                                    resposta = scan.nextLine().toLowerCase().trim();
-                                }
-                                break;
-                            case 8:
-                                break;
-                            case 9:
-                                break;
-                            case 10:
+                            case 7: // Inserir frequencias
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("          INSERIR FREQUENCIA             ");
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
@@ -251,12 +218,46 @@ public class MoodleApp {
                                                 frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas());
                                                 frequencias.setPrctg_presenca(frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas()));
                                             }
+                                        }else {
+                                            System.out.println("Nao existe aluno com esse ID!");
                                         }
+                                    } else {
+                                        System.out.println("Nao existe professor com esse ID!");
                                     }
+                                    System.out.println("Deseja inserir outro valor tabela de frequencias? ");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                }
+                                break;
+                            case 8: // inserir diario
+                                Diario diario = new Diario();
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                System.out.println("          INSERIR DIARIO             ");
+                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                while (resposta.equals("sim") || resposta.equals("s")) {
+                                    System.out.println("Informe o local do diario:");
+                                    diario.setDiariosLocal(scan.nextLine());
+
+                                    System.out.println("Informe as disciplinas:");
+                                    diario.setDiariosDisciplinas(scan.nextLine());
+
+                                    System.out.println("Informe a quantidade de alunos:");
+                                    diario.setQtdAlunos(scan.nextInt());
+
+                                    System.out.println("Informe o ID do professor:");
+                                    diario.setFkDiariosProfessores(scan.nextInt());
+
+                                    System.out.println("Informe o ID do aluno:");
+                                    diario.setFkDiariosAlunos(scan.nextInt());
+                                    scan.nextLine();
+
+                                    diario.inserir();
+
+                                    System.out.println("Deseja inserir outro diario?");
+                                    resposta = scan.nextLine().toLowerCase().trim();
                                 }
                                 break;
                             default:
-
                                 System.out.println("Nao existe esse campo!");
                                 break;
 
@@ -270,12 +271,12 @@ public class MoodleApp {
                     System.out.println("Deseja fazer atualizaçao de algum dado? ");
                     opc = scan.nextLine().toLowerCase().trim();
                     while (opc.equals("sim") || (opc.equals("s"))) {
-                        funcao.menuTabelas();
+                        funcao.menuTabelasInserir();
                         System.out.println("Deseja atualizar qual tabela? ");
                         tabela = scan.nextInt();
                         scan.nextLine();
                         switch (tabela) {
-                            case 1:
+                            case 1: // alterar tabela usuarios
                                 System.out.println("Deseja fazer a atualizacao da tabela usuarios? ");
                                 opc1 = scan.nextLine();
                                 while (opc1.equals("sim") || opc.equals("s")){
@@ -339,7 +340,7 @@ public class MoodleApp {
                                     opc1 = scan.nextLine();
                                 }
                                 break;
-                            case 2:
+                            case 2: // alterar tabela aluno
                                 System.out.println("Deseja fazer a atualizacao da tabela aluno? ");
                                 opc1 = scan.nextLine();
                                 while (opc1.equals("sim") || opc.equals("s")) {
@@ -402,7 +403,7 @@ public class MoodleApp {
                                     opc1 = scan.nextLine().toLowerCase().trim();
                                 }
                                 break;
-                            case 3:
+                            case 3: // alterar tabela professor
                                 break;
                             case 4:
                                 System.out.println("Deseja fazer alteracao na tabela Instituicao? ");
@@ -481,7 +482,7 @@ public class MoodleApp {
                                     opc1 = scan.nextLine().toLowerCase().trim();
                                 }
                                 break;
-                            case 5:
+                            case 5: // alterar tabela matricula
                                 Matricula matricula = new Matricula();
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("          ATUALIZAR MATRICULA             ");
@@ -519,11 +520,9 @@ public class MoodleApp {
                                     resposta = scan.nextLine().toLowerCase().trim();
                                 }
                                 break;
-                            case 6:
+                            case 6: // alterar tabela notas
                                 break;
-                            case 7:
-                                break;
-                            case 8:
+                            case 7: // alterar tabelas frequencias
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("          ATUALIZAR FREQUENCIA             ");
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
@@ -547,7 +546,7 @@ public class MoodleApp {
                                     }
                                 }
                                 break;
-                            case 9:
+                            case 8: //alterar tabela diario
                                 Diario diario = new Diario();
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("          ATUALIZAR DIARIO             ");
@@ -606,7 +605,7 @@ public class MoodleApp {
                         tabela = scan.nextInt();
                         scan.nextLine();
                         switch (tabela) {
-                            case 1:
+                            case 1: // remover tabela usuario
                                 System.out.println("Deseja fazer a remoçao de Usuario? ");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 while (opc.equals("sim") || opc.equals("s")) {
@@ -625,7 +624,7 @@ public class MoodleApp {
                                     opc = scan.nextLine().toLowerCase().trim();
                                 }
                                 break;
-                            case 2:
+                            case 2: // remover tabela aluno
                                 System.out.println("Deseja fazer a remoçao de aluno? ");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 while (opc.equals("sim") || opc.equals("s")) {
@@ -644,9 +643,9 @@ public class MoodleApp {
                                     opc = scan.nextLine().toLowerCase().trim();
                                 }
                                 break;
-                            case 3:
+                            case 3: // emover tabela professor
                                 break;
-                            case 4:
+                            case 4: // remover tabela instituicao
                                 System.out.println("Deseja fazer a remocao de instituicao? ");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 while (opc.equals("sim") || opc.equals("s")) {
@@ -666,7 +665,7 @@ public class MoodleApp {
                                 }
 
                                 break;
-                            case 5:
+                            case 5: // remover tabela matricula
                                 Matricula matricula = new Matricula();
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("         DELETAR MATRICULA             ");
@@ -688,11 +687,11 @@ public class MoodleApp {
                                     resposta = scan.nextLine().toLowerCase().trim();
                                 }
                                 break;
-                            case 6:
+                            case 6: // remover tabela boletim (boletim vai entrar no case de remover e de listar somente)
                                 break;
-                            case 7:
+                            case 7: // remover tabela notas
                                 break;
-                            case 8:
+                            case 8: // remover tabelas frequencias
                                 try {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("          DELETAR FREQUENCIA             ");
@@ -717,7 +716,7 @@ public class MoodleApp {
                                     System.out.println("Erro na remocao dos dados " + e.getMessage());
                                 }
                                 break;
-                            case 9:
+                            case 9: // remover tabela diario
                                 Diario diario = new Diario();
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("             DELETAR DIARIO             ");
@@ -745,7 +744,7 @@ public class MoodleApp {
                         opc = scan.nextLine().toLowerCase().trim();
                     }
                     break;
-                case 4:
+                case 4: // case para listar
                     System.out.println("Deseja listar alguma tabela? ");
                     resposta = scan.nextLine().toLowerCase().trim();
                     while (resposta.equals("sim") || resposta.equals("s")) {
@@ -754,7 +753,7 @@ public class MoodleApp {
                         tabela = scan.nextInt();
                         scan.nextLine();
                         switch (tabela) {
-                            case 1:
+                            case 1: // listar usuario
                                 System.out.println("Deseja listar todos os usuario?");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 if (opc.equals("sim") || opc.equals("s")) {
@@ -775,7 +774,7 @@ public class MoodleApp {
                                     }
                                 }
                                 break;
-                            case 2:
+                            case 2: // listar alunos
                                 System.out.println("Deseja listar todos os alunos? ");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 if (opc.equals("sim") || opc.equals("s")) {
@@ -796,9 +795,9 @@ public class MoodleApp {
                                     }
                                 }
                                 break;
-                            case 3:
+                            case 3: // listar professor
                                 break;
-                            case 4:
+                            case 4: // listar instituicao
                                 System.out.println("Deseja listar todas as instituicoes? ");
                                 opc = scan.nextLine().toLowerCase().trim();
                                 if (opc.equals("sim") || opc.equals("s")) {
@@ -819,7 +818,7 @@ public class MoodleApp {
                                     }
                                 }
                                 break;
-                            case 5:
+                            case 5: // listar matricula
                                 Matricula matricula = new Matricula();
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("          LISTAR MATRICULA             ");
@@ -841,11 +840,11 @@ public class MoodleApp {
                                 }
 
                                 break;
-                            case 6:
+                            case 6: // listar boletim
                                 break;
-                            case 7:
+                            case 7: // listar notas
                                 break;
-                            case 8:
+                            case 8: // listar frequencias
                                 try {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("          LISTAR FREQUENCIA             ");
@@ -870,7 +869,7 @@ public class MoodleApp {
                                     System.out.println("Erro ao listar dados da tabela de frequencias" + e.getMessage());
                                 }
                                 break;
-                            case 9:
+                            case 9: // listar diario
                                 Diario diario = new Diario();
                                 System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                 System.out.println("             LISTAR DIARIO             ");
