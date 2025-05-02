@@ -76,6 +76,43 @@ public class UsuarioAbstract extends PessoaAbstract{
     public void setId(int id) {
         this.usuario_id = id;
     }
+    
+    public void mostrarId() throws SQLException{
+        Connection conexao = new Conexao().getConexao();
+        String sql = "select usuarios_id from usuarios where usuarios_cpf = ?";
+        ResultSet rset = null;
+        PreparedStatement pstm = null;
+        try {
+            pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            pstm.executeQuery();
+            
+            if(rset.next()){
+                    System.out.println("==================================================");
+                    System.out.println("O id do usuario é: " + rset.getInt("usuarios_id"));
+                    System.out.println("==================================================");
+                }else {
+                    System.out.println("Nenhuma usuario encontrado com o CPF fornecido " + usuario_id);
+                }
+                
+            } catch (Exception e) {
+                System.out.println("Erro ao mostrar o id de usuario " + e.getMessage());
+            } finally {
+                
+                try {
+                    if (rset != null){
+                        rset.close();
+                    }
+                    if (pstm != null){
+                        pstm.close();
+                    }
+                    
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        
+    }
 
     
     /**
