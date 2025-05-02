@@ -57,7 +57,33 @@ public class MoodleApp {
                         scan.nextLine();
                         switch (tabela) {
                             case 1:
+                                System.out.println("Deseja cadastrar um usuario?");
+                                resposta = scan.nextLine().toLowerCase().trim();
+                                while(resposta.equals("sim") || resposta.equals("s")){
+                                    System.out.println("=============================================");
+                                    System.out.println("      Bem vindo ao cadastro de Usuarios ");
+                                    System.out.println("=============================================");
+                                    System.out.println("Digite o nome do Usuario");
+                                    usuario.setNome(scan.nextLine());
+                                    System.out.println("Digite o sexo do usuario(m) para Masculino e (f) para feminino");
+                                    usuario.setSexo(scan.nextLine());
+                                    System.out.println("Digite o endereço do usuario, ex: Rua 000 Num 000 Bairo xxxxxx");
+                                    usuario.setEndereco(scan.nextLine());
+                                    System.out.println("Digite o CPF do usuario (000.000.000-00");
+                                    usuario.setCpf(scan.nextLine());
+                                    System.out.println("Digite a data de nascimento do usuario, Ex: 00/00/0000");
+                                    usuario.setEndereco(scan.nextLine());
+                                    usuario.inserir();
+                                    System.out.println("Usuario inserido com sucesso!");
+                                    usuario.mostrarId();
+                                    
+                                    
+                                    System.out.println("Deseja cadastrar outro usuario?");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                    
+                                }
                                 break;
+                                
                             case 2:
                                 try {
                                     System.out.println("Deseja cadastrar alunos? ");
