@@ -86,6 +86,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             pstm = conexao.prepareStatement(sql);
             pstm.setString(1, cpf);
             pstm.executeQuery();
+            rset = pstm.executeQuery();
             
             if(rset.next()){
                     System.out.println("==================================================");
@@ -121,14 +122,16 @@ public class UsuarioAbstract extends PessoaAbstract{
      */
     public void inserir() throws SQLException{
         Connection conexao = new Conexao().getConexao();
-        String sql = "Insert into usuarios values (usuarios_nome, usuarios_endereco, usuarios_cpf, usuarios_sexo, usuarios_nascimento) values (?,?,?,?,?)";
+        String sql = "Insert into usuarios (usuarios_nome, usuarios_endereco, usuarios_cpf, usuarios_sexo, usuarios_nascimento) values (?,?,?,?,?)";
         try {
-            PreparedStatement stmt = null;
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, this.getNome());
             stmt.setString(2, this.getEndereco());
             stmt.setString(3, this.getCpf());
             stmt.setString(4, String.valueOf(this.getSexo()));
             stmt.setString(5, this.getDataNascimento());
+            stmt.executeUpdate();
+            
         } catch (Exception e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
         }
