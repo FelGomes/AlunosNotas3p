@@ -72,12 +72,11 @@ public class MoodleApp {
                                     System.out.println("Digite o CPF do usuario (000.000.000-00");
                                     usuario.setCpf(scan.nextLine());
                                     System.out.println("Digite a data de nascimento do usuario, Ex: 00/00/0000");
-                                    usuario.setEndereco(scan.nextLine());
+                                    usuario.setDataNascimento(scan.nextLine());
                                     usuario.inserir();
                                     System.out.println("Usuario inserido com sucesso!");
                                     usuario.mostrarId();
-                                    
-                                    
+                                  
                                     System.out.println("Deseja cadastrar outro usuario?");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                     
@@ -277,6 +276,68 @@ public class MoodleApp {
                         scan.nextLine();
                         switch (tabela) {
                             case 1:
+                                System.out.println("Deseja fazer a atualizacao da tabela usuarios? ");
+                                opc1 = scan.nextLine();
+                                while (opc1.equals("sim") || opc.equals("s")){
+                                    usuario.listar(0);
+                                    System.out.println("Informe o ID do usuario que deseja alterar!");
+                                    usuario.setId(scan.nextInt());
+                                    scan.nextLine();
+                                    existe = usuario.verificarUsuarios(usuario.getId());
+                                    if(existe){
+                                        System.out.println("=========================");
+                                        System.out.println("nome");
+                                        System.out.println("endereco");
+                                        System.out.println("cpf");
+                                        System.out.println("sexo");
+                                        System.out.println("nascimento");
+                                        System.out.println("tudo");
+                                        System.out.println("=========================");
+                                        System.out.println("Deseja alterar qual coluna?");
+                                        resposta = scan.nextLine().toLowerCase().trim();
+                                        if(resposta.equals("nome")){
+                                            System.out.println("Informe o novo nome do usuario");
+                                            usuario.setNome(scan.nextLine());
+                                            usuario.alterar(usuario.getId(), resposta);
+                                        }else if(resposta.equals("endereco")){
+                                            System.out.println("Informe o novo endereco do usuario");
+                                            usuario.setEndereco(scan.nextLine());
+                                            usuario.alterar(usuario.getId(), resposta);
+                                        }else if(resposta.equals("cpf")){
+                                            System.out.println("Informe o novo CPF do usuario");
+                                            usuario.setCpf(scan.nextLine());
+                                            usuario.alterar(usuario.getId(), resposta);
+                                        }else if(resposta.equals("sexo")){
+                                            System.out.println("Informe o novo sexo do usuario");
+                                            usuario.setSexo(scan.nextLine());
+                                            usuario.alterar(usuario.getId(), resposta);
+                                        }else if(resposta.equals("nascimento")){
+                                            System.out.println("Informe a nova data de nascimento do usuario");
+                                            usuario.setDataNascimento(scan.nextLine());
+                                            usuario.alterar(usuario.getId(), resposta);
+                                        }else if(resposta.equals("tudo")){
+                                            System.out.println("Digite o nome do Usuario");
+                                            usuario.setNome(scan.nextLine());
+                                            System.out.println("Digite o sexo do usuario(m) para Masculino e (f) para feminino");
+                                            usuario.setSexo(scan.nextLine());
+                                            System.out.println("Digite o endereço do usuario, ex: Rua 000 Num 000 Bairo xxxxxx");
+                                            usuario.setEndereco(scan.nextLine());
+                                            System.out.println("Digite o CPF do usuario (000.000.000-00");
+                                            usuario.setCpf(scan.nextLine());
+                                            System.out.println("Digite a data de nascimento do usuario, Ex: 00/00/0000");
+                                            usuario.setDataNascimento(scan.nextLine());
+                                            usuario.alterar(usuario.getId(), resposta);
+                                        }else{
+                                            System.out.println("Erro de digitação tente novamente!");
+                                        }
+                                        
+                                        
+                                    }else{
+                                        System.out.println("Usuario não existe");
+                                    }
+                                    System.out.println("Deseja fazer outra alteração na tabela usuarios?");
+                                    opc1 = scan.nextLine();
+                                }
                                 break;
                             case 2:
                                 System.out.println("Deseja fazer a atualizacao da tabela aluno? ");
