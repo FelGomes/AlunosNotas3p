@@ -58,6 +58,8 @@ public class MoodleApp {
                         switch (tabela) {
                             case 1:
                                 System.out.println("Deseja cadastrar um usuario?");
+                                System.out.println("Deseja inserir valores na tabela usuarios? ");
+                                System.out.println("Deseja cadastrar um usuario?");
                                 resposta = scan.nextLine().toLowerCase().trim();
                                 while(resposta.equals("sim") || resposta.equals("s")){
                                     System.out.println("=============================================");
@@ -119,6 +121,38 @@ public class MoodleApp {
                                 }
                                 break;
                             case 3: // inserir professor
+                                try {
+                                    System.out.println("Deseja cadastrar professores? ");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                    while (resposta.equals("sim") || resposta.equals("s")) {
+                                        System.out.println("Informe o ID do usuario: ");
+                                        int id_usu = scan.nextInt(); // vai receber um id e vai verificar se existe para dar procedimento
+                                        scan.nextLine();
+                                        existe = usuario.verificarUsuarios(id_usu);
+                                        if (existe == true) { // se existe, o codigo da andamento
+                                            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                            System.out.println("         BEM VINDO, PROFESSOR           ");
+                                            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                            System.out.println("Informe a disciplina que vai ministrar: ");
+                                            professores.setDisciplinaMinistrada(scan.nextLine());
+                                            System.out.println("Informe a turma que será trabalhada: ");
+                                            professores.setTurmaEnsinada(scan.nextLine());
+                                            System.out.println("Informe a sua titularidade: ");
+                                            professores.setGrauTitularidade(scan.nextLine());
+                                            professores.setIdUsuario(id_usu);
+                                            professores.inserir();
+                                            scan.nextLine();
+
+                                        } else {
+                                            System.out.println("Esse ID nao existe");
+
+                                        }
+                                        System.out.println("Deseja cadastrar outro professor? ");
+                                        resposta = scan.nextLine().toLowerCase().trim();
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Erro na entrada de dado!" + e.getMessage());
+                                }
                                 break;
                             case 4:
                                 System.out.println("Deseja prosseguir na inserção de valores de Instituicao? ");
