@@ -726,6 +726,18 @@ public class MoodleApp {
                                 }
                                 break;
                             case 3: // emover tabela professor
+                                System.out.println("Deseja fazer a remoção do professor? ");
+                                opc = scan.nextLine().toLowerCase().trim();
+                                while(opc.equals("sim") || opc.equals("s")){
+                                    professores.listarProfessores();
+                                    System.out.println("Informe o ID do professor que deseja remover: ");
+                                    int idDeletar = scan.nextInt();
+                                    scan.nextLine();
+                                    professores.deletar(idDeletar);
+                                    
+                                    System.out.println("Deseja fazer outra remocao? ");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                }
                                 break;
                             case 4: // remover tabela instituicao
                                 System.out.println("Deseja fazer a remocao de instituicao? ");
