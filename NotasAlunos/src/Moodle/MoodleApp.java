@@ -438,6 +438,54 @@ public class MoodleApp {
                                 }
                                 break;
                             case 3: // alterar tabela professor
+                                System.out.println("Deseja alterar a tabela professor?");
+                                opc1 = scan.nextLine();
+                                while (opc1.equals("sim") || opc1.equals("s")){
+                                    professores.listarProfessores();
+                                    System.out.println("Informe o ID do professor que deseja alterar: ");
+                                    professores.setId(scan.nextInt());
+                                    scan.nextLine();
+                                    existe = professores.verificarIdProfessor(professores.getIdProfessor());
+                                    
+                                    if(existe){
+                                        System.out.println("==========================");
+                                        System.out.println("Disciplina          ");
+                                        System.out.println("Turma               ");
+                                        System.out.println("Titularidade        ");
+                                        System.out.println("Tudo                ");
+                                        
+                                        System.out.println("Deseja alterar qual campo ");
+                                        resposta = scan.nextLine().toLowerCase().trim();
+                                        
+                                        if (resposta.equals("disciplina")){
+                                            System.out.println("Insira a nova disciplina dada pelo professor: ");
+                                            professores.setDisciplinaMinistrada(scan.nextLine());
+                                            professores.alterar(professores.getIdProfessor(), resposta);
+                                        } else if (resposta.equals("turma")){
+                                            System.out.println("Insira a nova turma a ser ensinada: ");
+                                            professores.setTurmaEnsinada(scan.nextLine());
+                                            professores.alterar(professores.getIdProfessor(), resposta);
+                                        } else if (resposta.equals("titularidade")){
+                                            System.out.println("Insira a nova titularidade do professor: ");
+                                            professores.setGrauTitularidade(scan.nextLine());
+                                            professores.alterar(professores.getIdProfessor(), resposta);
+                                        } else if (resposta.equals("tudo")){
+                                            System.out.println("Insira a nova disciplina dada pelo professor: ");
+                                            professores.setDisciplinaMinistrada(scan.nextLine());
+                                            System.out.println("Insira a nova turma a ser ensinada: ");
+                                            professores.setTurmaEnsinada(scan.nextLine());
+                                            System.out.println("Insira a nova titularidade do professor: ");
+                                            professores.setGrauTitularidade(scan.nextLine());
+                                            professores.alterar(professores.getIdProfessor(), resposta);
+                                        } else {
+                                            System.out.println("Confira se o campo foi digitado corretamente.");
+                                        }
+                                    } else {
+                                        System.out.println("Não foi encontrado professor com esse ID.");
+                                    }
+                                    System.out.println("Deseja fazer outra alteração? ");
+                                    opc1 = scan.nextLine().toLowerCase().trim();
+                                }
                                 break;
                             case 4:
                                 System.out.println("Deseja fazer alteracao na tabela Instituicao? ");
