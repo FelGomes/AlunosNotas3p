@@ -890,6 +890,17 @@ public class MoodleApp {
                                 }
                                 break;
                             case 3: // listar professor
+                                System.out.println("Deseja listar todos os professores? ");
+                                opc = scan.nextLine().toLowerCase().trim();
+                                
+                                if (opc.equals("sim") || opc.equals("s")){
+                                    professores.listarProfessores();
+                                } else {
+                                    System.out.println("Informe o ID de professor que deseja listar: ");
+                                    int idlistar = scan.nextInt();
+                                    scan.nextLine();
+                                    professores.listar(idlistar);
+                                }
                                 break;
                             case 4: // listar instituicao
                                 System.out.println("Deseja listar todas as instituicoes? ");

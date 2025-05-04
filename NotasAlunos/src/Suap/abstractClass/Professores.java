@@ -205,7 +205,38 @@ public class Professores extends UsuarioAbstract {
             System.out.println("Erro ao listar professores: " + e.getMessage());
         }
     }
+    
+    @Override
+    public void listar(int idListado){
+        boolean existe = verificarIdProfessor(idListado);
+        if(existe){
+            Connection conexao = new Conexao().getConexao();
+            String sintaxeSQL = "SELECT * FROM professores WHERE professores_id = ?";
 
+            try {
+                PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
+                comando.setInt(1, idListado);
+                ResultSet mostrar = comando.executeQuery();
+
+                if(mostrar.next()){
+                    System.out.println("ID de Professor: " + mostrar.getString("professores_id"));
+                    System.out.println("Disciplina: " + mostrar.getString("professores_disciplina"));
+                    System.out.println("Turma: " + mostrar.getString("professores_turma"));
+                    System.out.println("Titularidade: " + mostrar.getString("professores_titularidade"));
+                    System.out.println("==================================================");
+                }
+
+                mostrar.close();
+                comando.close();
+                conexao.close();
+            }catch(Exception e){
+                System.out.println("Erro ao listar professor: " + e.getMessage());
+            }
+        } else{
+            System.out.println("O ID inserido não existe!");
+        }
+    }
+    
     @Override
     public void alterar(int professores_id, String atributo) {
         if (atributo.equals("disciplina")) {
