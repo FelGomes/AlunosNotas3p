@@ -152,6 +152,7 @@ public class UsuarioAbstract extends PessoaAbstract{
         try {
             Connection conexao = new Conexao().getConexao();
             pstm = conexao.prepareStatement(sql);
+            pstm = conexao.prepareStatement(sql);
             pstm.setInt(1, usuario_id);
             
             pstm.execute();
@@ -183,6 +184,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getNome());
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -206,6 +208,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getEndereco());
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -228,6 +231,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getCpf());
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -250,6 +254,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, String.valueOf(this.getSexo()));
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -272,6 +277,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getDataNascimento());
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -294,6 +300,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getNome());
                 pstm.setString(2, this.getEndereco());
                 pstm.setString(3, this.getCpf());
@@ -330,6 +337,7 @@ public class UsuarioAbstract extends PessoaAbstract{
                 pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, usuario_id);
                 pstm.executeQuery();
+                rset = pstm.executeQuery();
                 
                 if(rset.next()){
                     System.out.println("==================================================");
