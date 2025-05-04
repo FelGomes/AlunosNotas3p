@@ -85,7 +85,7 @@ public class Professores extends UsuarioAbstract {
      */
     public boolean verificarIdProfessor(int idProcurado) {
         Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "SELECT COUNT(*) FROM professores WHERE id = ?";
+        String sintaxeSQL = "SELECT COUNT(*) FROM professores WHERE professores_id = ?";
         boolean existe = false;
 
         try {
@@ -111,7 +111,7 @@ public class Professores extends UsuarioAbstract {
      */
     public boolean verificarIdUsuario(int idProcurado) {
         Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "SELECT COUNT(*) FROM usuarios WHERE id = ?";
+        String sintaxeSQL = "SELECT COUNT(*) FROM usuarios WHERE usuarios_id = ?";
         boolean existe = false;
 
         try {
@@ -132,20 +132,22 @@ public class Professores extends UsuarioAbstract {
     public void inserirProfessor() {
 
         Connection conexao = new Conexao().getConexao();
-        String sintaxeSQL = "INSERT INTO professores (professores_id, professores_disciplina, professores_turma, professores_titularidade, fk_professores_usuarios_id) values (?,?,?,?,?)";
+        String sintaxeSQL = "INSERT INTO professores (professores_disciplina, professores_turma, professores_titularidade, fk_professores_usuarios_id) values (?,?,?,?)";
 
         try {
             PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
 
-            comando.setInt(1, this.idProfessor);
-            comando.setString(2, this.disciplinaMinistrada);
-            comando.setString(3, this.turmaEnsinada);
-            comando.setString(4, this.grauTitularidade);
-            comando.setInt(5, this.idUsuario);
+            comando.setString(1, this.disciplinaMinistrada);
+            comando.setString(2, this.turmaEnsinada);
+            comando.setString(3, this.grauTitularidade);
+            comando.setInt(4, this.idUsuario);
+            int alteracao = comando.executeUpdate();
 
-            comando.execute();
-            comando.close();
-            conexao.close();
+            if (alteracao > 0) {
+                System.out.println("Professor cadastrado com sucesso!");
+            } else {
+                System.out.println("Nao foi cadastrado nenhum professor!");
+            }
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar professor: " + e.getMessage());
         }
@@ -163,9 +165,14 @@ public class Professores extends UsuarioAbstract {
                 PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
                 comando.setInt(1, idProfessor);
 
-                comando.execute();
-                comando.close();
-                conexao.close();
+                int alteracao = comando.executeUpdate();
+
+                if (alteracao > 0) {
+                    System.out.println("Tabela deletada com sucesso!");
+                } else {
+                    System.out.println("Erro ao deletar a tabela");
+                }
+                
             } catch (Exception e) {
                 System.out.println("Erro ao deletar professor: " + e.getMessage());
             }
@@ -247,10 +254,13 @@ public class Professores extends UsuarioAbstract {
                 PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
                 comando.setString(1, this.getDisciplinaMinistrada());
                 comando.setInt(2, professores_id);
+                int alteracao = comando.executeUpdate();
+                if (alteracao > 0) {
+                    System.out.println("Tabela alterada com sucesso! ");
 
-                comando.executeUpdate();
-                comando.close();
-                conexao.close();
+                } else {
+                    System.out.println("Erro ao alterar a tabela!");
+                }
             } catch (Exception e) {
                 System.out.println("Erro ao alterar: " + e.getMessage());
             }
@@ -262,10 +272,13 @@ public class Professores extends UsuarioAbstract {
                 PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
                 comando.setString(1, this.getTurmaEnsinada());
                 comando.setInt(2, professores_id);
+                int alteracao = comando.executeUpdate();
+                if (alteracao > 0) {
+                    System.out.println("Tabela alterada com sucesso! ");
 
-                comando.executeUpdate();
-                comando.close();
-                conexao.close();
+                } else {
+                    System.out.println("Erro ao alterar a tabela!");
+                }
             } catch (Exception e) {
                 System.out.println("Erro ao alterar: " + e.getMessage());
             }
@@ -277,13 +290,17 @@ public class Professores extends UsuarioAbstract {
                 PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
                 comando.setString(1, this.getGrauTitularidade());
                 comando.setInt(2, professores_id);
+                int alteracao = comando.executeUpdate();
+                if (alteracao > 0) {
+                    System.out.println("Tabela alterada com sucesso! ");
 
-                comando.executeUpdate();
-                comando.close();
-                conexao.close();
+                } else {
+                    System.out.println("Erro ao alterar a tabela!");
+                }
             } catch (Exception e) {
                 System.out.println("Erro ao alterar: " + e.getMessage());
             }
+            
         } else if (atributo.equals("tudo")) {
             Connection conexao = new Conexao().getConexao();
             String sintaxeSQL = "UPDATE professores SET professores_disciplina = ?, professores_turma = ?, professores_titularidade = ? WHERE professores_id = ?";
@@ -294,10 +311,13 @@ public class Professores extends UsuarioAbstract {
                 comando.setString(2, this.getTurmaEnsinada());
                 comando.setString(3, this.getGrauTitularidade());
                 comando.setInt(4, professores_id);
+                int alteracao = comando.executeUpdate();
+                if (alteracao > 0) {
+                    System.out.println("Tabela alterada com sucesso! ");
 
-                comando.executeUpdate();
-                comando.close();
-                conexao.close();
+                } else {
+                    System.out.println("Erro ao alterar a tabela!");
+                }
             } catch (Exception e) {
                 System.out.println("Erro ao alterar: " + e.getMessage());
             }

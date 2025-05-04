@@ -59,8 +59,6 @@ public class MoodleApp {
                             case 1:
                                 try {
                                     System.out.println("Deseja cadastrar um usuario?");
-                                    System.out.println("Deseja inserir valores na tabela usuarios? ");
-                                    System.out.println("Deseja cadastrar um usuario?");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                     while(resposta.equals("sim") || resposta.equals("s")){
                                         System.out.println("=============================================");
@@ -145,8 +143,8 @@ public class MoodleApp {
                                             System.out.println("Informe a sua titularidade: ");
                                             professores.setGrauTitularidade(scan.nextLine());
                                             professores.setIdUsuario(id_usu);
-                                            professores.inserir();
-                                            scan.nextLine();
+                                            professores.inserirProfessor();
+                                            //scan.nextLine();
 
                                         } else {
                                             System.out.println("Esse ID nao existe");

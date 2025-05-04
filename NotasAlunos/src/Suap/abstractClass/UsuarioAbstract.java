@@ -128,7 +128,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             stmt.setString(1, this.getNome());
             stmt.setString(2, this.getEndereco());
             stmt.setString(3, this.getCpf());
-            stmt.setString(4, String.valueOf(this.getSexo()));
+            stmt.setString(4, this.getSexo());
             stmt.setString(5, this.getDataNascimento());
             stmt.executeUpdate();
             
