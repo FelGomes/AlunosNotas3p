@@ -196,6 +196,7 @@ public class MoodleApp {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("          INSERIR MATRICULA             ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("Deseja cadastrar uma matricula? ");
                                     String respostaMatricula = scan.nextLine().toLowerCase().trim();
 
                                     while (respostaMatricula.equals("sim") || respostaMatricula.equals("s")) {
@@ -480,7 +481,7 @@ public class MoodleApp {
                                             System.out.println("Informe o ID do professor que deseja alterar: ");
                                             professores.setId(scan.nextInt());
                                             scan.nextLine();
-                                            existe = professores.verificarIdProfessor(professores.getIdProfessor());
+                                            existe = professores.verificarIdProfessor(professores.getId());
 
                                             if(existe){
                                                 System.out.println("==========================");
@@ -488,8 +489,9 @@ public class MoodleApp {
                                                 System.out.println("Turma               ");
                                                 System.out.println("Titularidade        ");
                                                 System.out.println("Tudo                ");
+                                                System.out.println("==========================");
 
-                                                System.out.println("Deseja alterar qual campo ");
+                                                System.out.println("Deseja alterar qual campo? ");
                                                 resposta = scan.nextLine().toLowerCase().trim();
 
                                                 if (resposta.equals("disciplina")){
@@ -511,7 +513,7 @@ public class MoodleApp {
                                                     professores.setTurmaEnsinada(scan.nextLine());
                                                     System.out.println("Insira a nova titularidade do professor: ");
                                                     professores.setGrauTitularidade(scan.nextLine());
-                                                    professores.alterar(professores.getIdProfessor(), resposta);
+                                                    professores.alterar(professores.getId(), resposta);
                                                 } else {
                                                     System.out.println("Confira se o campo foi digitado corretamente.");
                                                 }
@@ -591,6 +593,7 @@ public class MoodleApp {
                                                     inst.setInst_escolaridade(scan.nextLine());
                                                     System.out.println("Informe o nivel da instituicao: ");
                                                     inst.setInst_nivel(scan.nextInt());
+                                                    scan.nextLine();
                                                     inst.alterar(idInst, resposta);
 
                                                 } else {
@@ -613,10 +616,11 @@ public class MoodleApp {
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("          ATUALIZAR MATRICULA             ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("Deseja alterar matriculas? ");
                                         resposta = scan.nextLine().toLowerCase().trim();
                                         while (resposta.equals("sim") || resposta.equals("s")) {
                                             System.out.println("Informe o ID da matricula que deseja atualizar:");
-                                            int id = scan.nextInt();
+                                            matricula.setMatriculasId(scan.nextInt());
                                             scan.nextLine();
 
                                             if (matricula.verificarMatricula(matricula.getMatriculaId())) {
@@ -658,7 +662,7 @@ public class MoodleApp {
                                         System.out.println("          ATUALIZAR FREQUENCIA             ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja atualizar algum dado na tabela de frequencias?");
-                                        opc1 = scan.nextLine().toLowerCase().trim();
+                                        opc = scan.nextLine().toLowerCase().trim();
                                         while (opc.equals("s") || opc.equals("sim")) {
                                             System.out.println("Digite o id da frequência:");
                                             int idUpdate = scan.nextInt();
@@ -925,7 +929,7 @@ public class MoodleApp {
                                     break;
                             }
                             System.out.println("Deseja remover valores de outra tabela? ");
-                            opc = scan.nextLine().toLowerCase().trim();
+                            resposta = scan.nextLine().toLowerCase().trim();
                         }
                     } catch (Exception e) {
                         System.out.println("Erro na entrada de dados!");
@@ -1041,6 +1045,7 @@ public class MoodleApp {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("          LISTAR MATRICULA             ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("Deseja listar matriculas? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
 
                                     if (resposta.equals("sim") || resposta.equals("s")) {
