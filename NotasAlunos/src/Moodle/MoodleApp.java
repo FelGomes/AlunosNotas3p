@@ -237,13 +237,17 @@ public class MoodleApp {
                                     System.out.println("Deseja inserir algum dado na tabela de frequencias? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                     while (resposta.equals("s") || resposta.equals("sim")) {
+                                        professores.listarProfessores();
                                         System.out.println("Digite o ID do professor: ");
                                         int idProfessorInsert = scan.nextInt();
+                                        professores.setId(idProfessorInsert);
                                         scan.nextLine();
                                         existe = frequencias.verificaIdProfessores(idProfessorInsert);
                                         if (existe == true) {
+                                            aluno.listar(0);
                                             System.out.println("Digite o id do aluno: ");
                                             int idAlunoInsert = scan.nextInt();
+                                            aluno.setId(idAlunoInsert);
                                             scan.nextLine();
                                             boolean existe1 = frequencias.verificaIdAlunos(idAlunoInsert);
                                             if (existe1 == true) {
@@ -252,7 +256,6 @@ public class MoodleApp {
                                                 scan.nextLine();
                                                 System.out.println("Digite o nome da disciplina: ");
                                                 frequencias.setFrequencias_disciplinas(scan.nextLine());
-                                                scan.nextLine();
                                                 System.out.println("Digite a quantidade de aulas de hoje: ");
                                                 frequencias.setAulas_ministradas(scan.nextInt());
                                                 scan.nextLine();
@@ -262,10 +265,12 @@ public class MoodleApp {
                                                     frequencias.setFrequencias_faltas(0);
                                                     frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas());
                                                     frequencias.setPrctg_presenca(frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas()));
+                                                    frequencias.inserirFrequencia();
                                                 } else {
                                                     frequencias.setFrequencias_faltas(frequencias.getAulas_ministradas());
                                                     frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas());
                                                     frequencias.setPrctg_presenca(frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas()));
+                                                    frequencias.inserirFrequencia();
                                                 }
                                             }else {
                                                 System.out.println("Nao existe aluno com esse ID!");
@@ -279,6 +284,7 @@ public class MoodleApp {
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    
                                 }
                                 break;
                             case 8: // inserir diario
@@ -287,6 +293,7 @@ public class MoodleApp {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("          INSERIR DIARIO             ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("Deseja inserir dados em diario?");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                     while (resposta.equals("sim") || resposta.equals("s")) {
                                         System.out.println("Informe o local do diario:");
@@ -297,10 +304,12 @@ public class MoodleApp {
 
                                         System.out.println("Informe a quantidade de alunos:");
                                         diario.setQtdAlunos(scan.nextInt());
+                                        professores.listarProfessores();
 
                                         System.out.println("Informe o ID do professor:");
                                         diario.setFkDiariosProfessores(scan.nextInt());
-
+                                        
+                                        aluno.listar(0);
                                         System.out.println("Informe o ID do aluno:");
                                         diario.setFkDiariosAlunos(scan.nextInt());
                                         scan.nextLine();
@@ -677,7 +686,7 @@ public class MoodleApp {
                                                     frequencias.setFrequencias_faltas(0);
                                                 }
                                                 System.out.println("Deseja alterar outro campo de Instituicao? ");
-                                                opc1 = scan.nextLine().toLowerCase().trim();
+                                                opc = scan.nextLine().toLowerCase().trim();
                                             }
                                         }
                                         
@@ -691,6 +700,7 @@ public class MoodleApp {
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("          ATUALIZAR DIARIO             ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("Deseja alterar valores em diario? ");
                                         resposta = scan.nextLine().toLowerCase().trim();
                                         while (resposta.equals("sim") || resposta.equals("s")) {
                                             System.out.println("Informe o ID do diario que deseja atualizar:");
@@ -708,10 +718,10 @@ public class MoodleApp {
 
                                                 System.out.println("Informe a nova quantidade de alunos:");
                                                 diario.setQtdAlunos(scan.nextInt());
-
+                                                professores.listarProfessores();
                                                 System.out.println("Informe o novo ID do professor:");
                                                 diario.setFkDiariosProfessores(scan.nextInt());
-
+                                                aluno.listar(0);
                                                 System.out.println("Informe o novo ID do aluno:");
                                                 diario.setFkDiariosAlunos(scan.nextInt());
                                                 scan.nextLine();
@@ -905,6 +915,7 @@ public class MoodleApp {
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("             DELETAR DIARIO             ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("Deseja deletar valores em Diario?");
                                         resposta = scan.nextLine().toLowerCase().trim();
                                         while (resposta.equals("sim") || resposta.equals("s")) {
                                             System.out.println("Informe o ID do diario que deseja deletar:");
@@ -1102,6 +1113,7 @@ public class MoodleApp {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("             LISTAR DIARIO             ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("Deseja listar diario? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
                                     if (resposta.equals("sim") || resposta.equals("s")) {
                                         System.out.println("Informe o ID do diario:");

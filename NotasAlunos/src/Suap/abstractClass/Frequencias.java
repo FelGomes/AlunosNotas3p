@@ -178,9 +178,9 @@ public class Frequencias {
 
     /**
      * Método para fazer a inserção dos valores em todas colunas da tabela frequencias, com excessão frequencias_id.
-     * @param id_frequencia Identificador de frequencia.
+     *
      */
-    public void inserirFrequencia(int id_frequencia) {
+    public void inserirFrequencia() {
         Connection conexao = new Conexao().getConexao();
         String sql = "INSERT INTO frequencias (total_aulas, aulas_ministradas, frequencias_faltas, prctg_presenca, frequencias_disciplinas,fk_frequencias_professores_id, fk_frequencias_alunos_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
@@ -200,7 +200,7 @@ public class Frequencias {
             } else {
                 System.out.println("Nao foi inserida nenhuma frequencia");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Erro ao inserir valores na tabela frequencia" + e.getMessage());
         }
     }
