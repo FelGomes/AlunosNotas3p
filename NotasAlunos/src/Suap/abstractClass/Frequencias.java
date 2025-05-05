@@ -16,8 +16,9 @@ public class Frequencias {
     private int frequencias_id, total_aulas, aulas_ministradas, frequencias_faltas;
     private float prctg_presenca;
     private String frequencias_disciplinas;
-    private Professores professores;
-    private Alunos aluno;
+    private Professores professores = new Professores();
+    private Alunos aluno = new Alunos();
+    private int alunos_id, professores_id;
 
     /**
      * Construtor vazio com todas as informações de Frequencias.
@@ -174,7 +175,28 @@ public class Frequencias {
      */
     public void setProfessores(Professores professores) {
         this.professores = professores;
+        
     }
+
+    public int getAlunos_id() {
+        return alunos_id;
+    }
+
+    public void setAlunos_id(int alunos_id) {
+        this.alunos_id = alunos_id;
+    }
+
+    public int getProfessores_id() {
+        return professores_id;
+    }
+
+    public void setProfessores_id(int professores_id) {
+        this.professores_id = professores_id;
+    }
+    
+    
+    
+    
 
     /**
      * Método para fazer a inserção dos valores em todas colunas da tabela frequencias, com excessão frequencias_id.
@@ -182,7 +204,7 @@ public class Frequencias {
      */
     public void inserirFrequencia() {
         Connection conexao = new Conexao().getConexao();
-        String sql = "INSERT INTO frequencias (total_aulas, aulas_ministradas, frequencias_faltas, prctg_presenca, frequencias_disciplinas,fk_frequencias_professores_id, fk_frequencias_alunos_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO frequencias (total_aulas, aulas_ministradas, frequencias_faltas, prctg_presenca, frequencias_disciplinas,fk_frequencias_professores_id, fk_frequencias_alunos_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt;
             stmt = conexao.prepareStatement(sql);
@@ -191,8 +213,8 @@ public class Frequencias {
             stmt.setInt(3, this.getFrequencias_faltas());
             stmt.setFloat(4, this.getPrctg_presenca());
             stmt.setString(5, this.getFrequencias_disciplinas());
-            stmt.setInt(6, this.getProfessores().getId());
-            stmt.setInt(7, this.getAluno().getId());
+            stmt.setInt(6, this.getProfessores_id());
+            stmt.setInt(7, this.getAlunos_id());
             int alteracao = stmt.executeUpdate();
 
             if (alteracao > 0) {
@@ -303,9 +325,9 @@ public class Frequencias {
             String sql = "SELECT f.frequencias_id, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, frequencias_disciplinas, f.fk_frequencias_professores_id, f.fk_frequencias_alunos_id, f.total_aulas"
                     + "FROM frequencias "
                     + "INNER JOIN professores p"
-                    + "ON f.fk_frequencias_professores_id = p.professores_id"
+                    + "ON f.fk_frequencias_professores_id = p.professores_id "
                     + "INNER JOIN alunos a"
-                    + "ON f.fk_frequencias_alunos_id = a.alunos_id"
+                    + "ON f.fk_frequencias_alunos_id = a.alunos_id "
                     + "WHERE  f.id_frequencia = ?";
             PreparedStatement pstm = null;
             ResultSet rset = null;
@@ -315,6 +337,7 @@ public class Frequencias {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, id_frequencia);
                 pstm.executeQuery();
+                rset = pstm.executeQuery();
 
                 if (rset.next()) {
                     System.out.println("ID: " + rset.getInt("frequencias_id"));
