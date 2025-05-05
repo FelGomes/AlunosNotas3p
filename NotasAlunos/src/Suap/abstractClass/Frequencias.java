@@ -365,6 +365,48 @@ public class Frequencias {
                     System.out.println(e.getMessage());
                 }
             }
+        } else {
+            String sql = "SELECT f.frequencias_id, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, frequencias_disciplinas, f.fk_frequencias_professores_id, f.fk_frequencias_alunos_id, f.total_aulas"
+                    + "FROM frequencias "
+                    + "INNER JOIN professores p"
+                    + "         ON f.fk_frequencias_professores_id = p.professores_id "
+                    + "INNER JOIN alunos a"
+                    + "         ON f.fk_frequencias_alunos_id = a.alunos_id ";
+            PreparedStatement pstm = null;
+            ResultSet rset = null;
+
+            try {
+                Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
+                pstm.setInt(1, id_frequencia);
+                pstm.executeQuery();
+                rset = pstm.executeQuery();
+                
+                while (rset.next()) {
+                    System.out.println("ID: " + rset.getInt("frequencias_id"));
+                    System.out.println("Aulas ministradas: " + rset.getInt("aulas_ministradas"));
+                    System.out.println("Faltas: " + rset.getInt("frequencias_faltas"));
+                    System.out.println("% Frequencia: " + rset.getInt("prctg_presenca"));
+                    System.out.println("Disciplina" + rset.getInt("frequencias_disciplinas"));
+                    System.out.println("`ID Professor(a): " + rset.getInt("fk_frequencias_professores_id"));
+                    System.out.println("`ID Aluno(a): " + rset.getInt("fk_frequencias_alunos_id"));
+
+                }
+            } catch (SQLException e) {
+                System.out.println("Erro ao listar os dados da tabela frequencias" + e.getMessage());
+            } finally {
+                try {
+                    if (rset != null) {
+                        rset.close();
+                    }
+                    if (pstm != null) {
+                        pstm.close();
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            
         }
     }
 
