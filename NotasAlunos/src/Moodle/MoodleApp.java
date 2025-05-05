@@ -239,17 +239,17 @@ public class MoodleApp {
                                     while (resposta.equals("s") || resposta.equals("sim")) {
                                         professores.listarProfessores();
                                         System.out.println("Digite o ID do professor: ");
-                                        int idProfessorInsert = scan.nextInt();
-                                        professores.setId(idProfessorInsert);
+                                        //int idProfessorInsert = scan.nextInt();
+                                        professores.setId(scan.nextInt());
                                         scan.nextLine();
-                                        existe = frequencias.verificaIdProfessores(idProfessorInsert);
+                                        existe = frequencias.verificaIdProfessores(professores.getId());
                                         if (existe == true) {
                                             aluno.listar(0);
                                             System.out.println("Digite o id do aluno: ");
-                                            int idAlunoInsert = scan.nextInt();
-                                            aluno.setId(idAlunoInsert);
+                                            //int idAlunoInsert = scan.nextInt();
+                                            aluno.setId(scan.nextInt());
                                             scan.nextLine();
-                                            boolean existe1 = frequencias.verificaIdAlunos(idAlunoInsert);
+                                            boolean existe1 = frequencias.verificaIdAlunos(aluno.getId());
                                             if (existe1 == true) {
                                                 System.out.println("Digite a quantidade de aulas que a disciplina possui: ");
                                                 frequencias.setTotal_aulas(scan.nextInt());
@@ -283,7 +283,7 @@ public class MoodleApp {
                                     }
                                     
                                 } catch (Exception e) {
-                                    System.out.println("Erro na entrada de dados!");
+                                    System.out.println("Erro na entrada de dados!" + e.getLocalizedMessage());
                                     
                                 }
                                 break;
