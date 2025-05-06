@@ -322,13 +322,12 @@ public class Frequencias {
      */
     public void listarFrequencias(int id_frequencia) {
         if (id_frequencia > 0) {
-            String sql = "SELECT f.frequencias_id, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, frequencias_disciplinas, f.fk_frequencias_professores_id, f.fk_frequencias_alunos_id, f.total_aulas"
-                    + "FROM frequencias "
-                    + "INNER JOIN professores p"
-                    + "ON f.fk_frequencias_professores_id = p.professores_id "
-                    + "INNER JOIN alunos a"
-                    + "ON f.fk_frequencias_alunos_id = a.alunos_id "
-                    + "WHERE  f.id_frequencia = ?";
+            String sql = "SELECT f.frequencias_id, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, " +
+                     "f.frequencias_disciplinas, f.fk_frequencias_professores_id, f.fk_frequencias_alunos_id, f.total_aulas " +
+                     "FROM frequencias f " +
+                     "INNER JOIN professores p ON f.fk_frequencias_professores_id = p.professores_id " +
+                     "INNER JOIN alunos a ON f.fk_frequencias_alunos_id = a.alunos_id " +
+                     "WHERE f.frequencias_id = ?";
             PreparedStatement pstm = null;
             ResultSet rset = null;
 
@@ -378,7 +377,6 @@ public class Frequencias {
             try {
                 Connection conexao = new Conexao().getConexao();
                 pstm = conexao.prepareStatement(sql);
-                pstm.setInt(1, id_frequencia);
                 pstm.executeQuery();
                 rset = pstm.executeQuery();
                 

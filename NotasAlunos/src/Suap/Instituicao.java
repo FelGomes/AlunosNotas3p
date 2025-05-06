@@ -322,6 +322,7 @@ public class Instituicao {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, inst_id);
                 pstm.executeQuery();
+                rset = pstm.executeQuery();
                 
                 if(rset.next()){
                     System.out.println("==================================================");

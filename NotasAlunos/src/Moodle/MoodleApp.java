@@ -208,7 +208,7 @@ public class MoodleApp {
 
                                         System.out.println("Informe a quantidade de tempo (em meses): ");
                                         matricula.setQtdTempo(scan.nextInt());
-
+                                            
                                         System.out.println("Informe o ID da instituicao: ");
                                         matricula.setFkinstituicaoId(scan.nextInt());
 
@@ -964,6 +964,7 @@ public class MoodleApp {
                                     }else{
                                         System.out.println("Digite o id do usuario a ser listado");
                                         int idListado = scan.nextInt();
+                                        scan.nextLine();
                                         if(idListado == 0){
                                             System.out.println("id 0 é inexistente");
                                         }else{
@@ -985,6 +986,7 @@ public class MoodleApp {
                                 try {
                                     System.out.println("Deseja listar todos os alunos? ");
                                     opc = scan.nextLine().toLowerCase().trim();
+                                    
                                     if (opc.equals("sim") || opc.equals("s")) {
                                         aluno.listar(0);
                                     } else {
@@ -1033,6 +1035,7 @@ public class MoodleApp {
                                     } else {
                                         System.out.println("Informe o ID da instituicao que deseja listar: ");
                                         int idlistar = scan.nextInt();
+                                        scan.nextLine();
                                         if (idlistar == 0) {
                                             inst.listar(0);
                                         } else {
@@ -1094,6 +1097,7 @@ public class MoodleApp {
                                     } else {
                                         System.out.println("Digite o ID de frequencias: ");
                                         int idListar = scan.nextInt();
+                                        scan.nextLine();
                                         if (idListar == 0) {
                                             frequencias.listarFrequencias(0);
                                         } else {
