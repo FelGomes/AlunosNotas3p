@@ -211,7 +211,7 @@ public class Frequencias {
             stmt.setInt(1, this.getTotal_aulas());
             stmt.setInt(2, this.getAulas_ministradas());
             stmt.setInt(3, this.getFrequencias_faltas());
-            stmt.setFloat(4, this.getPrctg_presenca());
+            stmt.setFloat(4, this.calculaPrctgFrequencia(this.getTotal_aulas(), this.getFrequencias_faltas()));
             stmt.setString(5, this.getFrequencias_disciplinas());
             stmt.setInt(6, this.getProfessores_id());
             stmt.setInt(7, this.getAlunos_id());

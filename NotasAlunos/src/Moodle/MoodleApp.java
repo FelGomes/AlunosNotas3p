@@ -263,15 +263,12 @@ public class MoodleApp {
                                                 String opcFrequencia = scan.nextLine().toLowerCase().trim();
                                                 if (opcFrequencia.equals("sim") || opcFrequencia.equals("s")) {
                                                     frequencias.setFrequencias_faltas(0);
-                                                    frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas());
                                                     frequencias.setPrctg_presenca(frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas()));
-                                                    frequencias.inserirFrequencia();
                                                 } else {
                                                     frequencias.setFrequencias_faltas(frequencias.getAulas_ministradas());
-                                                    frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas());
                                                     frequencias.setPrctg_presenca(frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas()));
-                                                    frequencias.inserirFrequencia();
                                                 }
+                                                frequencias.inserirFrequencia();
                                             }else {
                                                 System.out.println("Nao existe aluno com esse ID!");
                                             }
