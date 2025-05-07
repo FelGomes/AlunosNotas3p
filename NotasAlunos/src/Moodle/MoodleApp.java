@@ -7,10 +7,12 @@ package Moodle;
 import Suap.Funcoes;
 import Suap.Instituicao;
 import Suap.abstractClass.Alunos;
+import Suap.abstractClass.Boletim;
 import Suap.abstractClass.Diario;
 
 import Suap.abstractClass.Frequencias;
 import Suap.abstractClass.Matricula;
+import Suap.abstractClass.Notas;
 import Suap.abstractClass.Professores;
 import Suap.abstractClass.UsuarioAbstract;
 import java.sql.SQLException;
@@ -31,6 +33,7 @@ public class MoodleApp {
         boolean existe;
         int idUsu = 0;
         int escolha = 0;
+        Boletim boletim = new Boletim();
         Notas notas = new Notas();
         Alunos aluno = new Alunos();
         Instituicao inst = new Instituicao();
@@ -261,7 +264,7 @@ public class MoodleApp {
                                             System.out.println("Digite o ID do aluno: ");
                                             aluno.setId(scan.nextInt());
                                             scan.nextLine();
-                                            boolean existe1 = alunos.verificarAlunos(aluno.getId());
+                                            boolean existe1 = aluno.verificarAlunos(aluno.getId());
                                             if(existe1 == true){
                                                 System.out.println("Digite a primeira nota: ");
                                                 notas.setNota_um(scan.nextDouble());
@@ -274,6 +277,8 @@ public class MoodleApp {
                                                 scan.nextLine();
                                                 System.out.println("Digite a quarta nota: ");
                                                 notas.setNota_quatro(scan.nextDouble());
+                                                System.out.println("Digite a materia relacionada a essas notas: ");
+                                                notas.setNota_disciplina(scan.nextLine());
                                                 notas.inserirNotas();
                                             } else {
                                                 System.out.println("Não existe aluno com esse ID!");
@@ -733,9 +738,9 @@ public class MoodleApp {
                                         while (opc1.equals("sim") || opc.equals("s")){
                                             notas.listarNotas(0);
                                             System.out.println("Informe o ID da nota que deseja alterar!");
-                                            notas.setId(scan.nextInt());
+                                            notas.setNota_id(scan.nextInt());
                                             scan.nextLine();
-                                            existe = notas.verificarNota(notas.getNota_Id());
+                                            existe = notas.verificarNota(notas.getNota_id());
                                             if(existe){
                                                 System.out.println("=========================");
                                                 System.out.println("Nota um");
@@ -749,36 +754,36 @@ public class MoodleApp {
                                                 resposta = scan.nextLine().toLowerCase().trim();
                                                 if(resposta.equals("Nota um") || resposta.equals("nota um")){
                                                     System.out.println("Informe a nova nota um: ");
-                                                    notas.setNota_um(scan.nextLine());
-                                                    notas.alterarNotas(notas.getNota_Id(), resposta);
+                                                    notas.setNota_um(scan.nextDouble());
+                                                    notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else if(resposta.equals("Nota dois") || resposta.equals("nota dois")){
                                                     System.out.println("Informe a nova nota dois: ");
-                                                    notas.setNota_dois(scan.nextLine());
-                                                    notas.alterarNotas(notas.getNota_Id(), resposta);
+                                                    notas.setNota_dois(scan.nextDouble());
+                                                    notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else if(resposta.equals("Nota tres") || resposta.equals("nota tres")){
                                                     System.out.println("Informe a nova nota tres: ");
-                                                    notas.setNota_tres(scan.nextLine());
-                                                    notas.alterarNotas(notas.getNota_Id(), resposta);
+                                                    notas.setNota_tres(scan.nextDouble());
+                                                    notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else if(resposta.equals("Nota quatro") || resposta.equals("nota quatro")){
                                                     System.out.println("Informe a nova nota quatro: ");
-                                                    notas.setNota_quatro(scan.nextLine());
-                                                    notas.alterarNotas(notas.getNota_Id(), resposta);    
+                                                    notas.setNota_quatro(scan.nextDouble());
+                                                    notas.alterarNota(notas.getNota_id(), resposta);    
                                                 }else if(resposta.equals("Disciplina") || resposta.equals("disciplina")){
                                                     System.out.println("Informe a nova disciplina : ");
                                                     notas.setNota_disciplina(scan.nextLine());
-                                                    notas.alterarNotas(notas.getNota_Id(), resposta);    
+                                                    notas.alterarNota(notas.getNota_id(), resposta);    
                                                 }else if(resposta.equals("tudo")){
                                                     System.out.println("Informe a nova nota um: ");
-                                                    notas.setNota_um(scan.nextLine());
+                                                    notas.setNota_um(scan.nextDouble());
                                                     System.out.println("Informe a nova nota dois: ");
-                                                    notas.setNota_dois(scan.nextLine());
+                                                    notas.setNota_dois(scan.nextDouble());
                                                     System.out.println("Informe a nova nota tres: ");
-                                                    notas.setNota_tres(scan.nextLine());
+                                                    notas.setNota_tres(scan.nextDouble());
                                                     System.out.println("Informe a nova nota quatro: ");
-                                                    notas.setNota_quatro(scan.nextLine());
+                                                    notas.setNota_quatro(scan.nextDouble());
                                                     System.out.println("Informe a nova disciplina : ");
                                                     notas.setNota_disciplina(scan.nextLine());
-                                                    notas.alterarNotas(notas.getNotas_id(), resposta);
+                                                    notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else{
                                                     System.out.println("Erro de digitação tente novamente!");
                                                 }
@@ -1013,13 +1018,29 @@ public class MoodleApp {
                                     }
                                     break;
                                 case 6: // remover tabela boletim (boletim vai entrar no case de remover e de listar somente)
+                                    try {
+                                        System.out.println("Deseja fazer a remoção do boletim? ");
+                                        opc = scan.nextLine().toLowerCase().trim();
+                                        while(opc.equals("sim") || opc.equals("s")){
+                                            System.out.println("Informe o ID do boletim que deseja remover: ");
+                                            int idDeletar = scan.nextInt();
+                                            scan.nextLine();
+                                            boletim.deletarBoletim(idDeletar);
+
+                                            System.out.println("Deseja fazer outra remocao? ");
+                                            opc = scan.nextLine().toLowerCase().trim();
+                                        }
+                                        
+                                    } catch (Exception e) {
+                                        System.out.println("Erro na entrada de dados!");
+                                    }
                                     break;
                                 case 7: // remover tabela notas
                                     try{
                                         System.out.println("Deseja fazer a remoção das notas? ");
                                         opc = scan.nextLine().toLowerCase().trim();
                                         while (opc.equals("sim") || opc.equals("s")) {
-                                            notas.listarNotas();
+                                            notas.listarNotas(0);
                                             System.out.println("Informe o ID da nota que deseja remover: ");
                                             int idDelete = scan.nextInt();
                                             scan.nextLine();
@@ -1238,8 +1259,44 @@ public class MoodleApp {
 
                                 break;
                             case 6: // listar boletim
+                                try {
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("          LISTAR BOLETIM            ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("Deseja listar todos os boletins? ");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                    if (opc.equals("sim") || opc.equals("s")) {
+                                        boletim.listarBoletim(0);
+                                    } else {
+                                        System.out.println("Informe o ID de boletim que deseja listar: ");
+                                        int idlistar = scan.nextInt();
+                                        scan.nextLine();
+                                        boletim.listarBoletim(idlistar);
+                                    }
+
+                                } catch (Exception e) {
+
+                                }
                                 break;
                             case 7: // listar notas
+                                try {
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("          LISTAR NOTAS             ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("Deseja listar todas as notas? ");
+                                    opc = scan.nextLine().toLowerCase().trim();
+                                    if (opc.equals("sim") || opc.equals("s")) {
+                                        notas.listarNotas(0);
+                                    } else {
+                                        System.out.println("Informe o ID de professor que deseja listar: ");
+                                        int idlistar = scan.nextInt();
+                                        scan.nextLine();
+                                        notas.listarNotas(idlistar);
+                                    }
+
+                                } catch (Exception e) {
+
+                                }
                                 break;
                             case 8: // listar frequencias
                                 try {

@@ -289,15 +289,10 @@ public class Notas {
     
     /**
      * METODO CRIADO PARA INSERIR NOTAS
-     * @param nota_um
-     * @param nota_dois
-     * @param nota_tres
-     * @param nota_quatro
-     * @param nota_media
-     * @param nota_disciplina
+     
      * @throws SQLException 
      */
-    public void inserirNotas(double nota_um, double nota_dois, double nota_tres, double nota_quatro, double nota_media, String nota_disciplina) throws SQLException{
+    public void inserirNotas() throws SQLException{
         Connection conexao = new Conexao().getConexao();
         String sql = "Insert into notas (nota_um, nota_dois, nota_tres, nota_quatro, nota_media, nota_disciplina, fk_notas_alunos_id, fk_notas_professores_id) values (?,?,?,?,?,?,?,?)";
         try{
