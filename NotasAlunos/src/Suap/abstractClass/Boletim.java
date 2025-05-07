@@ -19,11 +19,14 @@ public class Boletim{
     Notas notas = new Notas();
     Frequencias frequencias = new Frequencias();
     
+    public Boletim(){
+    }
+    
     /**
      * 
      * @param boletins_id
      */
-    public void listarBoletim(int boletins_id, double nota_um, double nota_dois, double nota_tres, double nota_quatro){
+    public void listarBoletim(int boletins_id){
         
 
         if(boletins_id > 0){
@@ -115,4 +118,30 @@ public class Boletim{
     
     }
     
-}
+    public void deletarBoletim(int boletins_id) {
+        String sql = "DELETE FROM boletins WHERE boletins_id = ?";
+        PreparedStatement pstm = null;
+
+        try {
+            Connection conexao = new Conexao().getConexao();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setInt(1, boletins_id);
+
+            pstm.execute();
+        } catch (Exception e) {
+            System.out.println("Erro ao deletar boletins!" + e.getMessage());
+
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    }
+    
+
