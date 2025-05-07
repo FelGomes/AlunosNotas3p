@@ -31,6 +31,7 @@ public class MoodleApp {
         boolean existe;
         int idUsu = 0;
         int escolha = 0;
+        Notas notas = new Notas();
         Alunos aluno = new Alunos();
         Instituicao inst = new Instituicao();
         Frequencias frequencias = new Frequencias();
@@ -243,6 +244,49 @@ public class MoodleApp {
 
                                 break;
                             case 6: // inserir notas
+                                try{
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("          INSERIR NOTAS            ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("Deseja inserir algum dado na tabela de notas? ");
+                                    resposta = scan.nextLine().toLowerCase().trim();
+                                    while(resposta.equals("s") || resposta.equals("sim")){
+                                        professores.listarProfessores();
+                                        System.out.println("Digite o ID do professor: ");
+                                        professores.setId(scan.nextInt());
+                                        scan.nextLine();
+                                        existe = professores.verificarIdProfessor(professores.getId());
+                                        if(existe == true){
+                                            aluno.listar(0);
+                                            System.out.println("Digite o ID do aluno: ");
+                                            aluno.setId(scan.nextInt());
+                                            scan.nextLine();
+                                            boolean existe1 = alunos.verificarAlunos(aluno.getId());
+                                            if(existe1 == true){
+                                                System.out.println("Digite a primeira nota: ");
+                                                notas.setNota_um(scan.nextDouble());
+                                                scan.nextLine();
+                                                System.out.println("Digite a segunda nota: ");
+                                                notas.setNota_dois(scan.nextDouble());
+                                                scan.nextLine();
+                                                System.out.println("Digite a terceira nota: ");
+                                                notas.setNota_tres(scan.nextDouble());
+                                                scan.nextLine();
+                                                System.out.println("Digite a quarta nota: ");
+                                                notas.setNota_quatro(scan.nextDouble());
+                                                notas.inserirNotas();
+                                            } else {
+                                                System.out.println("Não existe aluno com esse ID!");
+                                            }
+                                        } else {
+                                            System.out.println("Não existe professor com esse ID!");
+                                        }
+                                        System.out.println("Deseja inserir outro valor tabela de notas? ");
+                                            resposta = scan.nextLine().toLowerCase().trim();
+                                    }
+                                } catch(Exception e) {
+                                    System.out.println("Erro na entrada de dados!" + e.getLocalizedMessage());
+                                }
                                 break;
                             case 7: // Inserir frequencias
                                 try {
@@ -680,6 +724,74 @@ public class MoodleApp {
                                     }
                                     break;
                                 case 6: // alterar tabela notas
+                                    try {
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("          ATUALIZAR NOTAS             ");
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("Deseja alterar algo na tabela notas? ");
+                                        opc1 = scan.nextLine();
+                                        while (opc1.equals("sim") || opc.equals("s")){
+                                            notas.listarNotas(0);
+                                            System.out.println("Informe o ID da nota que deseja alterar!");
+                                            notas.setId(scan.nextInt());
+                                            scan.nextLine();
+                                            existe = notas.verificarNota(notas.getNota_Id());
+                                            if(existe){
+                                                System.out.println("=========================");
+                                                System.out.println("Nota um");
+                                                System.out.println("Nota dois");
+                                                System.out.println("Nota tres");
+                                                System.out.println("Nota quatro");
+                                                System.out.println("Disciplina");
+                                                System.out.println("Tudo");
+                                                System.out.println("=========================");
+                                                System.out.println("Deseja alterar qual coluna?");
+                                                resposta = scan.nextLine().toLowerCase().trim();
+                                                if(resposta.equals("Nota um") || resposta.equals("nota um")){
+                                                    System.out.println("Informe a nova nota um: ");
+                                                    notas.setNota_um(scan.nextLine());
+                                                    notas.alterarNotas(notas.getNota_Id(), resposta);
+                                                }else if(resposta.equals("Nota dois") || resposta.equals("nota dois")){
+                                                    System.out.println("Informe a nova nota dois: ");
+                                                    notas.setNota_dois(scan.nextLine());
+                                                    notas.alterarNotas(notas.getNota_Id(), resposta);
+                                                }else if(resposta.equals("Nota tres") || resposta.equals("nota tres")){
+                                                    System.out.println("Informe a nova nota tres: ");
+                                                    notas.setNota_tres(scan.nextLine());
+                                                    notas.alterarNotas(notas.getNota_Id(), resposta);
+                                                }else if(resposta.equals("Nota quatro") || resposta.equals("nota quatro")){
+                                                    System.out.println("Informe a nova nota quatro: ");
+                                                    notas.setNota_quatro(scan.nextLine());
+                                                    notas.alterarNotas(notas.getNota_Id(), resposta);    
+                                                }else if(resposta.equals("Disciplina") || resposta.equals("disciplina")){
+                                                    System.out.println("Informe a nova disciplina : ");
+                                                    notas.setNota_disciplina(scan.nextLine());
+                                                    notas.alterarNotas(notas.getNota_Id(), resposta);    
+                                                }else if(resposta.equals("tudo")){
+                                                    System.out.println("Informe a nova nota um: ");
+                                                    notas.setNota_um(scan.nextLine());
+                                                    System.out.println("Informe a nova nota dois: ");
+                                                    notas.setNota_dois(scan.nextLine());
+                                                    System.out.println("Informe a nova nota tres: ");
+                                                    notas.setNota_tres(scan.nextLine());
+                                                    System.out.println("Informe a nova nota quatro: ");
+                                                    notas.setNota_quatro(scan.nextLine());
+                                                    System.out.println("Informe a nova disciplina : ");
+                                                    notas.setNota_disciplina(scan.nextLine());
+                                                    notas.alterarNotas(notas.getNotas_id(), resposta);
+                                                }else{
+                                                    System.out.println("Erro de digitação tente novamente!");
+                                                }
+                                            }
+                                            System.out.println("Deseja fazer outra alteração na tabela usuarios?");
+                                            opc1 = scan.nextLine();
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println("Erro na entrada de dados!");
+                                    }
+                                    
+                                    
+                                    
                                     break;
                                 case 7: // alterar tabelas frequencias
                                     try {
@@ -903,6 +1015,28 @@ public class MoodleApp {
                                 case 6: // remover tabela boletim (boletim vai entrar no case de remover e de listar somente)
                                     break;
                                 case 7: // remover tabela notas
+                                    try{
+                                        System.out.println("Deseja fazer a remoção das notas? ");
+                                        opc = scan.nextLine().toLowerCase().trim();
+                                        while (opc.equals("sim") || opc.equals("s")) {
+                                            notas.listarNotas();
+                                            System.out.println("Informe o ID da nota que deseja remover: ");
+                                            int idDelete = scan.nextInt();
+                                            scan.nextLine();
+                                            existe = notas.verificarNota(idDelete);
+                                            if (existe == true) {
+                                                notas.deletarNotas(idDelete);
+
+                                            } else {
+                                                System.out.println("Esse ID nao existe em notas! ");
+                                            }
+                                            System.out.println("Deseja fazer outra remocao? ");
+                                            opc = scan.nextLine().toLowerCase().trim();
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println("Erro na entrada de dados!");
+                                    }
+                                   
                                     break;
                                 case 8: // remover tabelas frequencias
                                     try {

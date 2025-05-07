@@ -204,7 +204,33 @@ public class Notas {
             }
         
         }
-        } else if (atributo.equals("todas") || atributo.equals("Todas")){
+        } else if (atributo.equals("Disciplina") || atributo.equals("disciplina")){
+            String sql = "UPDATE notas SET notas_disciplinas = ? WHERE notas_id = ?";
+            PreparedStatement pstm = null;
+
+            try{
+                Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
+                pstm.setString(1, this.getNota_disciplina());
+                pstm.setInt(2, nota_id);
+                pstm.execute();
+        
+        } catch (Exception e){
+            System.out.println("Erro ao alterar a disciplina da nota do aluno!" + e.getMessage());
+        } finally {
+            try{
+                if(pstm != null){
+                pstm.close();
+
+            }
+        }  catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        
+        } 
+        
+        
+            }else if (atributo.equals("tudo") || atributo.equals("Tudo")){
             String sql = "UPDATE notas SET nota_um = ?, nota_dois = ?, nota_tres = ?, nota_quatro = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
 
