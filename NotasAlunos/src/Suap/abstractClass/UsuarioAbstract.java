@@ -154,9 +154,13 @@ public class UsuarioAbstract extends PessoaAbstract{
             pstm = conexao.prepareStatement(sql);
             pstm = conexao.prepareStatement(sql);
             pstm.setInt(1, usuario_id);
+            int alteracao = pstm.executeUpdate();
             
-            pstm.execute();
-            
+            if (alteracao > 0){
+                System.out.println("Tabela deletada com sucesso!");
+            } else {
+                System.out.println("Erro ao deletar a tabela");
+            }
             
             
         } catch (Exception e) {
