@@ -29,13 +29,19 @@ public class Boletim{
     public void listarBoletim(int boletins_id){
         
 
-        if(boletins_id > 0){
-            String sql = "SELECT u.usuarios_nome, u.usuarios_sexo, a.alunos_sala, a.alunos_turma b.boletins_situacao, n.nota_media, f.prctg_presenca, n.nota_disciplina"
-                    + "from alunos a"
-                    + "inner join usuarios u on fk_alunos_usuarios = usuarios_id"
-                    + "inner join notas n on fk_notas_alunos_id = notas_id"
-                    + "inner join usuarios u on fk_alunos_usuarios_id = usuarios_id"
-                    + "inner join frequencia f on fk_frequencias_alunos_id = ";
+        if (boletins_id > 0) {
+            String sql = "SELECT"
+                    + "    u.usuarios_nome AS 'NOME',\n"
+                    + "    u.usuarios_sexo AS 'SEXO',\n"
+                    + "    a.alunos_sala AS 'SALA',\n"
+                    + "    a.alunos_turma AS 'TURMA',\n"
+                    + "    n.notas_media AS 'MEDIA',\n"
+                    + "    f.frequencias_faltas AS 'FALTAS',\n"
+                    + "    f.total_aulas AS 'AULAS TOTAIS'\n"
+                    + "FROM alunos a\n"
+                    + "JOIN usuarios u ON a.fk_alunos_usuarios_id = u.usuarios_id\n"
+                    + "LEFT JOIN notas n ON n.fk_notas_alunos_id = a.alunos_id\n"
+                    + "LEFT JOIN frequencias f ON f.fk_frequencias_alunos_id = a.alunos_id; = ";
             PreparedStatement pstm = null;
             ResultSet rset = null;
             
