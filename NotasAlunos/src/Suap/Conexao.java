@@ -15,7 +15,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 public class Conexao {
     
-    public static final String SERVIDOR = "jdbc:mysql://localhost:3306/Suap";
+    public static final String SERVIDOR = "jdbc:mysql://localhost:3306/Notas";
     public static final String USUARIO = "root";
     public static final String SENHA = "123456789";
     

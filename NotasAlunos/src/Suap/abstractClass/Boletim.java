@@ -30,7 +30,12 @@ public class Boletim{
         
 
         if(boletins_id > 0){
-            String sql = "SELECT * FROM boletins WHERE boletins_id = ?";
+            String sql = "SELECT u.usuarios_nome, u.usuarios_sexo, a.alunos_sala, a.alunos_turma b.boletins_situacao, n.nota_media, f.prctg_presenca, n.nota_disciplina"
+                    + "from alunos a"
+                    + "inner join usuarios u on fk_alunos_usuarios = usuarios_id"
+                    + "inner join notas n on fk_notas_alunos_id = notas_id"
+                    + "inner join usuarios u on fk_alunos_usuarios_id = usuarios_id"
+                    + "inner join frequencia f on fk_frequencias_alunos_id = ";
             PreparedStatement pstm = null;
             ResultSet rset = null;
             

@@ -19,6 +19,7 @@ public class Frequencias {
     private Professores professores = new Professores();
     private Alunos aluno = new Alunos();
     private int alunos_id, professores_id;
+    
 
     /**
      * Construtor vazio com todas as informações de Frequencias.

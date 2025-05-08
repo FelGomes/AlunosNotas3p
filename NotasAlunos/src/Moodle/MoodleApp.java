@@ -256,15 +256,15 @@ public class MoodleApp {
                                     while(resposta.equals("s") || resposta.equals("sim")){
                                         professores.listarProfessores();
                                         System.out.println("Digite o ID do professor: ");
-                                        professores.setId(scan.nextInt());
+                                        notas.setProfessor_id(scan.nextInt());
                                         scan.nextLine();
-                                        existe = professores.verificarIdProfessor(professores.getId());
+                                        existe = professores.verificarIdProfessor(notas.getProfessor_id());
                                         if(existe == true){
                                             aluno.listar(0);
                                             System.out.println("Digite o ID do aluno: ");
-                                            aluno.setId(scan.nextInt());
+                                            notas.setAluno_id(scan.nextInt());
                                             scan.nextLine();
-                                            boolean existe1 = aluno.verificarAlunos(aluno.getId());
+                                            boolean existe1 = aluno.verificarAlunos(notas.getAluno_id());
                                             if(existe1 == true){
                                                 System.out.println("Digite a primeira nota: ");
                                                 notas.setNota_um(scan.nextDouble());
@@ -277,6 +277,7 @@ public class MoodleApp {
                                                 scan.nextLine();
                                                 System.out.println("Digite a quarta nota: ");
                                                 notas.setNota_quatro(scan.nextDouble());
+                                                scan.nextLine();
                                                 System.out.println("Digite a materia relacionada a essas notas: ");
                                                 notas.setNota_disciplina(scan.nextLine());
                                                 notas.inserirNotas();
@@ -304,16 +305,16 @@ public class MoodleApp {
                                         professores.listarProfessores();
                                         System.out.println("Digite o ID do professor: ");
                                         //int idProfessorInsert = scan.nextInt();
-                                        professores.setId(scan.nextInt());
+                                        frequencias.setProfessores_id(scan.nextInt());
                                         scan.nextLine();
-                                        existe = frequencias.verificaIdProfessores(professores.getId());
+                                        existe = frequencias.verificaIdProfessores(frequencias.getProfessores_id());
                                         if (existe == true) {
                                             aluno.listar(0);
                                             System.out.println("Digite o id do aluno: ");
                                             //int idAlunoInsert = scan.nextInt();
-                                            aluno.setId(scan.nextInt());
+                                            frequencias.setAlunos_id(scan.nextInt());
                                             scan.nextLine();
-                                            boolean existe1 = frequencias.verificaIdAlunos(aluno.getId());
+                                            boolean existe1 = frequencias.verificaIdAlunos(frequencias.getAlunos_id());
                                             if (existe1 == true) {
                                                 System.out.println("Digite a quantidade de aulas que a disciplina possui: ");
                                                 frequencias.setTotal_aulas(scan.nextInt());
@@ -702,13 +703,13 @@ public class MoodleApp {
                                                 matricula.setMatriculasDataInicio(scan.nextLine());
 
                                                 System.out.println("Informe a nova data da matricula:");
-                                                matricula.setMatriculaDataFim(scan.nextLine());
+                                                matricula.setMatriculaDataFim(scan.nextLine()); scan.nextLine();
 
                                                 System.out.println("Informe a nova quantidade de tempo: ");
-                                                matricula.setQtdTempo(scan.nextInt());
+                                                matricula.setQtdTempo(scan.nextInt()); scan.nextLine();
 
                                                 System.out.println("Informe o novo ID da instituicao: ");
-                                                matricula.setFkinstituicaoId(scan.nextInt());
+                                                matricula.setFkinstituicaoId(scan.nextInt()); scan.nextLine();
 
                                                 System.out.println("Informe o novo ID do aluno: ");
                                                 matricula.setFkAlunoId(scan.nextInt());

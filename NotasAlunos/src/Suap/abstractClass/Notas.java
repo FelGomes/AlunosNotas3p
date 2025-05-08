@@ -16,13 +16,28 @@ public class Notas {
     
     private double nota_um, nota_dois, nota_tres, nota_quatro, nota_media;
     private String nota_disciplina;
-    private int nota_id;
+    private int nota_id, aluno_id, professor_id;
     
     Alunos alunos = new Alunos();
     Professores professores = new Professores();
     
     
     public Notas(){
+    }
+   
+    public void setProfessor_id(int professor_id){
+        this.professor_id = professor_id;
+    }
+    
+    public void setAluno_id(int aluno_id){
+        this.aluno_id = aluno_id;
+    }
+    
+    public int getProfessor_id(){
+        return professor_id;
+    }    
+    public int getAluno_id(){
+        return aluno_id;
     }
     
     public int getNota_id(){
@@ -304,12 +319,13 @@ public class Notas {
             stmt.setDouble(4, this.getNota_quatro());
             stmt.setDouble(5, this.calcularMedia(nota_um, nota_dois, nota_tres, nota_quatro));
             stmt.setString(6, this.getNota_disciplina());
-            stmt.setInt(7, professores.getId());
-            stmt.setInt(8, alunos.getId());
-
+            stmt.setInt(7, this.getAluno_id());
+            stmt.setInt(8, this.getProfessor_id());
+            
             stmt.execute();
             stmt.close();
             conexao.close();
+            System.out.println("NOTAS INSERIDAS COM SUCESSO!");
             
         
         } catch (Exception e) {
