@@ -614,15 +614,15 @@ public class MoodleApp {
                                                 if (resposta.equals("disciplina")){
                                                     System.out.println("Insira a nova disciplina dada pelo professor: ");
                                                     professores.setDisciplinaMinistrada(scan.nextLine());
-                                                    professores.alterar(professores.getIdProfessor(), resposta);
+                                                    professores.alterar(professores.getId(), resposta);
                                                 } else if (resposta.equals("turma")){
                                                     System.out.println("Insira a nova turma a ser ensinada: ");
                                                     professores.setTurmaEnsinada(scan.nextLine());
-                                                    professores.alterar(professores.getIdProfessor(), resposta);
+                                                    professores.alterar(professores.getId(), resposta);
                                                 } else if (resposta.equals("titularidade")){
                                                     System.out.println("Insira a nova titularidade do professor: ");
                                                     professores.setGrauTitularidade(scan.nextLine());
-                                                    professores.alterar(professores.getIdProfessor(), resposta);
+                                                    professores.alterar(professores.getId(), resposta);
                                                 } else if (resposta.equals("tudo")){
                                                     System.out.println("Insira a nova disciplina dada pelo professor: ");
                                                     professores.setDisciplinaMinistrada(scan.nextLine());
@@ -882,7 +882,7 @@ public class MoodleApp {
                                                 } else {
                                                     frequencias.setFrequencias_faltas(0);
                                                 }
-                                                System.out.println("Deseja alterar outro campo de Instituicao? ");
+                                                System.out.println("Deseja alterar outro campo de frequencia? ");
                                                 opc = scan.nextLine().toLowerCase().trim();
                                             }else {
                                                 System.out.println("Nao existe esse ID!");
