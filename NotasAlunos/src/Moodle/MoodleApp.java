@@ -904,13 +904,16 @@ public class MoodleApp {
                         System.out.println("Deseja remover valores de alguma tabela? ");
                         resposta = scan.nextLine();
                         while (resposta.equals("sim") || resposta.equals("s")) {
-                            funcao.menuTabelas();
+                            funcao.menuTabelasInserir();
                             System.out.println("Deseja escolher qual tabela? ");
                             tabela = scan.nextInt();
                             scan.nextLine();
                             switch (tabela) {
                                 case 1: // remover tabela usuario
                                     try {
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("          DELETAR USUARIO           ");
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja fazer a remoçao de Usuario? ");
                                         opc = scan.nextLine().toLowerCase().trim();
                                         while (opc.equals("sim") || opc.equals("s")) {
@@ -935,6 +938,9 @@ public class MoodleApp {
                                     break;
                                 case 2: // remover tabela aluno
                                     try {
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("           DELETAR ALUNO            ");
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja fazer a remoçao de aluno? ");
                                         opc = scan.nextLine().toLowerCase().trim();
                                         while (opc.equals("sim") || opc.equals("s")) {
@@ -959,6 +965,9 @@ public class MoodleApp {
                                     break;
                                 case 3: // emover tabela professor
                                     try {
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("         DELETAR PROFESSOR          ");
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja fazer a remoção do professor? ");
                                         opc = scan.nextLine().toLowerCase().trim();
                                         while(opc.equals("sim") || opc.equals("s")){
@@ -977,7 +986,11 @@ public class MoodleApp {
                                     }
                                     break;
                                 case 4: // remover tabela instituicao
+                                    
                                     try {
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("         DELETAR INSTITUICAO        ");
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja fazer a remocao de instituicao? ");
                                         opc = scan.nextLine().toLowerCase().trim();
                                         while (opc.equals("sim") || opc.equals("s")) {
@@ -1004,7 +1017,7 @@ public class MoodleApp {
                                     try {
                                         Matricula matricula = new Matricula();
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                        System.out.println("         DELETAR MATRICULA             ");
+                                        System.out.println("         DELETAR MATRICULA          ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja deletar valores de matricula?");
                                         resposta = scan.nextLine().toLowerCase().trim();
@@ -1048,6 +1061,9 @@ public class MoodleApp {
                                     break;*/
                                 case 6: // remover tabela notas
                                     try{
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("           DELETAR NOTAS            ");
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja fazer a remoção das notas? ");
                                         opc = scan.nextLine().toLowerCase().trim();
                                         while (opc.equals("sim") || opc.equals("s")) {
@@ -1073,7 +1089,7 @@ public class MoodleApp {
                                 case 7: // remover tabelas frequencias
                                     try {
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                        System.out.println("          DELETAR FREQUENCIA             ");
+                                        System.out.println("         DELETAR FREQUENCIA         ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja fazer a remocao de algum campo");
                                         opc = scan.nextLine().toLowerCase().toLowerCase().trim();
@@ -1099,7 +1115,7 @@ public class MoodleApp {
                                     try {
                                         Diario diario = new Diario();
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                        System.out.println("             DELETAR DIARIO             ");
+                                        System.out.println("           DELETAR DIARIO           ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja deletar valores em Diario?");
                                         resposta = scan.nextLine().toLowerCase().trim();
@@ -1144,6 +1160,9 @@ public class MoodleApp {
                         switch (tabela) {
                             case 1: // listar usuario
                                 try {
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("           LISTAR USUARIOS          ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar todos os usuario?");
                                     opc = scan.nextLine().toLowerCase().trim();
                                     if (opc.equals("sim") || opc.equals("s")) {
@@ -1171,6 +1190,9 @@ public class MoodleApp {
                                 break;
                             case 2: // listar alunos
                                 try {
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("            LISTAR ALUNOS           ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar todos os alunos? ");
                                     opc = scan.nextLine().toLowerCase().trim();
                                     
@@ -1198,6 +1220,9 @@ public class MoodleApp {
                                 break;
                             case 3: // listar professor
                                 try {
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("          LISTAR PROFESSORES        ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar todos os professores? ");
                                     opc = scan.nextLine().toLowerCase().trim();
 
@@ -1216,6 +1241,9 @@ public class MoodleApp {
                                 break;
                             case 4: // listar instituicao
                                 try {
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                    System.out.println("          LISTAR INSTITUICOES       ");
+                                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar todas as instituicoes? ");
                                     opc = scan.nextLine().toLowerCase().trim();
                                     if (opc.equals("sim") || opc.equals("s")) {
@@ -1245,7 +1273,7 @@ public class MoodleApp {
                                 try {
                                     Matricula matricula = new Matricula();
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                    System.out.println("          LISTAR MATRICULA             ");
+                                    System.out.println("          LISTAR MATRICULAS         ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar matriculas? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
@@ -1272,7 +1300,7 @@ public class MoodleApp {
                             case 6: // listar boletim
                                 try {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                    System.out.println("          LISTAR BOLETIM            ");
+                                    System.out.println("           LISTAR BOLETIM           ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar boletins? ");
                                     opc = scan.nextLine().toLowerCase().trim();
@@ -1300,7 +1328,7 @@ public class MoodleApp {
                             case 7: // listar notas
                                 try {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                    System.out.println("          LISTAR NOTAS             ");
+                                    System.out.println("            LISTAR NOTAS            ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar todas as notas? ");
                                     opc = scan.nextLine().toLowerCase().trim();
@@ -1320,7 +1348,7 @@ public class MoodleApp {
                             case 8: // listar frequencias
                                 try {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                    System.out.println("          LISTAR FREQUENCIA             ");
+                                    System.out.println("         LISTAR FREQUENCIAS         ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar todas as frequências");
                                     opc = scan.nextLine().toLowerCase().trim();
@@ -1347,7 +1375,7 @@ public class MoodleApp {
                                 try {
                                     Diario diario = new Diario();
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                    System.out.println("             LISTAR DIARIO             ");
+                                    System.out.println("            LISTAR DIARIOS          ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("Deseja listar diario? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
