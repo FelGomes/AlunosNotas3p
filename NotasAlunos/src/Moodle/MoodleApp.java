@@ -408,6 +408,10 @@ public class MoodleApp {
                             switch (tabela) {
                                 case 1: // alterar tabela usuarios
                                     try {
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("          ALTERAR USUARIO           ");
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        
                                         System.out.println("Deseja fazer a atualizacao da tabela usuarios? ");
                                         opc1 = scan.nextLine();
                                         while (opc1.equals("sim") || opc.equals("s")){
@@ -476,7 +480,9 @@ public class MoodleApp {
                                     break;
                                 case 2: // alterar tabela aluno
                                     try {
-                                        
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("            ALTERAR ALUNO           ");
+                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja fazer a atualizacao da tabela aluno? ");
                                         opc1 = scan.nextLine();
                                         while (opc1.equals("sim") || opc.equals("s")) {
@@ -546,7 +552,9 @@ public class MoodleApp {
                                     break;
                                 case 3: // alterar tabela professor
                                     try {
-                                        
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("         ALTERAR PROFESSOR          ");
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja alterar a tabela professor?");
                                         opc1 = scan.nextLine();
                                         while (opc1.equals("sim") || opc1.equals("s")){
@@ -602,7 +610,9 @@ public class MoodleApp {
                                     break;
                                 case 4:
                                     try {
-                                        
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                        System.out.println("         ALTERAR INSTITUICAO        ");
+                                        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja fazer alteracao na tabela Instituicao? ");
                                         opc1 = scan.nextLine().toLowerCase().trim();
                                         while (opc1.equals("sim") || opc1.equals("s")) {
@@ -688,7 +698,7 @@ public class MoodleApp {
                                     try {
                                         Matricula matricula = new Matricula();
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                        System.out.println("          ATUALIZAR MATRICULA             ");
+                                        System.out.println("          ALTERAR MATRICULA         ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja alterar matriculas? ");
                                         resposta = scan.nextLine().toLowerCase().trim();
@@ -732,7 +742,7 @@ public class MoodleApp {
                                 case 6: // alterar tabela notas
                                     try {
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                        System.out.println("          ATUALIZAR NOTAS             ");
+                                        System.out.println("           ALTERAR NOTAS            ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja alterar algo na tabela notas? ");
                                         opc1 = scan.nextLine();
@@ -802,7 +812,7 @@ public class MoodleApp {
                                 case 7: // alterar tabelas frequencias
                                     try {
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                        System.out.println("          ATUALIZAR FREQUENCIA             ");
+                                        System.out.println("          ALTERAR FREQUENCIA        ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja atualizar algum dado na tabela de frequencias?");
                                         opc = scan.nextLine().toLowerCase().trim();
@@ -833,7 +843,7 @@ public class MoodleApp {
                                     try {
                                         Diario diario = new Diario();
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                        System.out.println("          ATUALIZAR DIARIO             ");
+                                        System.out.println("           ALTERAR DIARIO           ");
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("Deseja alterar valores em diario? ");
                                         resposta = scan.nextLine().toLowerCase().trim();
