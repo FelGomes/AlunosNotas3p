@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class Boletim{
     
-    private String boletins_situacao;
+    /*private String boletins_situacao;
 
 
     Alunos alunos = new Alunos();
@@ -20,28 +20,29 @@ public class Boletim{
     Frequencias frequencias = new Frequencias();
     
     public Boletim(){
-    }
+    }*/
     
     /**
      * 
      * @param boletins_id
      */
     public void listarBoletim(int boletins_id){
-        
+            String sql = "SELECT "
+                + "    u.usuarios_nome, "
+                + "    u.usuarios_sexo, "
+                + "    a.alunos_sala, "
+                + "    a.alunos_turma, "
+                + "    n.nota_media, "
+                + "    f.frequencias_faltas, "
+                + "    f.total_aulas, "
+                + "    f.frequencias_disciplinas "
+                + "FROM alunos a "
+                + "JOIN usuarios u ON a.fk_alunos_usuarios_id = u.usuarios_id "
+                + "LEFT JOIN notas n ON n.fk_notas_alunos_id = a.alunos_id "
+                + "LEFT JOIN frequencias f ON f.fk_frequencias_alunos_id = a.alunos_id "
+                + "AND f.frequencias_disciplinas = n.nota_disciplina "
+                + "WHERE a.alunos_id = ?";
 
-        if (boletins_id > 0) {
-            String sql = "SELECT"
-                    + "    u.usuarios_nome AS 'NOME',\n"
-                    + "    u.usuarios_sexo AS 'SEXO',\n"
-                    + "    a.alunos_sala AS 'SALA',\n"
-                    + "    a.alunos_turma AS 'TURMA',\n"
-                    + "    n.notas_media AS 'MEDIA',\n"
-                    + "    f.frequencias_faltas AS 'FALTAS',\n"
-                    + "    f.total_aulas AS 'AULAS TOTAIS'\n"
-                    + "FROM alunos a\n"
-                    + "JOIN usuarios u ON a.fk_alunos_usuarios_id = u.usuarios_id\n"
-                    + "LEFT JOIN notas n ON n.fk_notas_alunos_id = a.alunos_id\n"
-                    + "LEFT JOIN frequencias f ON f.fk_frequencias_alunos_id = a.alunos_id; = ";
             PreparedStatement pstm = null;
             ResultSet rset = null;
             
@@ -49,24 +50,23 @@ public class Boletim{
                 Connection conexao = new Conexao().getConexao();
                 pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, boletins_id);
-                pstm.executeQuery();
+                rset = pstm.executeQuery();
                 
-                if(rset.next()){
+                while(rset.next()){
                     System.out.println("==================================================");
-                    System.out.println("ID: " + rset.getInt("boletins_id"));
+                    //System.out.println("ID: " + rset.getInt("boletins_id"));
                     System.out.println("Nome Aluno: " + rset.getString("usuarios_nome"));
                     System.out.println("Sexo: " + rset.getString("usuarios_sexo"));
-                    System.out.println("Situacao: " + rset.getString("boletins_situacao"));
-                    System.out.println("Media de notas: " + rset.getDouble("notas_media"));
-                    System.out.println("Porcentagem Frequencia: " + rset.getDouble("prctg_presenca"));
-                    System.out.println("Materias: " + rset.getString("nota_disciplina"));
+                    System.out.println("Sala: " + rset.getString("alunos_sala"));
+                    System.out.println("Turma: " + rset.getString("alunos_turma"));
+                    System.out.println("Media: " + rset.getString("nota_media"));
+                    System.out.println("Faltas " + rset.getString("frequencias_faltas") + "%");
+                    System.out.println("Total de aulas: " + rset.getString("total_aulas"));
+                    System.out.println("Disciplina: " + rset.getString("frequencias_disciplinas"));
                     System.out.println("==================================================");
                 
-            
-                } else {
-                    System.out.println("Nenhum boletim encontrado com o ID fornecido!" + boletins_id);
                 }
-        
+
             } catch (Exception e){
                 System.out.println("Erro ao fazer a listagem dos boletins " + e.getMessage());
             } finally {
@@ -82,11 +82,12 @@ public class Boletim{
                     System.out.println(e.getMessage());
                 }
             }
+    }
             
         //CASO NÃO EXISTA UM ID ESPECIFICO VAI RETORNAR TODOS
     
     
-        } else {
+        /*} else {
             String sql = "SELECT * FROM BOLETIM";
             PreparedStatement pstm = null;
             ResultSet rset = null;
@@ -125,11 +126,11 @@ public class Boletim{
                 
                 }   
             }
-        }
+        }*/
     
-    }
+   //}
     
-    public void deletarBoletim(int boletins_id) {
+   /* public void deletarBoletim(int boletins_id) {
         String sql = "DELETE FROM boletins WHERE boletins_id = ?";
         PreparedStatement pstm = null;
 
@@ -153,6 +154,8 @@ public class Boletim{
         }
     }
 
-    }
+    }*/
+    
+}
     
 

@@ -130,21 +130,20 @@ public class Notas {
             pstm = conexao.prepareStatement(sql);
             pstm.setDouble(1, this.getNota_um());
             pstm.setInt(2, nota_id);
-            pstm.execute();
+             int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
+                
         
-        } catch (Exception e){
-            System.out.println("Erro ao alterar nota um do aluno!" + e.getMessage());
-        } finally {
-            try{
-                if(pstm != null){
-                pstm.close();
-
-            }
-        }  catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+            } catch (Exception e){
+                System.out.println("Erro ao alterar nota um do aluno!" + e.getMessage());
+            } 
         
-        }
         } else if (atributo.equals("nota dois") || atributo.equals("Nota dois")){
             String sql = "UPDATE notas SET nota_dois = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
@@ -154,21 +153,21 @@ public class Notas {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setDouble(1, this.getNota_dois());
                 pstm.setInt(2, nota_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
+                
         
-        } catch (Exception e){
-            System.out.println("Erro ao alterar nota dois do aluno!" + e.getMessage());
-        } finally {
-            try{
-                if(pstm != null){
-                pstm.close();
-
-            }
-        }  catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+            } catch (Exception e){
+                System.out.println("Erro ao alterar nota dois do aluno!" + e.getMessage());
+            } 
         
-        }
+        
             
         } else if(atributo.equals("nota tres") || atributo.equals("Nota tres")){
             String sql = "UPDATE notas SET nota_tres = ? WHERE notas_id = ?";
@@ -179,21 +178,19 @@ public class Notas {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setDouble(1, this.getNota_tres());
                 pstm.setInt(2, nota_id);
-                pstm.execute();
+                 int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
+                
         
-        } catch (Exception e){
-            System.out.println("Erro ao alterar nota tres do aluno!" + e.getMessage());
-        } finally {
-            try{
-                if(pstm != null){
-                pstm.close();
-
-            }
-        }  catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        
-        }
+            } catch (Exception e){
+                System.out.println("Erro ao alterar nota tres do aluno!" + e.getMessage());
+            } 
 
         } else if (atributo.equals("nota quatro") || atributo.equals("Nota quatro")){
             String sql = "UPDATE notas SET nota_quatro = ? WHERE notas_id = ?";
@@ -204,21 +201,20 @@ public class Notas {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setDouble(1, this.getNota_quatro());
                 pstm.setInt(2, nota_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
+                
         
-        } catch (Exception e){
-            System.out.println("Erro ao alterar nota quatro do aluno!" + e.getMessage());
-        } finally {
-            try{
-                if(pstm != null){
-                pstm.close();
-
-            }
-        }  catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        
-        }
+            } catch (Exception e){
+                System.out.println("Erro ao alterar nota quatro do aluno!" + e.getMessage());
+            } 
+            
         } else if (atributo.equals("Disciplina") || atributo.equals("disciplina")){
             String sql = "UPDATE notas SET notas_disciplinas = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
@@ -228,24 +224,22 @@ public class Notas {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getNota_disciplina());
                 pstm.setInt(2, nota_id);
-                pstm.execute();
-        
-        } catch (Exception e){
-            System.out.println("Erro ao alterar a disciplina da nota do aluno!" + e.getMessage());
-        } finally {
-            try{
-                if(pstm != null){
-                pstm.close();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
+                
 
-            }
-        }  catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        
-        } 
+            } catch (Exception e){
+                System.out.println("Erro ao alterar a disciplina da nota do aluno!" + e.getMessage());
+            } 
         
         
-            }else if (atributo.equals("tudo") || atributo.equals("Tudo")){
+        }else if (atributo.equals("tudo") || atributo.equals("Tudo")){
             String sql = "UPDATE notas SET nota_um = ?, nota_dois = ?, nota_tres = ?, nota_quatro = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
 
@@ -257,20 +251,18 @@ public class Notas {
                 pstm.setDouble(3, this.getNota_tres());
                 pstm.setDouble(4, this.getNota_quatro());
                 pstm.setInt(5, nota_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
+                
         
         } catch (Exception e){
             System.out.println("Erro ao alterar as notas do aluno!" + e.getMessage());
-        } finally {
-            try{
-                if(pstm != null){
-                pstm.close();
-
-            }
-        }  catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        
         }
 
         } else if (atributo.equals("disciplina") || atributo.equals("Disciplina")){
@@ -282,25 +274,26 @@ public class Notas {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getNota_disciplina());
                 pstm.setInt(2, nota_id);
-                pstm.execute();
+                int alteracao = pstm.executeUpdate();
+                
+                if (alteracao > 0){
+                    System.out.println("Tabela alterada com sucesso! ");
+                    
+                } else{
+                    System.out.println("Erro ao alterar a tabela!");
+                }
+                
         
-        } catch (Exception e){
-            System.out.println("Erro ao alterar a disciplina da nota!" + e.getMessage());
-        } finally {
-            try{
-                if(pstm != null){
-                pstm.close();
-
-            }
-        }  catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+            } catch (Exception e){
+                System.out.println("Erro ao alterar a disciplina da nota!" + e.getMessage());
+            } 
+            
         
         }
-}
+    }
     
 
-        } 
+        
     
     /**
      * METODO CRIADO PARA INSERIR NOTAS
@@ -321,14 +314,16 @@ public class Notas {
             stmt.setString(6, this.getNota_disciplina());
             stmt.setInt(7, this.getAluno_id());
             stmt.setInt(8, this.getProfessor_id());
-            
-            stmt.execute();
-            stmt.close();
-            conexao.close();
-            System.out.println("NOTAS INSERIDAS COM SUCESSO!");
+            int alteracao = stmt.executeUpdate();
+
+            if (alteracao > 0) {
+                System.out.println("ALuno cadastrado com sucesso!");
+            } else {
+                System.out.println("Nao foi cadastrado nenhum aluno!");
+            }
             
         
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Erro ao fazer a inserção de notas no banco de dados!" + e.getMessage());
         }
         
@@ -346,20 +341,19 @@ public class Notas {
             pstm = conexao.prepareStatement(sql);
             pstm.setInt(1, nota_id);
             
-            pstm.execute();
+            int alteracao = pstm.executeUpdate();
+            
+            if (alteracao > 0){
+                System.out.println("Tabela deletada com sucesso!");
+            } else {
+                System.out.println("Erro ao deletar a tabela");
+            }
         } catch (Exception e){
             System.out.println("Erro ao deletar notas!" + e.getMessage());
             
-        } finally{
-                try{
-                    if(pstm != null){
-                        pstm.close();
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-        }
+        } 
+        
+    }
     /**
      * 
      * @param nota_id 
@@ -380,12 +374,12 @@ public class Notas {
                 if(rset.next()){
                     System.out.println("==================================================");
                     System.out.println("ID: " + rset.getInt("notas_id"));
-                    System.out.println("Primeira nota: " + rset.getDouble("primeira_nota"));
-                    System.out.println("Segunda nota: " + rset.getDouble("segunda_nota"));
-                    System.out.println("Terceira nota: " + rset.getDouble("terceira_nota"));
-                    System.out.println("Quarta nota: " + rset.getDouble("quarta_nota"));
-                    System.out.println("Media das notas: " + rset.getDouble("notas_media"));
-                    System.out.println("Disciplina referente as notas: " + rset.getString("notas_disciplinas"));
+                    System.out.println("Primeira nota: " + rset.getDouble("nota_um"));
+                    System.out.println("Segunda nota: " + rset.getDouble("nota_dois"));
+                    System.out.println("Terceira nota: " + rset.getDouble("nota_tres"));
+                    System.out.println("Quarta nota: " + rset.getDouble("nota_quatro"));
+                    System.out.println("Media das notas: " + rset.getDouble("nota_media"));
+                    System.out.println("Disciplina referente as notas: " + rset.getString("nota_disciplina"));
                     System.out.println("==================================================");
                 
                 } else{
@@ -422,12 +416,12 @@ public class Notas {
                 while(rset.next()){
                     System.out.println("==================================================");
                     System.out.println("ID: " + rset.getInt("notas_id"));
-                    System.out.println("Primeira nota: " + rset.getDouble("primeira_nota"));
-                    System.out.println("Segunda nota: " + rset.getDouble("segunda_nota"));
-                    System.out.println("Terceira nota: " + rset.getDouble("terceira_nota"));
-                    System.out.println("Quarta nota: " + rset.getDouble("quarta_nota"));
-                    System.out.println("Media das notas: " + rset.getDouble("notas_media"));
-                    System.out.println("Disciplina referente as notas: " + rset.getString("notas_disciplinas"));
+                    System.out.println("Primeira nota: " + rset.getDouble("nota_um"));
+                    System.out.println("Segunda nota: " + rset.getDouble("nota_dois"));
+                    System.out.println("Terceira nota: " + rset.getDouble("nota_tres"));
+                    System.out.println("Quarta nota: " + rset.getDouble("nota_quatro"));
+                    System.out.println("Media das notas: " + rset.getDouble("nota_media"));
+                    System.out.println("Disciplina referente as notas: " + rset.getString("nota_disciplina"));
                     System.out.println("==================================================");
                  
                 }

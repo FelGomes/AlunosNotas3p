@@ -1018,7 +1018,7 @@ public class MoodleApp {
                                         System.out.println("Erro na entrada de dados!");
                                     }
                                     break;
-                                case 6: // remover tabela boletim (boletim vai entrar no case de remover e de listar somente)
+                                /*case 6: // remover tabela boletim (boletim vai entrar no case de remover e de listar somente)
                                     try {
                                         System.out.println("Deseja fazer a remoção do boletim? ");
                                         opc = scan.nextLine().toLowerCase().trim();
@@ -1035,8 +1035,8 @@ public class MoodleApp {
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
                                     }
-                                    break;
-                                case 7: // remover tabela notas
+                                    break;*/
+                                case 6: // remover tabela notas
                                     try{
                                         System.out.println("Deseja fazer a remoção das notas? ");
                                         opc = scan.nextLine().toLowerCase().trim();
@@ -1060,7 +1060,7 @@ public class MoodleApp {
                                     }
                                    
                                     break;
-                                case 8: // remover tabelas frequencias
+                                case 7: // remover tabelas frequencias
                                     try {
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                         System.out.println("          DELETAR FREQUENCIA             ");
@@ -1085,7 +1085,7 @@ public class MoodleApp {
                                         System.out.println("Erro na remocao dos dados " + e.getMessage());
                                     }
                                     break;
-                                case 9: // remover tabela diario
+                                case 8: // remover tabela diario
                                     try {
                                         Diario diario = new Diario();
                                         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
@@ -1264,15 +1264,23 @@ public class MoodleApp {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("          LISTAR BOLETIM            ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                    System.out.println("Deseja listar todos os boletins? ");
+                                    System.out.println("Deseja listar boletins? ");
                                     opc = scan.nextLine().toLowerCase().trim();
-                                    if (opc.equals("sim") || opc.equals("s")) {
-                                        boletim.listarBoletim(0);
-                                    } else {
-                                        System.out.println("Informe o ID de boletim que deseja listar: ");
-                                        int idlistar = scan.nextInt();
+                                    while(opc.equals("sim")||opc.equals("s")){
+                                        aluno.listarAlunos();
+                                        System.out.println("Deseja ver boletim de qual aluno? ");
+                                        aluno.setId(scan.nextInt());
                                         scan.nextLine();
-                                        boletim.listarBoletim(idlistar);
+                                        existe = aluno.verificarAlunos(aluno.getId());
+                                        if(existe == true){
+                                            boletim.listarBoletim(aluno.getId());
+                                            
+                                        } else {
+                                            System.out.println("Nao existe aluno com esse id!");
+                                        }
+                                        System.out.println("Deseja listar outro aluno? ");
+                                        opc = scan.nextLine().toLowerCase().trim();
+
                                     }
 
                                 } catch (Exception e) {

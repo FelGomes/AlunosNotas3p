@@ -352,6 +352,55 @@ public class Alunos extends UsuarioAbstract{
         }
         return false;
     }
+    
+    
+    
+    public void listarAlunos(){
+        
+        String sql = "SELECT a.alunos_id, u.usuarios_nome, a.alunos_sala, a.alunos_turma "
+           + "FROM alunos a "
+           + "INNER JOIN usuarios u ON a.fk_alunos_usuarios_id = u.usuarios_id";
+
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+        
+        try {
+            Connection conexao = new Conexao().getConexao();
+            pstm = conexao.prepareStatement(sql);
+            rset = pstm.executeQuery();
+            
+            while(rset.next()){
+                System.out.println("========================================");
+                System.out.println("ID: " + rset.getString("alunos_id"));
+                System.out.println("Nome: " + rset.getString("usuarios_nome"));
+                System.out.println("Sala: " + rset.getString("alunos_sala"));
+                System.out.println("Turma: " + rset.getString("alunos_turma"));
+                System.out.println("========================================");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar alunos! " + e.getMessage());
+            
+        } finally {
+            try {
+                if (rset != null){
+                    rset.close();
+                }
+                if (pstm != null){
+                    pstm.close();
+                }
+            
+            } catch(SQLException e){
+                System.out.println(e.getMessage());
+                
+            }
+            
+        
+        }
+            
+                
+        
+    }
 }
 
     
