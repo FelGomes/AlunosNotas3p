@@ -31,6 +31,7 @@ public class MoodleApp {
         String resposta, opc, opc1;
         int tabela;
         boolean existe;
+        boolean Nexiste;
         int idUsu = 0;
         int escolha = 0;
         Boletim boletim = new Boletim();
@@ -103,19 +104,25 @@ public class MoodleApp {
                                         scan.nextLine();
                                         existe = usuario.verificarUsuarios(id_usu);
                                         if (existe == true) { // se existe, o codigo da andamento
-                                            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                            System.out.println("         BEM VINDO, ALUNO           ");
-                                            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                            aluno.setAlunos_matriculados(true);
-                                            System.out.println("Informe a sala: ");
-                                            aluno.setAlunos_sala(scan.nextLine());
-                                            System.out.println("Informe a turma: ");
-                                            aluno.setAlunos_turma(scan.nextLine());
-                                            System.out.println("Informe a quantidade de disciplina: ");
-                                            aluno.setQtd_disciplina(scan.nextInt());
-                                            aluno.setId(id_usu);
-                                            aluno.inserir();
-                                            scan.nextLine();
+                                            Nexiste = professores.verificarProfessorPorUsuarioID(id_usu); // vai verificar se existe professor cadastrado com esse id
+                                            if(!Nexiste){
+                                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                                System.out.println("         BEM VINDO, ALUNO           ");
+                                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                                aluno.setAlunos_matriculados(true);
+                                                System.out.println("Informe a sala: ");
+                                                aluno.setAlunos_sala(scan.nextLine());
+                                                System.out.println("Informe a turma: ");
+                                                aluno.setAlunos_turma(scan.nextLine());
+                                                System.out.println("Informe a quantidade de disciplina: ");
+                                                aluno.setQtd_disciplina(scan.nextInt());
+                                                aluno.setId(id_usu);
+                                                aluno.inserir();
+                                                scan.nextLine();
+                                            } else {
+                                                System.out.println("Nao foi possivel cadastrar aluno, pois ja existe aluno com esse ID de usuario");
+                                            }
+                                            
 
                                         } else {
                                             System.out.println("Esse ID nao existe");
@@ -139,18 +146,25 @@ public class MoodleApp {
                                         scan.nextLine();
                                         existe = usuario.verificarUsuarios(id_usu);
                                         if (existe == true) { // se existe, o codigo da andamento
-                                            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                            System.out.println("         BEM VINDO, PROFESSOR           ");
-                                            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                            System.out.println("Informe a disciplina que vai ministrar: ");
-                                            professores.setDisciplinaMinistrada(scan.nextLine());
-                                            System.out.println("Informe a turma que será trabalhada: ");
-                                            professores.setTurmaEnsinada(scan.nextLine());
-                                            System.out.println("Informe a sua titularidade: ");
-                                            professores.setGrauTitularidade(scan.nextLine());
-                                            professores.setIdUsuario(id_usu);
-                                            professores.inserirProfessor();
-                                            //scan.nextLine();
+                                            Nexiste = aluno.verificarAlunoPorUsuarioID(id_usu); // vai verificar se existe aluno com esse ID
+                                            if(!Nexiste){
+                                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                                System.out.println("         BEM VINDO, PROFESSOR           ");
+                                                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                                System.out.println("Informe a disciplina que vai ministrar: ");
+                                                professores.setDisciplinaMinistrada(scan.nextLine());
+                                                System.out.println("Informe a turma que será trabalhada: ");
+                                                professores.setTurmaEnsinada(scan.nextLine());
+                                                System.out.println("Informe a sua titularidade: ");
+                                                professores.setGrauTitularidade(scan.nextLine());
+                                                professores.setIdUsuario(id_usu);
+                                                professores.inserirProfessor();
+                                                //scan.nextLine();
+                                                
+                                            } else{
+                                                System.out.println("Nao foi possivel cadastrar professor, pois ja existe aluno com esse ID de usuario");
+                                            }
+                                            
 
                                         } else {
                                             System.out.println("Esse ID nao existe");

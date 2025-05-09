@@ -354,7 +354,9 @@ public class Alunos extends UsuarioAbstract{
     }
     
     
-    
+    /**
+     * Metodo para listar alunos com apenas alguns atributos
+     */
     public void listarAlunos(){
         
         String sql = "SELECT a.alunos_id, u.usuarios_nome, a.alunos_sala, a.alunos_turma "
@@ -397,9 +399,32 @@ public class Alunos extends UsuarioAbstract{
             
         
         }
-            
-                
-        
+    }
+    /**
+     * 
+     * @param idUsuario
+     * @return 
+     */
+    public boolean verificarAlunoPorUsuarioID(int idUsuario) {
+        boolean jaExiste = false;
+        String sql = "SELECT 1 FROM alunos WHERE fk_alunos_usuarios_id = ? LIMIT 1";
+
+        try  {
+            Connection conexao = new Conexao().getConexao();
+            PreparedStatement pstm;
+            pstm = conexao.prepareStatement(sql);
+            pstm.setInt(1, idUsuario);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                jaExiste = true; // Já existe um aluno com esse ID de usuário
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar aluno por usuário: " + e.getMessage());
+        }
+
+        return jaExiste;
     }
 }
 

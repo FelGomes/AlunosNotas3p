@@ -123,7 +123,7 @@ public class Professores extends UsuarioAbstract {
                     existe = quantidade > 0;
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Erro ao verificar ID: " + e.getMessage());
         }
         return existe;
@@ -148,7 +148,7 @@ public class Professores extends UsuarioAbstract {
             } else {
                 System.out.println("Nao foi cadastrado nenhum professor!");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Erro ao cadastrar professor: " + e.getMessage());
         }
 
@@ -173,7 +173,7 @@ public class Professores extends UsuarioAbstract {
                     System.out.println("Erro ao deletar a tabela");
                 }
                 
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.out.println("Erro ao deletar professor: " + e.getMessage());
             }
         } else {
@@ -208,7 +208,7 @@ public class Professores extends UsuarioAbstract {
             mostrar.close();
             comando.close();
             conexao.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Erro ao listar professores: " + e.getMessage());
         }
     }
@@ -236,7 +236,7 @@ public class Professores extends UsuarioAbstract {
                 mostrar.close();
                 comando.close();
                 conexao.close();
-            }catch(Exception e){
+            }catch(SQLException e){
                 System.out.println("Erro ao listar professor: " + e.getMessage());
             }
         } else{
@@ -261,7 +261,7 @@ public class Professores extends UsuarioAbstract {
                 } else {
                     System.out.println("Erro ao alterar a tabela!");
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.out.println("Erro ao alterar: " + e.getMessage());
             }
         } else if (atributo.equals("turma")) {
@@ -279,7 +279,7 @@ public class Professores extends UsuarioAbstract {
                 } else {
                     System.out.println("Erro ao alterar a tabela!");
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.out.println("Erro ao alterar: " + e.getMessage());
             }
         } else if (atributo.equals("titularidade")) {
@@ -297,7 +297,7 @@ public class Professores extends UsuarioAbstract {
                 } else {
                     System.out.println("Erro ao alterar a tabela!");
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.out.println("Erro ao alterar: " + e.getMessage());
             }
             
@@ -318,9 +318,35 @@ public class Professores extends UsuarioAbstract {
                 } else {
                     System.out.println("Erro ao alterar a tabela!");
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.out.println("Erro ao alterar: " + e.getMessage());
             }
         }
+    }
+    /**
+     * 
+     * @param idUsuario
+     * @return boolean para ver se existe aluno com usuario especificado
+     */
+    public boolean verificarProfessorPorUsuarioID(int idUsuario) {
+        boolean jaExiste = false;
+        String sql = "SELECT 1 FROM professores WHERE fk_professores_usuarios_id = ? LIMIT 1";
+
+        try  {
+            Connection conexao = new Conexao().getConexao();
+            PreparedStatement pstm;
+            pstm = conexao.prepareStatement(sql);
+            pstm.setInt(1, idUsuario);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                jaExiste = true; // Já existe um professor com esse ID de usuário
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar aluno por usuário: " + e.getMessage());
+        }
+
+        return jaExiste;
     }
 }
