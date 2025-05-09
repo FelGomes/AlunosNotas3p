@@ -90,6 +90,7 @@ public class MoodleApp {
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
                                 }
                                 break;
                                 
@@ -120,7 +121,7 @@ public class MoodleApp {
                                                 aluno.inserir();
                                                 scan.nextLine();
                                             } else {
-                                                System.out.println("Nao foi possivel cadastrar aluno, pois ja existe aluno com esse ID de usuario");
+                                                System.out.println("Nao foi possivel cadastrar aluno, pois ja existe professor com esse ID de usuario");
                                             }
                                             
 
@@ -133,6 +134,7 @@ public class MoodleApp {
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dado!" + e.getMessage());
+                                    scan.nextLine();
                                 }
                                 break;
                             case 3: // inserir professor
@@ -175,6 +177,7 @@ public class MoodleApp {
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dado!" + e.getMessage());
+                                    scan.nextLine();
                                 }
                                 break;
                             case 4:
@@ -197,8 +200,8 @@ public class MoodleApp {
                                         inst.setInst_escolaridade(scan.nextLine());
                                         System.out.println("Informe o nivel da escola: ");
                                         inst.setInst_nivel(scan.nextFloat());
-                                        inst.inserir();
                                         scan.nextLine();
+                                        inst.inserir();
 
                                         System.out.println("Deseja cadastrar uma nova instituicao? ");
                                         resposta = scan.nextLine().toLowerCase().trim();
@@ -206,6 +209,7 @@ public class MoodleApp {
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
                                 }
 
                                 break;
@@ -229,7 +233,7 @@ public class MoodleApp {
                                         System.out.println("Informe a quantidade de tempo (em meses): ");
                                         matricula.setQtdTempo(scan.nextInt());
                                             
-                                         inst.listar(0);
+                                        inst.listar(0);
                                         System.out.println("\nInforme o ID da instituicao: ");
                                         matricula.setFkinstituicaoId(scan.nextInt()); scan.nextLine();
                                         existe = inst.verificarInstituicao(matricula.getFkInstituicaoId());
@@ -256,6 +260,7 @@ public class MoodleApp {
                                     }
                                 } catch(Exception e){
                                     System.out.println("Erro ao inserir os dados!");
+                                    scan.nextLine();
                                     
                                 }
 
@@ -306,6 +311,7 @@ public class MoodleApp {
                                     }
                                 } catch(Exception e) {
                                     System.out.println("Erro na entrada de dados!" + e.getLocalizedMessage());
+                                    scan.nextLine();
                                 }
                                 break;
                             case 7: // Inserir frequencias
@@ -360,6 +366,7 @@ public class MoodleApp {
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!" + e.getLocalizedMessage());
+                                    scan.nextLine();
                                     
                                 }
                                 break;
@@ -381,16 +388,28 @@ public class MoodleApp {
                                         System.out.println("Informe a quantidade de alunos:");
                                         diario.setQtdAlunos(scan.nextInt());
                                         professores.listarProfessores();
+                                        scan.nextLine();
 
                                         System.out.println("Informe o ID do professor:");
                                         diario.setFkDiariosProfessores(scan.nextInt());
-                                        
-                                        aluno.listar(0);
-                                        System.out.println("Informe o ID do aluno:");
-                                        diario.setFkDiariosAlunos(scan.nextInt());
                                         scan.nextLine();
+                                        existe = professores.verificarIdProfessor(diario.getFkDiariosProfessores());
+                                        if(existe == true){
+                                            aluno.listar(0);
+                                            System.out.println("Informe o ID do aluno:");
+                                            diario.setFkDiariosAlunos(scan.nextInt());
+                                            scan.nextLine();
+                                            existe = aluno.verificarAlunos(diario.getFkDiariosAlunos());
+                                            if(existe == true){
+                                                diario.inserir();
+                                                
+                                            }
+                                            
+                                        }else {
+                                            System.out.println("Nao existe professor com esse ID!");
+                                            scan.nextLine();
+                                        }
 
-                                        diario.inserir();
 
                                         System.out.println("Deseja inserir outro diario?");
                                         resposta = scan.nextLine().toLowerCase().trim();
@@ -398,6 +417,7 @@ public class MoodleApp {
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
                                 }
                                 break;
                             default:
@@ -490,6 +510,7 @@ public class MoodleApp {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 2: // alterar tabela aluno
@@ -562,6 +583,7 @@ public class MoodleApp {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 3: // alterar tabela professor
@@ -620,6 +642,7 @@ public class MoodleApp {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!" + e.getLocalizedMessage());
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 4:
@@ -706,6 +729,7 @@ public class MoodleApp {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 5: // alterar tabela matricula
@@ -751,6 +775,7 @@ public class MoodleApp {
                                         
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 6: // alterar tabela notas
@@ -780,44 +805,57 @@ public class MoodleApp {
                                                 if(resposta.equals("Nota um") || resposta.equals("nota um")){
                                                     System.out.println("Informe a nova nota um: ");
                                                     notas.setNota_um(scan.nextDouble());
+                                                    scan.nextLine();
                                                     notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else if(resposta.equals("Nota dois") || resposta.equals("nota dois")){
                                                     System.out.println("Informe a nova nota dois: ");
                                                     notas.setNota_dois(scan.nextDouble());
+                                                    scan.nextLine();
                                                     notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else if(resposta.equals("Nota tres") || resposta.equals("nota tres")){
                                                     System.out.println("Informe a nova nota tres: ");
                                                     notas.setNota_tres(scan.nextDouble());
+                                                    scan.nextLine();
                                                     notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else if(resposta.equals("Nota quatro") || resposta.equals("nota quatro")){
                                                     System.out.println("Informe a nova nota quatro: ");
                                                     notas.setNota_quatro(scan.nextDouble());
+                                                    scan.nextLine();
                                                     notas.alterarNota(notas.getNota_id(), resposta);    
                                                 }else if(resposta.equals("Disciplina") || resposta.equals("disciplina")){
                                                     System.out.println("Informe a nova disciplina : ");
                                                     notas.setNota_disciplina(scan.nextLine());
+                                                    scan.nextLine();
                                                     notas.alterarNota(notas.getNota_id(), resposta);    
                                                 }else if(resposta.equals("tudo")){
                                                     System.out.println("Informe a nova nota um: ");
                                                     notas.setNota_um(scan.nextDouble());
+                                                    scan.nextLine();
                                                     System.out.println("Informe a nova nota dois: ");
                                                     notas.setNota_dois(scan.nextDouble());
+                                                    scan.nextLine();
                                                     System.out.println("Informe a nova nota tres: ");
                                                     notas.setNota_tres(scan.nextDouble());
+                                                    scan.nextLine();
                                                     System.out.println("Informe a nova nota quatro: ");
                                                     notas.setNota_quatro(scan.nextDouble());
+                                                    scan.nextLine();
                                                     System.out.println("Informe a nova disciplina : ");
                                                     notas.setNota_disciplina(scan.nextLine());
+                                                    scan.nextLine();
                                                     notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else{
                                                     System.out.println("Erro de digitação tente novamente!");
                                                 }
+                                            } else {
+                                                System.out.println("Nao existe esse ID");
                                             }
-                                            System.out.println("Deseja fazer outra alteração na tabela usuarios?");
+                                            System.out.println("Deseja fazer outra alteração na tabela notas?");
                                             opc1 = scan.nextLine();
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     
                                     
@@ -846,11 +884,17 @@ public class MoodleApp {
                                                 }
                                                 System.out.println("Deseja alterar outro campo de Instituicao? ");
                                                 opc = scan.nextLine().toLowerCase().trim();
+                                            }else {
+                                                System.out.println("Nao existe esse ID!");
                                             }
+                                            System.out.println("Deseja atualizar algum outro dado?");
+                                            opc = scan.nextLine().toLowerCase().trim();
+
                                         }
                                         
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 8: //alterar tabela diario
@@ -896,6 +940,7 @@ public class MoodleApp {
                                         
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
 
@@ -948,6 +993,7 @@ public class MoodleApp {
                                         
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 2: // remover tabela aluno
@@ -975,6 +1021,7 @@ public class MoodleApp {
                                         
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 3: // emover tabela professor
@@ -997,6 +1044,7 @@ public class MoodleApp {
                                         
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 4: // remover tabela instituicao
@@ -1024,6 +1072,7 @@ public class MoodleApp {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
 
                                     break;
@@ -1053,6 +1102,7 @@ public class MoodleApp {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                     break;
                                 /*case 6: // remover tabela boletim (boletim vai entrar no case de remover e de listar somente)
@@ -1097,6 +1147,7 @@ public class MoodleApp {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Erro na entrada de dados!");
+                                        scan.nextLine();
                                     }
                                    
                                     break;
@@ -1123,6 +1174,7 @@ public class MoodleApp {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Erro na remocao dos dados " + e.getMessage());
+                                        scan.nextLine();
                                     }
                                     break;
                                 case 8: // remover tabela diario
@@ -1161,6 +1213,7 @@ public class MoodleApp {
                         }
                     } catch (Exception e) {
                         System.out.println("Erro na entrada de dados!");
+                        scan.nextLine();
                     }
                     break;
                 case 4: // case para listar
@@ -1200,6 +1253,7 @@ public class MoodleApp {
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
                                 }
                                 break;
                             case 2: // listar alunos
@@ -1230,6 +1284,7 @@ public class MoodleApp {
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
                                 }
                                 break;
                             case 3: // listar professor
@@ -1251,6 +1306,7 @@ public class MoodleApp {
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
                                 }
                                 break;
                             case 4: // listar instituicao
@@ -1269,7 +1325,7 @@ public class MoodleApp {
                                         if (idlistar == 0) {
                                             inst.listar(0);
                                         } else {
-                                            existe = aluno.verificarAlunos(idlistar);
+                                            existe = inst.verificarInstituicao(idlistar);
                                             if (existe == true) {
                                                 inst.listar(idlistar);
 
@@ -1281,6 +1337,7 @@ public class MoodleApp {
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
                                 }
                                 break;
                             case 5: // listar matricula
@@ -1308,6 +1365,7 @@ public class MoodleApp {
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
                                 }
 
                                 break;
@@ -1336,6 +1394,8 @@ public class MoodleApp {
                                     }
 
                                 } catch (Exception e) {
+                                    System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
 
                                 }
                                 break;
@@ -1349,13 +1409,21 @@ public class MoodleApp {
                                     if (opc.equals("sim") || opc.equals("s")) {
                                         notas.listarNotas(0);
                                     } else {
-                                        System.out.println("Informe o ID de professor que deseja listar: ");
+                                        System.out.println("Informe o ID de notas que deseja listar: ");
                                         int idlistar = scan.nextInt();
                                         scan.nextLine();
-                                        notas.listarNotas(idlistar);
+                                        existe = notas.verificarNota(idlistar);
+                                        if(existe == true){
+                                            notas.listarNotas(idlistar);
+                                            
+                                        } else {
+                                            System.out.println("Nao existe esse ID em notas!!");
+                                        }
                                     }
 
                                 } catch (Exception e) {
+                                    System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
 
                                 }
                                 break;
@@ -1378,11 +1446,14 @@ public class MoodleApp {
                                             existe = frequencias.verificaIdFrequencia(idListar);
                                             if (existe == true) {
                                                 frequencias.listarFrequencias(idListar);
+                                            } else {
+                                                System.out.println("Nao existe esse ID!!");
                                             }
                                         }
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Erro ao listar dados da tabela de frequencias" + e.getMessage());
+                                    scan.nextLine();
                                 }
                                 break;
                             case 9: // listar diario
@@ -1391,22 +1462,31 @@ public class MoodleApp {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("            LISTAR DIARIOS          ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                    System.out.println("Deseja listar diario? ");
+                                    System.out.println("Deseja listar todos os diario? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
-                                    if (resposta.equals("sim") || resposta.equals("s")) {
-                                        System.out.println("Informe o ID do diario:");
-                                        int id = scan.nextInt();
-                                        scan.nextLine();
-                                        diario.listar(id);
+                                    if(resposta.equals("sim") || resposta.equals("s")){
+                                        diario.listar(0);
                                     } else {
-                                        diario.listar(0); // lista todos
-
+                                        System.out.println("Informe o ID de diario para listar: ");
+                                        int idListar = scan.nextInt();
+                                        scan.nextLine();
+                                        if(idListar == 0){
+                                            diario.listar(0);
+                                        } else {
+                                            existe = diario.verificarDiario(idListar);
+                                            if(existe == true){
+                                                diario.listar(idListar);
+                                            } else {
+                                                System.out.println("Nao existe esse ID");
+                                            }
+                                        }
                                     }
 
                                     break;
                                     
                                 } catch (Exception e) {
                                     System.out.println("Erro na entrada de dados!");
+                                    scan.nextLine();
                                 }
                         }
                         System.out.println("Deseja listar outra tabela? ");

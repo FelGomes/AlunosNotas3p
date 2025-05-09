@@ -218,19 +218,26 @@ public class Professores extends UsuarioAbstract {
         boolean existe = verificarIdProfessor(idListado);
         if(existe){
             Connection conexao = new Conexao().getConexao();
-            String sintaxeSQL = "SELECT * FROM professores WHERE professores_id = ?";
-
+            String sintaxeSQL = "SELECT p.professores_id, u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_nascimento, p.professores_disciplina, professores_turma, professores_titularidade "
+                    + " FROM professores p "
+                    + " INNER JOIN usuarios u on p.fk_professores_usuarios_id = usuarios_id "
+                    + " WHERE professores_id = ?";
             try {
                 PreparedStatement comando = conexao.prepareStatement(sintaxeSQL);
                 comando.setInt(1, idListado);
                 ResultSet mostrar = comando.executeQuery();
 
                 if(mostrar.next()){
+                    System.out.println("==================================================================");
                     System.out.println("ID de Professor: " + mostrar.getString("professores_id"));
+                    System.out.println("Nome: " + mostrar.getString("usuarios_nome"));
+                    System.out.println("Sexo: " + mostrar.getString("usuarios_sexo"));
+                    System.out.println("Endereco: " + mostrar.getString("usuarios_endereco"));
+                    System.out.println("Nascimento: " + mostrar.getString("usuarios_nascimento"));
                     System.out.println("Disciplina: " + mostrar.getString("professores_disciplina"));
                     System.out.println("Turma: " + mostrar.getString("professores_turma"));
                     System.out.println("Titularidade: " + mostrar.getString("professores_titularidade"));
-                    System.out.println("==================================================");
+                    System.out.println("==================================================================");
                 }
 
                 mostrar.close();

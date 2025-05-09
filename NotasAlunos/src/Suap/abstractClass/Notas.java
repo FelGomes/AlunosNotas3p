@@ -266,7 +266,7 @@ public class Notas {
         }
 
         } else if (atributo.equals("disciplina") || atributo.equals("Disciplina")){
-            String sql = "UPDATE notas SET notas_disciplinas = ? WHERE notas_id = ?";
+            String sql = "UPDATE notas SET nota_disciplina = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
 
             try{
@@ -317,9 +317,9 @@ public class Notas {
             int alteracao = stmt.executeUpdate();
 
             if (alteracao > 0) {
-                System.out.println("ALuno cadastrado com sucesso!");
+                System.out.println("Notas inseridas com sucesso!");
             } else {
-                System.out.println("Nao foi cadastrado nenhum aluno!");
+                System.out.println("Nao foi possivel inserir notas!");
             }
             
         
@@ -360,7 +360,25 @@ public class Notas {
      */
     public void listarNotas(int nota_id){
         if(nota_id > 0){
-        String sql = "SELECT * FROM notas WHERE notas_id = ?";
+        String sql = "SELECT " +
+             "n.notas_id, " +
+             "ua.usuarios_nome AS aluno_nome, " +
+             "ua.usuarios_sexo AS aluno_sexo, " +
+             "up.usuarios_nome AS professor_nome, " +
+             "up.usuarios_sexo AS professor_sexo, " +
+             "n.nota_um, " +
+             "n.nota_dois, " +
+             "n.nota_tres, " +
+             "n.nota_quatro, " +
+             "n.nota_media, " +
+             "n.nota_disciplina " +
+             "FROM notas n " +
+             "INNER JOIN alunos a ON n.fk_notas_alunos_id = a.alunos_id " +
+             "INNER JOIN usuarios ua ON a.fk_alunos_usuarios_id = ua.usuarios_id " +
+             "INNER JOIN professores p ON n.fk_notas_professores_id = p.professores_id " +
+             "INNER JOIN usuarios up ON p.fk_professores_usuarios_id = up.usuarios_id " +
+             "where n.notas_id = ?";
+             
         PreparedStatement pstm = null;
         ResultSet rset = null;
         
@@ -370,16 +388,21 @@ public class Notas {
                 pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, nota_id);
                 pstm.executeQuery();
+                rset = pstm.executeQuery();
 
                 if(rset.next()){
                     System.out.println("==================================================");
                     System.out.println("ID: " + rset.getInt("notas_id"));
+                    System.out.println("Aluno: " + rset.getString("aluno_nome"));
+                    System.out.println("Sexo: " + rset.getString("aluno_sexo"));
                     System.out.println("Primeira nota: " + rset.getDouble("nota_um"));
                     System.out.println("Segunda nota: " + rset.getDouble("nota_dois"));
                     System.out.println("Terceira nota: " + rset.getDouble("nota_tres"));
                     System.out.println("Quarta nota: " + rset.getDouble("nota_quatro"));
                     System.out.println("Media das notas: " + rset.getDouble("nota_media"));
                     System.out.println("Disciplina referente as notas: " + rset.getString("nota_disciplina"));
+                    System.out.println("Professor: " + rset.getString("professor_nome"));
+                    System.out.println("Sexo:" + rset.getString("professor_sexo"));
                     System.out.println("==================================================");
                 
                 } else{
@@ -403,7 +426,24 @@ public class Notas {
                 }
         
         } else {
-            String sql = "SELECT * FROM notas";
+            String sql = "SELECT " +
+             "n.notas_id, " +
+             "ua.usuarios_nome AS aluno_nome, " +
+             "ua.usuarios_sexo AS aluno_sexo, " +
+             "up.usuarios_nome AS professor_nome, " +
+             "up.usuarios_sexo AS professor_sexo, " +
+             "n.nota_um, " +
+             "n.nota_dois, " +
+             "n.nota_tres, " +
+             "n.nota_quatro, " +
+             "n.nota_media, " +
+             "n.nota_disciplina " +
+             "FROM notas n " +
+             "INNER JOIN alunos a ON n.fk_notas_alunos_id = a.alunos_id " +
+             "INNER JOIN usuarios ua ON a.fk_alunos_usuarios_id = ua.usuarios_id " +
+             "INNER JOIN professores p ON n.fk_notas_professores_id = p.professores_id " +
+             "INNER JOIN usuarios up ON p.fk_professores_usuarios_id = up.usuarios_id;";
+;
             PreparedStatement pstm = null;
             ResultSet rset = null;
             
@@ -416,12 +456,16 @@ public class Notas {
                 while(rset.next()){
                     System.out.println("==================================================");
                     System.out.println("ID: " + rset.getInt("notas_id"));
+                    System.out.println("Aluno: " + rset.getString("aluno_nome"));
+                    System.out.println("Sexo: " + rset.getString("aluno_sexo"));
                     System.out.println("Primeira nota: " + rset.getDouble("nota_um"));
                     System.out.println("Segunda nota: " + rset.getDouble("nota_dois"));
                     System.out.println("Terceira nota: " + rset.getDouble("nota_tres"));
                     System.out.println("Quarta nota: " + rset.getDouble("nota_quatro"));
                     System.out.println("Media das notas: " + rset.getDouble("nota_media"));
                     System.out.println("Disciplina referente as notas: " + rset.getString("nota_disciplina"));
+                    System.out.println("Professor: " + rset.getString("professor_nome"));
+                    System.out.println("Sexo:" + rset.getString("professor_sexo"));
                     System.out.println("==================================================");
                  
                 }
