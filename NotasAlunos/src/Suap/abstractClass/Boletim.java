@@ -40,7 +40,6 @@ public class Boletim{
                 + "JOIN usuarios u ON a.fk_alunos_usuarios_id = u.usuarios_id "
                 + "LEFT JOIN notas n ON n.fk_notas_alunos_id = a.alunos_id "
                 + "LEFT JOIN frequencias f ON f.fk_frequencias_alunos_id = a.alunos_id "
-                + "AND f.frequencias_disciplinas = n.nota_disciplina "
                 + "WHERE a.alunos_id = ?";
 
             PreparedStatement pstm = null;
@@ -59,9 +58,9 @@ public class Boletim{
                     System.out.println("Sexo: " + rset.getString("usuarios_sexo"));
                     System.out.println("Sala: " + rset.getString("alunos_sala"));
                     System.out.println("Turma: " + rset.getString("alunos_turma"));
-                    System.out.println("Media: " + rset.getString("nota_media"));
-                    System.out.println("Faltas " + rset.getString("frequencias_faltas") + "%");
-                    System.out.println("Total de aulas: " + rset.getString("total_aulas"));
+                    System.out.println("Media: " +  rset.getString("nota_media"));
+                    System.out.println("Faltas " +  rset.getString("frequencias_faltas") + "%");
+                    System.out.println("Total de aulas: " +  rset.getString("total_aulas"));
                     System.out.println("Disciplina: " + rset.getString("frequencias_disciplinas"));
                     System.out.println("==================================================");
                 
