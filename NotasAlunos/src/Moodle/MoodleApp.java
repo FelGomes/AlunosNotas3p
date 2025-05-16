@@ -16,7 +16,6 @@ import Suap.abstractClass.Notas;
 import Suap.abstractClass.Professores;
 import Suap.abstractClass.UsuarioAbstract;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 /**
@@ -1382,7 +1381,7 @@ public class MoodleApp {
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                                     System.out.println("          LISTAR MATRICULAS         ");
                                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                                    System.out.println("Deseja listar matriculas? ");
+                                    System.out.println("Deseja listar uma matricula especifica? ");
                                     resposta = scan.nextLine().toLowerCase().trim();
 
                                     if (resposta.equals("sim") || resposta.equals("s")) {
