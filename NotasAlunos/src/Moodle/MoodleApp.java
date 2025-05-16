@@ -894,15 +894,32 @@ public class MoodleApp {
                                             scan.nextLine();
                                             existe = frequencias.verificaIdFrequencia(idUpdate);
                                             if (existe == true) {
-                                                System.out.println("O aluno(a) faltou a aula?");
-                                                String opcUpdate = scan.nextLine().toLowerCase().trim();
-                                                if (opcUpdate.equals("s") || opcUpdate.equals("sim")) {
+                                                System.out.println("Informe a aula total: ");
+                                                frequencias.setTotal_aulas(scan.nextInt());
+                                                scan.nextLine();
+                                                System.out.println("Informe a quantidade de aulas ministrada: ");
+                                                frequencias.setAulas_ministradas(scan.nextInt());
+                                                scan.nextLine();
+                                                System.out.println("Informe a disciplina: ");
+                                                frequencias.setFrequencias_disciplinas(scan.nextLine());
+                                                System.out.println("O aluno faltou? ");
+                                                String verdade = scan.nextLine().toLowerCase().trim();
+                                                if(verdade.equals("sim") || verdade.equals("s")){
                                                     frequencias.setFrequencias_faltas(frequencias.getAulas_ministradas());
-                                                } else {
+                                                    
+                                                    
+                                                } else if(verdade.equals("nao") || verdade.equals("n")){
                                                     frequencias.setFrequencias_faltas(0);
+                                                    
+                                                } else {
+                                                    System.out.println("Resposta errada!");
                                                 }
-                                                System.out.println("Deseja alterar outro campo de frequencia? ");
-                                                opc = scan.nextLine().toLowerCase().trim();
+                                                
+                                                
+                                                frequencias.calculaPrctgFrequencia(frequencias.getTotal_aulas(), frequencias.getFrequencias_faltas());
+                                                frequencias.alterarFrequencia(idUpdate);
+                                                
+                                                
                                             }else {
                                                 System.out.println("Nao existe esse ID!");
                                             }
