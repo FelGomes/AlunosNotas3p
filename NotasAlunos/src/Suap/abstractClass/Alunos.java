@@ -245,7 +245,7 @@ public class Alunos extends UsuarioAbstract{
     public void listar(int alunos_id){
         if(alunos_id > 0){
             String sql = "Select a.alunos_id, u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_cpf, u.usuarios_nascimento,"
-                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on a.fk_alunos_usuarios_id = u.usuarios_id Where a.alunos_id = ?";
+                    + "a.alunos_sala, a.alunos_turma, a.qtd_disciplinas FROM alunos a INNER JOIN usuarios u on a.fk_alunos_usuarios_id = u.usuarios_id Where a.alunos_id = ?";
             //Inner join para mostrar os dados do usuarios que passam chave primaria para alunos, nessa condição, especificos com id escolhido
             PreparedStatement pstm = null;
             ResultSet rset = null;
@@ -267,6 +267,7 @@ public class Alunos extends UsuarioAbstract{
                     System.out.println("Nascimento: " + rset.getString("usuarios_nascimento"));
                     System.out.println("Sala: " + rset.getString("alunos_sala"));
                     System.out.println("Turma: " + rset.getString("alunos_turma"));
+                    System.out.println("Quantidade de disciplina: " + rset.getInt("qtd_disciplinas"));
                     System.out.println("==================================================");
                 }else {
                     System.out.println("Nenhum aluno encontrado com o ID fornecido " + alunos_id);
@@ -292,7 +293,7 @@ public class Alunos extends UsuarioAbstract{
             
         } else {
             String sql = "Select a.alunos_id, u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_cpf, u.usuarios_nascimento,"
-                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on a.fk_alunos_usuarios_id = u.usuarios_id";
+                    + "a.alunos_sala, a.alunos_turma, a.qtd_disciplinas FROM alunos a INNER JOIN usuarios u on a.fk_alunos_usuarios_id = u.usuarios_id";
             //Select com inner join de alunos que recebem a chave estrangeira de usuarios, nesse caso, ira mostrar todos os dados
             PreparedStatement pstm = null;
             ResultSet rset = null;
@@ -313,6 +314,7 @@ public class Alunos extends UsuarioAbstract{
                     System.out.println("Nascimento: " + rset.getString("usuarios_nascimento"));
                     System.out.println("Sala: " + rset.getString("alunos_sala"));
                     System.out.println("Turma: " + rset.getString("alunos_turma"));
+                    System.out.println("Quantidade de disciplinas: " + rset.getInt("qtd_disciplinas"));
                     System.out.println("==================================================");
                 }
                 

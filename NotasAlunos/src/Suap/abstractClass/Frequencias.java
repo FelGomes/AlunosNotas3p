@@ -335,12 +335,14 @@ public class Frequencias {
                         + "f.frequencias_faltas, "
                         + "f.prctg_presenca, "
                         + "f.frequencias_disciplinas, "
-                        + "f.fk_frequencias_professores_id, "
-                        + "f.fk_frequencias_alunos_id, "
+                        + "uprof.usuarios_nome as professor_nome, "
+                        + "ualuno.usuarios_nome as aluno_nome, "
                         + "f.total_aulas "
                         + "FROM frequencias f "
                         + "INNER JOIN professores p ON f.fk_frequencias_professores_id = p.professores_id "
+                        + "INNER JOIN usuarios uprof ON p.fk_professores_usuarios_id = uprof.usuarios_id "
                         + "INNER JOIN alunos a ON f.fk_frequencias_alunos_id = a.alunos_id "
+                        + "INNER JOIN usuarios ualuno ON a.fk_alunos_usuarios_id = ualuno.usuarios_id " 
                         + "WHERE f.frequencias_id = ?";
                 pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, id_frequencia);
@@ -350,12 +352,14 @@ public class Frequencias {
                         + "f.frequencias_faltas, "
                         + "f.prctg_presenca, "
                         + "f.frequencias_disciplinas, "
-                        + "f.fk_frequencias_professores_id, "
-                        + "f.fk_frequencias_alunos_id, "
+                        + "uprof.usuarios_nome as professor_nome, "
+                        + "ualuno.usuarios_nome as aluno_nome, "
                         + "f.total_aulas "
                         + "FROM frequencias f "
                         + "INNER JOIN professores p ON f.fk_frequencias_professores_id = p.professores_id "
-                        + "INNER JOIN alunos a ON f.fk_frequencias_alunos_id = a.alunos_id";
+                        + "INNER JOIN usuarios uprof ON p.fk_professores_usuarios_id = uprof.usuarios_id "
+                        + "INNER JOIN alunos a ON f.fk_frequencias_alunos_id = a.alunos_id "
+                        + "INNER JOIN usuarios ualuno ON a.fk_alunos_usuarios_id = ualuno.usuarios_id ";
                 pstm = conexao.prepareStatement(sql);
             }
 
@@ -369,9 +373,9 @@ public class Frequencias {
                 System.out.println("Faltas: " + rset.getInt("frequencias_faltas"));
                 System.out.println("% Presença: " + rset.getInt("prctg_presenca"));
                 System.out.println("Disciplina: " + rset.getString("frequencias_disciplinas")); // CORRETO
-                System.out.println("ID Professor(a): " + rset.getInt("fk_frequencias_professores_id"));
-                System.out.println("ID Aluno(a): " + rset.getInt("fk_frequencias_alunos_id"));
-                System.out.println("Total de aulas: " + rset.getInt("total_aulas"));
+                System.out.println("Nome do Professor(a): " + rset.getString("professor_nome"));
+                System.out.println("Nome do Aluno(a): " + rset.getString("aluno_nome"));
+                System.out.println("Total de aulas: " + rset.getString("total_aulas"));
                 System.out.println("--------------------------------------------------");
             }
 
@@ -379,8 +383,8 @@ public class Frequencias {
                 System.out.println("ID de Frequência não encontrado");
             }
 
-        } catch (Exception e) {
-            System.out.println("Erro ao listar os dados da tabela frequencias");
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar os dados da tabela frequencias" + e.getMessage());
         }
     }
     /**
