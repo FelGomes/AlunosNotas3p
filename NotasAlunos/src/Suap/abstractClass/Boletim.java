@@ -59,7 +59,7 @@ public class Boletim{
                     System.out.println("Sala: " + rset.getString("alunos_sala"));
                     System.out.println("Turma: " + rset.getString("alunos_turma"));
                     System.out.println("Media: " +  rset.getString("nota_media"));
-                    System.out.println("Faltas " +  rset.getString("frequencias_faltas") + "%");
+                    System.out.println("Faltas " +  rset.getString("frequencias_faltas"));
                     System.out.println("Total de aulas: " +  rset.getString("total_aulas"));
                     System.out.println("Disciplina: " + rset.getString("frequencias_disciplinas"));
                     System.out.println("==================================================");
