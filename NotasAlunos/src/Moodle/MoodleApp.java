@@ -755,16 +755,30 @@ public class MoodleApp {
 
                                                 System.out.println("Informe a nova quantidade de tempo: ");
                                                 matricula.setQtdTempo(scan.nextInt()); scan.nextLine();
-
+                                                inst.listar(0);
                                                 System.out.println("Informe o novo ID da instituicao: ");
-                                                matricula.setFkinstituicaoId(scan.nextInt()); scan.nextLine();
-
-                                                System.out.println("Informe o novo ID do aluno: ");
-                                                matricula.setFkAlunoId(scan.nextInt());
+                                                matricula.setFkinstituicaoId(scan.nextInt());
+                                                existe = inst.verificarInstituicao(matricula.getFkInstituicaoId());
+                                                if(existe == true){
+                                                    aluno.listar(0);
+                                                    System.out.println("Informe o novo ID do aluno: ");
+                                                    matricula.setFkAlunoId(scan.nextInt());
+                                                    scan.nextLine();
+                                                    boolean existe1 = aluno.verificarAlunos(matricula.getFkAlunoId());
+                                                    if(existe1 == true){
+                                                        scan.nextLine();
+                                                        matricula.alterar(matricula.getMatriculaId());
+                                                        
+                                                    } else {
+                                                        System.out.println("Nao existe esse ID para Aluno!");
+                                                    }
+                                                    
+                                                } else {
+                                                    System.out.println("Nao existe ID para essa Instituicao");
+                                                }
 
                                                 scan.nextLine();
 
-                                                matricula.alterar(matricula.getMatriculaId());
 
                                             } else {
                                                 System.out.println("ID de matricula nao encontrada.");
