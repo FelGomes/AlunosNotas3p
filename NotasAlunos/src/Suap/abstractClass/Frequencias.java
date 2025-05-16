@@ -252,70 +252,53 @@ public class Frequencias {
 
     /**
      * Método para fazer a atualização dos valores das colunas total_aulas, aulas_ministradas e frequencias_faltas da tabela frequencias.
+     * @param frequencias_id
      * @param id_frequencia Identificador de frequencia.
      * @param atributo
      */
-    public void alterarFrequencia(int id_frequencia, String atributo) {
-        if (atributo.equals("total_aulas")) {
-            String sql = "UPDATE frequencias SET total_aulas = ? WHERE frequencias_id = ?";
-            PreparedStatement pstm = null;
-            try {
-                Connection conexao = new Conexao().getConexao();
-                pstm = conexao.prepareStatement(sql);
-                pstm.setInt(1, this.getTotal_aulas());
-                pstm.setInt(2, frequencias_id);
-                pstm.execute();
-            } catch (SQLException e) {
-                System.out.println("Erro ao alterar o atributos total_aulas da tabela frequencias" + e.getMessage());
-            } finally {
-                try {
-                    if (pstm != null) {
-                        pstm.close();
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                }
+  
+    public void alterarFrequencia(int frequencias_id) {
+        String sql = "UPDATE frequencias SET total_aulas = ?, aulas_ministradas = ?, frequencias_faltas = ?, prctg_presenca = ? WHERE frequencias_id = ?";
+        PreparedStatement pstm = null;
+
+        try {
+            // Validação básica
+            if (this.getFrequencias_faltas() > this.getAulas_ministradas()) {
+                System.out.println("Erro: faltas não podem ser maiores que aulas ministradas.");
+                return;
             }
-        } else if (atributo.equals("aulas_ministradas")) {
-            String sql = "UPDATE frequencias SET aulas_ministradas = ? WHERE frequencias_id = ?";
-            PreparedStatement pstm = null;
-            try {
-                Connection conexao = new Conexao().getConexao();
-                pstm = conexao.prepareStatement(sql);
-                pstm.setInt(1, this.aulas_ministradas);
-                pstm.setInt(2, frequencias_id);
-                pstm.execute();
-            } catch (SQLException e) {
-                System.out.println("Erro ao alterar o atributo aulas_ministradas da tabela frequencias" + e.getMessage());
-            } finally {
-                try {
-                    if (pstm != null);
-                    pstm.close();
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                }
+
+            Connection conexao = new Conexao().getConexao();
+            pstm = conexao.prepareStatement(sql);
+
+            pstm.setInt(1, this.getTotal_aulas());
+            pstm.setInt(2, this.getAulas_ministradas());
+            pstm.setInt(3, this.getFrequencias_faltas()); // número real de faltas
+            pstm.setFloat(4, this.calculaPrctgFrequencia(this.getTotal_aulas(), this.getFrequencias_faltas())); // % presença
+            pstm.setInt(5, frequencias_id);
+
+            int alteracao = pstm.executeUpdate();
+
+            if (alteracao > 0) {
+                System.out.println("Tabela `frequencias` alterada com sucesso!");
+            } else {
+                System.out.println("Nenhuma linha foi alterada na tabela `frequencias`.");
             }
-        } else if (atributo.equals("frequencias_faltas")) {
-            String sql = "UPDATE frequencias SET frequencias_faltas = ? WHERE frequencias_faltas = ?";
-            PreparedStatement pstm = null;
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao alterar a tabela `frequencias`: " + e.getMessage());
+        } finally {
             try {
-                Connection conexao = new Conexao().getConexao();
-                pstm = conexao.prepareStatement(sql);
-                pstm.setInt(1, this.frequencias_faltas);
-                pstm.setInt(2, frequencias_id);
-                pstm.execute();
-            } catch (SQLException e) {
-                System.out.println("Erro ao alterar o atributo frequencias_faltas da tabela frequencias" + e.getMessage());
-            } finally {
-                try {
-                    if (pstm != null);
+                if (pstm != null) {
                     pstm.close();
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
                 }
+            } catch (SQLException e) {
+                System.out.println("Erro ao fechar o PreparedStatement: " + e.getMessage());
             }
         }
     }
+
+
 
     /**
      * Método para fazer mostrar/listar todos os dados de frequências.

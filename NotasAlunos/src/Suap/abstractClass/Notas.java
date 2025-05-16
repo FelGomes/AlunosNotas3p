@@ -108,7 +108,7 @@ public class Notas {
     
     public double calcularMedia(double nota_um, double nota_dois, double nota_tres, double nota_quatro){
         
-       double nota_calculada = (this.getNota_um() + this.getNota_dois() + this.getNota_tres() + this.getNota_quatro()) / 4;
+       double nota_calculada = (this.getNota_um() + this.getNota_dois() + this.getNota_tres() + this.getNota_quatro()) / 4.0;
        
        return nota_calculada;
         
@@ -129,7 +129,7 @@ public class Notas {
             Connection conexao = new Conexao().getConexao();
             pstm = conexao.prepareStatement(sql);
             pstm.setDouble(1, this.getNota_um());
-            pstm.setDouble(2, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+            pstm.setDouble(2, this.calcularMedia(nota_um, nota_dois, nota_tres, nota_quatro));
             pstm.setInt(3, nota_id);
              int alteracao = pstm.executeUpdate();
                 
@@ -153,7 +153,7 @@ public class Notas {
                 Connection conexao = new Conexao().getConexao();
                 pstm = conexao.prepareStatement(sql);
                 pstm.setDouble(1, this.getNota_dois());
-                pstm.setDouble(2, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+                pstm.setDouble(2, this.calcularMedia(nota_um, nota_dois, nota_tres, nota_quatro));
                 pstm.setInt(3, nota_id);
                 int alteracao = pstm.executeUpdate();
                 
@@ -179,7 +179,7 @@ public class Notas {
                 Connection conexao = new Conexao().getConexao();
                 pstm = conexao.prepareStatement(sql);
                 pstm.setDouble(1, this.getNota_tres());
-                pstm.setDouble(2, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+                pstm.setDouble(2, this.calcularMedia(nota_um, nota_dois, nota_tres, nota_quatro));
                 pstm.setInt(3, nota_id);
                  int alteracao = pstm.executeUpdate();
                 
@@ -203,7 +203,7 @@ public class Notas {
                 Connection conexao = new Conexao().getConexao();
                 pstm = conexao.prepareStatement(sql);
                 pstm.setDouble(1, this.getNota_quatro());
-                pstm.setDouble(2, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+                pstm.setDouble(2, this.calcularMedia(nota_um, nota_dois, nota_tres, nota_quatro));
                 pstm.setInt(3, nota_id);
                 int alteracao = pstm.executeUpdate();
                 
@@ -244,7 +244,7 @@ public class Notas {
         
         
         }else if (atributo.equals("tudo") || atributo.equals("Tudo")){
-            String sql = "UPDATE notas SET nota_um = ?, nota_dois = ?, nota_tres = ?, nota_quatro = ?, nota_media = ?, nota_disciplina WHERE notas_id = ?";
+            String sql = "UPDATE notas SET nota_um = ?, nota_dois = ?, nota_tres = ?, nota_quatro = ?, nota_media = ?, nota_disciplina = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
 
             try{
@@ -254,7 +254,7 @@ public class Notas {
                 pstm.setDouble(2, this.getNota_dois());
                 pstm.setDouble(3, this.getNota_tres());
                 pstm.setDouble(4, this.getNota_quatro());
-                pstm.setDouble(5, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+                pstm.setDouble(5, this.calcularMedia(nota_um, nota_dois, nota_tres, nota_quatro));
                 pstm.setString(6, this.getNota_disciplina());
                 
                 pstm.setInt(7, nota_id);
