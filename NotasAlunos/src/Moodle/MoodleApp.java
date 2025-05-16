@@ -820,21 +820,25 @@ public class MoodleApp {
                                                     System.out.println("Informe a nova nota um: ");
                                                     notas.setNota_um(scan.nextDouble());
                                                     scan.nextLine();
+                                                    notas.calcularMedia(notas.getNota_um(), notas.getNota_dois(), notas.getNota_tres(), notas.getNota_quatro());
                                                     notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else if(resposta.equals("Nota dois") || resposta.equals("nota dois")){
                                                     System.out.println("Informe a nova nota dois: ");
                                                     notas.setNota_dois(scan.nextDouble());
                                                     scan.nextLine();
+                                                    notas.calcularMedia(notas.getNota_um(), notas.getNota_dois(), notas.getNota_tres(), notas.getNota_quatro());
                                                     notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else if(resposta.equals("Nota tres") || resposta.equals("nota tres")){
                                                     System.out.println("Informe a nova nota tres: ");
                                                     notas.setNota_tres(scan.nextDouble());
                                                     scan.nextLine();
+                                                    notas.calcularMedia(notas.getNota_um(), notas.getNota_dois(), notas.getNota_tres(), notas.getNota_quatro());
                                                     notas.alterarNota(notas.getNota_id(), resposta);
                                                 }else if(resposta.equals("Nota quatro") || resposta.equals("nota quatro")){
                                                     System.out.println("Informe a nova nota quatro: ");
                                                     notas.setNota_quatro(scan.nextDouble());
                                                     scan.nextLine();
+                                                    notas.calcularMedia(notas.getNota_um(), notas.getNota_dois(), notas.getNota_tres(), notas.getNota_quatro());
                                                     notas.alterarNota(notas.getNota_id(), resposta);    
                                                 }else if(resposta.equals("Disciplina") || resposta.equals("disciplina")){
                                                     System.out.println("Informe a nova disciplina : ");
@@ -854,6 +858,7 @@ public class MoodleApp {
                                                     System.out.println("Informe a nova nota quatro: ");
                                                     notas.setNota_quatro(scan.nextDouble());
                                                     scan.nextLine();
+                                                    notas.calcularMedia(notas.getNota_um(), notas.getNota_dois(), notas.getNota_tres(), notas.getNota_quatro());
                                                     System.out.println("Informe a nova disciplina : ");
                                                     notas.setNota_disciplina(scan.nextLine());
                                                     scan.nextLine();

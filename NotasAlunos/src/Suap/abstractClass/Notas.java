@@ -122,14 +122,15 @@ public class Notas {
      */
     public void alterarNota (int nota_id, String atributo){
         if(atributo.equals("nota um") || atributo.equals("Nota um")){
-        String sql = "UPDATE notas SET nota_um = ? WHERE notas_id = ?";
+        String sql = "UPDATE notas SET nota_um = ?, nota_media = ? WHERE notas_id = ?";
         PreparedStatement pstm = null;
         
         try{
             Connection conexao = new Conexao().getConexao();
             pstm = conexao.prepareStatement(sql);
             pstm.setDouble(1, this.getNota_um());
-            pstm.setInt(2, nota_id);
+            pstm.setDouble(2, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+            pstm.setInt(3, nota_id);
              int alteracao = pstm.executeUpdate();
                 
                 if (alteracao > 0){
@@ -145,14 +146,15 @@ public class Notas {
             } 
         
         } else if (atributo.equals("nota dois") || atributo.equals("Nota dois")){
-            String sql = "UPDATE notas SET nota_dois = ? WHERE notas_id = ?";
+            String sql = "UPDATE notas SET nota_dois = ?, nota_media = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
 
             try{
                 Connection conexao = new Conexao().getConexao();
                 pstm = conexao.prepareStatement(sql);
                 pstm.setDouble(1, this.getNota_dois());
-                pstm.setInt(2, nota_id);
+                pstm.setDouble(2, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+                pstm.setInt(3, nota_id);
                 int alteracao = pstm.executeUpdate();
                 
                 if (alteracao > 0){
@@ -170,14 +172,15 @@ public class Notas {
         
             
         } else if(atributo.equals("nota tres") || atributo.equals("Nota tres")){
-            String sql = "UPDATE notas SET nota_tres = ? WHERE notas_id = ?";
+            String sql = "UPDATE notas SET nota_tres = ?, nota_media = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
 
             try{
                 Connection conexao = new Conexao().getConexao();
                 pstm = conexao.prepareStatement(sql);
                 pstm.setDouble(1, this.getNota_tres());
-                pstm.setInt(2, nota_id);
+                pstm.setDouble(2, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+                pstm.setInt(3, nota_id);
                  int alteracao = pstm.executeUpdate();
                 
                 if (alteracao > 0){
@@ -193,14 +196,15 @@ public class Notas {
             } 
 
         } else if (atributo.equals("nota quatro") || atributo.equals("Nota quatro")){
-            String sql = "UPDATE notas SET nota_quatro = ? WHERE notas_id = ?";
+            String sql = "UPDATE notas SET nota_quatro = ?, nota_media = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
 
             try{
                 Connection conexao = new Conexao().getConexao();
                 pstm = conexao.prepareStatement(sql);
                 pstm.setDouble(1, this.getNota_quatro());
-                pstm.setInt(2, nota_id);
+                pstm.setDouble(2, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+                pstm.setInt(3, nota_id);
                 int alteracao = pstm.executeUpdate();
                 
                 if (alteracao > 0){
@@ -240,7 +244,7 @@ public class Notas {
         
         
         }else if (atributo.equals("tudo") || atributo.equals("Tudo")){
-            String sql = "UPDATE notas SET nota_um = ?, nota_dois = ?, nota_tres = ?, nota_quatro = ? WHERE notas_id = ?";
+            String sql = "UPDATE notas SET nota_um = ?, nota_dois = ?, nota_tres = ?, nota_quatro = ?, nota_media = ?, nota_disciplina WHERE notas_id = ?";
             PreparedStatement pstm = null;
 
             try{
@@ -250,7 +254,10 @@ public class Notas {
                 pstm.setDouble(2, this.getNota_dois());
                 pstm.setDouble(3, this.getNota_tres());
                 pstm.setDouble(4, this.getNota_quatro());
-                pstm.setInt(5, nota_id);
+                pstm.setDouble(5, this.calcularMedia(this.getNota_um(), this.getNota_dois(), this.getNota_tres(), this.getNota_quatro()));
+                pstm.setString(6, this.getNota_disciplina());
+                
+                pstm.setInt(7, nota_id);
                 int alteracao = pstm.executeUpdate();
                 
                 if (alteracao > 0){
