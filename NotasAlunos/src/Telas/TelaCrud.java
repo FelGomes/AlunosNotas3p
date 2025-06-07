@@ -28,8 +28,35 @@ public class TelaCrud {
         
         final JFrame jFrameInicial = new JFrame("Sistema de notas");
         
-        jFrameInicial.setBounds(200, 170, 500, 200);
+        jFrameInicial.setBounds(200, 170, 650, 450);
         jFrameInicial.setLayout(null);
+        
+        JLabel labelInserir = new JLabel("   Inserir");
+        labelInserir.setBounds(20, 20, 100, 100);
+        labelInserir.setHorizontalAlignment(JLabel.CENTER);
+        
+        JButton buttonInserir = new JButton();
+        buttonInserir.setBounds(150,175, 100, 50);
+        buttonInserir.add(labelInserir);
+        jFrameInicial.add(buttonInserir);
+        
+        JLabel labelEditar = new JLabel("   Editar");
+        labelEditar.setBounds(20, 20, 100, 100);
+        labelEditar.setHorizontalAlignment(JLabel.CENTER);
+        
+        JButton buttonEditar = new JButton();
+        buttonEditar.setBounds(275, 175, 100, 50);
+        buttonEditar.add(labelEditar);
+        jFrameInicial.add(buttonEditar);
+        
+        JLabel labelListar = new JLabel("   Listar");
+        labelListar.setBounds(20, 20, 100, 100);
+        labelListar.setHorizontalAlignment(JLabel.CENTER);
+        
+        JButton buttonListar = new JButton();
+        buttonListar.setBounds(400, 175, 100, 50);
+        buttonListar.add(labelListar);
+        jFrameInicial.add(buttonListar);
         
         jFrameInicial.setVisible(true);
         
