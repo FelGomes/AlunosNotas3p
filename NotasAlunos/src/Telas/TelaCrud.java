@@ -58,6 +58,8 @@ public class TelaCrud {
         buttonListar.add(labelListar);
         jFrameInicial.add(buttonListar);
         
+        
+        // ainda falta adicionar as funcionalidades!
         jFrameInicial.setVisible(true);
         
     }
