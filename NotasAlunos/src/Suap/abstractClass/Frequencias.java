@@ -16,8 +16,10 @@ public class Frequencias {
     private int frequencias_id, total_aulas, aulas_ministradas, frequencias_faltas;
     private float prctg_presenca;
     private String frequencias_disciplinas;
-    private Professores professores;
-    private Alunos aluno;
+    private Professores professores = new Professores();
+    private Alunos aluno = new Alunos();
+    private int alunos_id, professores_id;
+    
 
     /**
      * Construtor vazio com todas as informações de Frequencias.
@@ -174,25 +176,46 @@ public class Frequencias {
      */
     public void setProfessores(Professores professores) {
         this.professores = professores;
+        
     }
+
+    public int getAlunos_id() {
+        return alunos_id;
+    }
+
+    public void setAlunos_id(int alunos_id) {
+        this.alunos_id = alunos_id;
+    }
+
+    public int getProfessores_id() {
+        return professores_id;
+    }
+
+    public void setProfessores_id(int professores_id) {
+        this.professores_id = professores_id;
+    }
+    
+    
+    
+    
 
     /**
      * Método para fazer a inserção dos valores em todas colunas da tabela frequencias, com excessão frequencias_id.
-     * @param id_frequencia Identificador de frequencia.
+     *
      */
-    public void inserirFrequencia(int id_frequencia) {
+    public void inserirFrequencia() {
         Connection conexao = new Conexao().getConexao();
-        String sql = "INSERT INTO frequencias (total_aulas, aulas_ministradas, frequencias_faltas, prctg_presenca, frequencias_disciplinas,fk_frequencias_professores_id, fk_frequencias_alunos_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO frequencias (total_aulas, aulas_ministradas, frequencias_faltas, prctg_presenca, frequencias_disciplinas,fk_frequencias_professores_id, fk_frequencias_alunos_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt;
             stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, this.getTotal_aulas());
             stmt.setInt(2, this.getAulas_ministradas());
             stmt.setInt(3, this.getFrequencias_faltas());
-            stmt.setFloat(4, this.getPrctg_presenca());
+            stmt.setFloat(4, this.calculaPrctgFrequencia(this.getTotal_aulas(), this.getFrequencias_faltas()));
             stmt.setString(5, this.getFrequencias_disciplinas());
-            stmt.setInt(6, this.getProfessores().getId());
-            stmt.setInt(7, this.getAluno().getId());
+            stmt.setInt(6, this.getProfessores_id());
+            stmt.setInt(7, this.getAlunos_id());
             int alteracao = stmt.executeUpdate();
 
             if (alteracao > 0) {
@@ -200,7 +223,7 @@ public class Frequencias {
             } else {
                 System.out.println("Nao foi inserida nenhuma frequencia");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Erro ao inserir valores na tabela frequencia" + e.getMessage());
         }
     }
@@ -229,122 +252,124 @@ public class Frequencias {
 
     /**
      * Método para fazer a atualização dos valores das colunas total_aulas, aulas_ministradas e frequencias_faltas da tabela frequencias.
+     * @param frequencias_id
      * @param id_frequencia Identificador de frequencia.
      * @param atributo
      */
-    public void alterarFrequencia(int id_frequencia, String atributo) {
-        if (atributo.equals("total_aulas")) {
-            String sql = "UPDATE frequencias SET total_aulas = ? WHERE frequencias_id = ?";
-            PreparedStatement pstm = null;
-            try {
-                Connection conexao = new Conexao().getConexao();
-                pstm = conexao.prepareStatement(sql);
-                pstm.setInt(1, this.getTotal_aulas());
-                pstm.setInt(2, frequencias_id);
-                pstm.execute();
-            } catch (SQLException e) {
-                System.out.println("Erro ao alterar o atributos total_aulas da tabela frequencias" + e.getMessage());
-            } finally {
-                try {
-                    if (pstm != null) {
-                        pstm.close();
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                }
+  
+    public void alterarFrequencia(int frequencias_id) {
+        String sql = "UPDATE frequencias SET total_aulas = ?, aulas_ministradas = ?, frequencias_faltas = ?, prctg_presenca = ? WHERE frequencias_id = ?";
+        PreparedStatement pstm = null;
+
+        try {
+            // Validação básica
+            if (this.getFrequencias_faltas() > this.getAulas_ministradas()) {
+                System.out.println("Erro: faltas não podem ser maiores que aulas ministradas.");
+                return;
             }
-        } else if (atributo.equals("aulas_ministradas")) {
-            String sql = "UPDATE frequencias SET aulas_ministradas = ? WHERE frequencias_id = ?";
-            PreparedStatement pstm = null;
-            try {
-                Connection conexao = new Conexao().getConexao();
-                pstm = conexao.prepareStatement(sql);
-                pstm.setInt(1, this.aulas_ministradas);
-                pstm.setInt(2, frequencias_id);
-                pstm.execute();
-            } catch (SQLException e) {
-                System.out.println("Erro ao alterar o atributo aulas_ministradas da tabela frequencias" + e.getMessage());
-            } finally {
-                try {
-                    if (pstm != null);
-                    pstm.close();
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                }
+
+            Connection conexao = new Conexao().getConexao();
+            pstm = conexao.prepareStatement(sql);
+
+            pstm.setInt(1, this.getTotal_aulas());
+            pstm.setInt(2, this.getAulas_ministradas());
+            pstm.setInt(3, this.getFrequencias_faltas()); // número real de faltas
+            pstm.setFloat(4, this.calculaPrctgFrequencia(this.getTotal_aulas(), this.getFrequencias_faltas())); // % presença
+            pstm.setInt(5, frequencias_id);
+
+            int alteracao = pstm.executeUpdate();
+
+            if (alteracao > 0) {
+                System.out.println("Tabela `frequencias` alterada com sucesso!");
+            } else {
+                System.out.println("Nenhuma linha foi alterada na tabela `frequencias`.");
             }
-        } else if (atributo.equals("frequencias_faltas")) {
-            String sql = "UPDATE frequencias SET frequencias_faltas = ? WHERE frequencias_faltas = ?";
-            PreparedStatement pstm = null;
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao alterar a tabela `frequencias`: " + e.getMessage());
+        } finally {
             try {
-                Connection conexao = new Conexao().getConexao();
-                pstm = conexao.prepareStatement(sql);
-                pstm.setInt(1, this.frequencias_faltas);
-                pstm.setInt(2, frequencias_id);
-                pstm.execute();
-            } catch (SQLException e) {
-                System.out.println("Erro ao alterar o atributo frequencias_faltas da tabela frequencias" + e.getMessage());
-            } finally {
-                try {
-                    if (pstm != null);
+                if (pstm != null) {
                     pstm.close();
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
                 }
+            } catch (SQLException e) {
+                System.out.println("Erro ao fechar o PreparedStatement: " + e.getMessage());
             }
         }
     }
+
+
 
     /**
      * Método para fazer mostrar/listar todos os dados de frequências.
      * @param id_frequencia Identificador de frequencia.
      */
     public void listarFrequencias(int id_frequencia) {
-        if (id_frequencia > 0) {
-            String sql = "SELECT f.frequencias_id, f.aulas_ministradas, f.frequencias_faltas, f.prctg_presenca, frequencias_disciplinas, f.fk_frequencias_professores_id, f.fk_frequencias_alunos_id, f.total_aulas"
-                    + "FROM frequencias "
-                    + "INNER JOIN professores p"
-                    + "ON f.fk_frequencias_professores_id = p.professores_id"
-                    + "INNER JOIN alunos a"
-                    + "ON f.fk_frequencias_alunos_id = a.alunos_id"
-                    + "WHERE  f.id_frequencia = ?";
-            PreparedStatement pstm = null;
-            ResultSet rset = null;
+        String sql;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
 
-            try {
-                Connection conexao = new Conexao().getConexao();
+        try {
+            Connection conexao = new Conexao().getConexao();
+
+            if (id_frequencia > 0) {
+                sql = "SELECT f.frequencias_id, "
+                        + "f.aulas_ministradas, "
+                        + "f.frequencias_faltas, "
+                        + "f.prctg_presenca, "
+                        + "f.frequencias_disciplinas, "
+                        + "uprof.usuarios_nome as professor_nome, "
+                        + "ualuno.usuarios_nome as aluno_nome, "
+                        + "f.total_aulas "
+                        + "FROM frequencias f "
+                        + "INNER JOIN professores p ON f.fk_frequencias_professores_id = p.professores_id "
+                        + "INNER JOIN usuarios uprof ON p.fk_professores_usuarios_id = uprof.usuarios_id "
+                        + "INNER JOIN alunos a ON f.fk_frequencias_alunos_id = a.alunos_id "
+                        + "INNER JOIN usuarios ualuno ON a.fk_alunos_usuarios_id = ualuno.usuarios_id " 
+                        + "WHERE f.frequencias_id = ?";
                 pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, id_frequencia);
-                pstm.executeQuery();
-
-                if (rset.next()) {
-                    System.out.println("ID: " + rset.getInt("frequencias_id"));
-                    System.out.println("Aulas ministradas: " + rset.getInt("aulas_ministradas"));
-                    System.out.println("Faltas: " + rset.getInt("frequencias_faltas"));
-                    System.out.println("% Frequencia: " + rset.getInt("prctg_presenca"));
-                    System.out.println("Disciplina" + rset.getInt("frequencias_disciplinas"));
-                    System.out.println("`ID Professor(a): " + rset.getInt("fk_frequencias_professores_id"));
-                    System.out.println("`ID Aluno(a): " + rset.getInt("fk_frequencias_alunos_id"));
-                } else {
-                    System.out.println("ID de Frequencia não encontrado");
-
-                }
-            } catch (Exception e) {
-                System.out.println("Erro ao listar os dados da tabela frequencias" + e.getMessage());
-            } finally {
-                try {
-                    if (rset != null) {
-                        rset.close();
-                    }
-                    if (pstm != null) {
-                        pstm.close();
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                }
+            } else {
+                sql = "SELECT f.frequencias_id, "
+                        + "f.aulas_ministradas, "
+                        + "f.frequencias_faltas, "
+                        + "f.prctg_presenca, "
+                        + "f.frequencias_disciplinas, "
+                        + "uprof.usuarios_nome as professor_nome, "
+                        + "ualuno.usuarios_nome as aluno_nome, "
+                        + "f.total_aulas "
+                        + "FROM frequencias f "
+                        + "INNER JOIN professores p ON f.fk_frequencias_professores_id = p.professores_id "
+                        + "INNER JOIN usuarios uprof ON p.fk_professores_usuarios_id = uprof.usuarios_id "
+                        + "INNER JOIN alunos a ON f.fk_frequencias_alunos_id = a.alunos_id "
+                        + "INNER JOIN usuarios ualuno ON a.fk_alunos_usuarios_id = ualuno.usuarios_id ";
+                pstm = conexao.prepareStatement(sql);
             }
+
+            rset = pstm.executeQuery();
+
+            boolean encontrou = false;
+            while (rset.next()) {
+                encontrou = true;
+                System.out.println("ID: " + rset.getInt("frequencias_id"));
+                System.out.println("Aulas ministradas: " + rset.getInt("aulas_ministradas"));
+                System.out.println("Faltas: " + rset.getInt("frequencias_faltas"));
+                System.out.println("% Presença: " + rset.getInt("prctg_presenca"));
+                System.out.println("Disciplina: " + rset.getString("frequencias_disciplinas")); // CORRETO
+                System.out.println("Nome do Professor(a): " + rset.getString("professor_nome"));
+                System.out.println("Nome do Aluno(a): " + rset.getString("aluno_nome"));
+                System.out.println("Total de aulas: " + rset.getString("total_aulas"));
+                System.out.println("--------------------------------------------------");
+            }
+
+            if (!encontrou && id_frequencia > 0) {
+                System.out.println("ID de Frequência não encontrado");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar os dados da tabela frequencias" + e.getMessage());
         }
     }
-
     /**
      * Método para fazer a verificação do Identificador de frequencia no banco de dados.
      * @param id_frequencia Identificador de frequencia.

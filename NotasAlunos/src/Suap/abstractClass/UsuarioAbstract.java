@@ -86,6 +86,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             pstm = conexao.prepareStatement(sql);
             pstm.setString(1, cpf);
             pstm.executeQuery();
+            rset = pstm.executeQuery();
             
             if(rset.next()){
                     System.out.println("==================================================");
@@ -121,14 +122,16 @@ public class UsuarioAbstract extends PessoaAbstract{
      */
     public void inserir() throws SQLException{
         Connection conexao = new Conexao().getConexao();
-        String sql = "Insert into usuarios values (usuarios_nome, usuarios_endereco, usuarios_cpf, usuarios_sexo, usuarios_nascimento) values (?,?,?,?,?)";
+        String sql = "Insert into usuarios (usuarios_nome, usuarios_endereco, usuarios_cpf, usuarios_sexo, usuarios_nascimento) values (?,?,?,?,?)";
         try {
-            PreparedStatement stmt = null;
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, this.getNome());
             stmt.setString(2, this.getEndereco());
             stmt.setString(3, this.getCpf());
-            stmt.setString(4, String.valueOf(this.getSexo()));
+            stmt.setString(4, this.getSexo());
             stmt.setString(5, this.getDataNascimento());
+            stmt.executeUpdate();
+            
         } catch (Exception e) {
             System.out.println("Erro ao fazer a inserção de dados no Banco! " + e.getMessage());
         }
@@ -149,10 +152,15 @@ public class UsuarioAbstract extends PessoaAbstract{
         try {
             Connection conexao = new Conexao().getConexao();
             pstm = conexao.prepareStatement(sql);
+            pstm = conexao.prepareStatement(sql);
             pstm.setInt(1, usuario_id);
+            int alteracao = pstm.executeUpdate();
             
-            pstm.execute();
-            
+            if (alteracao > 0){
+                System.out.println("Tabela deletada com sucesso!");
+            } else {
+                System.out.println("Erro ao deletar a tabela");
+            }
             
             
         } catch (Exception e) {
@@ -180,6 +188,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getNome());
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -203,6 +212,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getEndereco());
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -225,6 +235,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getCpf());
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -247,6 +258,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, String.valueOf(this.getSexo()));
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -269,6 +281,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getDataNascimento());
                 pstm.setInt(2, usuario_id);
                 pstm.execute();
@@ -291,6 +304,7 @@ public class UsuarioAbstract extends PessoaAbstract{
             PreparedStatement pstm = null;
             try {
                 Connection conexao = new Conexao().getConexao();
+                pstm = conexao.prepareStatement(sql);
                 pstm.setString(1, this.getNome());
                 pstm.setString(2, this.getEndereco());
                 pstm.setString(3, this.getCpf());
@@ -327,6 +341,7 @@ public class UsuarioAbstract extends PessoaAbstract{
                 pstm = conexao.prepareStatement(sql);
                 pstm.setInt(1, usuario_id);
                 pstm.executeQuery();
+                rset = pstm.executeQuery();
                 
                 if(rset.next()){
                     System.out.println("==================================================");

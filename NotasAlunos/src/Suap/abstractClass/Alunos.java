@@ -245,7 +245,7 @@ public class Alunos extends UsuarioAbstract{
     public void listar(int alunos_id){
         if(alunos_id > 0){
             String sql = "Select a.alunos_id, u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_cpf, u.usuarios_nascimento,"
-                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on a.alunos_usuarios_id = u.usuarios_id Where a.alunos_id = ?";
+                    + "a.alunos_sala, a.alunos_turma, a.qtd_disciplinas FROM alunos a INNER JOIN usuarios u on a.fk_alunos_usuarios_id = u.usuarios_id Where a.alunos_id = ?";
             //Inner join para mostrar os dados do usuarios que passam chave primaria para alunos, nessa condição, especificos com id escolhido
             PreparedStatement pstm = null;
             ResultSet rset = null;
@@ -266,7 +266,8 @@ public class Alunos extends UsuarioAbstract{
                     System.out.println("CPF: " + rset.getString("usuarios_cpf"));
                     System.out.println("Nascimento: " + rset.getString("usuarios_nascimento"));
                     System.out.println("Sala: " + rset.getString("alunos_sala"));
-                    System.out.println("Turma: " + rset.getString("usuarios_turma"));
+                    System.out.println("Turma: " + rset.getString("alunos_turma"));
+                    System.out.println("Quantidade de disciplina: " + rset.getInt("qtd_disciplinas"));
                     System.out.println("==================================================");
                 }else {
                     System.out.println("Nenhum aluno encontrado com o ID fornecido " + alunos_id);
@@ -292,7 +293,7 @@ public class Alunos extends UsuarioAbstract{
             
         } else {
             String sql = "Select a.alunos_id, u.usuarios_nome, u.usuarios_sexo, u.usuarios_endereco, u.usuarios_cpf, u.usuarios_nascimento,"
-                    + "a.alunos_sala, a.alunos_turma FROM alunos a INNER JOIN usuarios u on a.fk_alunos_usuarios_id = u.usuarios_id";
+                    + "a.alunos_sala, a.alunos_turma, a.qtd_disciplinas FROM alunos a INNER JOIN usuarios u on a.fk_alunos_usuarios_id = u.usuarios_id";
             //Select com inner join de alunos que recebem a chave estrangeira de usuarios, nesse caso, ira mostrar todos os dados
             PreparedStatement pstm = null;
             ResultSet rset = null;
@@ -313,6 +314,7 @@ public class Alunos extends UsuarioAbstract{
                     System.out.println("Nascimento: " + rset.getString("usuarios_nascimento"));
                     System.out.println("Sala: " + rset.getString("alunos_sala"));
                     System.out.println("Turma: " + rset.getString("alunos_turma"));
+                    System.out.println("Quantidade de disciplinas: " + rset.getInt("qtd_disciplinas"));
                     System.out.println("==================================================");
                 }
                 
@@ -351,6 +353,80 @@ public class Alunos extends UsuarioAbstract{
             System.out.println("Erro ao verificar a tabela alunos " + e.getMessage());
         }
         return false;
+    }
+    
+    
+    /**
+     * Metodo para listar alunos com apenas alguns atributos
+     */
+    public void listarAlunos(){
+        
+        String sql = "SELECT a.alunos_id, u.usuarios_nome, a.alunos_sala, a.alunos_turma "
+           + "FROM alunos a "
+           + "INNER JOIN usuarios u ON a.fk_alunos_usuarios_id = u.usuarios_id";
+
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+        
+        try {
+            Connection conexao = new Conexao().getConexao();
+            pstm = conexao.prepareStatement(sql);
+            rset = pstm.executeQuery();
+            
+            while(rset.next()){
+                System.out.println("========================================");
+                System.out.println("ID: " + rset.getString("alunos_id"));
+                System.out.println("Nome: " + rset.getString("usuarios_nome"));
+                System.out.println("Sala: " + rset.getString("alunos_sala"));
+                System.out.println("Turma: " + rset.getString("alunos_turma"));
+                System.out.println("========================================");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar alunos! " + e.getMessage());
+            
+        } finally {
+            try {
+                if (rset != null){
+                    rset.close();
+                }
+                if (pstm != null){
+                    pstm.close();
+                }
+            
+            } catch(SQLException e){
+                System.out.println(e.getMessage());
+                
+            }
+            
+        
+        }
+    }
+    /**
+     * 
+     * @param idUsuario
+     * @return 
+     */
+    public boolean verificarAlunoPorUsuarioID(int idUsuario) {
+        boolean jaExiste = false;
+        String sql = "SELECT 1 FROM alunos WHERE fk_alunos_usuarios_id = ? LIMIT 1";
+
+        try  {
+            Connection conexao = new Conexao().getConexao();
+            PreparedStatement pstm;
+            pstm = conexao.prepareStatement(sql);
+            pstm.setInt(1, idUsuario);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                jaExiste = true; // Já existe um aluno com esse ID de usuário
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar aluno por usuário: " + e.getMessage());
+        }
+
+        return jaExiste;
     }
 }
 

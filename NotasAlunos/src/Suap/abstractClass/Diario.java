@@ -73,7 +73,7 @@ public class Diario {
 
     //INSERÇÃO
    public void inserir() {
-        String sql = "INSERT INTO diario (diarios_local, diarios_disciplinas, qtd_alunos, fk_diarios_professores_, fk_diarios_alunos_) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO diarios (diarios_local, diarios_disciplinas, qtd_alunos, fk_diarios_professores_id, fk_diarios_alunos_id) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
@@ -94,7 +94,7 @@ public class Diario {
     
     //DELET
       public void deletar(int diarios_id) {
-        String sql = "DELETE FROM diario WHERE diarios_id = ?";
+        String sql = "DELETE FROM diarios WHERE diarios_id = ?";
 
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
@@ -111,10 +111,13 @@ public class Diario {
     
     public void listar(int diarios_id) {
     String sql = "SELECT d.diarios_id, d.diarios_local, d.diarios_disciplinas, d.qtd_alunos, " +
-                 "p.professor_nome, a.aluno_nome " +
-                 "FROM diario d " +
-                 "INNER JOIN professor p ON d.fk_diarios_professores_ = p.professor_id " +
-                 "INNER JOIN aluno a ON d.fk_diarios_alunos_ = a.aluno_id";
+             "u1.usuarios_nome AS professor_nome, u2.usuarios_nome AS aluno_nome " +
+             "FROM diarios d " +
+             "INNER JOIN professores p ON d.fk_diarios_professores_id = p.professores_id " +
+             "INNER JOIN alunos a ON d.fk_diarios_alunos_id = a.alunos_id " +
+             "INNER JOIN usuarios u1 ON p.fk_professores_usuarios_id = u1.usuarios_id " +
+             "INNER JOIN usuarios u2 ON a.fk_alunos_usuarios_id = u2.usuarios_id";
+
 
     if (diarios_id > 0) {
         sql += " WHERE d.diarios_id = ?";
@@ -146,7 +149,7 @@ public class Diario {
 }
   // Método para alterar
     public void alterar(int diarios_id) {
-        String sql = "UPDATE diario SET diarios_local = ?, diarios_disciplinas = ?, qtd_alunos = ?, fk_diarios_professores_ = ?, fk_diarios_alunos_ = ? WHERE diarios_id = ?";
+        String sql = "UPDATE diarios SET diarios_local = ?, diarios_disciplinas = ?, qtd_alunos = ?, fk_diarios_professores_id = ?, fk_diarios_alunos_id = ? WHERE diarios_id = ?";
 
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
@@ -167,7 +170,7 @@ public class Diario {
     }
      // Verificação
     public boolean verificarDiario(int diarios_id) {
-        String sql = "SELECT * FROM diario WHERE diarios_id = ?";
+        String sql = "SELECT * FROM diarios WHERE diarios_id = ?";
 
         try (Connection conexao = new Conexao().getConexao();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
