@@ -28,7 +28,10 @@ public class TelaCrud {
         
         final JFrame jFrameInicial = new JFrame("Sistema de notas");
         
+        jFrameInicial.setBounds(200, 170, 500, 200);
+        jFrameInicial.setLayout(null);
         
+        jFrameInicial.setVisible(true);
         
     }
 }
