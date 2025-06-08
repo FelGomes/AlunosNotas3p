@@ -14,7 +14,7 @@ public abstract class PessoaAbstract {
     
     private String nome , sexo, dataNascimento;
     
-    public PessoaAbstract(){
+    public  PessoaAbstract(){
     }
     
     public PessoaAbstract(String nome, String sexo, String dataNascimento){

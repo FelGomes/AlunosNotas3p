@@ -73,7 +73,7 @@ public class Notas {
     }
     
     public double getNota_tres() {
-        return nota_quatro;
+        return nota_tres;
     }
 
     public void setNota_tres(double nota_tres) {
@@ -220,7 +220,7 @@ public class Notas {
             } 
             
         } else if (atributo.equals("Disciplina") || atributo.equals("disciplina")){
-            String sql = "UPDATE notas SET notas_disciplinas = ? WHERE notas_id = ?";
+            String sql = "UPDATE notas SET nota_disciplina = ? WHERE notas_id = ?";
             PreparedStatement pstm = null;
 
             try{
