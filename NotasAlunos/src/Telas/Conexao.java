@@ -2,19 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Suap;
+package Telas;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  *
  * @author felipe
- * @since 13-04 at 10:45
  */
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 public class Conexao {
-    
     private static String status = "Não conectou!";
     
     public static final String SERVIDOR = "jdbc:mysql://localhost:3306/Notas";
@@ -58,12 +55,12 @@ public class Conexao {
 
             return true;
 
-        } catch (SQLException e) {
+        } catch (java.sql.SQLException e) {
 
             return false;
 
         }
 
     }
-
+    
 }
