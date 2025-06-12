@@ -54,7 +54,52 @@ public class TMatricula {
         
         JFormattedTextField campoDataInicio = new JFormattedTextField(mascaraData("##/##/####"));
         campoDataInicio.setBounds(150, 60, 200, 20);
-        janela.add(campoDataInicio);        
+        janela.add(campoDataInicio);  
+        
+        JFormattedTextField campoDataFim = new JFormattedTextField(mascaraData("##/##/####"));
+        campoDataFim.setBounds(150, 100, 200, 20);
+        janela.add(campoDataFim);
+
+        JTextField campoQtdTempo = new JTextField();
+        campoQtdTempo.setBounds(150, 140, 200, 20);
+        janela.add(campoQtdTempo);
+
+        JTextField campoInstituicao = new JTextField();
+        campoInstituicao.setBounds(150, 180, 200, 20);
+        janela.add(campoInstituicao);
+
+        JTextField campoAluno = new JTextField();
+        campoAluno.setBounds(150, 220, 200, 20);
+        janela.add(campoAluno);
+
+        JTextField campoFiltro = new JTextField();
+        campoFiltro.setBounds(150, 250, 200, 20);
+        janela.add(campoFiltro);
+        
+         // Botões
+        JButton botaoSalvar = new JButton("Salvar");
+        botaoSalvar.setBounds(400, 20, 100, 30);
+        janela.add(botaoSalvar);
+
+        JButton botaoAlterar = new JButton("Alterar");
+        botaoAlterar.setBounds(400, 60, 100, 30);
+        janela.add(botaoAlterar);
+
+        JButton botaoExcluir = new JButton("Excluir");
+        botaoExcluir.setBounds(400, 100, 100, 30);
+        janela.add(botaoExcluir);
+
+        JButton botaoFiltrar = new JButton("Filtrar");
+        botaoFiltrar.setBounds(400, 250, 100, 30);
+        janela.add(botaoFiltrar);
+
+        JButton botaoArquivo = new JButton("Gerar Arquivo");
+        botaoArquivo.setBounds(400, 140, 150, 30);
+        janela.add(botaoArquivo);
+
+        JButton botaoCancelar = new JButton("Cancelar");
+        botaoCancelar.setBounds(400, 180, 100, 30);
+        janela.add(botaoCancelar);
         
     }
 }
