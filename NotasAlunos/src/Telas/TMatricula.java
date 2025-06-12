@@ -101,5 +101,61 @@ public class TMatricula {
         botaoCancelar.setBounds(400, 180, 100, 30);
         janela.add(botaoCancelar);
         
+          // Tabela
+        String[] colunas = {"ID", "Data Início", "Data Fim", "Qtd Tempo", "Instituição", "Aluno"};
+        String[][] dados = new String[0][6];
+        JTable tabela = new JTable(dados, colunas);
+        JScrollPane scroll = new JScrollPane(tabela);
+        scroll.setBounds(30, 300, 520, 200);
+        janela.add(scroll);
+        
+         // Ações dos botões
+        PMatricula matricula = new PMatricula();
+
+        botaoSalvar.addActionListener(e -> {
+            try {
+                if(campoID.getText().isEmpty() || campoDataInicio.getText().trim().equals("") || campoDataFim.getText().trim().equals("") ||
+                        campoQtdTempo.getText().isEmpty() || campoInstituicao.getText().isEmpty() || campoAluno.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Preencha todos os dados!");
+                } else {
+                    String resultado = matricula.inserirMatricula(
+                            Integer.parseInt(campoID.getText()),
+                            campoDataInicio.getText(),
+                            campoDataFim.getText(),
+                            Integer.parseInt(campoQtdTempo.getText()),
+                            Integer.parseInt(campoInstituicao.getText()),
+                            Integer.parseInt(campoAluno.getText())
+                    );
+                    JOptionPane.showMessageDialog(null, resultado);
+                    janela.dispose();
+                    montarTelaMatricula();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        
+        botaoAlterar.addActionListener(e -> {
+            try {
+                if(campoID.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Informe o ID para alterar!");
+                } else {
+                    String resultado = matricula.alterarMatricula(
+                            Integer.parseInt(campoID.getText()),
+                            campoDataInicio.getText(),
+                            campoDataFim.getText(),
+                            Integer.parseInt(campoQtdTempo.getText()),
+                            Integer.parseInt(campoInstituicao.getText()),
+                            Integer.parseInt(campoAluno.getText())
+                    );
+                    JOptionPane.showMessageDialog(null, resultado);
+                    janela.dispose();
+                    montarTelaMatricula();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        
     }
 }
