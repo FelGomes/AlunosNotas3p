@@ -10,6 +10,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
+import Telas.EMatricula;
+import Telas.PMatricula;
 
 public class TMatricula {
     public static void MontarTelaMatricula() throws IOException {
@@ -156,6 +158,29 @@ public class TMatricula {
                 ex.printStackTrace();
             }
         });
+        
+        botaoAlterar.addActionListener(e -> {
+             try {
+                if(campoID.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Informe o ID para alterar!");
+                } else {
+                    String resultado = matricula.alterarMatricula(
+                            Integer.parseInt(campoID.getText()),
+                            campoDataInicio.getText(),
+                            campoDataFim.getText(),
+                            Integer.parseInt(campoQtdTempo.getText()),
+                            Integer.parseInt(campoInstituicao.getText()),
+                            Integer.parseInt(campoAluno.getText())
+                    );
+                    JOptionPane.showMessageDialog(null, resultado);
+                    janela.dispose();
+                    montarTelaMatricula();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        
         
     }
 }
