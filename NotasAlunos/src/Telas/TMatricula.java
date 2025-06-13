@@ -5,6 +5,7 @@ package Telas;
  *
  * @author Kauã Luiz
  */
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -44,9 +45,6 @@ public class TMatricula {
         rotuloAluno.setBounds(30, 220, 80, 20);
         janela.add(rotuloAluno);
         
-        JLabel rotuloFiltro = new JLabel("Filtrar por ID:");
-        rotuloFiltro.setBounds(30, 250, 80, 20);
-        janela.add(rotuloFiltro);
         
         // CAMPOS DE TEXT
         JTextField campoID = new JTextField();
@@ -73,9 +71,6 @@ public class TMatricula {
         campoAluno.setBounds(150, 220, 200, 20);
         janela.add(campoAluno);
 
-        JTextField campoFiltro = new JTextField();
-        campoFiltro.setBounds(150, 250, 200, 20);
-        janela.add(campoFiltro);
         
          // Botões
         JButton botaoSalvar = new JButton("Salvar");
@@ -90,9 +85,9 @@ public class TMatricula {
         botaoExcluir.setBounds(400, 100, 100, 30);
         janela.add(botaoExcluir);
 
-        JButton botaoFiltrar = new JButton("Filtrar");
-        botaoFiltrar.setBounds(400, 250, 100, 30);
-        janela.add(botaoFiltrar);
+        JButton botaoListar = new JButton("Listar");
+        botaoListar.setBounds(400, 140, 100, 30);
+        janela.add(botaoListar);
 
         JButton botaoArquivo = new JButton("Gerar Arquivo");
         botaoArquivo.setBounds(400, 140, 150, 30);
@@ -126,5 +121,83 @@ public class TMatricula {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente.");
             }
         });
+        botaoAlterar.addActionListener(e ->{
+            try{
+                int id = Integer.parseInt(campoID.getText());
+                matricula.setMatriculasDataInicio(campoDataInicio.getText());
+                matricula.setMatriculaDataFim(campoDataFim.getText());
+                matricula.setQtdTempo(Integer.parseInt(campoInstituicao.getText()));
+                matricula.setFkinstituicaoId(Integer.parseInt(campoInstituicao.getText()));
+                matricula.setFkAlunoId(Integer.parseInt(campoAluno.getText()));
+                matricula.alterar(id);
+                JOptionPane.showMessageDialog(null, "Matrícula alterada com sucesso!"); 
+            } catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente.");
+                
+            }
+        });
+        botaoExcluir.addActionListener(e -> {
+            try {
+                int id = Integer.parseInt(campoID.getText());
+                matricula.deletar(id);
+                JOptionPane.showMessageDialog(null, "Matrícula excluída com sucesso!");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Informe um ID válido para exclusão.");
+            }
+        });
+        botaoListar.addActionListener(e -> {
+            try {
+                int id = campoID.getText().isEmpty() ? 0 : Integer.parseInt(campoID.getText());
+                matricula.listar(id);
+                JOptionPane.showMessageDialog(null, "Listagem concluída no console ou destino configurado.");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Informe um ID válido para listar.");
+            }
+        });
+
+        botaoArquivo.addActionListener(e -> {
+            try {
+                matricula.gerarArquivo();
+                JOptionPane.showMessageDialog(null, "Arquivo gerado com sucesso!");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao gerar o arquivo: " + ex.getMessage());
+            }
+        });
+        botaoCancelar.addActionListener(e -> {
+            campoID.setText("");
+            campoDataInicio.setText("");
+            campoDataFim.setText("");
+            campoQtdTempo.setText("");
+            campoInstituicao.setText("");
+            campoAluno.setText("");
+        });
+
+        janela.setVisible(true);
+    }
+    public static MaskFormatter mascaraData(String mascara) {
+        MaskFormatter F_Mascara = null;
+        try {
+            F_Mascara = new MaskFormatter(mascara);
+            F_Mascara.setPlaceholderCharacter(' ');
+        } catch (ParseException excecao) {
+            System.out.println(excecao.getMessage());
+        }
+        return F_Mascara;
+    }
+}
+class Matricula {
+    public void setMatriculasDataInicio(String dataInicio) {}
+    public void setMatriculaDataFim(String dataFim) {}
+    public void setQtdTempo(int qtdTempo) {}
+    public void setFkinstituicaoId(int idInstituicao) {}
+    public void setFkAlunoId(int idAluno) {}
+    public void inserir() {}
+    public void alterar(int id) {}
+    public void deletar(int id) {}
+    public void listar(int id) {}
+    public void gerarArquivo() throws IOException {
+        FileWriter writer = new FileWriter("matriculas.txt");
+        writer.write("Arquivo de matrículas gerado com sucesso!\n");
+        writer.close();
     }
 }
