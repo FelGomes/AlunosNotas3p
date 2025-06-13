@@ -113,6 +113,18 @@ public class TMatricula {
          // Ações dos botões
         Matricula matricula = new Matricula();
 
-        
+        botaoSalvar.addActionListener(e -> {
+            try{
+            matricula.setMatriculasDataInicio(campoDataInicio.getText());
+            matricula.setMatriculaDataFim(campoDataFim.getText());
+            matricula.setQtdTempo(Integer.parseInt(campoQtdTempo.getText()));
+            matricula.setFkinstituicaoId(Integer.parseInt(campoInstituicao.getText()));
+            matricula.setFkAlunoId(Integer.parseInt(campoAluno.getText()));
+             matricula.inserir();
+            JOptionPane.showMessageDialog(null, "Matrícula salva com sucesso!");
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente.");
+            }
+        });
     }
 }
