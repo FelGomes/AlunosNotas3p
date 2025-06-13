@@ -215,5 +215,38 @@ public class TMatricula {
             janela.revalidate();
             janela.repaint();
         });
+        botaoArquivo.addActionListener(e -> {
+            try {
+                ArrayList<EMatricula> lista = matricula.consultarMatriculaID(Integer.parseInt(campoID.getText()));
+                Arquivo.gerarArquivoTabela("/home/felipe/Documentos/Matricula.txt", lista);
+                JOptionPane.showMessageDialog(null, "Arquivo gerado com sucesso!");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        
+        botaoCancelar.addActionListener(e -> {
+            janela.dispose();
+            try {
+                montarTelaMatricula();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        janela.setVisible(true);
+        
+    }
+  
+     // Máscaras 
+    public static MaskFormatter mascaraData(String mascara){
+        MaskFormatter F_Mascara = new MaskFormatter();
+        try{
+            F_Mascara.setMask(mascara);
+            F_Mascara.setPlaceholderCharacter(' ');
+        } catch(ParseExeception exececao){
+            System.out.println(exececao.getMessage());
+        }
+        return F_Mascara;
     }
 }
