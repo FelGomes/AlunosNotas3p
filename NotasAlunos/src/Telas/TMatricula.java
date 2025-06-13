@@ -130,7 +130,7 @@ public class TMatricula {
                     );
                     JOptionPane.showMessageDialog(null, resultado);
                     janela.dispose();
-                    montarTelaMatricula();
+                    MontarTelaMatricula();
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -152,7 +152,7 @@ public class TMatricula {
                     );
                     JOptionPane.showMessageDialog(null, resultado);
                     janela.dispose();
-                    montarTelaMatricula();
+                    MontarTelaMatricula();
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -174,13 +174,46 @@ public class TMatricula {
                     );
                     JOptionPane.showMessageDialog(null, resultado);
                     janela.dispose();
-                    montarTelaMatricula();
+                    MontarTelaMatricula();
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         });
-        
-        
+        botaoExcluir.addActionListener(e -> {
+            try {
+                if(campoID.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Informe o ID para excluir!");
+                } else {
+                    String resultado = matricula.excluirMatricula(Integer.parseInt(campoID.getText()));
+                    JOptionPane.showMessageDialog(null, resultado);
+                    janela.dispose();
+                    MontarTelaMatricula();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        botaoFiltrar.addActionListener(e -> {
+            ArrayList<EMatricula> lista = matricula.consultarMatriculaID(Integer.parseInt(campoFiltro.getText()));
+            String[][] linhas = new String[lista.size()][6];
+            int i = 0;
+            for(EMatricula mat : lista){
+                linhas[i][0] = String.valueOf(mat.getMatriculas_id());
+                linhas[i][1] = mat.getData_inicio();
+                linhas[i][2] = mat.getData_fim();
+                linhas[i][3] = String.valueOf(mat.getQtd_tempo());
+                linhas[i][4] = String.valueOf(mat.getFk_instituicao_id());
+                linhas[i][5] = String.valueOf(mat.getFk_aluno_id());
+                i++;
+            }
+            janela.remove(scroll);
+            JTable novaTabela = new JTable(linhas, colunas);
+            JScrollPane novoScroll = new JScrollPane(novaTabela);
+            novoScroll.setBounds(30, 300, 520, 200);
+            janela.add(novoScroll);
+            janela.revalidate();
+            janela.repaint();
+        });
     }
 }
