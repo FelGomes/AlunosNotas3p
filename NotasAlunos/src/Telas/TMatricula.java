@@ -10,8 +10,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
-import Telas.EMatricula;
-import Telas.PMatricula;
+import Suap.abstractClass.Matricula;
 
 public class TMatricula {
     public static void MontarTelaMatricula() throws IOException {
@@ -112,141 +111,8 @@ public class TMatricula {
         janela.add(scroll);
         
          // Ações dos botões
-        PMatricula matricula = new PMatricula();
+        Matricula matricula = new Matricula();
 
-        botaoSalvar.addActionListener(e -> {
-            try {
-                if(campoID.getText().isEmpty() || campoDataInicio.getText().trim().equals("") || campoDataFim.getText().trim().equals("") ||
-                        campoQtdTempo.getText().isEmpty() || campoInstituicao.getText().isEmpty() || campoAluno.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Preencha todos os dados!");
-                } else {
-                    String resultado = matricula.inserirMatricula(
-                            Integer.parseInt(campoID.getText()),
-                            campoDataInicio.getText(),
-                            campoDataFim.getText(),
-                            Integer.parseInt(campoQtdTempo.getText()),
-                            Integer.parseInt(campoInstituicao.getText()),
-                            Integer.parseInt(campoAluno.getText())
-                    );
-                    JOptionPane.showMessageDialog(null, resultado);
-                    janela.dispose();
-                    MontarTelaMatricula();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
         
-        botaoAlterar.addActionListener(e -> {
-            try {
-                if(campoID.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Informe o ID para alterar!");
-                } else {
-                    String resultado = matricula.alterarMatricula(
-                            Integer.parseInt(campoID.getText()),
-                            campoDataInicio.getText(),
-                            campoDataFim.getText(),
-                            Integer.parseInt(campoQtdTempo.getText()),
-                            Integer.parseInt(campoInstituicao.getText()),
-                            Integer.parseInt(campoAluno.getText())
-                    );
-                    JOptionPane.showMessageDialog(null, resultado);
-                    janela.dispose();
-                    MontarTelaMatricula();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-        
-        botaoAlterar.addActionListener(e -> {
-             try {
-                if(campoID.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Informe o ID para alterar!");
-                } else {
-                    String resultado = matricula.alterarMatricula(
-                            Integer.parseInt(campoID.getText()),
-                            campoDataInicio.getText(),
-                            campoDataFim.getText(),
-                            Integer.parseInt(campoQtdTempo.getText()),
-                            Integer.parseInt(campoInstituicao.getText()),
-                            Integer.parseInt(campoAluno.getText())
-                    );
-                    JOptionPane.showMessageDialog(null, resultado);
-                    janela.dispose();
-                    MontarTelaMatricula();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-        botaoExcluir.addActionListener(e -> {
-            try {
-                if(campoID.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Informe o ID para excluir!");
-                } else {
-                    String resultado = matricula.excluirMatricula(Integer.parseInt(campoID.getText()));
-                    JOptionPane.showMessageDialog(null, resultado);
-                    janela.dispose();
-                    MontarTelaMatricula();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-        botaoFiltrar.addActionListener(e -> {
-            ArrayList<EMatricula> lista = matricula.consultarMatriculaID(Integer.parseInt(campoFiltro.getText()));
-            String[][] linhas = new String[lista.size()][6];
-            int i = 0;
-            for(EMatricula mat : lista){
-                linhas[i][0] = String.valueOf(mat.getMatriculas_id());
-                linhas[i][1] = mat.getData_inicio();
-                linhas[i][2] = mat.getData_fim();
-                linhas[i][3] = String.valueOf(mat.getQtd_tempo());
-                linhas[i][4] = String.valueOf(mat.getFk_instituicao_id());
-                linhas[i][5] = String.valueOf(mat.getFk_aluno_id());
-                i++;
-            }
-            janela.remove(scroll);
-            JTable novaTabela = new JTable(linhas, colunas);
-            JScrollPane novoScroll = new JScrollPane(novaTabela);
-            novoScroll.setBounds(30, 300, 520, 200);
-            janela.add(novoScroll);
-            janela.revalidate();
-            janela.repaint();
-        });
-        botaoArquivo.addActionListener(e -> {
-            try {
-                ArrayList<EMatricula> lista = matricula.consultarMatriculaID(Integer.parseInt(campoID.getText()));
-                Arquivo.gerarArquivoTabela("/home/felipe/Documentos/Matricula.txt", lista);
-                JOptionPane.showMessageDialog(null, "Arquivo gerado com sucesso!");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-        
-        botaoCancelar.addActionListener(e -> {
-            janela.dispose();
-            try {
-                montarTelaMatricula();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-
-        janela.setVisible(true);
-        
-    }
-  
-     // Máscaras 
-    public static MaskFormatter mascaraData(String mascara){
-        MaskFormatter F_Mascara = new MaskFormatter();
-        try{
-            F_Mascara.setMask(mascara);
-            F_Mascara.setPlaceholderCharacter(' ');
-        } catch(ParseExeception exececao){
-            System.out.println(exececao.getMessage());
-        }
-        return F_Mascara;
     }
 }
