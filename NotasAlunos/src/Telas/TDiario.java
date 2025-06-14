@@ -51,6 +51,40 @@ public class TDiario {
         campoDisciplina.setBounds(150, 100, 200, 20);
         janela.add(campoDisciplina);
         
+        JTextField campoQtdAlunos = new JTextField();
+        campoQtdAlunos.setBounds(150, 140, 200, 20);
+        janela.add(campoQtdAlunos);
+        
+        JTextField campoProfessor = new JTextField();
+        campoProfessor.setBounds(150, 180, 200, 20);
+        janela.add(campoProfessor);
+        
+        JTextField campoAluno = new JTextField();
+        campoAluno.setBounds(150, 220, 200, 20);
+        janela.add(campoAluno);
+       
+        JButton botaoSalvar = new JButton("Salvar");
+        botaoSalvar.setBounds(400, 20, 100, 30);
+        janela.add(botaoSalvar);
+
+        JButton botaoAlterar = new JButton("Alterar");
+        botaoAlterar.setBounds(400, 60, 100, 30);
+        janela.add(botaoAlterar);
+
+        JButton botaoExcluir = new JButton("Excluir");
+        botaoExcluir.setBounds(400, 100, 100, 30);
+        janela.add(botaoExcluir);
+
+        JButton botaoListar = new JButton("Listar");
+        botaoListar.setBounds(400, 140, 100, 30);
+        janela.add(botaoListar);
+        
+        
+        
+        
+        
+        
+        
     }
     
 }
