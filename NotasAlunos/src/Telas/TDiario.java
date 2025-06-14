@@ -79,12 +79,47 @@ public class TDiario {
         botaoListar.setBounds(400, 140, 100, 30);
         janela.add(botaoListar);
         
+        // VOU AGUARDAR JUNTAR TODAS AS CLASSES PARA ORGANIZAR O IMPORT 
+        EDiario diario = new EDiario();
+        PDiario pdiario = new PDiario();
         
+         botaoSalvar.addActionListener(e -> {
+            diario.setDiarios_local(campoLocal.getText());
+            diario.setDiarios_disciplinas(campoDisciplina.getText());
+            diario.setQtd_alunos(Integer.parseInt(campoQtdAlunos.getText()));
+            diario.setFk_diarios_professores_(Integer.parseInt(campoProfessor.getText()));
+            diario.setFk_diarios_alunos_(Integer.parseInt(campoAluno.getText()));
+            pdiario.inserir(diario);
+            JOptionPane.showMessageDialog(null, "Diário salvo com sucesso!");
+        });
+
+        botaoAlterar.addActionListener(e -> {
+            diario.setDiarios_id(Integer.parseInt(campoId.getText()));
+            diario.setDiarios_local(campoLocal.getText());
+            diario.setDiarios_disciplinas(campoDisciplina.getText());
+            diario.setQtd_alunos(Integer.parseInt(campoQtdAlunos.getText()));
+            diario.setFk_diarios_professores_(Integer.parseInt(campoProfessor.getText()));
+            diario.setFk_diarios_alunos_(Integer.parseInt(campoAluno.getText()));
+            pdiario.alterar(diario);
+            JOptionPane.showMessageDialog(null, "Diário alterado com sucesso!");
+        });
+
+        botaoExcluir.addActionListener(e -> {
+            int id = Integer.parseInt(campoId.getText());
+            pdiario.deletar(id);
+            JOptionPane.showMessageDialog(null, "Diário excluído com sucesso!");
+        });
+
+        botaoListar.addActionListener(e -> {
+            int id = campoId.getText().isEmpty() ? 0 : Integer.parseInt(campoId.getText());
+            pdiario.listar(id);
+            JOptionPane.showMessageDialog(null, "Listagem concluída! Confira no console.");
+        });
+
+        janela.setVisible(true);
+            }
+
         
-        
-        
-        
-        
-    }
+       }
     
-}
+
