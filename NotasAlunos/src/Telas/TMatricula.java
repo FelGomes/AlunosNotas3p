@@ -185,19 +185,3 @@ public class TMatricula {
         return F_Mascara;
     }
 }
-class Matricula {
-    public void setMatriculasDataInicio(String dataInicio) {}
-    public void setMatriculaDataFim(String dataFim) {}
-    public void setQtdTempo(int qtdTempo) {}
-    public void setFkinstituicaoId(int idInstituicao) {}
-    public void setFkAlunoId(int idAluno) {}
-    public void inserir() {}
-    public void alterar(int id) {}
-    public void deletar(int id) {}
-    public void listar(int id) {}
-    public void gerarArquivo() throws IOException {
-        FileWriter writer = new FileWriter("matriculas.txt");
-        writer.write("Arquivo de matrículas gerado com sucesso!\n");
-        writer.close();
-    }
-}
