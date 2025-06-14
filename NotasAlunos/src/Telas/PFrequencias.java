@@ -33,7 +33,7 @@ public class PFrequencias {
 
                 // Criar e setar o objeto Professores
                 Professores prof = new Professores();
-                prof.setIdProfessor(rs.getInt("professores_id"));
+                prof.setId(rs.getInt("professores_id"));
                 // aqui você pode carregar mais campos se quiser
                 freq.setProfessores(prof);
 
@@ -67,7 +67,7 @@ public class PFrequencias {
             pstm.setInt(3, freq.getFrequencias_faltas());
             pstm.setFloat(4, freq.getPrctg_presenca());
             pstm.setString(5, freq.getFrequencias_disciplinas().toUpperCase());
-            pstm.setInt(6, freq.getProfessores().getIdProfessor());
+            pstm.setInt(6, freq.getProfessores().getId());
             pstm.setInt(7, freq.getAluno().getId());
 
             int linhas = pstm.executeUpdate();
@@ -97,7 +97,7 @@ public class PFrequencias {
             pstm.setInt(3, freq.getFrequencias_faltas());
             pstm.setFloat(4, freq.getPrctg_presenca());
             pstm.setString(5, freq.getFrequencias_disciplinas().toUpperCase());
-            pstm.setInt(6, freq.getProfessores().getIdProfessor());
+            pstm.setInt(6, freq.getProfessores().getId());
             pstm.setInt(7, freq.getAluno().getId());
             pstm.setInt(8, freq.getFrequencias_id());
 
